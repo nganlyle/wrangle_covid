@@ -1,0 +1,1110 @@
+**LANGUAGE**
+
+100. Total - Knowledge of official languages for the total population excluding institutional residents - 100% data (16)
+101.   English only
+102.   French only
+103.   English and French
+104.   Neither English nor French
+105. Total - First official language spoken for the total population excluding institutional residents - 100% data (18)
+106.   English
+107.   French
+108.   English and French
+109.   Neither English nor French
+110. Official language minority (number) (20)
+111. Official language minority (percentage) (21)
+112. Total - Mother tongue for the total population excluding institutional residents - 100% data (22)
+113.   Single responses
+114.     Official languages
+115.       English
+116.       French
+117.     Non-official languages
+118.       Aboriginal languages
+119.         Algonquian languages
+120.           Blackfoot
+121.           Cree-Montagnais languages
+122.             Atikamekw
+123.             Montagnais (Innu)
+124.             Moose Cree
+125.             Naskapi
+126.             Northern East Cree
+127.             Plains Cree
+128.             Southern East Cree
+129.             Swampy Cree
+130.             Woods Cree
+131.             Cree, n.o.s.
+132.           Eastern Algonquian languages
+133.             Malecite
+134.             Mi'kmaq
+135.           Ojibway-Potawatomi languages
+136.             Algonquin
+137.             Ojibway
+138.             Oji-Cree
+139.             Ottawa (Odawa)
+140.           Algonquian languages, n.i.e.
+141.         Athabaskan languages
+142.           Northern Athabaskan languages
+143.             Babine (Wetsuwet'en)
+144.             Beaver
+145.             Carrier
+146.             Chilcotin
+147.             Dene
+148.             Dogrib (Tlicho)
+149.             Gwich'in
+150.             Sarsi (Sarcee)
+151.             Sekani
+152.             Slavey-Hare languages
+153.               North Slavey (Hare)
+154.               South Slavey
+155.               Slavey, n.o.s.
+156.             Tahltan languages
+157.               Kaska (Nahani)
+158.               Tahltan
+159.             Tutchone languages
+160.               Northern Tutchone
+161.               Southern Tutchone
+162.           Athabaskan languages, n.i.e.
+163.         Haida
+164.         Inuit languages
+165.           Inuinnaqtun (Inuvialuktun)
+166.           Inuktitut
+167.           Inuit languages, n.i.e.
+168.         Iroquoian languages
+169.           Cayuga
+170.           Mohawk
+171.           Oneida
+172.           Iroquoian languages, n.i.e.
+173.         Kutenai
+174.         Michif
+175.         Salish languages
+176.           Comox
+177.           Halkomelem
+178.           Lillooet
+179.           Okanagan
+180.           Shuswap (Secwepemctsin)
+181.           Squamish
+182.           Straits
+183.           Thompson (Ntlakapamux)
+184.           Salish languages, n.i.e.
+185.         Siouan languages
+186.           Dakota
+187.           Stoney
+188.           Siouan languages, n.i.e.
+189.         Tlingit
+190.         Tsimshian languages
+191.           Gitxsan (Gitksan)
+192.           Nisga'a
+193.           Tsimshian
+194.         Wakashan languages
+195.           Haisla
+196.           Heiltsuk
+197.           Kwakiutl (Kwak'wala)
+198.           Nuu-chah-nulth (Nootka)
+199.           Wakashan languages, n.i.e.
+200.         Aboriginal languages, n.o.s.
+201.       Non-Aboriginal languages
+202.         Afro-Asiatic languages
+203.           Berber languages
+204.             Kabyle
+205.             Berber languages, n.i.e.
+206.           Cushitic languages
+207.             Bilen
+208.             Oromo
+209.             Somali
+210.             Cushitic languages, n.i.e.
+211.           Semitic languages
+212.             Amharic
+213.             Arabic
+214.             Assyrian Neo-Aramaic
+215.             Chaldean Neo-Aramaic
+216.             Harari
+217.             Hebrew
+218.             Maltese
+219.             Tigrigna
+220.             Semitic languages, n.i.e.
+221.           Afro-Asiatic languages, n.i.e.
+222.         Austro-Asiatic languages
+223.           Khmer (Cambodian)
+224.           Vietnamese
+225.           Austro-Asiatic languages, n.i.e
+226.         Austronesian languages
+227.           Bikol
+228.           Cebuano
+229.           Fijian
+230.           Hiligaynon
+231.           Ilocano
+232.           Malagasy
+233.           Malay
+234.           Pampangan (Kapampangan, Pampango)
+235.           Pangasinan
+236.           Tagalog (Pilipino, Filipino)
+237.           Waray-Waray
+238.           Austronesian languages, n.i.e.
+239.         Creole languages
+240.           Haitian Creole
+241.           Creole, n.o.s.
+242.           Creole languages, n.i.e.
+243.         Dravidian languages
+244.           Kannada
+245.           Malayalam
+246.           Tamil
+247.           Telugu
+248.           Dravidian languages, n.i.e.
+249.         Hmong-Mien languages
+250.         Indo-European languages
+251.           Albanian
+252.           Armenian
+253.           Balto-Slavic languages
+254.             Baltic languages
+255.               Latvian
+256.               Lithuanian
+257.             Slavic languages
+258.               Belarusan
+259.               Bosnian
+260.               Bulgarian
+261.               Croatian
+262.               Czech
+263.               Macedonian
+264.               Polish
+265.               Russian
+266.               Serbian
+267.               Serbo-Croatian
+268.               Slovak
+269.               Slovene (Slovenian)
+270.               Ukrainian
+271.               Slavic languages, n.i.e.
+272.           Celtic languages
+273.             Scottish Gaelic
+274.             Welsh
+275.             Celtic languages, n.i.e.
+276.           Germanic languages
+277.             Afrikaans
+278.             Danish
+279.             Dutch
+280.             Frisian
+281.             German
+282.             Icelandic
+283.             Norwegian
+284.             Swedish
+285.             Vlaams (Flemish)
+286.             Yiddish
+287.             Germanic languages, n.i.e.
+288.           Greek
+289.           Indo-Iranian languages
+290.             Indo-Aryan languages
+291.               Bengali
+292.               Gujarati
+293.               Hindi
+294.               Kashmiri
+295.               Konkani
+296.               Marathi
+297.               Nepali
+298.               Oriya (Odia)
+299.               Punjabi (Panjabi)
+300.               Sindhi
+301.               Sinhala (Sinhalese)
+302.               Urdu
+303.             Iranian languages
+304.               Kurdish
+305.               Pashto
+306.               Persian (Farsi)
+307.             Indo-Iranian languages, n.i.e.
+308.           Italic (Romance) languages
+309.             Catalan
+310.             Italian
+311.             Portuguese
+312.             Romanian
+313.             Spanish
+314.             Italic (Romance) languages, n.i.e.
+315.         Japanese
+316.         Kartvelian languages
+317.           Georgian
+318.         Korean
+319.         Mongolic languages
+320.           Mongolian
+321.         Niger-Congo languages
+322.           Akan (Twi)
+323.           Bamanankan
+324.           Edo
+325.           Ewe
+326.           Fulah (Pular, Pulaar, Fulfulde)
+327.           Ga
+328.           Ganda
+329.           Igbo
+330.           Lingala
+331.           Rundi (Kirundi)
+332.           Kinyarwanda (Rwanda)
+333.           Shona
+334.           Swahili
+335.           Wolof
+336.           Yoruba
+337.           Niger-Congo languages, n.i.e.
+338.         Nilo-Saharan languages
+339.           Dinka
+340.           Nilo-Saharan languages, n.i.e.
+341.         Sign languages
+342.           American Sign Language
+343.           Quebec Sign Language
+344.           Sign languages, n.i.e
+345.         Sino-Tibetan languages
+346.           Chinese languages
+347.             Cantonese
+348.             Hakka
+349.             Mandarin
+350.             Min Dong
+351.             Min Nan (Chaochow, Teochow, Fukien, Taiwanese)
+352.             Wu (Shanghainese)
+353.             Chinese, n.o.s.
+354.             Chinese languages, n.i.e.
+355.           Tibeto-Burman languages
+356.             Burmese
+357.             Karenic languages
+358.             Tibetan
+359.             Tibeto-Burman languages, n.i.e.
+360.         Tai-Kadai languages
+361.           Lao
+362.           Thai
+363.           Tai-Kadai languages, n.i.e
+364.         Turkic languages
+365.           Azerbaijani
+366.           Turkish
+367.           Uyghur
+368.           Uzbek
+369.           Turkic languages, n.i.e.
+370.         Uralic languages
+371.           Estonian
+372.           Finnish
+373.           Hungarian
+374.           Uralic languages, n.i.e.
+375.         Other languages, n.i.e.
+376.   Multiple responses
+377.     English and French
+378.     English and non-official language
+379.     French and non-official language
+380.     English, French and non-official language
+381. Total - Language spoken most often at home for the total population excluding institutional residents - 100% data (25)
+382.   Single responses
+383.     Official languages
+384.       English
+385.       French
+386.     Non-official languages
+387.       Aboriginal languages
+388.         Algonquian languages
+389.           Blackfoot
+390.           Cree-Montagnais languages
+391.             Atikamekw
+392.             Montagnais (Innu)
+393.             Moose Cree
+394.             Naskapi
+395.             Northern East Cree
+396.             Plains Cree
+397.             Southern East Cree
+398.             Swampy Cree
+399.             Woods Cree
+400.             Cree, n.o.s.
+401.           Eastern Algonquian languages
+402.             Malecite
+403.             Mi'kmaq
+404.           Ojibway-Potawatomi languages
+405.             Algonquin
+406.             Ojibway
+407.             Oji-Cree
+408.             Ottawa (Odawa)
+409.           Algonquian languages, n.i.e.
+410.         Athabaskan languages
+411.           Northern Athabaskan languages
+412.             Babine (Wetsuwet'en)
+413.             Beaver
+414.             Carrier
+415.             Chilcotin
+416.             Dene
+417.             Dogrib (Tlicho)
+418.             Gwich'in
+419.             Sarsi (Sarcee)
+420.             Sekani
+421.             Slavey-Hare languages
+422.               North Slavey (Hare)
+423.               South Slavey
+424.               Slavey, n.o.s.
+425.             Tahltan languages
+426.               Kaska (Nahani)
+427.               Tahltan
+428.             Tutchone languages
+429.               Northern Tutchone
+430.               Southern Tutchone
+431.           Athabaskan languages, n.i.e.
+432.         Haida
+433.         Inuit languages
+434.           Inuinnaqtun (Inuvialuktun)
+435.           Inuktitut
+436.           Inuit languages, n.i.e.
+437.         Iroquoian languages
+438.           Cayuga
+439.           Mohawk
+440.           Oneida
+441.           Iroquoian languages, n.i.e.
+442.         Kutenai
+443.         Michif
+444.         Salish languages
+445.           Comox
+446.           Halkomelem
+447.           Lillooet
+448.           Okanagan
+449.           Shuswap (Secwepemctsin)
+450.           Squamish
+451.           Straits
+452.           Thompson (Ntlakapamux)
+453.           Salish languages, n.i.e.
+454.         Siouan languages
+455.           Dakota
+456.           Stoney
+457.           Siouan languages, n.i.e.
+458.         Tlingit
+459.         Tsimshian languages
+460.           Gitxsan (Gitksan)
+461.           Nisga'a
+462.           Tsimshian
+463.         Wakashan languages
+464.           Haisla
+465.           Heiltsuk
+466.           Kwakiutl (Kwak'wala)
+467.           Nuu-chah-nulth (Nootka)
+468.           Wakashan languages, n.i.e.
+469.         Aboriginal languages, n.o.s.
+470.       Non-Aboriginal languages
+471.         Afro-Asiatic languages
+472.           Berber languages
+473.             Kabyle
+474.             Berber languages, n.i.e.
+475.           Cushitic languages
+476.             Bilen
+477.             Oromo
+478.             Somali
+479.             Cushitic languages, n.i.e.
+480.           Semitic languages
+481.             Amharic
+482.             Arabic
+483.             Assyrian Neo-Aramaic
+484.             Chaldean Neo-Aramaic
+485.             Harari
+486.             Hebrew
+487.             Maltese
+488.             Tigrigna
+489.             Semitic languages, n.i.e.
+490.           Afro-Asiatic languages, n.i.e.
+491.         Austro-Asiatic languages
+492.           Khmer (Cambodian)
+493.           Vietnamese
+494.           Austro-Asiatic languages, n.i.e
+495.         Austronesian languages
+496.           Bikol
+497.           Cebuano
+498.           Fijian
+499.           Hiligaynon
+500.           Ilocano
+501.           Malagasy
+502.           Malay
+503.           Pampangan (Kapampangan, Pampango)
+504.           Pangasinan
+505.           Tagalog (Pilipino, Filipino)
+506.           Waray-Waray
+507.           Austronesian languages, n.i.e.
+508.         Creole languages
+509.           Haitian Creole
+510.           Creole, n.o.s.
+511.           Creole languages, n.i.e.
+512.         Dravidian languages
+513.           Kannada
+514.           Malayalam
+515.           Tamil
+516.           Telugu
+517.           Dravidian languages, n.i.e.
+518.         Hmong-Mien languages
+519.         Indo-European languages
+520.           Albanian
+521.           Armenian
+522.           Balto-Slavic languages
+523.             Baltic languages
+524.               Latvian
+525.               Lithuanian
+526.             Slavic languages
+527.               Belarusan
+528.               Bosnian
+529.               Bulgarian
+530.               Croatian
+531.               Czech
+532.               Macedonian
+533.               Polish
+534.               Russian
+535.               Serbian
+536.               Serbo-Croatian
+537.               Slovak
+538.               Slovene (Slovenian)
+539.               Ukrainian
+540.               Slavic languages, n.i.e.
+541.           Celtic languages
+542.             Scottish Gaelic
+543.             Welsh
+544.             Celtic languages, n.i.e.
+545.           Germanic languages
+546.             Afrikaans
+547.             Danish
+548.             Dutch
+549.             Frisian
+550.             German
+551.             Icelandic
+552.             Norwegian
+553.             Swedish
+554.             Vlaams (Flemish)
+555.             Yiddish
+556.             Germanic languages, n.i.e.
+557.           Greek
+558.           Indo-Iranian languages
+559.             Indo-Aryan languages
+560.               Bengali
+561.               Gujarati
+562.               Hindi
+563.               Kashmiri
+564.               Konkani
+565.               Marathi
+566.               Nepali
+567.               Oriya (Odia)
+568.               Punjabi (Panjabi)
+569.               Sindhi
+570.               Sinhala (Sinhalese)
+571.               Urdu
+572.             Iranian languages
+573.               Kurdish
+574.               Pashto
+575.               Persian (Farsi)
+576.             Indo-Iranian languages, n.i.e.
+577.           Italic (Romance) languages
+578.             Catalan
+579.             Italian
+580.             Portuguese
+581.             Romanian
+582.             Spanish
+583.             Italic (Romance) languages, n.i.e.
+584.         Japanese
+585.         Kartvelian languages
+586.           Georgian
+587.         Korean
+588.         Mongolic languages
+589.           Mongolian
+590.         Niger-Congo languages
+591.           Akan (Twi)
+592.           Bamanankan
+593.           Edo
+594.           Ewe
+595.           Fulah (Pular, Pulaar, Fulfulde)
+596.           Ga
+597.           Ganda
+598.           Igbo
+599.           Lingala
+600.           Rundi (Kirundi)
+601.           Kinyarwanda (Rwanda)
+602.           Shona
+603.           Swahili
+604.           Wolof
+605.           Yoruba
+606.           Niger-Congo languages, n.i.e.
+607.         Nilo-Saharan languages
+608.           Dinka
+609.           Nilo-Saharan languages, n.i.e.
+610.         Sign languages
+611.           American Sign Language
+612.           Quebec Sign Language
+613.           Sign languages, n.i.e
+614.         Sino-Tibetan languages
+615.           Chinese languages
+616.             Cantonese
+617.             Hakka
+618.             Mandarin
+619.             Min Dong
+620.             Min Nan (Chaochow, Teochow, Fukien, Taiwanese)
+621.             Wu (Shanghainese)
+622.             Chinese, n.o.s.
+623.             Chinese languages, n.i.e.
+624.           Tibeto-Burman languages
+625.             Burmese
+626.             Karenic languages
+627.             Tibetan
+628.             Tibeto-Burman languages, n.i.e.
+629.         Tai-Kadai languages
+630.           Lao
+631.           Thai
+632.           Tai-Kadai languages, n.i.e
+633.         Turkic languages
+634.           Azerbaijani
+635.           Turkish
+636.           Uyghur
+637.           Uzbek
+638.           Turkic languages, n.i.e.
+639.         Uralic languages
+640.           Estonian
+641.           Finnish
+642.           Hungarian
+643.           Uralic languages, n.i.e.
+644.         Other languages, n.i.e.
+645.   Multiple responses
+646.     English and French
+647.     English and non-official language
+648.     French and non-official language
+649.     English, French and non-official language
+650. Total - Other language(s) spoken regularly at home for the total population excluding institutional residents - 100% data (28)
+651.   None
+652.   English
+653.   French
+654.   Non-official language
+655.     Aboriginal
+656.     Non-Aboriginal
+657.   English and French
+658.   English and non-official language
+659.   French and non-official language
+660.   English, French and non-official language
+
+**LANGUAGE KNOWLEDGE**
+872. Total - Knowledge of languages for the population in private households - 25% sample data (57)
+873.   Official languages
+874.     English
+875.     French
+876.   Non-official languages
+877.     Aboriginal languages
+878.       Algonquian languages
+879.         Blackfoot
+880.         Cree-Montagnais languages
+881.           Atikamekw
+882.           Montagnais (Innu)
+883.           Moose Cree
+884.           Naskapi
+885.           Northern East Cree
+886.           Plains Cree
+887.           Southern East Cree
+888.           Swampy Cree
+889.           Woods Cree
+890.           Cree, n.o.s.
+891.         Eastern Algonquian languages
+892.           Malecite
+893.           Mi'kmaq
+894.         Ojibway-Potawatomi languages
+895.           Algonquin
+896.           Ojibway
+897.           Oji-Cree
+898.           Ottawa (Odawa)
+899.         Algonquian languages, n.i.e.
+900.       Athabaskan languages
+901.         Northern Athabaskan languages
+902.           Babine (Wetsuwet'en)
+903.           Beaver
+904.           Carrier
+905.           Chilcotin
+906.           Dene
+907.           Dogrib (Tlicho)
+908.           Gwich'in
+909.           Sarsi (Sarcee)
+910.           Sekani
+911.           Slavey-Hare languages
+912.             North Slavey (Hare)
+913.             South Slavey
+914.             Slavey, n.o.s.
+915.           Tahltan languages
+916.             Kaska (Nahani)
+917.             Tahltan
+918.           Tutchone languages
+919.             Northern Tutchone
+920.             Southern Tutchone
+921.         Athabaskan languages, n.i.e.
+922.       Haida
+923.       Inuit languages
+924.         Inuinnaqtun (Inuvialuktun)
+925.         Inuktitut
+926.         Inuit languages, n.i.e.
+927.       Iroquoian languages
+928.         Cayuga
+929.         Mohawk
+930.         Oneida
+931.         Iroquoian languages, n.i.e.
+932.       Kutenai
+933.       Michif
+934.       Salish languages
+935.         Comox
+936.         Halkomelem
+937.         Lillooet
+938.         Okanagan
+939.         Shuswap (Secwepemctsin)
+940.         Squamish
+941.         Straits
+942.         Thompson (Ntlakapamux)
+943.         Salish languages, n.i.e.
+944.       Siouan languages
+945.         Dakota
+946.         Stoney
+947.         Siouan languages, n.i.e.
+948.       Tlingit
+949.       Tsimshian languages
+950.         Gitxsan (Gitksan)
+951.         Nisga'a
+952.         Tsimshian
+953.       Wakashan languages
+954.         Haisla
+955.         Heiltsuk
+956.         Kwakiutl (Kwak'wala)
+957.         Nuu-chah-nulth (Nootka)
+958.         Wakashan languages, n.i.e.
+959.       Aboriginal languages, n.o.s.
+960.     Non-Aboriginal languages
+961.       Afro-Asiatic languages
+962.         Berber languages
+963.           Kabyle
+964.           Berber languages, n.i.e.
+965.         Cushitic languages
+966.           Bilen
+967.           Oromo
+968.           Somali
+969.           Cushitic languages, n.i.e.
+970.         Semitic languages
+971.           Amharic
+972.           Arabic
+973.           Assyrian Neo-Aramaic
+974.           Chaldean Neo-Aramaic
+975.           Harari
+976.           Hebrew
+977.           Maltese
+978.           Tigrigna
+979.           Semitic languages, n.i.e.
+980.         Afro-Asiatic languages, n.i.e.
+981.       Austro-Asiatic languages
+982.         Khmer (Cambodian)
+983.         Vietnamese
+984.         Austro-Asiatic languages, n.i.e
+985.       Austronesian languages
+986.         Bikol
+987.         Cebuano
+988.         Fijian
+989.         Hiligaynon
+990.         Ilocano
+991.         Malagasy
+992.         Malay
+993.         Pampangan (Kapampangan, Pampango)
+994.         Pangasinan
+995.         Tagalog (Pilipino, Filipino)
+996.         Waray-Waray
+997.         Austronesian languages, n.i.e.
+998.       Creole languages
+999.         Haitian Creole
+1000.         Creole, n.o.s.
+1001.         Creole languages, n.i.e.
+1002.       Dravidian languages
+1003.         Kannada
+1004.         Malayalam
+1005.         Tamil
+1006.         Telugu
+1007.         Dravidian languages, n.i.e.
+1008.       Hmong-Mien languages
+1009.       Indo-European languages
+1010.         Albanian
+1011.         Armenian
+1012.         Balto-Slavic languages
+1013.           Baltic languages
+1014.             Latvian
+1015.             Lithuanian
+1016.           Slavic languages
+1017.             Belarusan
+1018.             Bosnian
+1019.             Bulgarian
+1020.             Croatian
+1021.             Czech
+1022.             Macedonian
+1023.             Polish
+1024.             Russian
+1025.             Serbian
+1026.             Serbo-Croatian
+1027.             Slovak
+1028.             Slovene (Slovenian)
+1029.             Ukrainian
+1030.             Slavic languages, n.i.e.
+1031.         Celtic languages
+1032.           Scottish Gaelic
+1033.           Welsh
+1034.           Celtic languages, n.i.e.
+1035.         Germanic languages
+1036.           Afrikaans
+1037.           Danish
+1038.           Dutch
+1039.           Frisian
+1040.           German
+1041.           Icelandic
+1042.           Norwegian
+1043.           Swedish
+1044.           Vlaams (Flemish)
+1045.           Yiddish
+1046.           Germanic languages, n.i.e.
+1047.         Greek
+1048.         Indo-Iranian languages
+1049.           Indo-Aryan languages
+1050.             Bengali
+1051.             Gujarati
+1052.             Hindi
+1053.             Kashmiri
+1054.             Konkani
+1055.             Marathi
+1056.             Nepali
+1057.             Oriya (Odia)
+1058.             Punjabi (Panjabi)
+1059.             Sindhi
+1060.             Sinhala (Sinhalese)
+1061.             Urdu
+1062.           Iranian languages
+1063.             Kurdish
+1064.             Pashto
+1065.             Persian (Farsi)
+1066.           Indo-Iranian languages, n.i.e.
+1067.         Italic (Romance) languages
+1068.           Catalan
+1069.           Italian
+1070.           Portuguese
+1071.           Romanian
+1072.           Spanish
+1073.           Italic (Romance) languages, n.i.e.
+1074.       Japanese
+1075.       Kartvelian languages
+1076.         Georgian
+1077.       Korean
+1078.       Mongolic languages
+1079.         Mongolian
+1080.       Niger-Congo languages
+1081.         Akan (Twi)
+1082.         Bamanankan
+1083.         Edo
+1084.         Ewe
+1085.         Fulah (Pular, Pulaar, Fulfulde)
+1086.         Ga
+1087.         Ganda
+1088.         Igbo
+1089.         Lingala
+1090.         Rundi (Kirundi)
+1091.         Kinyarwanda (Rwanda)
+1092.         Shona
+1093.         Swahili
+1094.         Wolof
+1095.         Yoruba
+1096.         Niger-Congo languages, n.i.e.
+1097.       Nilo-Saharan languages
+1098.         Dinka
+1099.         Nilo-Saharan languages, n.i.e.
+1100.       Sign languages
+1101.         American Sign Language
+1102.         Quebec Sign Language
+1103.         Sign languages, n.i.e
+1104.       Sino-Tibetan languages
+1105.         Chinese languages
+1106.           Cantonese
+1107.           Hakka
+1108.           Mandarin
+1109.           Min Dong
+1110.           Min Nan (Chaochow, Teochow, Fukien, Taiwanese)
+1111.           Wu (Shanghainese)
+1112.           Chinese, n.o.s.
+1113.           Chinese languages, n.i.e.
+1114.         Tibeto-Burman languages
+1115.           Burmese
+1116.           Karenic languages
+1117.           Tibetan
+1118.           Tibeto-Burman languages, n.i.e.
+1119.       Tai-Kadai languages
+1120.         Lao
+1121.         Thai
+1122.         Tai-Kadai languages, n.i.e
+1123.       Turkic languages
+1124.         Azerbaijani
+1125.         Turkish
+1126.         Uyghur
+1127.         Uzbek
+1128.         Turkic languages, n.i.e.
+1129.       Uralic languages
+1130.         Estonian
+1131.         Finnish
+1132.         Hungarian
+1133.         Uralic languages, n.i.e.
+1134.       Other languages, n.i.e.
+1135.
+
+1950. Total - Language used most often at work for the population in private households aged 15 years and over who worked since January 1, 2015 - 25% sample data (233)
+1951.   Single responses
+1952.     Official languages
+1953.       English
+1954.       French
+1955.     Non-official languages
+1956.       Aboriginal languages
+1957.         Algonquian languages
+1958.           Blackfoot
+1959.           Cree-Montagnais languages
+1960.             Atikamekw
+1961.             Montagnais (Innu)
+1962.             Moose Cree
+1963.             Naskapi
+1964.             Northern East Cree
+1965.             Plains Cree
+1966.             Southern East Cree
+1967.             Swampy Cree
+1968.             Woods Cree
+1969.             Cree, n.o.s.
+1970.           Eastern Algonquian languages
+1971.             Malecite
+1972.             Mi'kmaq
+1973.           Ojibway-Potawatomi languages
+1974.             Algonquin
+1975.             Ojibway
+1976.             Oji-Cree
+1977.             Ottawa (Odawa)
+1978.           Algonquian languages, n.i.e.
+1979.         Athabaskan languages
+1980.           Northern Athabaskan languages
+1981.             Babine (Wetsuwet'en)
+1982.             Beaver
+1983.             Carrier
+1984.             Chilcotin
+1985.             Dene
+1986.             Dogrib (Tlicho)
+1987.             Gwich'in
+1988.             Sarsi (Sarcee)
+1989.             Sekani
+1990.             Slavey-Hare languages
+1991.               North Slavey (Hare)
+1992.               South Slavey
+1993.               Slavey, n.o.s.
+1994.             Tahltan languages
+1995.               Kaska (Nahani)
+1996.               Tahltan
+1997.             Tutchone languages
+1998.               Northern Tutchone
+1999.               Southern Tutchone
+2000.           Athabaskan languages, n.i.e.
+2001.         Haida
+2002.         Inuit languages
+2003.           Inuinnaqtun (Inuvialuktun)
+2004.           Inuktitut
+2005.           Inuit languages, n.i.e.
+2006.         Iroquoian languages
+2007.           Cayuga
+2008.           Mohawk
+2009.           Oneida
+2010.           Iroquoian languages, n.i.e.
+2011.         Kutenai
+2012.         Michif
+2013.         Salish languages
+2014.           Comox
+2015.           Halkomelem
+2016.           Lillooet
+2017.           Okanagan
+2018.           Shuswap (Secwepemctsin)
+2019.           Squamish
+2020.           Straits
+2021.           Thompson (Ntlakapamux)
+2022.           Salish languages, n.i.e.
+2023.         Siouan languages
+2024.           Dakota
+2025.           Stoney
+2026.           Siouan languages, n.i.e.
+2027.         Tlingit
+2028.         Tsimshian languages
+2029.           Gitxsan (Gitksan)
+2030.           Nisga'a
+2031.           Tsimshian
+2032.         Wakashan languages
+2033.           Haisla
+2034.           Heiltsuk
+2035.           Kwakiutl (Kwak'wala)
+2036.           Nuu-chah-nulth (Nootka)
+2037.           Wakashan languages, n.i.e.
+2038.         Aboriginal languages, n.o.s.
+2039.       Non-Aboriginal languages
+2040.         Afro-Asiatic languages
+2041.           Berber languages
+2042.             Kabyle
+2043.             Berber languages, n.i.e.
+2044.           Cushitic languages
+2045.             Bilen
+2046.             Oromo
+2047.             Somali
+2048.             Cushitic languages, n.i.e.
+2049.           Semitic languages
+2050.             Amharic
+2051.             Arabic
+2052.             Assyrian Neo-Aramaic
+2053.             Chaldean Neo-Aramaic
+2054.             Harari
+2055.             Hebrew
+2056.             Maltese
+2057.             Tigrigna
+2058.             Semitic languages, n.i.e.
+2059.           Afro-Asiatic languages, n.i.e.
+2060.         Austro-Asiatic languages
+2061.           Khmer (Cambodian)
+2062.           Vietnamese
+2063.           Austro-Asiatic languages, n.i.e
+2064.         Austronesian languages
+2065.           Bikol
+2066.           Cebuano
+2067.           Fijian
+2068.           Hiligaynon
+2069.           Ilocano
+2070.           Malagasy
+2071.           Malay
+2072.           Pampangan (Kapampangan, Pampango)
+2073.           Pangasinan
+2074.           Tagalog (Pilipino, Filipino)
+2075.           Waray-Waray
+2076.           Austronesian languages, n.i.e.
+2077.         Creole languages
+2078.           Haitian Creole
+2079.           Creole, n.o.s.
+2080.           Creole languages, n.i.e.
+2081.         Dravidian languages
+2082.           Kannada
+2083.           Malayalam
+2084.           Tamil
+2085.           Telugu
+2086.           Dravidian languages, n.i.e.
+2087.         Hmong-Mien languages
+2088.         Indo-European languages
+2089.           Albanian
+2090.           Armenian
+2091.           Balto-Slavic languages
+2092.             Baltic languages
+2093.               Latvian
+2094.               Lithuanian
+2095.             Slavic languages
+2096.               Belarusan
+2097.               Bosnian
+2098.               Bulgarian
+2099.               Croatian
+2100.               Czech
+2101.               Macedonian
+2102.               Polish
+2103.               Russian
+2104.               Serbian
+2105.               Serbo-Croatian
+2106.               Slovak
+2107.               Slovene (Slovenian)
+2108.               Ukrainian
+2109.               Slavic languages, n.i.e.
+2110.           Celtic languages
+2111.             Scottish Gaelic
+2112.             Welsh
+2113.             Celtic languages, n.i.e.
+2114.           Germanic languages
+2115.             Afrikaans
+2116.             Danish
+2117.             Dutch
+2118.             Frisian
+2119.             German
+2120.             Icelandic
+2121.             Norwegian
+2122.             Swedish
+2123.             Vlaams (Flemish)
+2124.             Yiddish
+2125.             Germanic languages, n.i.e.
+2126.           Greek
+2127.           Indo-Iranian languages
+2128.             Indo-Aryan languages
+2129.               Bengali
+2130.               Gujarati
+2131.               Hindi
+2132.               Kashmiri
+2133.               Konkani
+2134.               Marathi
+2135.               Nepali
+2136.               Oriya (Odia)
+2137.               Punjabi (Panjabi)
+2138.               Sindhi
+2139.               Sinhala (Sinhalese)
+2140.               Urdu
+2141.             Iranian languages
+2142.               Kurdish
+2143.               Pashto
+2144.               Persian (Farsi)
+2145.             Indo-Iranian languages, n.i.e.
+2146.           Italic (Romance) languages
+2147.             Catalan
+2148.             Italian
+2149.             Portuguese
+2150.             Romanian
+2151.             Spanish
+2152.             Italic (Romance) languages, n.i.e.
+2153.         Japanese
+2154.         Kartvelian languages
+2155.           Georgian
+2156.         Korean
+2157.         Mongolic languages
+2158.           Mongolian
+2159.         Niger-Congo languages
+2160.           Akan (Twi)
+2161.           Bamanankan
+2162.           Edo
+2163.           Ewe
+2164.           Fulah (Pular, Pulaar, Fulfulde)
+2165.           Ga
+2166.           Ganda
+2167.           Igbo
+2168.           Lingala
+2169.           Rundi (Kirundi)
+2170.           Kinyarwanda (Rwanda)
+2171.           Shona
+2172.           Swahili
+2173.           Wolof
+2174.           Yoruba
+2175.           Niger-Congo languages, n.i.e.
+2176.         Nilo-Saharan languages
+2177.           Dinka
+2178.           Nilo-Saharan languages, n.i.e.
+2179.         Sign languages
+2180.           American Sign Language
+2181.           Quebec Sign Language
+2182.           Sign languages, n.i.e
+2183.         Sino-Tibetan languages
+2184.           Chinese languages
+2185.             Cantonese
+2186.             Hakka
+2187.             Mandarin
+2188.             Min Dong
+2189.             Min Nan (Chaochow, Teochow, Fukien, Taiwanese)
+2190.             Wu (Shanghainese)
+2191.             Chinese, n.o.s.
+2192.             Chinese languages, n.i.e.
+2193.           Tibeto-Burman languages
+2194.             Burmese
+2195.             Karenic languages
+2196.             Tibetan
+2197.             Tibeto-Burman languages, n.i.e.
+2198.         Tai-Kadai languages
+2199.           Lao
+2200.           Thai
+2201.           Tai-Kadai languages, n.i.e
+2202.         Turkic languages
+2203.           Azerbaijani
+2204.           Turkish
+2205.           Uyghur
+2206.           Uzbek
+2207.           Turkic languages, n.i.e.
+2208.         Uralic languages
+2209.           Estonian
+2210.           Finnish
+2211.           Hungarian
+2212.           Uralic languages, n.i.e.
+2213.         Other languages, n.i.e.
+2214.   Multiple responses
+2215.     English and French
+2216.     English and non-official language
+2217.     French and non-official language
+2218.     English, French and non-official language
+2219. Total - Other language(s) used regularly at work for the population in private households aged 15 years and over who worked since January 1, 2015 - 25% Sample Data (236)
+2220.   None
+2221.   English
+2222.   French
+2223.   Non-official language
+2224.     Aboriginal
+2225.     Non-Aboriginal
+2226.   English and French
+2227.   English and non-official language
+2228.   French and non-official language
+2229.   English, French and non-official language

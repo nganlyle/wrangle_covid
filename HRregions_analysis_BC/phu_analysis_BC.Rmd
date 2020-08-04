@@ -1,0 +1,330 @@
+---
+title: "phu_analysis"
+author: "NL"
+date: "27/05/2020"
+output: html_document
+---
+
+
+```{r, echo=FALSE}
+# Import the necessary libraries
+library(skimr)
+```
+
+## Import data
+```{r }
+# Import the PHU data
+df_source = read.csv(file = 'merged_data_BC_HSD.csv', stringsAsFactors = FALSE, na.strings="", header=TRUE)
+df <- df_source
+
+colnames(df)
+# skim(df)
+# rownames(df)
+# head(df)
+
+```
+
+## Clean data
+Four variables with missing values: 
+
+1. prox_idx_transit_med (Median proximity measure to transit) and Chronic.obstructive.pulmonary.disease..COPD..35.years.and.over. - **impute 0**
+
+2. Breast.milk.feeding.initiation - **remove**
+
+3. Exclusive.breastfeeding..at.least.6.months - **remove**
+
+4. Body.mass.index..self.reported..youth..12.to.17.years.old...overweight.or.obese - **remove**
+
+We remove the columns that are not needed and we will use weighted proximity scores rather than the median proximity scores. This leaves us with 55 predictor variables and 2 response variables. 
+
+The predictor variables include:
+
+1. Census variables (e.g. age, housing, income, education, employment) - 26
+
+2. Proximity variables (e.g. transit, parks, grocery) - 10
+
+3. Health variables (e.g. asthma, perceived health, obesity) - 19
+
+The response variables are proportion (as a fraction of the population in the health region) of cases and fatalities. 
+
+```{r, echo=FALSE}
+# COPD - impute 0
+df$Chronic.obstructive.pulmonary.disease..COPD..35.years.and.over.[is.na(df$Chronic.obstructive.pulmonary.disease..COPD..35.years.and.over.)] <- 0
+
+# Breastfeeding variables and obesity in youth - remove
+# Remove other variables not needed
+# df <- df[,-c(1:2, 4:5, 32:42, 57:58, 60, 63, 78:99)] # Remove weighted prox scores
+df <- df[,-c(1:2, 4:5, 32, 43:52, 56:58, 60, 63, 76, 78:79)] # Remove median prox scores
+
+# rownames(df) <- df[,1]
+
+# Convert percent data to proportions: 1. age group data 2. health data
+# df[, c(16:34)] <- df[, c(16:34)]/100
+
+colnames(df)
+# head(df)
+
+```
+
+## PCA on the data
+```{r }
+pca <- prcomp(df[,-c(1, 57)], scale = TRUE)
+summary(pca)
+
+```
+
+```{r }
+# Scree plot
+plot(pca, type="lines")
+
+```
+
+# Graph the PCA
+```{r }
+# # PCA graph using the base graphics function plot()
+# plot(pca$x[,1], pca$x[,3])
+
+# Biplot
+biplot(pca, col = c("blue", "red"), cex = c(0.5,0.5))
+# pca
+
+```
+
+## Principal components regression (PCR) against proportion of cases
+```{r }
+# pca$x <- -pca$x
+# pca$rotation <- -pca$rotation
+
+# Extract the first 6 principal components (based on the Scree plot) for PCR
+pcs <- pca$x[,c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6")]
+
+# Create a dataframe with reponse variable TOTAL proportion of COVID cases and explanatory variables (the PCs)
+pcr_data <- as.data.frame(cbind(df[,"count_prop"], pcs))
+head(pcr_data)
+
+# Perform linear regression
+phu_lm_total <- lm(V1~., data = pcr_data)
+summary(phu_lm_total)
+
+# Backwards Selection
+phu_lm_total <- update(phu_lm_total, .~. -PC5)
+summary(phu_lm_total)
+phu_lm_total <- update(phu_lm_total, .~. -PC3)
+summary(phu_lm_total)
+phu_lm_total <- update(phu_lm_total, .~. -PC4)
+summary(phu_lm_total)
+phu_lm_total <- update(phu_lm_total, .~. -PC6)
+summary(phu_lm_total)
+phu_lm_total <- update(phu_lm_total, .~. -PC2)
+summary(phu_lm_total)
+
+```
+
+## Review PCs 1 and 3
+```{r, echo=FALSE }
+pca$rotation[,c(1, 6)]
+
+```
+
+## Review the top loading scores
+```{r }
+loading_scores <- pca$rotation[,1]
+var_scores <- abs(loading_scores)
+
+# Rank and show the top 10 loading score by magnitude
+var_scores_ranked <- sort(var_scores, decreasing = TRUE)
+top_10_var <- names(var_scores_ranked[1:10])
+top_10_var
+
+pca$rotation[top_10_var, 1] 
+```
+
+
+
+```{r, include=FALSE }
+# library(ggplot2)
+# library(grid)
+# library(RColorBrewer)
+# # colnames(df_source)
+# density <- df_source[, 6]
+# PCbiplot <- function(PC, x="PC1", y="PC2") {
+#     # PC being a prcomp object
+#     data <- data.frame(obsnames=row.names(PC$x), PC$x)
+#     plot <- ggplot(data, aes_string(x=x, y=y)) + geom_point(aes(colour = density), alpha=1, size=2) + scale_color_gradient(low = "blue", high = "orange red")
+#     plot <- last_plot() + theme_minimal()
+#     # plot <- ggplot(data, aes_string(x=x, y=y)) + geom_text(alpha=.6, size=2.5, aes(label=obsnames))
+#     # plot <- plot + geom_hline(aes(0), size=.2) + geom_vline(aes(0), size=.2)
+#     datapc <- data.frame(varnames=rownames(PC$rotation), PC$rotation)
+#     mult <- min(
+#         (max(data[,y]) - min(data[,y])/(max(datapc[,y])-min(datapc[,y]))),
+#         (max(data[,x]) - min(data[,x])/(max(datapc[,x])-min(datapc[,x])))
+#         )
+#     datapc <- transform(datapc,
+#             v1 = .7 * mult * (get(x)),
+#             v2 = .7 * mult * (get(y))
+#             )
+#     plot <- plot + coord_equal() + geom_text(data=datapc, aes(x=v1, y=v2, label=varnames), size = 3.5, vjust=1, color="red")
+#     plot <- plot + geom_segment(data=datapc, aes(x=0, y=0, xend=v1, yend=v2), arrow=arrow(length=unit(0.2,"cm")), alpha=0.75, color="red")
+#     plot
+# }
+# 
+# PCbiplot(pca)
+
+```
+
+
+```{r, include=FALSE }
+# # Use ggplot2 to plot the data
+# library(ggplot2)
+# pca.data <- data.frame(Sample = df$ENG_LABEL, X=pca$x[,1], Y=pca$x[,2])
+# pca.data
+# 
+# ggplot(data=pca.data, aes(x=X, y=Y, label = Sample)) +
+#   geom_text() + geom_point() +
+#   xlab(paste("PC1 - ", pca.var.per[1], "%", sep = "")) +
+#   ylab(paste("PC2 - ", pca.var.per[2], "%", sep = "")) +
+#   theme_bw() +
+#   ggtitle("PCA Graph")
+
+```
+
+
+```{r, include=FALSE }
+## Factor Analysis
+# Extract the predictor columns
+# df2_prop2 <- df2_prop[,-c(1,2,3)]
+# df_med2 <- df_med[,-c(1:4, 37:48)]
+
+
+# Check KMO, Bartletts which tells us if FA is appropriate
+# KMO values between 0.8 and 1 indicate the sampling is adequate.
+# KMO values less than 0.6 indicate the sampling is not adequate and that remedial action should be taken. Some authors put this value at 0.5, so use your own judgment for values between 0.5 and 0.6.
+# KMO Values close to zero means that there are large partial correlations compared to the sum of correlations. In other words, there are widespread correlations which are a large problem for factor analysis.
+library(psych)
+
+# KMO(cor(df2_prop2))
+colnames(df)
+KMO(cor(df[,-c(1, 59:60)]))
+# We look for MSA > 0.5
+# The following variables have MSA < 0.5
+# Asthma
+# Body.mass.index..adjusted.self.reported..adult..18.years.and.over...overweight
+# Diabetes
+# Has.a.regular.healthcare.provider
+# Influenza.immunization.in.the.past.12.months
+# Life.satisfaction..satisfied.or.very.satisfied
+# Perceived.life.stress..most.days.quite.a.bit.or.extremely.stressful
+# Perceived.mental.health..fair.or.poor 
+# Perceived.mental.health..very.good.or.excellent 
+# Physical.activity..150.minutes.per.week..adult..18.years.and.over. 
+# Physical.activity..average.60.minutes.per.day..youth..12.to.17.years.old. 
+# Sense.of.belonging.to.local.community..somewhat.strong.or.very.strong
+# prox_idx_grocery_med 
+# prox_idx_educsec_med 
+# prox_idx_lib_med 
+
+# print(cortest.bartlett(cor(df_med2), nrow(df_med2)))
+print(cortest.bartlett(cor(df[,-c(1, 59:60)]), nrow(df[,-c(1, 59:60)])))
+# Bartletts test of sphericity is significant
+
+```
+
+```{r, eval=FALSE, include=FALSE }
+phu_fa <- factanal(df[,-c(1, 59:60)], factors = 6, rotation = "varimax", scores = "regression")
+# phu_fa <- factanal(df2_prop2, factors = 2, rotation = "varimax", scores = "regression")
+# phu_fa <- factanal(df2_prop2, factors = 2, rotation = 'none')
+# phu_fa <- factanal(df2_prop2, factors = 2, rotation = 'promax', scores = c("regression"))
+phu_fa
+
+```
+
+```{r, eval=FALSE, include=FALSE}
+# Use factor scores as explanatory variables in a regression analysis
+phu_fa$scores
+
+total_fa <- as.data.frame(cbind(df[,"TOTALprop"], phu_fa$scores))
+# total_fa <- as.data.frame(cbind(df2_prop[,"TOTALprop"], phu_fa$scores))
+head(total_fa)
+
+mod = lm (V1~., total_fa)
+summary(mod)
+
+```
+
+```{r, include=FALSE }
+# # 3d plot
+# options(rgl.useNULL = TRUE)
+# library(rgl)
+# with(total_fa, plot3d(V1, Factor1, Factor2, type="p"))
+# triangles3d(total_fa[,1], total_fa[,2], total_fa[,3])
+# rglwidget()
+# 
+# fit <- lm(V1~., total_fa)
+# surfacefn <- function(x, y) cbind(1, x, y, z) %*% coef(fit)
+# persp3d(surfacefn, add = TRUE, col = "blue")
+```
+
+
+```{r, eval=FALSE, include=FALSE }
+# fatal_fa <- as.data.frame(cbind(df2_prop[,"FATALprop"], phu_fa$scores))
+fatal_fa <- as.data.frame(cbind(df_med[,"FATAL_prop"], phu_fa$scores))
+head(fatal_fa)
+
+mod = lm (V1~., fatal_fa)
+summary(mod)
+
+```
+
+
+```{r, eval=FALSE, include=FALSE }
+set.seed(100)
+indices= sample(1:nrow(total_fa), 0.7*nrow(total_fa))
+train = total_fa[indices,]
+test = total_fa[-indices,]
+
+mod = lm (V1~., train)
+summary(mod)
+
+library(car)
+vif(mod)
+
+# Model Performance metrics:
+library(Metrics)
+
+# Model 1:
+pred_test1 <- predict(mod, newdata = test, type = "response")
+pred_test1
+
+```
+
+
+```{r }
+
+```
+
+
+```{r }
+
+```
+
+
+```{r }
+
+```
+
+
+```{r }
+
+```
+
+
+```{r }
+
+```
+
+
+```{r }
+
+```
+
+

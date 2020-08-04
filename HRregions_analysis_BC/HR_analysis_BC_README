@@ -1,0 +1,77 @@
+## HR analysis BC
+
+### Proximity Data Preparation
+
+1. Clean the Proximity Measures Database for manipulation in QGIS and in preparation for aggregation.
+
+Type | Name
+--|--
+Script | proximity_data_prep_BC.ipynb
+Input files | PMD-en.csv
+Output file | proximity_data_prep_forQGIS_BC.csv
+
+The Proximity Measures Database was downloaded from [Statistics Canada](https://www150.statcan.gc.ca/n1/pub/17-26-0002/2020001/csv/pmd-eng.zip).
+
+2. Aggregate the proximity data from the dissemination block (DB) to the HSD/HA level.
+
+Type | Name
+--|--
+Script | proximity_data_aggregation_BC.ipynb
+Input files | <ul><li>Joined_DB_to_HR_BC.csv</li><li>proximity_data_prep_forQGIS_BC.csv</li></ul>
+Output file | <ul><li>proximity_data_aggregated_BC_HSD.csv</li><li>proximity_data_aggregated_BC_HA.csv</li></ul>
+
+The proximity data were aggregated from the DB to the HSD/HA levels using 2 methods:
+
+1. The proximity value for each PHU was taken to be the sum of the population weighted proximity measures of the DBs.
+2. The proximity value for each PHU was taken to be the median of the proximity values at the DB level.
+
+The amenity score of the PHU was taken to be the mean of the amenity scores of the DBs.
+
+
+### Health/Comorbidity Data Preparation
+
+Type | Name
+--|--
+Script | comorbidity_data_prep_BC.ipynb
+Input files | 13100113.csv
+Output file | <ul><li>comorbidity_data_percent_BC.csv</li><li>comorbidity_data_num_BC.csv</li></ul>
+
+The Health characteristics, two-year period estimates was downloaded from [Statistics Canada](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310011301).
+
+Health data were grouped at the Health Service Delivery (HSD) level rather than the Health Authority (HA) level. There are 16 HSAs in BC. These aggregate to HAs.
+
+https://www2.gov.bc.ca/gov/content/data/geographic-data-services/land-use/administrative-boundaries/health-boundaries
+
+### COVID Data preparation
+
+Type | Name
+--|--
+Script | covid_data_prep_BC.ipynb
+Input files | <ul><li>BCCDC_COVID19_Dashboard_Case_Details.csv</
+Output file | cases_by_HA.csv
+
+http://www.bccdc.ca/health-info/diseases-conditions/covid-19/data
+
+As of July 9, 2020, B.C. is reporting separately on COVID-19 cases in individuals whose primary residence is outside of Canada. Previously, these cases were assigned to the health authority that reported the case.
+- Note that "Out of Canada" cases were dropped from the database.
+
+As of June 4, 2020, B.C. is reporting epi-linked cases, meaning people who were never tested but were presumed to have COVID-19 because they developed symptoms and were close contacts of a laboratory confirmed case. Epi-linked cases identified since May 19, 2020, are now included in the case total, but are not considered new cases unless they were reported in the last 24 hours.
+
+COVID cases data at the HSD level were manually extracted from the COVID-19 cases by Health Service Delivery Area map (.png filetype).
+
+### Census Profile Data preparation
+
+Type | Name
+--|--
+Script | census_data_prep_BC.ipynb
+Input files | <ul><li>98-401-X2016058_English_CSV_data.csv</li><li>selected_variables.csv</li></ul>
+Output file | census_data_BC.csv
+
+The Census Profile at the HSD (not the HA) level was downloaded from [Statistics Canada](https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/prof/details/download-telecharger/comp/page_dl-tc.cfm?Lang=E).
+
+### Merge Data
+Type | Name
+--|--
+Script | merge_data_BC_HSD.ipynb
+Input files | <ul><li>HSD_HA_names_id.csv</li><li>proximity_data_aggregated_BC_HSD.csv</li><li>comorbidity_data_percent_BC.csv</li><li>census_data_BC.csv</li><li>cases_by_HSD_071620.csv</li></ul>
+Output file | merged_data_BC_HSD.csv
