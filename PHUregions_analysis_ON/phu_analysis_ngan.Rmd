@@ -388,7 +388,8 @@ pred_test1
 
 ```
 
-
+### BC biplot
+![](BC_biplot.png)
 ```{r }
 
 ```
