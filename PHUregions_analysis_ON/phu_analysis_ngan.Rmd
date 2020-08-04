@@ -150,11 +150,16 @@ plot(pca$x[,1], pca$x[,3])
 
 # Biplot
 biplot(pca, col = c("blue", "red"), cex = c(0.5,0.5))
-# pca
+
 
 ```
-![Magnified](mag_pca.png)
-![Limited](old_pca.png)
+
+### Without the census data
+![](old_pca.png)
+
+### Magnified
+![](mag_pca.png)
+
 
 ```{r, include=FALSE }
 # # Barplot scree plot
