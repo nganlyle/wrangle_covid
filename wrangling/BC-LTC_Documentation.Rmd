@@ -2,7 +2,10 @@
 title: "BC LTC Parameters"
 author: "KT Hobbs"
 date: "06/08/2020"
-output: pdf_document
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
 ---
 
 ## General Home Information
@@ -125,3 +128,14 @@ $^3$ [Excel provided by Seniors Advocate Representative.]
 $^4$ [https://docs.google.com/spreadsheets/d/1M_RzojK0vwF9nAozI7aoyLpPU8EA1JEqO6rq0g1iebU/edit#gid=0](https://docs.google.com/spreadsheets/d/1M_RzojK0vwF9nAozI7aoyLpPU8EA1JEqO6rq0g1iebU/edit#gid=0)
 
 $^5$ [http://www.phsa.ca/current-outbreaks](http://www.phsa.ca/current-outbreaks) 
+
+
+\pagebreak
+
+[] Dealing with sparsity and NA's; mostly apparent in `INCIDENT_*` and `INFRACTIONS_*` predictors, omission removes many homes. Some homes have up to 27 NAs. Currently, set to 0. `glm` can't handle NAs.
+
+[] Skewed predictors. Log and square-root transformations ineffective at mediating skewness.
+
+[] assumptions - nonlinear relationship of predictors with `outbreak_status`
+
+
