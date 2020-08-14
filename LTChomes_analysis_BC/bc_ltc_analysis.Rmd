@@ -153,14 +153,13 @@ Original, skewed data will be used for now.
 ```{r categorical assess}
 # Inspect the distribution of the categorical variables
 
-hist(xtabs(~outbreak_status + FACILITY_NAME, data=df))
+# hist(xtabs(~outbreak_status + FACILITY_NAME, data=df))
 summary(df4$outbreak_status)
 
-hist(xtabs(~residents_council + FACILITY_NAME, data=df))
+# hist(xtabs(~residents_council + FACILITY_NAME, data=df))
 summary(df4$residents_council)
 summary(df4$family_council)
 summary(df4$home_type)
-summary(df4$ownership_type)
 
 ```
 
@@ -190,9 +189,24 @@ summary(df4$ownership_type)
 
 ## Binary Logistic Regression with NAs
 
-```{r BLR with nas}
-fit2 = glm(outbreak_status~., family=binomial, data=df4, maxit = 25)
+```{r BLR with nas, eval = F}
+fit2 = glm(outbreak_status~., family=binomial, data=df4, maxit = 25, na.action = na.pass)
 summary(fit2)
+```
+`Error in glm.fit(x = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, : NA/NaN/Inf in 'x'`
+
+
+
+## Binary Logistic Regression without cols that have NAs
+
+```{r}
+no_nas <- colnames(df4)[colSums(is.na(df4)) == 0]
+df_no_null <- df4[names(df4) %in% no_nas]
+```
+
+```{r BLR without na cols, eval = F}
+fit3 = glm(outbreak_status~., family=binomial, data=df_no_null, maxit = 25)
+summary(fit3)
 ```
 
 ## Binary Logistic Regression where NA ==> 0
@@ -218,8 +232,6 @@ df[is.na(df4$years_operating),][1:6]
 # impute 0 where NAs exist
 df4[is.na(df4)] <- 0
 
-
-
 ```
 
 
@@ -236,7 +248,7 @@ Linearity - linear relationship between continuous predictor variables and the l
 Influential values | Cook's distance plot of model fit | no obvious influential points
 Multicolinearity | `car::vif(model)` | potentially perfect multicollinearity between `ownership_type` and `home_type` **RESOLVED:** 
 
-```{r linearity check}
+```{r linearity check, suppressMessages = TRUE}
 library(tidyverse)
 library(broom)
 
@@ -275,10 +287,10 @@ Warning in glm model implies potential separation of variables - for a particula
 **Determined `ownership_typepublic` caused perfect separation**
 
 
-##### LASSO
+##### LASSO with Imputed 0s
 LASSO removes multi-colinear predictors. 
 
-```{r lasso}
+```{r lasso, suppressMessages = TRUE}
 library(glmnet)
 
 # setup
@@ -293,7 +305,7 @@ plot(fit_lasso)
 
 ```
 
-Between 1 and 9 predictors are necessary.
+Between 1 and 11 predictors are necessary.
 
 ```{r lassomin}
 fit_lasso$lambda.min
@@ -306,6 +318,32 @@ Lambda defines the amount of shrinkage required to minimize prediction error.
 coef(fit_lasso, fit_lasso$lambda.min)
 ```
 
+
+
+##### LASSO on non-null cols
+
+```{r lasso no nulls, suppressMessages = TRUE}
+x <- model.matrix(outbreak_status~., data=df_no_null)[,-2]
+y <- df_no_null$outbreak_status
+grid=10^seq(10,-2,length=100)
+
+fit_lasso2 = cv.glmnet(x,y, family="binomial", alpha = 1, lambda = grid, data=df4)
+plot(fit_lasso2)
+
+```
+
+2 predictors are necessary.
+
+```{r lassomin2}
+fit_lasso2$lambda.min
+```
+
+Lambda defines the amount of shrinkage required to minimize prediction error.
+
+
+```{r lasso2 coef}
+coef(fit_lasso2, fit_lasso2$lambda.min)
+```
 ---
 
 ### Factor Analysis on Mixed Data
