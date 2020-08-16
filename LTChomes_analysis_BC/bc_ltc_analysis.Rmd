@@ -12,19 +12,21 @@ output:
 library(skimr)
 
 # Import the data
-df <- read.csv("../data/bc_ltc_final.csv", na.strings="", header=TRUE)
+df <- read.csv("../data/bc_ltc_odhf_final.csv", na.strings="", header=TRUE)
+colnames(df)
 ```
 
 
 ```{r}
 # drop unneccessary columns
 # incidents by category are removed, incidents per 100 beds is kept
-rmv <- c("FACILITY_NAME", "HCC_CODE", "HLTH_AUTH", "STREET_ADDRESS", "CITY", "POSTAL", "PHONE", "OPEN_DATE", 
+rmv <- c("Pruid", "CSDname", "source_facility_type", "provider", "odhf_facility_type",
+         "facility_name", "HCC_CODE", "HLTH_AUTH", "STREET_ADDRESS", "CITY", "POSTAL", "province", "PHONE", "OPEN_DATE", 
          "COUNCIL", "ACCRED_STATUS", "INCIDENT_OUTBREAK", "INCIDENT_ABUSE", "INCIDENT_FALL", 
          "INCIDENT_POISON", "INCIDENT_MEDICATION", "INCIDENT_WANDERING", "INCIDENT_INJURY", "INCIDENT_AGGRESSION",
-        'latitude', 'longitude', 'point',
-        'Number.of.dead', # removing number of dead because we are using outbreak as a response
-        'ownership_type') # removing ownership type because it seems to have perfect multicollinearity with home_type
+        'latitude_x', 'longitude_x', 'point',
+        'Number.of.dead' # removing number of dead because we are using outbreak as a response
+  ) 
 
 df2 <- df[, -which(names(df) %in% rmv)]
 
@@ -74,7 +76,7 @@ size <- c('BEDS_PRIV_PROP', 'BEDS_PUB_PROP', 'BEDS_TOTAL', 'ROOMS_PRIV_PROP', 'R
 
 resident_profile <- df3[,11:28]
 
-quality <- df3[,c(2, 29:41)]
+quality <- df3[,c(2:10, 29:41)]
 
 general<- df3[,42:48]
 
@@ -103,25 +105,44 @@ df3$years_operating <- as.numeric(as.character(df3$years_operating))
 skim(df3)
 ```
 
-**Assessing sparsity of dataframe:**
+**Assessing sparsity of dataframe and handling NAs:**
 
-```{r sparsity}
+
+```{r handling NAs}
+colSums(is.na(df3))
+rowSums(is.na(df3))
+```
+
+NAs are often concentrated for particular homes and in incident/infraction predictors.
+
+```{r col sparsity}
 # columns with proportion of NAs and 0s > 0.01
 colnames(df3)[colSums(is.na(df3) | df3 == 0)/(dim(df3)[1]*dim(df3)[2]) > 0.01]
+```
+```{r row sparsity}
+# rows with proportion of NAs and 0s > 0.003 (those with almost all missing info)
+indices = rownames(df3)[rowSums(is.na(df3) | df3 == 0)/(dim(df3)[1]*dim(df3)[2]) > 0.003]
+df[indices,]$facility_name
 ```
 
 **Remove sparse variables**
 ```{r}
 sparse_cols <- colnames(df3)[colSums(is.na(df3) | df3 == 0)/(dim(df3)[1]*dim(df3)[2]) > 0.01]
-
+sparse_rows <- rownames(df3)[rowSums(is.na(df3) | df3 == 0)/(dim(df3)[1]*dim(df3)[2]) > 0.003]
 df4 <- df3
 
 df4 <- df4[, -which(names(df4) %in% sparse_cols)]
+df4 <- df4[-which(rownames(df4) %in% sparse_rows),]
 colnames(df4)
+
+dim(df4)
 ```
 
 
 #### Transform Numerical Variables
+```{r}
+skim(df4)
+```
 
 No change in infractions distribution with sqrt or log transforms.
 
@@ -133,12 +154,26 @@ df5$ROOMS_SEMI_PROP <- log(df4$ROOMS_SEMI_PROP)
 
 
 par(mfrow=c(2,2))
-hist(xtabs(~ROOMS_SEMI_PROP + BEDS_TOTAL, data=df4), main = "INCIDENT_FALL_100 Untransformed")
-hist(xtabs(~ROOMS_SEMI_PROP + BEDS_TOTAL, data=df5), main = "INCIDENT_FALL_100 LOG Transformed")
+hist(xtabs(~ROOMS_SEMI_PROP + BEDS_TOTAL, data=df4), main = "ROOMS_SEMI_PROP Untransformed")
+hist(xtabs(~ROOMS_SEMI_PROP + BEDS_TOTAL, data=df5), main = "ROOMS_SEMI_PROP LOG Transformed")
 
 # sqrt transform
-hist(xtabs(~sqrt(ROOMS_SEMI_PROP) + BEDS_TOTAL, data=df4), main = "INCIDENT_FALL_100 SQRT Transformed")
+hist(xtabs(~sqrt(ROOMS_SEMI_PROP) + BEDS_TOTAL, data=df4), main = "ROOMS_SEMI_PROP SQRT Transformed")
 
+
+
+# log transform
+# age under 65
+df5 <- df4
+df5$AGE_UNDER_65 <- log(df4$AGE_UNDER_65)
+
+
+par(mfrow=c(2,2))
+hist(xtabs(~AGE_UNDER_65 + BEDS_TOTAL, data=df4), main = "AGE_UNDER_65 Untransformed")
+hist(xtabs(~AGE_UNDER_65 + BEDS_TOTAL, data=df5), main = "AGE_UNDER_65 LOG Transformed")
+
+# sqrt transform
+hist(xtabs(~sqrt(AGE_UNDER_65) + BEDS_TOTAL, data=df4), main = "AGE_UNDER_65 SQRT Transformed")
 
 ```
 
@@ -184,8 +219,14 @@ summary(df4$home_type)
 
 ```
 
-
 ---
+
+**Remove: `ROOMS_TOTAL` and `ISE` to eliminate multicolinearity according to VIF output.**
+
+```{r}
+df4 <- df4[,-which(names(df4) %in% c('ROOMS_TOTAL', 'ISE'))]
+# colnames(df4)
+```
 
 ## Binary Logistic Regression with NAs
 
@@ -204,7 +245,7 @@ no_nas <- colnames(df4)[colSums(is.na(df4)) == 0]
 df_no_null <- df4[names(df4) %in% no_nas]
 ```
 
-```{r BLR without na cols, eval = F}
+```{r BLR without na cols}
 fit3 = glm(outbreak_status~., family=binomial, data=df_no_null, maxit = 25)
 summary(fit3)
 ```
@@ -213,25 +254,9 @@ summary(fit3)
 
 Because each row represents an LTC, we do not want to omit any on the basis of NAs. Keeping NAs renders an error in LASSO so instead, 0s are imputed. ** Will this introduce bias? We dont know if LTCs that have NAs actually have high numbers or not.
 
-
-```{r handling NAs}
-colSums(is.na(df4))
-rowSums(is.na(df4))
-
-# which facilities have high amounts of NAs?
-df[c(28, 32, 47, 211),]$FACILITY_NAME
-```
-
-NAs are often concentrated for particular homes and in incident predictors.
-
-```{r}
-df[is.na(df4$years_operating),][1:6]
-```
-
 ```{r NAs}
 # impute 0 where NAs exist
 df4[is.na(df4)] <- 0
-
 ```
 
 
@@ -240,15 +265,18 @@ blr_fit <- glm(outbreak_status~., data = df4, family = binomial)
 summary(blr_fit)
 ```
 
+
+--- 
+
 ## Binary Logistic Regression Assumptions
 
 assumption | check | result
 ----------|--------------|-------------
-Linearity - linear relationship between continuous predictor variables and the logit of the outcome | visually - scatterplot | many appear non-linear
+Linearity - linear relationship between continuous predictor variables and the logit of the outcome | visually - scatterplot | ok
 Influential values | Cook's distance plot of model fit | no obvious influential points
-Multicolinearity | `car::vif(model)` | potentially perfect multicollinearity between `ownership_type` and `home_type` **RESOLVED:** 
+Multicolinearity | `car::vif(model)` | **ISSUE 1:** potentially perfect multicollinearity between `ownership_type` and `home_type`. **ISSUE 2:** Variable inflation factor for assessing multicollinearity - `BEDS_TOTAL`, `ROOMS_TOTAL`, `ISE`, `ISE_LOW`  ~ $\ge 5$. **RESOLVED**
 
-```{r linearity check, suppressMessages = TRUE}
+```{r linearity check, suppressMessages = TRUE, eval = F}
 library(tidyverse)
 library(broom)
 
@@ -272,22 +300,28 @@ ggplot(mydata, aes(logit, predictor.value))+
   facet_wrap(~predictors, scales = "free_y")
 ```
 
-```{r influential check}
+```{r influential check, eval = F}
 plot(blr_fit, which = 4, id.n = 3)
 ```
-
-No influential points.
 
 ```{r multicol check, eval = F}
 car::vif(blr_fit)
 ```
 
 
+```{r, eval = F}
+# Further assessing correlation
+cor(df4$ISE, df4$ISE_LOW)
+
+cor(df4$ROOMS_TOTAL, df4$BEDS_TOTAL)
+```
+
 Warning in glm model implies potential separation of variables - for a particular value of a predictor, one outcome will always occur.
 **Determined `ownership_typepublic` caused perfect separation**
 
+---
 
-##### LASSO with Imputed 0s
+## LASSO with Imputed 0s
 LASSO removes multi-colinear predictors. 
 
 ```{r lasso, suppressMessages = TRUE}
@@ -305,7 +339,7 @@ plot(fit_lasso)
 
 ```
 
-Between 1 and 11 predictors are necessary.
+Around 2 or 3 predictors are necessary.
 
 ```{r lassomin}
 fit_lasso$lambda.min
@@ -317,7 +351,6 @@ Lambda defines the amount of shrinkage required to minimize prediction error.
 ```{r lasso coef}
 coef(fit_lasso, fit_lasso$lambda.min)
 ```
-
 
 
 ##### LASSO on non-null cols
@@ -332,7 +365,7 @@ plot(fit_lasso2)
 
 ```
 
-2 predictors are necessary.
+0 predictors are necessary.
 
 ```{r lassomin2}
 fit_lasso2$lambda.min
