@@ -186,6 +186,8 @@ top_10_var <- names(var_scores_ranked[1:10])
 top_10_var
 
 pca$rotation[top_10_var, 1] 
+nrow(pca$rotation)
+
 ```
 
 # Graph the PCA
@@ -201,13 +203,23 @@ plot(pca$x[,1], pca$x[,2], xlab=paste("PCA 1 (", round(s$importance[2]*100, 1), 
 abline(v=0, lty=2, col="grey50")
 abline(h=0, lty=2, col="grey50")
 
-# # Get co-ordinates of variables (loadings), and multiply by 10
+# Get co-ordinates of variables (loadings), and multiply by 10
+
+l.x1 <- pca$rotation[27:55,1]*25
+# pca$rotation[37:55,1]
+l.x2 <- pca$rotation[1:26,1]*25
+
+l.y1 <- pca$rotation[27:55,2]*25
+# pca$rotation[37:55,1]
+l.y2 <- pca$rotation[1:26,2]*25
+
 # l.x <- pca$rotation[,1]*25
 # l.y <- pca$rotation[,2]*25
-# 
-# # Draw arrows
-# arrows(x0=0, x1=l.x, y0=0, y1=l.y, col="red", length=0.10, lwd=1.0)
-# 
+
+# Draw arrows
+arrows(x0=0, x1=l.x1, y0=0, y1=l.y1, col="tomato", length=0.10, lwd=1.0)
+arrows(x0=0, x1=l.x2, y0=0, y1=l.y2, col="darkblue", length=0.10, lwd=1.0)
+
 # # Label position
 # l.pos <- l.y # Create a vector of y axis coordinates
 # lo <- which(l.y < 0) # Get the variables on the bottom half of the plot
@@ -215,9 +227,11 @@ abline(h=0, lty=2, col="grey50")
 # # Replace values in the vector
 # l.pos <- replace(l.pos, lo, "1")
 # l.pos <- replace(l.pos, hi, "3")
-# 
-# # Variable labels
-# text(l.x, l.y, labels=row.names(pca$rotation), col="red", pos=l.pos, cex = 0.5)
+
+# Variable labels
+text(l.x1, l.y1, labels=row.names(pca$rotation), col="tomato", pos=l.pos, cex = 0.5)
+text(l.x2, l.y2, labels=row.names(pca$rotation), col="darkorange", pos=l.pos, cex = 0.5)
+
 
 # # Add legend
 # legend("bottomright", legend=c("Large urban", "Moderate urban", "Urban-rural mix", "Rural"), col="black", pt.bg=c("red", "gold", "dodgerblue", "dodgerblue4"), pch=c(21, 21, 21, 21), pt.cex=1.5)
