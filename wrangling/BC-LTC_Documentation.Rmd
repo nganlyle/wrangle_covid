@@ -21,10 +21,12 @@ Parameter | Type | Description
 `POSTAL` | string | Postal code.
 `PHONE` | string | Phone.
 `OPEN_DATE` | string | Year LTC opened.
-`point` | | Location coordinates.
-`latitude` |  | Latitude of home.
-`longitude` | | Longitude of home.
-
+`point` | | Location coordinates from OSM geocoder.
+`latitude` |  | Latitude of home from OSM geocoder.
+`longitude` | | Longitude of home from OSM geocoder.
+`LATITUDE` |  | Latitude of home from bc.gov data (missing values filled with OSM geocoder). $^6$
+`LONGITUDE` | | Longitude of home from bc.gov data (missing values filled with OSM geocoder). $^6$
+`geometry` | | Point of (`LATITUDE`, `LONGITUDE`).
 
 
 ## Detailed Home Information
@@ -129,6 +131,7 @@ $^4$ [https://docs.google.com/spreadsheets/d/1M_RzojK0vwF9nAozI7aoyLpPU8EA1JEqO6
 
 $^5$ [http://www.phsa.ca/current-outbreaks](http://www.phsa.ca/current-outbreaks) 
 
+$^6$ [https://catalogue.data.gov.bc.ca/dataset/residential-care-facilities/resource/75b329ef-1f29-4c03-a35b-03b3666dee1d](https://catalogue.data.gov.bc.ca/dataset/residential-care-facilities/resource/75b329ef-1f29-4c03-a35b-03b3666dee1d) 
 
 \pagebreak
 
@@ -140,6 +143,6 @@ $^5$ [http://www.phsa.ca/current-outbreaks](http://www.phsa.ca/current-outbreaks
 
 [] Skewed predictors. Log and square-root transformations ineffective at mediating skewness.
 
-[] 
+[] High multicolinearity exists between `BEDS_TOTAL` and `ROOMS_TOTAL`, `ISE_LOW` and `ISE`.
 
 

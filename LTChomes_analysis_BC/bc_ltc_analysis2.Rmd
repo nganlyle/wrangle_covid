@@ -21,7 +21,7 @@ colnames(df)
 # drop unneccessary columns
 # incidents by category are removed, incidents per 100 beds is kept
 rmv <- c("facility_name", "HCC_CODE", "HLTH_AUTH", "STREET_ADDRESS", "CITY", "POSTAL", "PHONE", 
-         "OPEN_DATE", 
+         "OPEN_DATE",  "provider", "BUSINESS_PHONE",
          "COUNCIL", "ACCRED_STATUS", "INCIDENT_OUTBREAK", "INCIDENT_ABUSE", "INCIDENT_FALL", 
          "INCIDENT_POISON", "INCIDENT_MEDICATION", "INCIDENT_WANDERING", "INCIDENT_INJURY", "INCIDENT_AGGRESSION",
         'latitude', 'longitude', 'point', 'LATITUDE', 'LONGITUDE', 'geometry',
@@ -257,6 +257,7 @@ Because each row represents an LTC, we do not want to omit any on the basis of N
 ```{r NAs}
 # impute 0 where NAs exist
 df4[is.na(df4)] <- 0
+
 ```
 
 
