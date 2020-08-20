@@ -250,6 +250,7 @@ summary(fit)
 fit <- update(fit, .~. -total_inspections)
 summary(fit)
 fit <- update(fit, .~. -home_type)
+fit <- update(fit, .~. -family_council)
 
 ```
 
