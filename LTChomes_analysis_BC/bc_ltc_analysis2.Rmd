@@ -12,7 +12,7 @@ output:
 library(skimr)
 
 # Import the data
-df <- read.csv("../data/bc_ltc_odhf_final.csv", na.strings="", header=TRUE)
+df <- read.csv("../data/bc-ltc-FINAL.csv", na.strings="", header=TRUE)
 colnames(df)
 ```
 
@@ -20,7 +20,7 @@ colnames(df)
 ```{r}
 # drop unneccessary columns
 # incidents by category are removed, incidents per 100 beds is kept
-rmv <- c("facility_name", "HCC_CODE", "HLTH_AUTH", "STREET_ADDRESS", "CITY", "POSTAL", "PHONE", 
+rmv <- c("X", "Unnamed..0", "Unnamed..0.1", "facility_name", "HCC_CODE", "HLTH_AUTH", "STREET_ADDRESS", "CITY", "POSTAL", "PHONE", "FACILITY_NAME",
          "OPEN_DATE",  "provider", "BUSINESS_PHONE",
          "COUNCIL", "ACCRED_STATUS", "INCIDENT_OUTBREAK", "INCIDENT_ABUSE", "INCIDENT_FALL", 
          "INCIDENT_POISON", "INCIDENT_MEDICATION", "INCIDENT_WANDERING", "INCIDENT_INJURY", "INCIDENT_AGGRESSION",
@@ -30,7 +30,7 @@ rmv <- c("facility_name", "HCC_CODE", "HLTH_AUTH", "STREET_ADDRESS", "CITY", "PO
 
 df2 <- df[, -which(names(df) %in% rmv)]
 
-# skim(df2)
+skim(df2)
 ```
 
 Numerical Variables are all right-skewed. Since they all have similar distributions - is it alright to leave them as is (no transformation)?
@@ -121,18 +121,18 @@ colnames(df3)[colSums(is.na(df3) | df3 == 0)/(dim(df3)[1]*dim(df3)[2]) > 0.01]
 ```
 ```{r row sparsity}
 # rows with proportion of NAs and 0s > 0.003 (those with almost all missing info)
-indices = rownames(df3)[rowSums(is.na(df3) | df3 == 0)/(dim(df3)[1]*dim(df3)[2]) > 0.003]
-df[indices,]$facility_name
+# indices = rownames(df3)[rowSums(is.na(df3) | df3 == 0)/(dim(df3)[1]*dim(df3)[2]) > 0.003]
+# df[indices,]$facility_name
 ```
 
 **Remove sparse variables**
 ```{r}
 sparse_cols <- colnames(df3)[colSums(is.na(df3) | df3 == 0)/(dim(df3)[1]*dim(df3)[2]) > 0.01]
-sparse_rows <- rownames(df3)[rowSums(is.na(df3) | df3 == 0)/(dim(df3)[1]*dim(df3)[2]) > 0.003]
+# sparse_rows <- rownames(df3)[rowSums(is.na(df3) | df3 == 0)/(dim(df3)[1]*dim(df3)[2]) > 0.003]
 df4 <- df3
 
 df4 <- df4[, -which(names(df4) %in% sparse_cols)]
-df4 <- df4[-which(rownames(df4) %in% sparse_rows),]
+# df4 <- df4[-which(rownames(df4) %in% sparse_rows),]
 colnames(df4)
 
 dim(df4)
@@ -314,7 +314,7 @@ car::vif(blr_fit)
 # Further assessing correlation
 cor(df4$ISE, df4$ISE_LOW)
 
-cor(df4$ROOMS_TOTAL, df4$BEDS_TOTAL)
+# cor(df4$ROOMS_TOTAL, df4$BEDS_TOTAL)
 ```
 
 Warning in glm model implies potential separation of variables - for a particular value of a predictor, one outcome will always occur.
@@ -340,7 +340,7 @@ plot(fit_lasso)
 
 ```
 
-Around 2 or 3 predictors are necessary.
+Between 2-5 predictors are necessary.
 
 ```{r lassomin}
 fit_lasso$lambda.min
