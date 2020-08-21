@@ -1,0 +1,147 @@
+---
+title: "bc_ltc_analysis"
+author: "Ngan Lyle"
+date: "21/08/2020"
+output: html_document
+---
+
+## Import and prepare the data
+```{r results="hide"}
+library(skimr)
+
+# Import the data
+df <- read.csv("../data/BC/ngan_bcLTC_foranalysis.csv", na.strings="", header=TRUE)
+# str(df)
+
+```
+
+```{r, echo=FALSE}
+# Change data type of character
+listofcol = list('FACILITY_NAME', 'cleaned_name', 'facility_name')
+for (each in listofcol){
+  df[, each] <- as.character(df[, each])
+}
+
+```
+
+```{r, include=FALSE}
+# Generate the data for analysis
+# Create lists of variables used to filter data for analysis
+
+incident = c("INCIDENT_OUTBREAK", "INCIDENT_ABUSE", "INCIDENT_FALL",
+  "INCIDENT_POISON", "INCIDENT_MEDICATION", "INCIDENT_WANDERING",
+  "INCIDENT_INJURY", "INCIDENT_AGGRESSION", "INCIDENT_OUTBREAK_100",
+  "INCIDENT_ABUSE_100", "INCIDENT_FALL_100", "INCIDENT_POISON_100",
+  "INCIDENT_MEDICATION_100", "INCIDENT_WANDERING_100", "INCIDENT_INJURY_100",
+  "INCIDENT_AGGRESSION_100")
+
+inspections = c("COMPLAINTS", "SUB_COMPLAINTS", "INSPECTIONS", "INFRACTIONS",
+  "INFRACTIONS_LICENSING",
+  "INFRACTIONS_LICENSING", "INFRACTIONS_FACILITY", "INFRACTIONS_STAFFING",
+  "INFRACTIONS_POLICY", "INFRACTIONS_CARE", "INFRACTIONS_DISEASE",
+  "INFRACTIONS_FOOD", "INFRACTIONS_MEDICATION", "INFRACTIONS_PROGRAM",
+  "INFRACTIONS_REPORTING", "INFRACTIONS_RIGHTS", "INFRACTIONS_OTHER")
+
+gen = c("OWNERSHIP", "REGULATION", "ACCRED_STATUS", "CMI", "facility_design",
+  "RESIDENT_COUNCIL", "FAMILY_COUNCIL")
+
+dch = c("DCH_NURSE_CURRENTYR", "DCH_ALLIED_CURRENTYR", "DCH_TOTAL_CURRENTYR")
+
+space = c("BEDS_PRIVATE", "BEDS_PUBLIC", "BEDS_TOTAL",
+  "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI",
+  "BEDS_PRIVATEprop", "BEDS_PUBLICprop", "ROOMS_TOTAL",
+  "ROOMS_PRIVATEprop", "ROOMS_SEMIprop", "ROOMS_MULTIprop")
+
+data <- subset(df, select = c(incident, inspections, dch, space, 'CMI'))
+summary(data)
+```
+
+
+
+```{r, }
+## Assessing skewness
+# Check for R skewness in numeric predictors
+library(e1071)
+
+listofcols = c(incident, inspections, "CMI", dch, space)
+
+for (each in listofcols){
+  print(each)
+  print(skewness(data[[each]]))
+  qqnorm(data[[each]], main = each)
+  qqline(data[[each]], col = 'red')
+}
+
+```
+
+All the data are right skewed except for 
+  1. BEDS_PUBLICprop 3.430426
+  2. ROOMS_PRIVATEprop -1.486055
+
+```{r, include=FALSE}
+# Assess variables for 0s
+for (each in listofcols){
+  print(each)
+  print(summary(df[[each]]))
+}
+
+```
+
+Most variables have 0s except for:
+- CMI
+- all DCH variables
+- BEDS_PUBLIC, 1.142218
+- BEDS_TOTAL, 1.03226
+- ROOMS_PRIVATE, 0.944784
+- BEDS_PUBLICprop, 3.430426 highly L skewed
+- ROOMS_TOTAL, 1.103714
+- ROOMS_PRIVATEprop, -1.486055 slightly R skewed
+
+## Explore the variables for transformation
+```{r, fig.show="hide"}
+# Create a list of numeric variables with 0 values
+space
+space_non0s = c('BEDS_PUBLIC', 'BEDS_TOTAL', 'ROOMS_PRIVATE', 'BEDS_PUBLICprop', 'ROOMS_TOTAL', 'ROOMS_PRIVATEprop')
+space_0s = c("BEDS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI",
+  "BEDS_PRIVATEprop", "ROOMS_SEMIprop", "ROOMS_MULTIprop")
+
+list0s <- c(incident, inspections, space_0s)
+list_non0s
+
+library(rcompanion)
+# listofcols <- setdiff(listofcols, list0s)
+
+# Visualize the effect of square root transformations on the data without 0s
+for (each in listofcols) {  
+  plotNormalHistogram(x = data[[each]], main = each)
+  plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
+  plotNormalHistogram(x = log(data[[each]]), main = c(each, 'log trans'))
+}
+
+```
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
