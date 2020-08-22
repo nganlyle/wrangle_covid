@@ -11,7 +11,7 @@ library(skimr)
 
 # Import the data
 df <- read.csv("../data/BC/ngan_bcLTC_foranalysis.csv", na.strings="", header=TRUE)
-# str(df)
+str(df)
 
 ```
 
@@ -28,9 +28,13 @@ for (each in listofcol){
 # Generate the data for analysis
 # Create lists of variables used to filter data for analysis
 
-incident = c("INCIDENT_OUTBREAK", "INCIDENT_ABUSE", "INCIDENT_FALL",
-  "INCIDENT_POISON", "INCIDENT_MEDICATION", "INCIDENT_WANDERING",
-  "INCIDENT_INJURY", "INCIDENT_AGGRESSION", "INCIDENT_OUTBREAK_100",
+incidents = c(
+  
+  # "INCIDENT_OUTBREAK", "INCIDENT_ABUSE", "INCIDENT_FALL",
+  # "INCIDENT_POISON", "INCIDENT_MEDICATION", "INCIDENT_WANDERING",
+  # "INCIDENT_INJURY", "INCIDENT_AGGRESSION", 
+  
+  "INCIDENT_OUTBREAK_100",
   "INCIDENT_ABUSE_100", "INCIDENT_FALL_100", "INCIDENT_POISON_100",
   "INCIDENT_MEDICATION_100", "INCIDENT_WANDERING_100", "INCIDENT_INJURY_100",
   "INCIDENT_AGGRESSION_100")
@@ -52,8 +56,9 @@ space = c("BEDS_PRIVATE", "BEDS_PUBLIC", "BEDS_TOTAL",
   "BEDS_PRIVATEprop", "BEDS_PUBLICprop", "ROOMS_TOTAL",
   "ROOMS_PRIVATEprop", "ROOMS_SEMIprop", "ROOMS_MULTIprop")
 
-data <- subset(df, select = c(incident, inspections, dch, space, 'CMI'))
-summary(data)
+data <- subset(df, select = c(gen, incidents, inspections, dch, space, 'outbreak'))
+
+str(data)
 ```
 
 
@@ -63,7 +68,7 @@ summary(data)
 # Check for R skewness in numeric predictors
 library(e1071)
 
-listofcols = c(incident, inspections, "CMI", dch, space)
+listofcols = c(incidents, inspections, "CMI", dch, space)
 
 for (each in listofcols){
   print(each)
@@ -87,7 +92,7 @@ for (each in listofcols){
 
 ```
 
-Most variables have 0s except for:
+Most numeric variables have 0s except for:
 - CMI
 - all DCH variables
 - BEDS_PUBLIC, 1.142218
@@ -99,24 +104,120 @@ Most variables have 0s except for:
 
 ## Explore the variables for transformation
 ```{r, fig.show="hide"}
-# Create a list of numeric variables with 0 values
-space
-space_non0s = c('BEDS_PUBLIC', 'BEDS_TOTAL', 'ROOMS_PRIVATE', 'BEDS_PUBLICprop', 'ROOMS_TOTAL', 'ROOMS_PRIVATEprop')
+# Create a list of right skewed numeric variables with 0 values
+space_non0s = c('BEDS_PUBLIC', 'BEDS_TOTAL', 'ROOMS_PRIVATE', 'ROOMS_TOTAL')
 space_0s = c("BEDS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI",
   "BEDS_PRIVATEprop", "ROOMS_SEMIprop", "ROOMS_MULTIprop")
 
-list0s <- c(incident, inspections, space_0s)
-list_non0s
+list0s <- c(incidents, inspections, space_0s)
+list_non0s <- c(space_non0s, dch, 'CMI')
+left_skewed <- c('BEDS_PUBLICprop', 'ROOMS_PRIVATEprop')
 
 library(rcompanion)
 # listofcols <- setdiff(listofcols, list0s)
 
-# Visualize the effect of square root transformations on the data without 0s
-for (each in listofcols) {  
+# Visualize the effect of square root transformations on the data with 0s
+for (each in list0s) {  
   plotNormalHistogram(x = data[[each]], main = each)
   plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
+}
+
+# Visualize the effect of log transformations on the data with no 0s that are right skewed
+for (each in list_non0s) {  
+  plotNormalHistogram(x = data[[each]], main = each)
   plotNormalHistogram(x = log(data[[each]]), main = c(each, 'log trans'))
 }
+
+# Visualize the effect of transformations on the data that are left skewed
+# log10(max(x+1) - x)
+plotNormalHistogram(x = data[['BEDS_PUBLICprop']])
+plotNormalHistogram(x = sqrt(max(data[['BEDS_PUBLICprop']] + 1) - data[['BEDS_PUBLICprop']]))
+
+# sqrt(max(x+1) - x)
+plotNormalHistogram(x = data[['ROOMS_PRIVATEprop']])
+plotNormalHistogram(x = sqrt(max(data[['ROOMS_PRIVATEprop']] + 1) - data[['ROOMS_PRIVATEprop']]))
+
+```
+
+## Transform the data
+```{r }
+list0s
+# Log transform in place
+data[list0s] <- sqrt(data[list0s])
+
+# Square root transform in place
+data[list_non0s] <- log(data[list_non0s])
+
+skim(data)
+```
+
+## Fit logistic regression
+```{r }
+# Fit logistic regression using transformed data
+fit = glm(outbreak~., family=binomial, data=data)
+summary(fit)
+```
+
+### Backwards selection
+```{r, include=FALSE}
+fit <- update(fit, .~. -pressure_ulcers_percent)
+summary(fit)
+fit <- update(fit, .~. -X5y_complaints)
+summary(fit)
+fit <- update(fit, .~. -total_critical)
+summary(fit)
+fit <- update(fit, .~. -total_cc)
+summary(fit)
+fit <- update(fit, .~. -X2y_withOrders)
+summary(fit)
+fit <- update(fit, .~. -depression_percent)
+summary(fit)
+fit <- update(fit, .~. -falls_percent)
+summary(fit)
+fit <- update(fit, .~. -X2y_complaints)
+summary(fit)
+fit <- update(fit, .~. -residents_council)
+summary(fit)
+fit <- update(fit, .~. -short_stay)
+summary(fit)
+fit <- update(fit, .~. -X5y_ccw)
+summary(fit)
+fit <- update(fit, .~. -total_ccw)
+summary(fit)
+fit <- update(fit, .~. -total_withOrders)
+summary(fit)
+fit <- update(fit, .~. -X5y_cc)
+summary(fit)
+fit <- update(fit, .~. -X2y_inspections)
+summary(fit)
+fit <- update(fit, .~. -accreditation)
+summary(fit)
+fit <- update(fit, .~. -X5y_inspections)
+summary(fit)
+fit <- update(fit, .~. -antipsychotic_percent)
+summary(fit)
+fit <- update(fit, .~. -pain_percent)
+summary(fit)
+fit <- update(fit, .~. -X2y_noncomplaints)
+summary(fit)
+fit <- update(fit, .~. -X2y_ccw)
+summary(fit)
+fit <- update(fit, .~. -X2y_cc)
+summary(fit)
+fit <- update(fit, .~. -X2y_critical)
+summary(fit)
+fit <- update(fit, .~. -X5y_critical)
+summary(fit)
+fit <- update(fit, .~. -X5y_noncomplaints)
+summary(fit)
+fit <- update(fit, .~. -total_noncomplaints)
+summary(fit)
+fit <- update(fit, .~. -X5y_withOrders)
+summary(fit)
+fit <- update(fit, .~. -total_inspections)
+summary(fit)
+fit <- update(fit, .~. -home_type)
+fit <- update(fit, .~. -family_council)
 
 ```
 
