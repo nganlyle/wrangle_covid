@@ -13,7 +13,7 @@ output:
 Parameter | Type | Description
 ----------|------|------------
 `FACILITY_NAME` | string | Name of long-term care facility.
-`Number of dead` | float64 | As reported by [Nora Loreto](https://docs.google.com/spreadsheets/d/1M_RzojK0vwF9nAozI7aoyLpPU8EA1JEqO6rq0g1iebU/edit#gid=0).
+`Number of dead` | float64 | As reported by [Global News article](https://globalnews.ca/news/6769101/seniors-homes-coronavirus/).
 `HCC_CODE` | string | Unique identifier of facility.
 `HLTH_AUTH` | string | Name of health authority that home resides in.
 `STREET_ADDRESS` | string | Street address.
@@ -141,6 +141,6 @@ $^6$ [https://catalogue.data.gov.bc.ca/dataset/residential-care-facilities/resou
     
     * Skewed predictors. Log and square-root transformations ineffective at mediating skewness.
     
-    * High multicolinearity exists between `BEDS_TOTAL` and `ROOMS_TOTAL`, `ISE_LOW` and `ISE`.
+    * High multicollinearity exists between `BEDS_TOTAL` and `ROOMS_TOTAL`, `ISE_LOW` and `ISE`.
     
 
