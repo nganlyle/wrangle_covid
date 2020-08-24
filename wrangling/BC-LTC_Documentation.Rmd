@@ -3,144 +3,154 @@ title: "BC LTC Parameters"
 author: "KT Hobbs"
 date: "06/08/2020"
 output:
-  pdf_document: default
   html_document:
     df_print: paged
+  pdf_document: default
 ---
 
 ## General Home Information
 
-Parameter | Type | Description
-----------|------|------------
-`FACILITY_NAME` | string | Name of long-term care facility.
-`Number of dead` | float64 | As reported by [Global News article](https://globalnews.ca/news/6769101/seniors-homes-coronavirus/).
-`HCC_CODE` | string | Unique identifier of facility.
-`HLTH_AUTH` | string | Name of health authority that home resides in.
-`STREET_ADDRESS` | string | Street address.
-`CITY` | string | City.
-`POSTAL` | string | Postal code.
-`PHONE` | string | Phone.
-`OPEN_DATE` | string | Year LTC opened.
-`point` | | Location coordinates from OSM geocoder.
-`latitude` |  | Latitude of home from OSM geocoder.
-`longitude` | | Longitude of home from OSM geocoder.
-`LATITUDE` |  | Latitude of home from bc.gov data (missing values filled with OSM geocoder). $^6$
-`LONGITUDE` | | Longitude of home from bc.gov data (missing values filled with OSM geocoder). $^6$
-`geometry` | | Point of (`LATITUDE`, `LONGITUDE`).
+Parameter | Type | Description | NA
+----------|------|------------|----
+`FACILITY_NAME` | string | Name of long-term care facility. | 0
+`HCC_CODE` | string | Unique identifier of facility. | 0
+`HLTH_AUTH` | string | Name of health authority that home resides in. | 0
+`OWNERSHIP` | string | Funding - either HA (Health Authority), PFP (for-profit), PNP (non-profit). | 0
+`STREET_ADDRESS` | string | Street address. | 0
+`CITY` | string | City. | 0
+`POSTAL` | string | Postal code.| 0
+`REGULATION` | string | Licensing either under the Community Care and Assisted Living Act, or licensed or designated under the Hospital Act $^{(1)}$. | 0
+`ACCRED_STATUS` | string | Accreditation is a voluntary process that LTC homes may use to assess their services and help them improve the quality, safety and efficiency of their performance for the benefit of their residents and the health system $^{(2)}$.| 0
+`DCH_NURSE_LASTYR` | float | Nursing/care aide care hours (last year). | 4
+`DCH_ALLIED_LASTYR` | float | Allied health hours (last year). "Allied health care workers, such as physical, occupational or recreational therapists, speech language pathologists, social workers and dietitians." $^{(5)}$ | 4
+`DCH_TOTAL_LASTYR` | float | Total direct care hours (last year). | 4
+`DCH_NURSE_CURRENTYR` | float | Nursing/care aide care hours (current year). | 3
+`DCH_ALLIED_CURRENTYR` | float | Allied health hours (current year). | 3
+`DCH_TOTAL_CURRENTYR` | float | Total direct care hours (current year). | 3
+`latitude` | float | Latitude positioning of home according to Statistics Canada's ODHF. | 0
+`longitude` | float | Longitude positioning of home according to Statistics Canada's ODHF. | 0
 
+$^*$**DCH:** Direct care hours may be delivered by nursing staff, care aides, or allied health care workers, such as physical, occupational or recreational therapists, speech language pathologists, social workers and dietitians. $^{(5)}$
+
+![missing values for DCH](../LTChomes_analysis_BC/imgs/msno_dch.png)
 
 ## Detailed Home Information
 
-Parameter | Type | Description
-----------|------|------------
-`COUNCIL` | string | List of councils operating in home. A family and/or resident  council is also self-led, self-determining and democratic. Councils exist to engage the resident community in collaborative activities which will advance the quality of life for residents. $^{(1)}$
-`residents_council` | binary string | "yes" or "no".
-`family_council` | binary string | "yes" or "no".
-`ACCRED_STATUS` | string | Accreditation is a voluntary process that LTC homes may use to assess their services and help them improve the quality, safety and efficiency of their performance for the benefit of their residents and the health system $^{(2)}$.
-`accreditation` | binary string | "yes" or "no".
-`BEDS_PRIVATE` | int64 | Number of private beds in facility.
-`BEDS_PUBLIC` | int64 | Number of public beds in facility.
-`BEDS_TOTAL` | int64 | Total number of beds in facility.
-`ROOMS_PRIVATE` | int64 | Number of private rooms.
-`ROOMS_SEMI` | int64 | Number of semi-private rooms (2 beds).
-`ROOMS_MULTI` | int64 | Number of mult-persons rooms (3+ beds).
-`home_type` | string | Home operation - either for profit, non-profit, or health authority.
-`ownership_type` | string | Funding - either public or private (for profit, non-profit homes).
-`years_operation` | float64 | Number of years a home has operated for.
+Parameter | Type | Description | NA
+----------|------|------------|---
+`BEDS_TOTAL` | int64 | Total number of beds in facility.  | 0
+`ROOMS_PRIVATE` | int64 | Number of private rooms. | 0
+`ROOMS_SEMI` | int64 | Number of semi-private rooms (2 beds). | 0
+`ROOMS_MULTI` | int64 | Number of mult-persons rooms (3+ beds). | 0
+`BEDS_PRIVATEprop` | int64 | Proportion of private beds in facility. | 0
+`RESIDENT_COUNCIL` | binary boolean | "TRUE" or "FALSE".$^*$ | 0
+`FAMILY_COUNCIL` | binary boolean | "TRUE" or "FALSE".$^*$ | 0
+
+$^*$ A family and/or resident  council is also self-led, self-determining and democratic. Councils exist to engage the resident community in collaborative activities which will advance the quality of life for residents. $^{(2)}$
 
 
-## Quality Metrics$^3$
+## Quality Metrics$^4$
 
-Parameter | Type | Description
-----------|------|------------
-`COMPLAINTS` | int64 | Number of licensing complaints.
-`COMPLAINTS_SUB` | int64 | Number of substantiated licensing complaints.
-`INCIDENT_OUTBREAK` | int64 | Total disease or outbreak occurences.
-`INCIDENT_ABUSE` | int64 | Total documented cases of abuse or neglect.
-`INCIDENT_FALL` | int64 | Total documented cases of falls with injury / adverse events.
-`INCIDENT_POISON` | int64 | Total documented cases of food or other poisonings.
-`INCIDENT_MEDICATION` | int64 | Total documented cases of medication error with adverse event.
-`INCIDENT_WANDERING` | int64 | Total documented cases of missing or wandering person.
-`INCIDENT_INJURY` | int64 | Total documented cases of other injury.
-`INCIDENT_AGGRESSION` | int64 | Total documented cases of aggression between persons in care.
-`INCIDENT_OUTBREAK_100` | int64 | Per 100 beds, disease or outbreak occurences.
-`INCIDENT_ABUSE_100` | int64 | Per 100 beds, documented cases of abuse or neglect.
-`INCIDENT_FALL_100` | int64 | Per 100 beds, documented cases of falls with injury / adverse events.
-`INCIDENT_POISON_100` | int64 | Per 100 beds, documented cases of food or other poisonings.
-`INCIDENT_MEDICATION_100` | int64 | Per 100 beds, documented cases of medication error with adverse event.
-`INCIDENT_WANDERING_100` | int64 | Per 100 beds, documented cases of missing or wandering person.
-`INCIDENT_INJURY_100` | int64 | Per 100 beds, documented cases of other injury.
-`INCIDENT_AGGRESSION_100` | int64 | Per 100 beds, documented cases of aggression between persons in care.
-`INSPECTIONS` | float64 | Number of inspections.
-`INFRACTIONS` | float64 | Number of licensing infractions found.
-`INFRACTIONS_LICENSING` | float64 | Licensing infractions - Licensing.
-`INFRACTIONS_FACILITY` | float64 | Licensing infractions - physcial facility, equipment & furnishings.
-`INFRACTIONS_STAFFING` | float64 | Licensing infractions - staffing.
-`INFRACTIONS_POLICY` | float64 | Licensing infractions - policies & procedures.
-`INFRACTIONS_CARE` |float64 | Licensing infractions - care & supervision.
-`INFRACTIONS_DISEASE` | float64 | Licensing infractions - hygiene & communicable disease control.
-`INFRACTIONS_FOOD` | float64 | Licensing infractions - nutrition & food services.
-`INFRACTIONS_MEDICATION` | float64 | Licensing infractions - medication.
-`INFRACTIONS_PROGRAM` | float64 | Licensing infractions - program.
-`INFRACTIONS_REPORTING` | float64 | Licensing infractions - records & reporting.
-`INFRACTIONS_RIGHTS` | float64 | Licensing infractions - resident bill of rights.
-`INFRACTIONS_OTHER` | float64 | Licensing infractions - other.
+Parameter | Type | Description | NA
+----------|------|------------|-------
+`COMPLAINTS` | int64 | Number of licensing complaints. | 14
+`COMPLAINTS_SUB` | int64 | Number of substantiated licensing complaints. | 14
+`INCIDENT_OUTBREAK` | int64 | Total disease or outbreak occurences.  | 25
+`INCIDENT_ABUSE` | int64 | Total documented cases of abuse or neglect.  | 25
+`INCIDENT_FALL` | int64 | Total documented cases of falls with injury / adverse events.  | 25
+`INCIDENT_POISON` | int64 | Total documented cases of food or other poisonings.  | 25
+`INCIDENT_MEDICATION` | int64 | Total documented cases of medication error with adverse event.  | 25
+`INCIDENT_WANDERING` | int64 | Total documented cases of missing or wandering person.  | 25
+`INCIDENT_INJURY` | int64 | Total documented cases of other injury.  | 25
+`INCIDENT_AGGRESSION` | int64 | Total documented cases of aggression between persons in care.  | 25
+`INCIDENT_OUTBREAK_100` | int64 | Per 100 beds, disease or outbreak occurences.  | 25
+`INCIDENT_ABUSE_100` | int64 | Per 100 beds, documented cases of abuse or neglect.  | 25
+`INCIDENT_FALL_100` | int64 | Per 100 beds, documented cases of falls with injury / adverse events.  | 25
+`INCIDENT_POISON_100` | int64 | Per 100 beds, documented cases of food or other poisonings.  | 25
+`INCIDENT_MEDICATION_100` | int64 | Per 100 beds, documented cases of medication error with adverse event.  | 25
+`INCIDENT_WANDERING_100` | int64 | Per 100 beds, documented cases of missing or wandering person.  | 25
+`INCIDENT_INJURY_100` | int64 | Per 100 beds, documented cases of other injury.  | 25
+`INCIDENT_AGGRESSION_100` | int64 | Per 100 beds, documented cases of aggression between persons in care.  | 25
+`INSPECTIONS` | float64 | Number of inspections.  | 3
+`INFRACTIONS` | float64 | Number of licensing infractions found.  | 3
+`INFRACTIONS_LICENSING` | float64 | Licensing infractions - Licensing.  | 3
+`INFRACTIONS_FACILITY` | float64 | Licensing infractions - physcial facility, equipment & furnishings.  | 3
+`INFRACTIONS_STAFFING` | float64 | Licensing infractions - staffing.  | 3
+`INFRACTIONS_POLICY` | float64 | Licensing infractions - policies & procedures.  | 3
+`INFRACTIONS_CARE` |float64 | Licensing infractions - care & supervision.  | 3
+`INFRACTIONS_DISEASE` | float64 | Licensing infractions - hygiene & communicable disease control.  | 3
+`INFRACTIONS_FOOD` | float64 | Licensing infractions - nutrition & food services.  | 3
+`INFRACTIONS_MEDICATION` | float64 | Licensing infractions - medication.  | 3
+`INFRACTIONS_PROGRAM` | float64 | Licensing infractions - program.  | 3
+`INFRACTIONS_REPORTING` | float64 | Licensing infractions - records & reporting.  | 3
+`INFRACTIONS_RIGHTS` | float64 | Licensing infractions - resident bill of rights.  | 3
+`INFRACTIONS_OTHER` | float64 | Licensing infractions - other.  | 3
 
+![missing values for quality metrics](../LTChomes_analysis_BC/imgs/msno_quality.png)
 
-## General Resident Profile
+## General Resident Health Profile$^4$
 
-Parameter | Type | Description
-----------|------|------------
-`AGE` | int64 | Average age of population.
-`FEMALE` | int64 | Percent female.
-`AGE_85_PLUS` | int64 | Percent 85 years or older.
-`AGE_UNDER_65` | int64 | Percent younger than 65 years.
-`STAY_LENGTH` | int64 | Average length of stay
-`DEPRESSION` | float64 | Percent of residents diagnosed with depression
-`ADL_DEPENDENT` |float64  | Percent of residents dependent in activities of daily living
-`CPS_SEVERE` | float64 | Percent of residents with severe cognitive impairment
-`DEMENTIA` |  float64 | Percent of residents with dementia
-`ABS_PHYS_ABUSIVE` | float64 | Percent of residents with physically abusive behaviour
-`ISE` | float64  | Average index of social engagement
-`ISE_LOW` | float64 | Percent of residents with low social engagement
-`CMI` | float64 | Case mix index
-`THERAPY_PT` | float64 | Percents of residents receiving physical therapy
-`THERAPY_RT` | float64 | Percents of residents receiving recreation therapy
-`THERAPY_OT` | float64 | Percents of residents receiving occupational therapy
-`MEDS_DEPRESSION` | float64 | Percent of residents receiving depression medication
-`MEDS_ANTIPSYCHOTICS` | float64 | Percent of residents taking antipsychotics without a diagnosis of psychosis
-`RESTRAINTS` | float64 | Percent of residents with daily physical restraints
+Parameter | Type | Description | NA
+----------|------|------------|---------
+`AGE` | int64 | Average age of population.  | 3
+`FEMALE` | int64 | Percent female.  | 3
+`AGE_85_PLUS` | int64 | Percent 85 years or older.  | 3
+`AGE_UNDER_65` | int64 | Percent younger than 65 years.  | 3
+`STAY_LENGTH` | int64 | Average length of stay.  | 13
+`DEPRESSION` | float64 | Percent of residents diagnosed with depression.  | 3
+`ADL_DEPENDENT` |float64  | Percent of residents dependent in activities of daily living.  | 3
+`CPS_SEVERE` | float64 | Percent of residents with severe cognitive impairment.  | 3
+`DEMENTIA` |  float64 | Percent of residents with dementia.  | 3
+`ABS_PHYS_ABUSIVE` | float64 | Percent of residents with physically abusive behaviour.  | 3
+`ISE` | float64  | Average index of social engagement.  | 4
+`ISE_LOW` | float64 | Percent of residents with low social engagement.  | 3
+`CMI` | float64 | Case mix index. "A standardized method for calculating the intensity of resources required to meet the needs of a resident and reflects a measure of clinical complexity of the resident population as a whole. A higher score indicates that a greater intensity of resources is required to meet the needs of the resident population." $^{(5)}$  | 4
+`THERAPY_PT` | float64 | Percents of residents receiving physical therapy.  | 3
+`THERAPY_RT` | float64 | Percents of residents receiving recreation therapy.  | 3
+`THERAPY_OT` | float64 | Percents of residents receiving occupational therapy.  | 3
+`MEDS_DEPRESSION` | float64 | Percent of residents receiving depression medication.  | 3
+`MEDS_ANTIPSYCHOTICS` | float64 | Percent of residents taking antipsychotics without a diagnosis of psychosis.  | 3
+`RESTRAINTS` | float64 | Percent of residents with daily physical restraints.  | 3
 
+![missing values for health of residences](../LTChomes_analysis_BC/imgs/msno_general.png)
 
 ## COVID-19 Related Parameters
 
 Parameter | Type | Description
 ----------|------|------------
-`outbreak_status` | binary string | "yes" (outbreak has occured) or "no" (outbreak has not occured)
-`Number of dead` | int64/string | Number of dead as reported by Nora Loreto$^{4}$. For homes with an outbreak (according to government websites $^{5}$) but not included in Nora's report, `"unreported"` was imputed.
+`Total Confirmed Cases` | int64 | Total number of COVID-19 cases according to Ministry of Health Representative (Stephen May).
+`Total Deaths` | int64 | Total number of deaths according to Ministry of Health Representative (Stephen May).
+`outbreaks` | binary numeric | 1 (outbreak has occured) or 0 (outbreak has not occured)
 
 ---
-
-$^1$ [https://www2.gov.bc.ca/gov/content/health/accessing-health-care/home-community-care/accountability/family-and-resident-councils](https://www2.gov.bc.ca/gov/content/health/accessing-health-care/home-community-care/accountability/family-and-resident-councils)
-
-$^2$ [http://health.gov.on.ca/en/public/programs/ltc/glossary.aspx](http://health.gov.on.ca/en/public/programs/ltc/glossary.aspx)
-
-$^3$ [Excel provided by Seniors Advocate Representative.]
-
-$^4$ [https://docs.google.com/spreadsheets/d/1M_RzojK0vwF9nAozI7aoyLpPU8EA1JEqO6rq0g1iebU/edit#gid=0](https://docs.google.com/spreadsheets/d/1M_RzojK0vwF9nAozI7aoyLpPU8EA1JEqO6rq0g1iebU/edit#gid=0)
-
-$^5$ [http://www.phsa.ca/current-outbreaks](http://www.phsa.ca/current-outbreaks) 
-
-$^6$ [https://catalogue.data.gov.bc.ca/dataset/residential-care-facilities/resource/75b329ef-1f29-4c03-a35b-03b3666dee1d](https://catalogue.data.gov.bc.ca/dataset/residential-care-facilities/resource/75b329ef-1f29-4c03-a35b-03b3666dee1d) 
 
 \pagebreak
 
 # Data Quality
 
-    * Dealing with sparsity and NA's; mostly apparent in `INCIDENT_*` and `INFRACTIONS_*` predictors.
+  * Data sparsity and NA's: 
     
-    * Skewed predictors. Log and square-root transformations ineffective at mediating skewness.
+      * Mostly apparent in `INCIDENT_*` and `INFRACTIONS_*` predictors.
     
-    * High multicollinearity exists between `BEDS_TOTAL` and `ROOMS_TOTAL`, `ISE_LOW` and `ISE`.
+      * Majority of NA's exist in Northern Health Authority.
+    
+  * High multicollinearity exists between `ISE_LOW` and `ISE` (choose one).
     
 
+
+
+![**Overall missing data**](../LTChomes_analysis_BC/imgs/msno_complete.png)
+
+\pagebreak
+
+#### References
+
+$^1$ [https://www2.gov.bc.ca/gov/content/health/accessing-health-care/finding-assisted-living-or-residential-care/residential-care-facilities](https://www2.gov.bc.ca/gov/content/health/accessing-health-care/finding-assisted-living-or-residential-care/residential-care-facilities)
+
+$^2$ [https://www2.gov.bc.ca/gov/content/health/accessing-health-care/home-community-care/accountability/family-and-resident-councils](https://www2.gov.bc.ca/gov/content/health/accessing-health-care/home-community-care/accountability/family-and-resident-councils)
+
+$^3$ [http://health.gov.on.ca/en/public/programs/ltc/glossary.aspx](http://health.gov.on.ca/en/public/programs/ltc/glossary.aspx)
+
+$^4$ Excel provided by Seniors Advocate Representative.
+
+$^5$ 2019 BRITISH COLUMBIA Long-Term Care Facilities Quick Facts Directory.
