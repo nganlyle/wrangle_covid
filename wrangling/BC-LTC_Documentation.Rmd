@@ -1,7 +1,5 @@
 ---
-title: "BC LTC Parameters"
-author: "KT Hobbs"
-date: "06/08/2020"
+title: "Variables for bc_ltc_complete.csv"
 output:
   html_document:
     df_print: paged
@@ -21,18 +19,18 @@ Parameter | Type | Description | NA
 `POSTAL` | string | Postal code.| 0
 `REGULATION` | string | Licensing either under the Community Care and Assisted Living Act, or licensed or designated under the Hospital Act $^{(1)}$. | 0
 `ACCRED_STATUS` | string | Accreditation is a voluntary process that LTC homes may use to assess their services and help them improve the quality, safety and efficiency of their performance for the benefit of their residents and the health system $^{(2)}$.| 0
-`DCH_NURSE_LASTYR` | float | Nursing/care aide care hours (last year). | 4
-`DCH_ALLIED_LASTYR` | float | Allied health hours (last year). "Allied health care workers, such as physical, occupational or recreational therapists, speech language pathologists, social workers and dietitians." $^{(5)}$ | 4
-`DCH_TOTAL_LASTYR` | float | Total direct care hours (last year). | 4
-`DCH_NURSE_CURRENTYR` | float | Nursing/care aide care hours (current year). | 3
-`DCH_ALLIED_CURRENTYR` | float | Allied health hours (current year). | 3
-`DCH_TOTAL_CURRENTYR` | float | Total direct care hours (current year). | 3
+$^*$`DCH_NURSE_LASTYR` | float | Nursing/care aide care hours (last year). | 4
+$^*$`DCH_ALLIED_LASTYR` | float | Allied health hours (last year). "Allied health care workers, such as physical, occupational or recreational therapists, speech language pathologists, social workers and dietitians." $^{(5)}$ | 4
+$^*$`DCH_TOTAL_LASTYR` | float | Total direct care hours (last year). | 4
+$^*$`DCH_NURSE_CURRENTYR` | float | Nursing/care aide care hours (current year). | 3
+$^*$`DCH_ALLIED_CURRENTYR` | float | Allied health hours (current year). | 3
+$^*$`DCH_TOTAL_CURRENTYR` | float | Total direct care hours (current year). | 3
 `latitude` | float | Latitude positioning of home according to Statistics Canada's ODHF. | 0
 `longitude` | float | Longitude positioning of home according to Statistics Canada's ODHF. | 0
 
-$^*$**DCH:** Direct care hours may be delivered by nursing staff, care aides, or allied health care workers, such as physical, occupational or recreational therapists, speech language pathologists, social workers and dietitians. $^{(5)}$
+$^*$**DCH:** Direct care hours - may be delivered by nursing staff, care aides, or allied health care workers, such as physical, occupational or recreational therapists, speech language pathologists, social workers and dietitians. $^{(5)}$
 
-![missing values for DCH](../LTChomes_analysis_BC/imgs/msno_dch.png)
+![**Missing values for DCH**](../LTChomes_analysis_BC/imgs/msno_dch.png)
 
 ## Detailed Home Information
 
@@ -46,7 +44,7 @@ Parameter | Type | Description | NA
 `RESIDENT_COUNCIL` | binary boolean | "TRUE" or "FALSE".$^*$ | 0
 `FAMILY_COUNCIL` | binary boolean | "TRUE" or "FALSE".$^*$ | 0
 
-$^*$ A family and/or resident  council is also self-led, self-determining and democratic. Councils exist to engage the resident community in collaborative activities which will advance the quality of life for residents. $^{(2)}$
+$^*$A family and/or resident  council is also self-led, self-determining and democratic. Councils exist to engage the resident community in collaborative activities which will advance the quality of life for residents. $^{(2)}$
 
 
 ## Quality Metrics$^4$
@@ -86,7 +84,7 @@ Parameter | Type | Description | NA
 `INFRACTIONS_RIGHTS` | float64 | Licensing infractions - resident bill of rights.  | 3
 `INFRACTIONS_OTHER` | float64 | Licensing infractions - other.  | 3
 
-![missing values for quality metrics](../LTChomes_analysis_BC/imgs/msno_quality.png)
+![**Missing values for quality metrics**](../LTChomes_analysis_BC/imgs/msno_quality.png)
 
 ## General Resident Health Profile$^4$
 
@@ -112,7 +110,7 @@ Parameter | Type | Description | NA
 `MEDS_ANTIPSYCHOTICS` | float64 | Percent of residents taking antipsychotics without a diagnosis of psychosis.  | 3
 `RESTRAINTS` | float64 | Percent of residents with daily physical restraints.  | 3
 
-![missing values for health of residences](../LTChomes_analysis_BC/imgs/msno_general.png)
+![**Missing values for health of residences**](../LTChomes_analysis_BC/imgs/msno_general.png)
 
 ## COVID-19 Related Parameters
 
