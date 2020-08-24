@@ -19,6 +19,9 @@ cor(data[,c(35:40)])
 
 
 ```{r}
-table(data$OWNERSHIP, data$BEDS_PRIVATE)
+library(dplyr)
+tally(data$OWNERSHIP)
+
+data %>% count(OWNERSHIP, BEDS_PRIVATE)
 ```
 
