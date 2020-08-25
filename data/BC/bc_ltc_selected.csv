@@ -1,298 +1,298 @@
-FACILITY_NAME,HCC_CODE,HLTH_AUTH,OWNERSHIP,STREET_ADDRESS,CITY,POSTAL,REGULATION,ACCRED_STATUS,BEDS_TOTAL,ROOMS_PRIVATE,ROOMS_SEMI,ROOMS_MULTI,latitude,longitude,outbreak,RESIDENT_COUNCIL,FAMILY_COUNCIL,BEDS_PRIVATEprop
-Aberdeen Hospital,9A616,Vancouver Island Health,HA,1450 Hillside Ave.,Victoria,V8T2B7,Hospital Act,Accredited,100,19,4,25,48.4421967,-123.34324160465658,0,True,True,0.0
-Acacia Ty Mawr,99549,Vancouver Island Health,PFP,2655 E Shawnigan Lake Rd,Shawnigan Lake,V0R2W0,Community Care & Assisted Living Act,Accredited,35,31,2,0,48.64987100000001,-123.62358,0,False,True,0.0
-Acropolis Manor,9A8ID,Northern Health,HA,1325 Summit Avenue,Prince Rupert,V8J4C1,Community Care & Assisted Living Act,Accredited,61,49,6,0,54.30405500000001,-130.33,0,True,True,0.0
-Adanac Park Lodge,919G3,Vancouver Coastal Health,PNP,851 Boundary Road,Vancouver,V5K4T2,Community Care & Assisted Living Act,Not Accredited,73,67,3,0,49.2770771,-123.0245958,0,True,False,0.0
-Agassiz Seniors Community,936E0,Fraser Health,PFP,1525 MacKay Crescent,Agassiz,V0M1A3,Community Care & Assisted Living Act,Unknown,74,68,0,0,49.2335015,-121.7681608,0,True,True,0.14864864864864866
-Arbutus Care Centre,9B814,Vancouver Coastal Health,PFP,4505 Valley Drive,Vancouver,V6L2L1,Hospital Act,Accredited,156,58,49,0,49.2478819,-123.1579085,1,True,True,0.02564102564102564
-Arrowsmith Lodge,995A3,Vancouver Island Health,PNP,266 Moilliet St,Parksville,V9P1M9,Community Care & Assisted Living Act,Accredited,75,75,0,0,49.316385,-124.32359,0,True,True,0.0
-Ayre Manor,9357A,Vancouver Island Health,PNP,6764 Ayre Rd,Sooke,V9Z1K1,Community Care & Assisted Living Act,Accredited,33,32,0,0,48.378338,-123.72716,0,True,True,0.030303030303030304
-Baillie House,9A6G9,Fraser Health,HA,11666 Laity St,Maple Ridge,V2X7G5,Hospital Act,Unknown,148,116,16,0,49.2171373,-122.631898,0,True,True,0.0
-Banfield Pavilion - Vancouver General Hospital,9A52F,Vancouver Coastal Health,HA,2785 Ash Street,Vancouver,V5Z1M9,Hospital Act,Accredited,156,17,13,36,49.2611939,-123.1187682,0,True,True,0.0
-Bastion Place,9C094,Interior Health,HA,700 11 St. NE,Salmon Arm,V1E4P9,Hospital Act,Accredited,80,69,2,3,50.7378252,-119.2720293,0,True,True,0.0
-Beacon Hill Villa,91B60,Vancouver Island Health,PFP,635 Superior St,Victoria,V8V1V1,Community Care & Assisted Living Act,Accredited,80,66,7,0,48.4180655,-123.3670916,0,True,True,0.0
-Beckley Farm Lodge,9AB20,Vancouver Island Health,PNP,530 Simcoe St,Victoria,V8V4W4,Community Care & Assisted Living Act,Accredited,64,65,0,0,48.415112,-123.37239,0,True,True,0.0
-Bella Coola General Hospital,9A8DC,Vancouver Coastal Health,HA,1025 Elcho Street,Bella Coola,V0T1C0,Hospital Act,Accredited,5,5,0,0,52.37417620000001,-126.75795,0,True,True,0.0
-Belvedere Care Centre,9BG96,Fraser Health,PFP,739 Alderson Avenue,Coquitlam,V3K7B3,Hospital Act,Unknown,123,146,2,0,49.24008325,-122.87856982297993,0,True,True,0.5447154471544715
-Berkley Care Centre,91GB3,Vancouver Coastal Health,HA,2444 Burr Place,North Vancouver,V7H3A5,Community Care & Assisted Living Act,Accredited,177,159,9,0,49.312278000000006,-123.006,1,True,True,0.0
-Berkley Care Centre - Special Unit,93A60,Vancouver Coastal Health,HA,2444 Burr Place,North Vancouver,V7H3A5,Community Care & Assisted Living Act,Accredited,12,12,0,0,49.1415955,-122.9054267,0,True,True,0.0
-Bevan Village,923E0,Fraser Health,PFP,33386 Bevan Ave.,Abbotsford,V2S5G6,Community Care & Assisted Living Act,Not Accredited,122,105,5,0,49.0413325,-122.2992395,0,True,True,0.819672131147541
-Birchview Residences,93GDH,Northern Health,PNP,7780 Hart Highway,Prince George,V2K3B3,Community Care & Assisted Living Act,Not Accredited,21,18,1,0,53.999924,-122.8011,0,False,True,0.6666666666666666
-Blenheim Lodge,999BD,Vancouver Coastal Health,PNP,3263 Blenheim Street,Vancouver,V6L2X7,Community Care & Assisted Living Act,Not Accredited,100,65,17,0,49.2572761,-123.1791189,0,True,True,0.06
-Braddan Private Hospital,91997,Vancouver Coastal Health,PFP,2450 West 2nd Ave,Vancouver,V6K1J6,Hospital Act,Not Accredited,62,22,20,0,49.2697848,-123.1610416529879,0,True,True,0.03225806451612903
-Bradley Center,9A6JG,Fraser Health,HA,45600 Menholm Rd,Chilliwack,V2P1P7,Hospital Act,Unknown,90,8,1,20,49.16730645,-121.96485716719084,0,True,False,0.0
-Brandt's Creek Mews,937BA,Interior Health,PFP,2081 Cross Rd,Kelowna,V1V2G2,Community Care & Assisted Living Act,Accredited,102,102,0,0,49.9200841,-119.4354247,0,True,True,0.0196078431372549
-Brentwood House,93290,Vancouver Island Health,PNP,1167 Stelly's Cross Road,Brentwood Bay,V8M1H4,Community Care & Assisted Living Act,Accredited,17,17,0,0,48.5794252,-123.4509233,0,True,True,0.11764705882352941
-Broadway Pentecostal Lodge,9A9CE,Vancouver Coastal Health,PNP,1377 Lamey's Mill Rd,Vancouver,V6H3S9,Community Care & Assisted Living Act,Not Accredited,114,114,0,0,49.2674372,-123.1343725,0,True,False,0.0
-Brocklehurst Gemstone Care Centre,93E9A,Interior Health,PFP,1955 Tranquille Road,Kamloops,V2B3M4,Community Care & Assisted Living Act,Accredited,130,126,4,0,50.6997303,-120.3999925,0,True,True,0.038461538461538464
-Brookhaven Care Centre,917I9,Interior Health,HA,1775 Shannon Lake Rd,West Kelowna,V4T2N7,Hospital Act,Accredited,84,0,0,0,49.8648276,-119.5896005,0,True,True,0.0
-Brookside Lodge,937F0,Fraser Health,PFP,19550 Fraser Highway,Surrey,V3S6K5,Community Care & Assisted Living Act,Unknown,103,93,5,0,49.114097,-122.681031,0,True,True,0.13592233009708737
-Buchanan Lodge,9A500,Fraser Health,PNP,409 Blair Ave,New Westminster,V3L4A4,Community Care & Assisted Living Act,Unknown,112,104,4,0,49.22877315,-122.89808629846813,0,True,True,0.0
-Bulkley Lodge,9BDH1,Northern Health,HA,3668 11th Avenue,Smithers,V0J2N0,Community Care & Assisted Living Act,Accredited,70,67,3,0,54.779299,-127.15819,0,True,True,0.0
-Cairnsmore Place,9A5F3,Vancouver Island Health,HA,250 Cairnsmore Street,Duncan,V9L4H2,Hospital Act,Accredited,100,8,4,21,48.7854979,-123.71063329999998,0,True,True,0.0
-Capilano Care Centre,9C414,Vancouver Coastal Health,PFP,525 Clyde Avenue,West Vancouver,V7T1C4,Hospital Act & Community Care & Assisted Living Act,Accredited,205,76,48,11,49.329066,-123.13,0,True,True,0.0
-CareLife Fleetwood,9A5AD,Fraser Health,HA,8265 159th Street,Surrey,V4N5T5,Hospital Act,Unknown,191,167,12,0,49.1527,-122.7822,0,True,False,0.0
-Cariboo Place,93GGE,Interior Health,PFP,185 Fourth Ave N,Williams Lake,V2G2C8,Community Care & Assisted Living Act,Accredited,72,72,0,0,52.1311279,-122.141753,0,True,True,0.027777777777777776
-Carlton Gardens Care Centre,99FE5,Fraser Health,PFP,4108 Norfolk Street,Burnaby,V5G0B4,Community Care & Assisted Living Act,Accredited,128,120,4,0,49.2550436,-123.0128497,0,True,True,0.0859375
-Cartier House Seniors Community,992EJ,Fraser Health,PFP,1419 Cartier St,Coquitlam,V3K2C6,Community Care & Assisted Living Act,Unknown,78,30,24,0,49.28317715,-122.78734899022074,0,True,True,0.0
-Castleview Care Centre,9C017,Interior Health,PFP,2300 14th Ave.,Castlegar,V1N4A6,Community Care & Assisted Living Act,Unknown,61,61,0,0,49.2881065,-117.6624447,0,True,True,0.26229508196721313
-Cedarview Lodge,9AF9E,Vancouver Coastal Health,HA,1200 Cedar Village Close,North Vancouver,V7J3P3,Community Care & Assisted Living Act,Accredited,89,89,0,0,49.326053,-123.04,0,True,True,0.0
-Central City Lodge,99A78,Vancouver Coastal Health,PNP,415 West Pender St,Vancouver,V6B1V2,Community Care & Assisted Living Act,Not Accredited,100,84,8,0,49.28313320000001,-123.1119351,1,True,False,0.0
-Cerwydden Seniors Community,9244A,Vancouver Island Health,PFP,3243 Cowichan Lake R,Duncan,V9L4B8,Community Care & Assisted Living Act,Unknown,56,44,6,0,48.77872,-123.69876000000001,0,True,True,0.07142857142857142
-Chemainus Health Care Centre,9BF66,Vancouver Island Health,HA,9909 Esplanade Street,Chemainus,V0R1K1,Hospital Act,Accredited,75,55,10,0,48.927226,-123.715913,0,True,True,0.0
-Cherington Place,9B889,Fraser Health,PFP,13453 111A Ave,Surrey,V3R2C5,Community Care & Assisted Living Act,Unknown,75,33,21,0,49.20565300000001,-122.849334,0,True,False,0.0
-Chetwynd Hospital and Health Centre,922CD,Northern Health,HA,5500 Hospital road,Chetwynd,V0C1J0,Hospital Act,Accredited,7,7,0,0,55.695633,-121.645304,0,False,False,0.0
-Christenson Village,92I30,Vancouver Coastal Health,PNP,585 Shaw Road,Gibsons,V0N1V8,Community Care & Assisted Living Act,Accredited,80,80,0,0,49.4045,-123.519,0,True,True,0.0
-Columbia Garden Village,93DHA,Interior Health,PFP,"800-10 Ave., Box 578",Invermere,V0A1K0,Community Care & Assisted Living Act,Accredited,34,34,0,0,50.50146,-116.03312,0,True,False,0.0
-Columbia House - Invermere District Hospital,915C7,Interior Health,HA,1030 - 10th Street,Invermere,V0A1K0,Community Care & Assisted Living Act,Accredited,35,35,0,0,50.5060821,-116.0328794,0,True,True,0.0
-Columbia View Lodge,98H3C,Interior Health,HA,2920 Laburnum Dr,Trail,V1R4N2,Community Care & Assisted Living Act,Accredited,76,76,0,0,49.09953,-117.6793694,0,True,True,0.0
-Columbus Residence,9BHG7,Vancouver Coastal Health,PNP,704 West 69th Avenue,Vancouver,V6P2W3,Community Care & Assisted Living Act,Accredited,76,74,1,0,49.208775,-123.121,0,True,True,0.0
-Comox Valley Seniors Village,936F0,Vancouver Island Health,PFP,4640 Headquarters Rd.,Courtenay,V9N7J3,Community Care & Assisted Living Act,Accredited,136,128,4,0,49.702595,-124.99339,0,True,True,0.11029411764705882
-Cormorant Island Health Centre,9A72D,Vancouver Island Health,HA,49 School Road,Alert Bay,V0N1A0,Hospital Act,Accredited,10,10,0,0,50.594297,-126.9423575,0,True,True,0.0
-Cottage and Worthington Pavilions - MSA Hospital,9A6GA,Fraser Health,HA,33457 Cottage Lane,Abbotsford,V2S0B3,Hospital Act,Unknown,119,11,6,24,49.04118560000001,-122.2963164,1,True,True,0.0
-Cottonwoods Care Centre,9A6EF,Interior Health,HA,2255 Ethel Street,Kelowna,V1Y2Z9,Hospital Act,Accredited,221,34,29,33,49.8729257,-119.482555,0,True,True,0.0
-Creekside Landing,934BA,Interior Health,PFP,6190 Okanagan Landing Rd,Vernon,V1H1M3,Community Care & Assisted Living Act,Accredited,70,70,0,0,50.2465633,-119.3223493,0,True,True,0.0
-Crescent Gardens,91GD7,Fraser Health,PFP,1222 King George Boulevard,Surrey,V4A9W6,Community Care & Assisted Living Act,Unknown,75,69,3,0,49.02467100000001,-122.76523600000002,0,True,True,0.29333333333333333
-Crest View Village,92DG0,Interior Health,PFP,800 Cavell Street,Creston,V0B1G4,Community Care & Assisted Living Act,Accredited,32,32,0,0,49.1042985,-116.5148918,0,True,True,0.0625
-Cumberland Lodge,995I0,Vancouver Island Health,HA,2696 Windermere Ave,Cumberland,V0R1S0,Community Care & Assisted Living Act,Accredited,66,40,13,0,49.62206725,-125.03102586836599,0,True,False,0.0
-Czorny Alzheimer Centre,9327A,Fraser Health,HA,16850 66th Avenue,Surrey,V3S5M1,Hospital Act,Unknown,72,72,0,0,49.12241,-122.75509,1,False,False,0.0
-Dania Home,99C1E,Fraser Health,PNP,4175 Norland Avenue,Burnaby,V5G3S7,Community Care & Assisted Living Act,Accredited,102,102,0,0,49.247584,-122.975187,1,True,True,0.0
-David Lloyd Jones Home,99127,Interior Health,HA,934 Bernard Ave,Kelowna,V1Y6P8,Community Care & Assisted Living Act,Accredited,64,64,0,0,49.8869222,-119.4815286,0,True,True,0.0
-Delta View Habilitation Centre,9C280,Fraser Health,PFP,9341 Burns Drive,Delta,V4K3N3,Hospital Act,Accredited,80,72,4,0,49.09220420000001,-122.96504725675072,0,True,True,0.1125
-Delta View Life Enrichment Centre,9940H,Fraser Health,PFP,9321 Burns Drive,Delta,V4K3N3,Hospital Act,Accredited,212,172,20,0,49.09130415,-122.96486604215154,1,True,True,0.29245283018867924
-Deni House,93B40,Interior Health,HA,517 6th Ave N.,Williams Lake,V2G2G8,Hospital Act,Accredited,28,13,0,5,52.1378197,-122.1436286,0,True,False,0.0
-Discovery Harbour Seniors Community,9353A,Vancouver Island Health,PFP,850 14th Avenue,Campbell River,V9W4H4,Community Care & Assisted Living Act,Unknown,142,90,4,0,50.0293746,-125.2748504,0,True,True,0.0
-Dogwood Lodge,999F1,Vancouver Coastal Health,HA,500 West 57th Avenue,Vancouver,V6P6E8,Community Care & Assisted Living Act,Accredited,83,83,0,0,49.218578,-123.118,0,True,True,0.0
-Dr. Andrew Pavilion - Summerland Health Centre,9AJF4,Interior Health,HA,12815 Atkinson Rd.,Summerland,V0H1Z0,Hospital Act,Accredited,50,4,5,8,49.6027035,-119.6679222,0,True,True,0.0
-Dr. F. W. Green Memorial Home,98F1A,Interior Health,HA,1700 4th Street St. South,Cranbrook,V1C6E1,Community Care & Assisted Living Act,Accredited,58,60,0,0,49.50527,-115.75737,0,False,True,0.0
-Dufferin Care Centre,919C4,Fraser Health,PFP,1131 Dufferin St,Coquitlam,V3B7X5,Hospital Act,Accredited,153,0,0,0,49.2791682,-122.80399579999998,1,False,False,0.16339869281045752
-Dufferin Place,9A6D2,Vancouver Island Health,HA,1200 Dufferin Crescent,Nanaimo,V9S2B7,Hospital Act,Accredited,146,14,8,29,49.1848743,-123.96984534779169,0,True,True,0.0
-Dunrovin Park Lodge,99617,Northern Health,HA,900 St Laurent Avenue,Quesnel,V2J3S3,Community Care & Assisted Living Act,Accredited,117,107,3,0,52.979626,-122.48601,0,True,True,0.0
-Eagle Park Health Care Facility,9154A,Vancouver Island Health,HA,777 Jones St,Qualicum Beach,V9K2L1,Hospital Act,Accredited,75,55,20,0,49.3409296,-124.4492447,0,True,True,0.0
-Eagle Ridge Manor - Port Hardy,923C0,Vancouver Island Health,HA,9120 Granville Street,Port Hardy,V0N2P0,Hospital Act,Accredited,22,22,0,0,50.71997325,-127.5028512640254,0,True,True,0.0
-Eagle Ridge Manor - Port Moody,9C6EC,Fraser Health,HA,475 Guildford Way,Port Moody,V3H3W9,Hospital Act,Unknown,75,39,18,0,49.28553745,-122.82369973641943,0,True,True,0.0
-Echo Village,9C2F7,Vancouver Island Health,PNP,4200 10th Avenue,Port Alberni,V9Y4X3,Hospital Act,Accredited,67,67,0,0,49.2367453,-124.7978368,0,True,False,0.029850746268656716
-Eden Care Centre,9AB4F,Fraser Health,PFP,9100 Charles Street,Chilliwack,V2P5K6,Community Care & Assisted Living Act,Not Accredited,89,89,0,0,49.1672383,-121.9419001,1,True,True,0.0
-Eden Gardens,9951E,Vancouver Island Health,PNP,1917 Northfield Road,Nanaimo,V9S3B6,Community Care & Assisted Living Act,Unknown,130,130,0,0,49.191744,-123.98389,0,True,True,0.0
-Elim Village - The Harrison / Harrison West,9371A,Fraser Health,PNP,9025 160 Street,Surrey,V4N2X7,Community Care & Assisted Living Act,Accredited,194,181,6,0,49.167023,-122.7815006,1,True,True,0.09278350515463918
-Evergreen - The Terraces / The Pointe,99420,Fraser Health,PNP,1550 Oxford St,White Rock,V4B3R5,Community Care & Assisted Living Act,Accredited,252,252,0,0,49.0264665,-122.8122029,0,True,True,0.011904761904761904
-Evergreen Extended Care - Powell River Hospital,9A551,Vancouver Coastal Health,HA,4970 Joyce Ave.,Powell River,V8A5P2,Hospital Act,Accredited,75,6,4,15,49.8489957,-124.5226255,0,True,True,0.0
-Evergreen House - Lions Gate Hospital,9A55C,Vancouver Coastal Health,HA,231 East 15th Street,North Vancouver,V7L2L7,Hospital Act,Accredited,289,22,11,60,49.32097835,-123.06767192461285,1,True,True,0.0
-Evergreen Seniors Home,92J70,Vancouver Island Health,PFP,635 Evergreen Rd,Campbell River,V9W3R7,Community Care & Assisted Living Act,Accredited,64,60,1,0,50.007318,-125.24818,0,True,True,0.65625
-Fair Haven - Burnaby,99C49,Fraser Health,PNP,7557 Sussex Ave.,Burnaby,V5J3V6,Community Care & Assisted Living Act,Accredited,100,100,0,0,49.21526995,-123.0059056805597,0,True,True,0.0
-Fair Haven - Vancouver,999HG,Vancouver Coastal Health,PNP,2720 East 48th Ave.,Vancouver,V5S1G7,Community Care & Assisted Living Act,Accredited,82,70,6,0,49.225452,-123.0365843,0,True,True,0.0
-Fair Haven - Vancouver - Special Unit,93860,Vancouver Coastal Health,PNP,2720 East 48th Ave.,Vancouver,V5S1G7,Community Care & Assisted Living Act,Accredited,19,19,0,0,49.225452,-123.0365843,0,True,True,0.0
-Fellburn Care Centre,9A575,Fraser Health,HA,6050 Hastings St.,Burnaby,V5B1R6,Hospital Act,Accredited,81,10,16,10,49.2803168,-122.9624341,0,True,True,0.0
-Finnish Home,999CF,Vancouver Coastal Health,PNP,2288 Harrison Drive,Vancouver,V5P2P6,Community Care & Assisted Living Act,Not Accredited,64,64,0,0,49.20822879999999,-123.06074540000002,0,True,True,0.0
-Fir Park Village,9A919,Vancouver Island Health,PNP,4411 Wallace Street,Port Alberni,V9Y7Y5,Community Care & Assisted Living Act,Accredited,66,66,0,0,49.250749,-124.79915,0,True,False,0.015151515151515152
-Fischer Place/Mill Site Lodge,9B9DF,Interior Health,HA,555 Cedar Ave. South,100 Mile House,V0K2E0,Hospital Act & Community Care & Assisted Living Act,Accredited,93,93,0,0,51.6444141,-121.2939045,0,True,False,0.0
-Fleetwood Place,993E2,Fraser Health,PFP,16011 83rd Ave,Surrey,V4N0N2,Community Care & Assisted Living Act,Accredited,111,108,0,0,49.153895,-122.778049,0,True,True,0.11711711711711711
-Forest View Place,92960,Interior Health,HA,640 Park Dr.,Clearwater,V0E1N1,Hospital Act,Accredited,21,21,0,0,51.64507195,-120.01774781423934,0,True,True,0.0
-Fort Langley Seniors Community,9ACEC,Fraser Health,PFP,8838 Glover Road,Langley,V1M2R4,Hospital Act,Unknown,96,68,14,0,49.1132513,-122.6442649,0,True,True,0.052083333333333336
-Fort Nelson Multi Level Unit,91552,Northern Health,HA,5315 Liard St,Fort Nelson,V0C1R0,Hospital Act,Accredited,7,7,0,0,58.80894549999999,-122.7049735049242,0,False,False,0.0
-Foyer Maillard,992J9,Fraser Health,PNP,1010 Alderson Avenue,Coquitlam,V3K1W1,Community Care & Assisted Living Act,Not Accredited,125,125,0,0,49.23926289999999,-122.8662457,0,True,True,0.0
-Fraser Hope Lodge,9BJC6,Fraser Health,HA,1275-7th Avenue,Hope,V0X1L4,Hospital Act,Unknown,50,46,2,0,49.3773925,-121.42378463532327,0,True,True,0.0
-Fraserview,99BEI,Vancouver Coastal Health,PFP,9580 Williams Road,Richmond,V7A1H2,Community Care & Assisted Living Act,Accredited,101,33,37,0,49.140789700000006,-123.1141556,0,True,True,0.0
-Gateway Lodge Residential Care,937I0,Northern Health,HA,1488 20th Ave.,Prince George,V2L0A5,Community Care & Assisted Living Act,Accredited,120,120,0,0,53.905584,-122.7520213,0,True,True,0.0
-George Derby Centre,9BC9J,Fraser Health,PNP,7550 Cumberland St,Burnaby,V3N3X5,Community Care & Assisted Living Act,Accredited,300,284,8,0,49.23360200000001,-122.916488,1,True,True,0.0
-George Pearson Centre,9A5BF,Vancouver Coastal Health,HA,700 West 57th Ave.,Vancouver,V6P1S1,Hospital Act,Accredited,114,54,13,7,49.21877,-123.121144,0,True,False,0.0
-German Canadian Care Home,999D6,Vancouver Coastal Health,PNP,2010 Harrison Drive,Vancouver,V5P2P6,Community Care & Assisted Living Act,Accredited,132,76,29,0,49.2098793,-123.0651145,1,True,True,0.0
-Gillis House,9AAGI,Interior Health,HA,1699 Tutill Court,Merritt,V1K1C6,Hospital Act & Community Care & Assisted Living Act,Accredited,74,52,7,2,50.1075263,-120.7861348,0,True,True,0.0
-Glacier View Lodge,99605,Vancouver Island Health,PNP,2450 Back Road,Courtenay,V9N8B5,Community Care & Assisted Living Act,Accredited,102,102,0,0,49.690363,-124.96434,0,True,True,0.0
-Glengarry Hospital,9A60F,Vancouver Island Health,HA,1780 Fairfield Rd.,Victoria,V8S1G7,Hospital Act,Accredited,135,10,18,34,48.4152829,-123.3318857,0,False,True,0.0
-Glenmore Lodge,93GE4,Interior Health,PFP,325 Drysdale Blvd.,Kelowna,V1V1P5,Community Care & Assisted Living Act,Unknown,118,0,0,0,49.9163179,-119.4400778,0,False,False,0.15254237288135594
-Glenwarren Lodge,9B7A0,Vancouver Island Health,PFP,1230 Balmoral Rd,Victoria,V8T1B3,Hospital Act,Accredited,104,46,20,11,48.4283883,-123.3486649,0,True,True,0.0
-Glenwood Seniors Community,923FA,Fraser Health,PFP,1458 Glenwood Dr,Agassiz,V0M1A3,Community Care & Assisted Living Act,Unknown,44,37,0,0,49.2308549,-121.75817859999998,0,True,True,0.18181818181818182
-Gorge Road Hospital,93000,Vancouver Island Health,HA,63 Gorge Road East,Victoria,V9A1L2,Hospital Act,Accredited,111,11,4,27,48.44178385,-123.38810164430215,0,True,True,0.0
-Greenwoods,99DD4,Vancouver Island Health,PNP,133 Blain Road,Salt Spring Island,V8K1Z9,Community Care & Assisted Living Act,Accredited,51,51,0,0,48.86170900000001,-123.51033,0,False,True,0.0
-Guildford Seniors Village,926CA,Fraser Health,PFP,14568 104a Ave.,Surrey,V3R1R3,Community Care & Assisted Living Act,Accredited,101,98,0,0,49.192422,-122.8183,1,True,True,0.37623762376237624
-Haida Gwaii Hospital and Health Centre,9A76C,Northern Health,HA,3209 Oceanview Drive,Queen Charlotte,V0T1S0,Hospital Act,Accredited,8,0,2,2,53.254868,-132.070526,0,False,False,0.0
-Hardy View Lodge,9ADB9,Interior Health,HA,7649 22nd St.,Grand Forks,V0H1H2,Community Care & Assisted Living Act,Accredited,80,78,2,0,49.030261,-118.467798,0,True,True,0.0
-Harmony Court Care Centre,91BCE,Fraser Health,PFP,7195 Canada Way,Burnaby,V5E3R7,Community Care & Assisted Living Act,Unknown,55,7,24,0,49.224537,-122.942499,0,False,True,0.0
-Harmony Court Care Centre  - Special Unit,93A2A,Fraser Health,PFP,7195 Canada Way,Burnaby,V5E3R7,Community Care & Assisted Living Act,Unknown,25,25,0,0,49.25340870000001,-122.989119,0,False,True,0.0
-Haro Park Centre,9A4I4,Vancouver Coastal Health,PNP,1233 Haro Street,Vancouver,V6E3Y5,Community Care & Assisted Living Act,Unknown,154,154,0,0,49.285771,-123.129,1,True,False,0.0
-Haven Hill Retirement Centre,9C2CB,Interior Health,PFP,415 Haven Hill Road,Penticton,V2A4E9,Community Care & Assisted Living Act,Accredited,152,152,0,0,49.497463,-119.58078,0,True,True,0.02631578947368421
-Hawthorne Seniors Care Community,992JA,Fraser Health,PNP,2111 Hawthorne Ave,Port Coquitlam,V3C1W3,Hospital Act,Unknown,131,115,8,0,49.2570112,-122.7792222,0,True,True,0.0
-Henry Durand Manor,9A7GF,Interior Health,HA,803 9th St South,Golden,V0A1H0,Community Care & Assisted Living Act,Accredited,28,28,0,0,51.2961409,-116.9734392,0,True,True,0.0
-Heritage Square,9BI83,Interior Health,PFP,3904 27th St.,Vernon,V1T4X7,Community Care & Assisted Living Act,Accredited,50,50,0,0,50.270687,-119.26823,0,True,True,0.0
-Heritage Village,9C5BC,Fraser Health,HA,7525 Topaz Dr,Chilliwack,V2R3C9,Hospital Act,Accredited,100,64,12,3,49.1407098,-121.9665418,0,True,True,0.0
-Heron Grove,92IIA,Interior Health,PNP,4900 - 20th Street,Vernon,V1T9W3,Community Care & Assisted Living Act,Accredited,76,76,0,0,50.28272,-119.26055,0,True,True,0.0
-Hillside Village,92FC0,Interior Health,PNP,2891 15 Ave NE,Salmon Arm,V1E2B8,Community Care & Assisted Living Act,Accredited,112,112,0,0,50.71122329999999,-119.252111,0,True,True,0.0
-Hilltop House,9AIC3,Vancouver Coastal Health,HA,38146 Behrner Drive,Squamish,V8B0C8,Community Care & Assisted Living Act,Accredited,86,82,2,0,49.699648,-123.14,0,True,True,0.0
-Hilton Villa Seniors Community,917D8,Fraser Health,PFP,13525 Hilton Rd,Surrey,V3R5J3,Community Care & Assisted Living Act,Accredited,157,83,36,0,49.20242145,-122.84672725264092,0,True,True,0.01910828025477707
-Hogg and Weatherby Pavilions - Peace Arch Hospital,9A58I,Fraser Health,HA,15521 Russell Ave.,White Rock,V4B2R4,Hospital Act,Unknown,234,30,78,12,49.03015955,-122.79236955,0,True,True,0.0
-Holy Family Hospital,9A5D8,Vancouver Coastal Health,PNP,7801 Argyle St.,Vancouver,V5P3L6,Hospital Act,Accredited,126,9,6,21,49.213284,-123.073098,1,True,True,0.0
-Holyrood Manor,91842,Fraser Health,PFP,22710 Holyrood Ave,Maple Ridge,V2X3E6,Hospital Act,Accredited,125,0,0,0,49.2122959,-122.5939042,0,False,True,0.016
-Houston Health Centre,937C0,Northern Health,HA,3202 - 14th St,Houston,V0J1Z0,Community Care & Assisted Living Act,Accredited,6,6,0,0,54.39621800000001,-126.65281,0,False,False,0.0
-Inglewood Care Centre,999J9,Vancouver Coastal Health,PFP,725 Inglewood Avenue,West Vancouver,V7T1X5,Hospital Act & Community Care & Assisted Living Act,Unknown,230,196,17,0,49.3354367,-123.1356688,1,True,True,0.0
-Jackman Manor,9ADHD,Fraser Health,PNP,27477 28 Ave,Aldergrove,V4W3L9,Community Care & Assisted Living Act,Not Accredited,88,88,0,0,49.0538233,-122.4630403,0,True,True,0.0
-Jackson House - Ashcroft Hospital and Health Centre,9A6I3,Interior Health,HA,700 Ash-Cache Creek Hwy,Ashcroft,V0K1A0,Hospital Act,Accredited,22,20,1,1,50.731887,-121.278471,0,True,True,0.0
-James Bay Care Centre,9C426,Vancouver Island Health,PFP,336 Simcoe St.,Victoria,V8V1L2,Community Care & Assisted Living Act,Accredited,115,95,10,0,48.4173083,-123.376914,0,True,False,0.0
-Joseph Creek Village,92IJA,Interior Health,PFP,1901 Willowbrook Dr,Cranbrook,V1C6S4,Community Care & Assisted Living Act,Unknown,102,102,0,0,49.5270986,-115.7452938,0,True,True,0.0196078431372549
-Jubilee Lodge,9A69E,Northern Health,HA,1475 Edmonton Street,Prince George,V2M1S2,Hospital Act,Accredited,66,4,3,14,53.9120966,-122.7626315,0,True,True,0.0
-Jubilee Multi Generational Housing Society,99C25,Fraser Health,PNP,3460 Kalyk Avenue,Burnaby,V5G3B2,Community Care & Assisted Living Act,Not Accredited,60,12,18,3,49.2528169,-123.01300249999998,0,True,True,0.0
-Kamloops Seniors Village,92DCA,Interior Health,PFP,1220 Hugh Allan Dr.,Kamloops,V1S2B3,Community Care & Assisted Living Act,Accredited,114,114,0,0,50.6499607,-120.3729788,0,True,True,0.12280701754385964
-Kimberley Special Care Home,91711,Interior Health,HA,386 2nd Ave,Kimberley,V1A2Z8,Community Care & Assisted Living Act,Accredited,55,49,3,0,49.6899979,-115.9896466,0,True,True,0.0
-KinVillage West Court,9A4JH,Fraser Health,PNP,5410 10th Ave.,Delta,V4M3X8,Community Care & Assisted Living Act,Accredited,100,100,0,0,49.021494,-123.07365800000001,0,True,False,0.0
-Kinsmen Lodge,9942B,Fraser Health,PNP,9650 137A Street,Surrey,V3T4H9,Community Care & Assisted Living Act,Accredited,157,143,7,0,49.1777346,-122.8417995,0,True,True,0.0
-Kiwanis Care Centre,9AD1I,Fraser Health,PNP,35 Clute Street,New Westminster,V3L1Z5,Community Care & Assisted Living Act,Accredited,75,59,8,0,49.2232118,-122.9150878,0,True,True,0.0
-Kiwanis Pavilion,9AC36,Vancouver Island Health,PNP,3034 Cedar Hill Road,Victoria,V8T3J3,Community Care & Assisted Living Act,Accredited,122,122,0,0,48.4464163,-123.3467929,0,False,True,0.04918032786885246
-Kiwanis Village Lodge,995AE,Vancouver Island Health,PNP,1221 Kiwanis Crescent,Nanaimo,V9S5Y1,Community Care & Assisted Living Act,Unknown,75,75,0,0,49.186109,-123.96893,0,True,True,0.0
-Kopernik Lodge,99A2I,Vancouver Coastal Health,PNP,3150 Rosemont Drive,Vancouver,V5S2C9,Community Care & Assisted Living Act,Not Accredited,87,45,21,0,49.21522,-123.039,0,True,True,0.0
-Lady Minto Hospital,9A5G5,Vancouver Island Health,HA,135 Crofton Rd,Salt Spring Island,V8K1T1,Hospital Act,Accredited,29,1,4,5,48.8617,-123.5084,0,True,True,0.0
-Lake Country Lodge,9B969,Interior Health,PFP,100-10163 Konschuh Rd,Winfield,V4V2M2,Community Care & Assisted Living Act,Unknown,49,41,4,0,50.0291435,-119.3984578,0,True,True,0.08163265306122448
-Lakeshore Care Centre,992HG,Fraser Health,PFP,657 Gatensbury Street,Coquitlam,V3J5G9,Hospital Act,Not Accredited,56,42,7,0,49.2595472,-122.85635159999998,0,True,True,0.375
-Lakeview Care Centre,9C477,Vancouver Coastal Health,PFP,3490 Porter Street,Vancouver,V5N5W4,Hospital Act,Accredited,177,105,36,0,49.25348995,-123.06648814723715,0,True,True,0.0
-Lakeview Lodge,93DAA,Interior Health,PFP,2337 Butt Road,West Kelowna,V4T3L3,Community Care & Assisted Living Act,Unknown,114,114,0,0,49.83701729999999,-119.6237769,0,True,True,0.12280701754385964
-Langley Gardens,925CA,Fraser Health,PFP,8888 202nd Street,Langley,V1M4A7,Community Care & Assisted Living Act,Accredited,92,86,6,0,49.1663494,-122.6609691,1,True,True,0.20652173913043478
-Langley Lodge,98JIE,Fraser Health,PNP,5451-204th St,Langley,V3A5M9,Community Care & Assisted Living Act,Accredited,139,127,6,0,49.10156729999999,-122.6573035,1,True,True,0.10071942446043165
-Langley Memorial Hospital ECU,9A5E0,Fraser Health,HA,22051 Fraser Hwy,Langley,V3A4H4,Hospital Act,Unknown,230,8,4,44,49.0944775,-122.6116674454287,1,True,False,0.0
-Laurel Place,9359A,Fraser Health,PFP,9688 137A St,Surrey,V3T4H9,Community Care & Assisted Living Act,Accredited,215,207,4,0,49.1784219,-122.8417807,0,True,True,0.06046511627906977
-Little Mountain Place,9BA01,Vancouver Coastal Health,PNP,330 East 36th Avenue,Vancouver,V5W3Z4,Community Care & Assisted Living Act,Not Accredited,117,117,0,0,49.2376636,-123.0998532,1,True,True,0.0
-Louis Brier Home and Hospital,999G3,Vancouver Coastal Health,PNP,1055 West 41st Ave,Vancouver,V6M1W9,Hospital Act & Community Care & Assisted Living Act,Accredited,215,149,33,0,49.2346366,-123.12927274582044,0,True,True,0.0
-Luther Court,99DIG,Vancouver Island Health,PNP,1525 Cedar Hill Cross Rd,Victoria,V8P5M1,Community Care & Assisted Living Act,Accredited,60,60,0,0,48.4619202,-123.3364271,0,False,False,0.0
-Lynn Valley Care Centre,9B5JB,Vancouver Coastal Health,PFP,"1070 Lynn Valley Rd, North",North Vancouver,V7J1Z8,Hospital Act & Community Care & Assisted Living Act,Accredited,201,178,13,0,49.33396,-123.045,1,True,True,0.30845771144278605
-MSA Manor,98H7B,Fraser Health,PNP,2510 Gladwin Rd,Abbotsford,V2T3N9,Community Care & Assisted Living Act,Accredited,34,34,0,0,49.04747485,-122.31462286620344,1,True,False,0.0
-Mackenzie and District Hospital and Health Centre,93790,Northern Health,HA,45 Centennial Drive,Mackenzie,V0J2C0,Hospital Act,Accredited,5,4,0,0,55.3375782,-123.100648,0,False,False,0.0
-Malaspina Gardens,99I1B,Vancouver Island Health,PFP,100 Eleventh Street,Nanaimo,V9R6R6,Community Care & Assisted Living Act,Accredited,136,136,0,0,49.1298617,-123.9227916,0,True,True,0.007352941176470588
-Maple Ridge Seniors Village,9376A,Fraser Health,PFP,22141 - 119th Avenue,Maple Ridge,V2X2Y7,Community Care & Assisted Living Act,Accredited,108,108,0,0,49.2193789,-122.6084592,1,True,True,0.16666666666666666
-Maplewood House,9BE34,Fraser Health,PNP,1919 Jackson St.,Abbotsford,V2S2Z8,Community Care & Assisted Living Act,Accredited,78,78,0,0,49.03660720000001,-122.3091484,0,True,False,0.0
-Mariposa Gardens,935JA,Interior Health,PFP,8816 97th Street (highway 97),Osoyoos,V0H1V5,Community Care & Assisted Living Act,Unknown,109,97,6,0,49.034727,-119.47705829999998,0,True,True,0.045871559633027525
-McBride and District Hospital,9A681,Northern Health,HA,1136 5th Avenue,McBride,V0J2E0,Hospital Act,Accredited,9,7,1,0,53.30163979999999,-120.1608281,0,False,False,0.0
-McKinney Place - South Okanagan General Hospital,9A722,Interior Health,HA,911 McKinney Road,Oliver,V0H1T3,Hospital Act,Accredited,75,7,4,15,49.1835315,-119.53900043064311,0,True,True,0.0
-Menno Home,98H8D,Fraser Health,PNP,32910 Brundige Ave,Abbotsford,V2S1N2,Community Care & Assisted Living Act,Accredited,196,186,5,0,49.0401555,-122.3081538,0,True,True,0.0
-Menno Hospital,9A6H1,Fraser Health,PNP,32945 Marshall Road,Abbotsford,V2S1K1,Hospital Act,Accredited,151,59,43,2,49.03929855,-122.31110698892836,0,True,True,0.0
-Minoru Residence,9A5B4,Vancouver Coastal Health,HA,7333 Gollner Avenue,Richmond,V6Y0J1,Hospital Act,Accredited,250,70,90,0,49.16897,-123.15,0,True,True,0.0
-Minto House - Arrow Lakes Hospital,9A5A2,Interior Health,HA,97 1st Avenue NE,Nakusp,V0G1R0,Hospital Act,Accredited,16,15,0,0,50.2392729,-117.795712,0,True,True,0.0
-Mission Creek Landing,98J5G,Interior Health,PFP,3081 Hall Rd,Kelowna,V1W2R5,Community Care & Assisted Living Act,Accredited,104,94,5,0,49.8697756,-119.429557,0,True,True,0.038461538461538464
-Monashee Mews,93D80,Interior Health,PFP,2165 Norris Avenue,Lumby,V0E2G5,Community Care & Assisted Living Act,Accredited,46,46,0,0,50.2498936,-118.9617267,0,True,True,0.0
-Morgan Place,926A0,Fraser Health,PFP,3288 156a St,Surrey,V3Z9T1,Community Care & Assisted Living Act,Accredited,141,111,5,0,49.062332,-122.790069,0,True,True,0.09219858156028368
-Mount Cartier Court - Queen Victoria Hospital,92JJ0,Interior Health,HA,1200 Newlands Rd,Revelstoke,V0E2S1,Community Care & Assisted Living Act,Accredited,44,38,6,0,50.9769146,-118.1847111,0,True,True,0.0
-Mount Ida Mews,93D60,Interior Health,PFP,100 5th Avenue SE,Salmon Arm,V1E4H4,Community Care & Assisted Living Act,Accredited,132,72,0,0,50.69600300000001,-119.28418,0,True,True,0.007575757575757576
-Mount Saint Joseph Hospital,9A54J,Vancouver Coastal Health,PNP,3080 Prince Edward Street,Vancouver,V5T3N4,Hospital Act,Accredited,99,16,8,17,49.257699,-123.096358,0,True,True,0.0
-Mount St. Mary Hospital,9A6A6,Vancouver Island Health,PNP,861 Fairfield Rd.,Victoria,V8V5A9,Hospital Act,Unknown,200,184,8,0,48.4132064,-123.3446919,0,True,True,0.0
-Mount Tolmie Hospital,9A5JC,Vancouver Island Health,HA,3690 Richmond Rd.,Victoria,V8P4R6,Hospital Act,Accredited,72,9,14,9,48.459924,-123.330454,0,True,True,0.0
-Mountain Lake Seniors Community,92HIA,Interior Health,PFP,908 11th St,Nelson,V1L7A6,Community Care & Assisted Living Act,Unknown,92,92,0,0,49.5081403,-117.26611815013092,0,True,True,0.07608695652173914
-Mountain View Lodge - Lillooet Hospital and Health Centre,9A4E5,Interior Health,HA,951 Murray St. ,Lillooet,V0K1V0,Community Care & Assisted Living Act,Accredited,22,20,1,0,50.68929895,-121.93935595579315,0,True,True,0.0
-Mountain View Manor - Delta Hospital,9A56E,Fraser Health,HA,5800 Mountain View Boulevard,Delta,V4K3V6,Hospital Act,Unknown,92,12,4,18,49.085682399999996,-123.06125243089485,0,True,True,0.0
-Mountainview Lodge - Kitimat General Hospital,9A630,Northern Health,HA,920 Lahakas Blvd. S,Kitimat,V8C2S3,Hospital Act,Accredited,36,32,2,0,54.05427370000001,-128.6552266,0,True,True,0.0
-Mountainview Village,93240,Interior Health,PNP,1540 K.L.O. Road,Kelowna,V1W3P6,Community Care & Assisted Living Act,Accredited,90,90,0,0,49.8610063,-119.4565603,0,True,True,0.0
-Nanaimo Seniors Village,9261A,Vancouver Island Health,PFP,6085 Uplands Drive,Nanaimo,V9V1T8,Community Care & Assisted Living Act,Accredited,150,150,0,0,49.236311,-124.03886,0,True,True,0.10666666666666667
-Nelson Jubilee Manor,98G4A,Interior Health,HA,500 Beasley St West,Nelson,V1L6G9,Community Care & Assisted Living Act,Accredited,39,39,0,0,49.4795674,-117.29899609999998,0,True,True,0.0
-New Vista Care Home,99C37,Fraser Health,PNP,7550 Rosewood Street,Burnaby,V5E3Z3,Community Care & Assisted Living Act,Accredited,236,236,0,0,49.2239438,-122.94541269093858,1,True,True,0.0
-Nicola Lodge,93GBA,Fraser Health,PFP,2240 Hawkins St.,Port Coquitlam,V3B0M2,Community Care & Assisted Living Act,Unknown,230,0,0,0,49.255787,-122.737523,1,False,False,0.0782608695652174
-Noric House,98IF3,Interior Health,HA,1400 Mission Rd,Vernon,V1T9C3,Community Care & Assisted Living Act,Accredited,85,85,0,0,50.251193,-119.282587,0,True,True,0.0
-Normanna Rest Home,9C489,Fraser Health,PNP,7725-4th St,Burnaby,V3N5B6,Community Care & Assisted Living Act,Unknown,100,90,5,0,49.22202645,-122.92761074114857,0,True,True,0.0
-Northcrest Care Centre,9C5G2,Fraser Health,PFP,6771-120th Street,Delta,V4E2A7,Community Care & Assisted Living Act,Accredited,106,90,8,0,49.126449,-122.891122,0,True,True,0.0
-Northern Haida Gwaii Hospital and Health Centre,91F3C,Northern Health,HA,2520 Harrison Avenue,Masset,V0T1M0,Hospital Act,Accredited,5,4,0,0,54.020576,-132.157074,0,False,False,0.0
-Oak Bay Lodge,99D3D,Vancouver Island Health,HA,2251 Cadboro Bay Rd.,Victoria,V8R5H3,Community Care & Assisted Living Act,Accredited,235,87,74,0,48.432936,-123.3138,0,False,False,0.0
-Orchard Haven - South Similkameen Health Centre,9252A,Interior Health,HA,700 3rd St,Keremeos,V0X1N0,Community Care & Assisted Living Act,Accredited,38,38,0,0,49.2069196,-119.8315278,0,True,True,0.0
-Overlander Residential Care,9A708,Interior Health,HA,953 Southill Street,Kamloops,V2B7Z9,Hospital Act,Accredited,183,35,14,30,50.70373370000001,-120.3973241,0,True,True,0.0
-Oyster Harbour Seniors Community,99G47,Vancouver Island Health,PFP,1127 4th Ave,Ladysmith,V9G1A6,Community Care & Assisted Living Act,Not Accredited,89,87,2,0,48.9966463,-123.8287358,0,True,True,0.0
-Parkside Care,9AI58,Northern Health,HA,788 Ospika Boulevard,Prince George,V2M6Y2,Community Care & Assisted Living Act,Accredited,58,58,0,0,53.91781,-122.79478700000001,0,True,True,0.0
-Parkview Place,98IEB,Interior Health,HA,707 3rd Ave,Enderby,V0E1V0,Community Care & Assisted Living Act,Accredited,31,31,0,0,50.5466217,-119.1407493,0,True,True,0.0
-Peace Portal Seniors Village,9C47I,Fraser Health,PFP,15441 - 16th Avenue,Surrey,V4A8T8,Community Care & Assisted Living Act,Accredited,84,67,7,0,49.031282,-122.7945296,0,True,True,0.6785714285714286
-Peace Villa,9BDGA,Northern Health,HA,8407 112 Avenue,Fort St John,V1J0J5,Community Care & Assisted Living Act,Accredited,124,124,0,0,56.25673199999999,-120.81792,0,True,True,0.0
-Piccadilly Seniors Community,931AA,Interior Health,PFP,821 10th Avenue SW,Salmon Arm,V1E1T2,Community Care & Assisted Living Act,Accredited,59,46,7,0,50.692591,-119.29439599999999,0,True,True,0.13559322033898305
-Pine Acres Home,9BDAH,Interior Health,PNP,1902 Pheasant Lane,Westbank,V4T2H4,Community Care & Assisted Living Act,Accredited,63,33,5,0,49.839286,-119.59551,0,True,True,0.36507936507936506
-Pine Grove Seniors Community,9A9G2,Interior Health,PFP,313 Mcgowan Street,Kamloops,V2B2N8,Community Care & Assisted Living Act,Unknown,75,14,31,0,50.64479145,-120.3440998,0,True,True,0.0
-Pinegrove Place,9AG59,Vancouver Coastal Health,PNP,11331 Mellis Drive,Richmond,V6X1L8,Community Care & Assisted Living Act,Accredited,76,76,0,0,49.1867925,-123.0984471,0,True,True,0.0
-Pleasant Valley Manor,9BJG5,Interior Health,HA,3800 Patten Dr.,Armstrong,V0E1B2,Hospital Act,Accredited,82,82,0,0,50.43928579999999,-119.2079969,0,True,True,0.0
-Point Grey Private Hospital,9995A,Vancouver Coastal Health,PFP,2423 Cornwall Avenue,Vancouver,V6K1B9,Hospital Act,Not Accredited,72,31,20,0,49.2724948,-123.1496031,0,True,False,0.06944444444444445
-Polson Residential Care - Vernon Jubilee Hospital,9A628,Interior Health,HA,2101 32nd Street,Vernon,V1T5L2,Hospital Act,Accredited,97,15,9,16,50.256926,-119.271624,0,True,True,0.0
-Ponderosa Lodge,98FA9,Interior Health,HA,425 Columbia St,Kamloops,V2C2T4,Community Care & Assisted Living Act,Accredited,98,90,1,0,50.670828,-120.331933,0,False,True,0.0
-Poplar Ridge Pavilion - Kootenay Boundary Hospital,9A667,Interior Health,HA,1200 Hospital Bench,Trail,V1R4M1,Hospital Act,Accredited,49,5,14,4,49.1035546,-117.7011867,0,True,True,0.0
-Purdy Pavilion - UBC Hospital,9A5C6,Vancouver Coastal Health,HA,2221 Wesbrook Mall,Vancouver,V6T1Z9,Hospital Act,Accredited,199,23,0,60,49.2632866,-123.24586939010037,0,True,True,0.0
-Qualicum Manor,92EE0,Vancouver Island Health,PFP,124 Fourth Ave East,Qualicum Beach,V9K1N6,Community Care & Assisted Living Act,Unknown,59,34,13,0,49.3449157,-124.4405245,0,True,True,0.3728813559322034
-Queen's Park Care Centre,9A5GG,Fraser Health,HA,315 McBride Blvd.,New Westminster,V3L5E8,Hospital Act,Unknown,148,14,2,32,49.2158542,-122.9036695,1,True,True,0.0
-R. W. Large Memorial Hospital,9A773,Vancouver Coastal Health,HA,88 Waglisla Street,Bella Bella,V0T1Z0,Hospital Act,Accredited,7,7,0,0,52.1612112,-128.1433195843372,0,False,False,0.0
-Rainbow Lodge,9315A,Northern Health,HA,1000 Liard Drive,Prince George,V2M3Z3,Community Care & Assisted Living Act,Accredited,18,19,0,0,49.2238303,-122.9332908,0,True,True,0.0
-Renfrew Care Centre,9193F,Vancouver Coastal Health,PFP,1880 Renfrew Street,Vancouver,V5M3H9,Community Care & Assisted Living Act,Accredited,106,86,10,0,49.26786,-123.044,0,True,True,0.0
-Rest Haven Lodge,9ADH2,Vancouver Island Health,PNP,2281 Mills Road,Sidney,V8L2C3,Community Care & Assisted Living Act,Accredited,73,73,0,0,48.654974,-123.40484,0,True,True,0.0
-Richmond Lions Manor,99BGD,Vancouver Coastal Health,HA,9020 Bridgeport Road,Richmond,V6X1S1,Community Care & Assisted Living Act,Accredited,93,49,22,0,49.1914932,-123.1252982423324,1,True,True,0.0
-Ridgeview Lodge,93530,Interior Health,PFP,920 Desmond Street,Kamloops,V2B5K6,Community Care & Assisted Living Act,Unknown,129,129,0,0,50.7034312,-120.39313490000002,0,False,False,0.17829457364341086
-Ridgewood Lodge - Princeton General Hospital,9A4J6,Interior Health,HA,98 Ridgewood Drive,Princeton,V0X1W0,Community Care & Assisted Living Act,Accredited,37,33,2,0,49.45459015,-120.52645140910023,0,True,True,0.0
-Rocky Mountain Village,92D60,Interior Health,PFP,55 Cokato Road,Fernie,V0B1M4,Community Care & Assisted Living Act,Unknown,62,62,0,0,49.4906726,-115.0647647,0,True,True,0.016129032258064516
-Rose Wood Village,92CB0,Interior Health,PFP,8125 Devito Drive,Trail,V1R4X9,Community Care & Assisted Living Act,Unknown,46,45,0,0,49.0957762,-117.64176299999998,0,True,True,0.021739130434782608
-Rosemary Heights Seniors Village,935CA,Fraser Health,PFP,15240-34th Avenue,Surrey,V3Z2J9,Community Care & Assisted Living Act,Accredited,90,85,2,0,49.0635552,-122.8006006,0,True,False,0.05555555555555555
-Rosewood Manor,9ADI4,Vancouver Coastal Health,PNP,6260 Blundell Rd,Richmond,V7C5C4,Community Care & Assisted Living Act,Not Accredited,151,151,0,0,49.1551041,-123.1553156,0,True,True,0.0
-Rotary Manor,9976D,Northern Health,HA,1121 90th Avenue,Dawson Creek,V1G5A3,Community Care & Assisted Living Act,Accredited,115,115,0,0,55.773403,-120.23466,0,True,False,0.0
-Royal Arch Masonic Home,9AAG7,Vancouver Coastal Health,PNP,7850 Champlain Cresc,Vancouver,V5S4C7,Community Care & Assisted Living Act,Not Accredited,151,151,0,0,49.2135328,-123.0288043,1,True,True,0.0
-Royal Ascot Care Centre,917JC,Vancouver Coastal Health,PFP,2455 East Broadway,Vancouver,V5M1Y1,Hospital Act,Not Accredited,82,64,9,0,49.26239535,-123.0555417,0,True,True,0.024390243902439025
-Royal City Manor,91JJ3,Fraser Health,PFP,77 Jamieson Court,New Westminster,V3L5P8,Community Care & Assisted Living Act,Accredited,165,125,21,0,49.2153153,-122.8951618,0,True,True,0.696969696969697
-Saanich Peninsula Hospital Residential Care,9A6B8,Vancouver Island Health,HA,2166 Mt Newton X Rd,Saanichton,V8M2B2,Hospital Act,Accredited,143,17,10,116,48.596018,-123.40711499999999,0,True,True,0.0
-Selkirk Seniors Village,93570,Vancouver Island Health,PFP,385 Waterfront Crescent,Victoria,V8T5K7,Community Care & Assisted Living Act,Accredited,217,195,11,0,48.441914,-123.37798,0,True,True,0.14746543778801843
-Shorncliffe,9AHA5,Vancouver Coastal Health,HA,5847 Medusa Street,Sechelt,V0N3A0,Community Care & Assisted Living Act,Accredited,59,59,0,0,49.474191,-123.765,0,True,True,0.0
-Sidney Care Home,9BHDB,Vancouver Island Health,PFP,9888 Fifth St.,Sidney,V8L2X3,Community Care & Assisted Living Act,Unknown,54,44,5,0,48.6512125,-123.4010229,0,False,True,0.0
-Silver Kettle Village,93CIA,Interior Health,PFP,2350 72nd Avenue,Grand Forks,V0H1H4,Community Care & Assisted Living Act,Unknown,42,42,0,0,49.0246317,-118.4649688,0,True,True,0.047619047619047616
-Simon Fraser Lodge,9B65F,Northern Health,PFP,2410 Laurier Cres.,Prince George,V2M2B3,Hospital Act,Accredited,130,130,0,0,53.9153784,-122.7642509,0,True,True,0.0
-Simon K.Y. Lee Seniors Care Home,926I0,Vancouver Coastal Health,PNP,555 Carrall Street,Vancouver,V6B2J8,Community Care & Assisted Living Act,Unknown,114,104,5,0,49.2814788,-123.1043333,0,True,True,0.03508771929824561
-Slocan Community Health Centre - The Pavillion,98G52,Interior Health,HA,401 Galena Ave,New Denver,V0G1S0,Community Care & Assisted Living Act,Accredited,28,6,20,0,49.9843977,-117.3754623,0,True,True,0.0
-Sluggett House,9373A,Vancouver Island Health,PNP,1336 Marchant Rd.,Brentwood Bay,V8M1G5,Community Care & Assisted Living Act,Accredited,16,16,0,0,48.572695,-123.44301000000002,0,True,True,0.0
-Spring Valley Seniors Community,990F2,Interior Health,PFP,355 Terai Court,Kelowna,V1X5X6,Community Care & Assisted Living Act,Unknown,151,114,8,0,49.8855029,-119.416278,0,True,True,0.006622516556291391
-St. Jude's Anglican Home,999GE,Vancouver Coastal Health,PNP,810 West 27th Avenue,Vancouver,V5Z2G7,Community Care & Assisted Living Act,Not Accredited,55,45,5,0,49.2468877,-123.1227326,0,True,True,0.03636363636363636
-St. Michael's Centre,9A9FB,Fraser Health,PNP,7451 Sussex Avenue,Burnaby,V5J5C2,Hospital Act,Not Accredited,144,20,36,9,49.2157228,-123.0052424,0,True,True,0.0
-St. Vincent's - Brock Fahrni Pavilion,9A587,Vancouver Coastal Health,PNP,4650 Oak St.,Vancouver,V6H4J4,Hospital Act,Accredited,148,12,8,30,49.2432438,-123.12301099560094,0,True,False,0.0
-St. Vincent's - Langara,9C05H,Vancouver Coastal Health,PNP,255 W 62nd Ave,Vancouver,V5X4V4,Hospital Act,Accredited,197,17,8,41,49.2147869,-123.11081877119535,0,True,True,0.0
-Stanford Seniors Village,93590,Vancouver Island Health,PFP,250 Craig St,Parksville,V9P0A7,Community Care & Assisted Living Act,Accredited,182,172,5,0,49.316749,-124.31121,0,True,True,0.11538461538461539
-Stuart Lake Hospital,928GA,Northern Health,HA,600 Stuart Drive E,Fort St. James,V0J1P0,Hospital Act,Accredited,6,6,0,0,54.44140520000001,-124.242352,0,False,False,0.0
-Stuart Nechako Manor,997BF,Northern Health,HA,3277 Hospital Road,Vanderhoof,V0J3A2,Community Care & Assisted Living Act,Accredited,53,45,4,0,54.028787,-124.00926,0,True,True,0.0
-Summerland Seniors Village,92HB0,Interior Health,PFP,12803 Atkinson Road,Summerland,V0H1Z4,Community Care & Assisted Living Act,Accredited,112,105,0,0,49.6000555,-119.6687918,0,True,True,0.33035714285714285
-Sun Pointe Village,92450,Interior Health,PNP,700 Rutland Road N,Kelowna,V1X7W8,Community Care & Assisted Living Act,Unknown,100,100,0,0,49.8958819,-119.3870785,0,True,True,0.0
-Suncreek Village,9370A,Fraser Health,PFP,13687 62nd Avenue,Surrey,V3X0B5,Community Care & Assisted Living Act,Unknown,134,120,0,0,49.1156408,-122.8450108,0,True,True,0.1044776119402985
-Sunnybank Retirement Home,98IDJ,Interior Health,HA,6553 Park Drive,Oliver,V0H1T0,Community Care & Assisted Living Act,Accredited,51,51,0,0,49.18796645,-119.53956620008628,0,True,True,0.0
-Sunridge Place Seniors Community,93580,Vancouver Island Health,PFP,361 Bundock Ave,Duncan,V9L3P1,Community Care & Assisted Living Act,Not Accredited,160,160,0,0,48.7787315,-123.696975,0,True,True,0.0
-Sunset Lodge,99ICF,Vancouver Island Health,PNP,952 Arm Street,Esquimalt,V9A4G7,Community Care & Assisted Living Act,Accredited,108,108,0,0,48.441883,-123.393387,0,True,True,0.0
-Swan Valley Lodge,98F21,Interior Health,HA,818 Vancouver St,Creston,V0B1G4,Hospital Act & Community Care & Assisted Living Act,Accredited,90,90,0,0,49.097877200000006,-116.5163929,0,True,True,0.0
-Tabor Home,98H94,Fraser Health,PNP,31944 Sunrise Cres,Abbotsford,V2T1N5,Community Care & Assisted Living Act,Unknown,118,106,6,0,49.047016,-122.338899,1,True,True,0.0
-Talarico Place - Castlegar District Community Health Centre,9C0DE,Interior Health,HA,709 10th Street,Castlegar,V1N2H7,Community Care & Assisted Living Act,Accredited,60,38,11,0,49.3144174,-117.6608054,0,True,True,0.0
-Terraceview Lodge,9AIHF,Northern Health,HA,4707 Kerby Avenue,Terrace,V8G2W2,Community Care & Assisted Living Act,Accredited,99,95,0,0,54.533333,-128.59333999999998,0,True,True,0.0
-The Cascades Care Community,9A599,Fraser Health,PFP,45586 Mcintosh Drive,Chilliwack,V2P7W8,Community Care & Assisted Living Act,Unknown,119,101,9,0,49.1608031,-121.9656901,0,True,True,0.1092436974789916
-The Gardens at Qualicum Beach,9C6H8,Vancouver Island Health,PFP,650 Berwick Road North,Qualicum Beach,V9K2T8,Community Care & Assisted Living Act,Accredited,100,86,5,0,49.348341,-124.43764,0,True,True,0.15
-The Gateby,9AFCB,Interior Health,HA,3000 Gateby Place,Vernon,V1T8V8,Community Care & Assisted Living Act,Accredited,75,75,0,0,50.2642353,-119.28130149999998,0,True,True,0.0
-The Hamlets at Penticton,93510,Interior Health,PFP,103 Duncan Ave West,Penticton,V2A2Y3,Community Care & Assisted Living Act,Unknown,89,94,2,0,49.4840616,-119.5897419,0,True,True,0.033707865168539325
-The Hamlets at Westsyde,930H0,Interior Health,PFP,3255 Overlander Drive,Kamloops,V2B0A5,Community Care & Assisted Living Act,Unknown,112,112,0,0,50.77082100000001,-120.341961,0,True,True,0.026785714285714284
-The Heights at Mount View,93F7A,Vancouver Island Health,PNP,3814 Carey Road,Victoria,V8Z4C4,Community Care & Assisted Living Act,Unknown,260,260,0,0,48.459499,-123.38131,0,False,True,0.0
-The Madison Care Centre,935IA,Fraser Health,PFP,1399 Foster Avenue,Coquitlam,V3J2N1,Hospital Act,Not Accredited,137,128,9,0,49.2568192,-122.89315220000002,0,True,True,0.29927007299270075
-The Mayfair,9C3GE,Fraser Health,PNP,33433 Marshall Road,Abbotsford,V2S1K8,Community Care & Assisted Living Act,Not Accredited,91,80,2,0,49.03936815,-122.29768336109244,0,True,True,0.32967032967032966
-The Pines,9C373,Northern Health,HA,800 Centre St.,Burns Lake,V0J1E0,Hospital Act,Accredited,36,26,5,0,54.2365817,-125.7600106,0,True,True,0.0
-The Priory - Heritage Woods,921JD,Vancouver Island Health,HA,567 Goldstream Ave.,Langford,V9B2W4,Hospital Act,Accredited,75,75,0,0,48.44513565,-123.48827996082501,0,True,True,0.0
-The Priory - Hiscock,9A604,Vancouver Island Health,HA,567 Goldstream Ave.,Langford,V9B2W4,Hospital Act,Accredited,75,7,6,14,48.44513565,-123.48827996082501,0,True,True,0.0
-The Residence at Clayton Heights,93CAA,Fraser Health,PFP,18788 71st Avenue,Surrey,V4N6L9,Community Care & Assisted Living Act,Not Accredited,87,87,0,0,49.1317703,-122.7026815,1,True,False,0.0
-The Residence at Morgan Heights,9375A,Fraser Health,PFP,15955 27th Avenue,Surrey,V3Z3W3,Community Care & Assisted Living Act,Not Accredited,116,108,4,0,49.051178,-122.779875,0,False,True,0.22413793103448276
-The Residence in Mission,93F40,Fraser Health,HA,7324 Hurd Street,Mission,V2V3H5,Community Care & Assisted Living Act,Unknown,200,190,5,0,49.135354,-122.330124,0,True,True,0.0
-The Views - St. Joseph's General Hospital,9A6DD,Vancouver Island Health,PNP,2137 Comox Avenue,Comox,V9M1P2,Hospital Act,Accredited,145,23,21,13,49.67354215,-124.9422815862309,0,True,True,0.0
-Three Links Care Centre,9AC12,Vancouver Coastal Health,PNP,2934 East 22nd Ave,Vancouver,V5M2Y4,Community Care & Assisted Living Act,Accredited,90,90,0,0,49.2503144,-123.0429307,0,True,True,0.0
-Three Links Manor,9AHHB,Interior Health,HA,1449 Kelglen Cres,Kelowna,V1Y8P4,Community Care & Assisted Living Act,Accredited,82,82,0,0,49.883268,-119.4669195,0,True,True,0.0
-Totem Lodge - Sechelt Hospital,9A563,Vancouver Coastal Health,HA,5544 Sunshine Coast Highway,Sechelt,V0N3A0,Hospital Act,Accredited,49,3,3,10,49.50828092664089,-123.89803176719371,0,True,True,0.0
-Trillium Lodge,9AD7B,Vancouver Island Health,HA,401 Moilliet St,Parksville,V9P1N3,Hospital Act & Community Care & Assisted Living Act,Accredited,91,58,3,9,49.311376,-124.32514,0,True,True,0.0
-Trinity Care Centre,9AGF1,Interior Health,HA,75 Green Ave West,Penticton,V2A7N6,Community Care & Assisted Living Act,Accredited,75,75,0,0,49.46314520000001,-119.5894601,0,True,True,0.0
-Tsawaayuus - Rainbow Gardens,9C2FI,Vancouver Island Health,PNP,6151 Russell Place,Port Alberni,V9Y7W3,Hospital Act,Unknown,30,31,0,0,49.2690022,-124.8462038,0,True,False,0.0
-Valhaven Rest Home,98H9F,Fraser Health,PNP,4212 Balmoral St,Abbotsford,V4X1Y5,Community Care & Assisted Living Act,Accredited,26,26,0,0,49.0789671,-122.3857153,1,True,True,0.15384615384615385
-Valleyhaven,98HA8,Fraser Health,PFP,45450 Menholm Rd.,Chilliwack,V2P1M2,Community Care & Assisted Living Act,Accredited,91,83,4,0,49.1664458,-121.96614440000002,0,True,True,0.01098901098901099
-Veterans Memorial Lodge,916HD,Vancouver Island Health,PNP,4579 Chatterton Way,Saanich,V8X4Y7,Hospital Act,Accredited,225,201,12,0,48.4968,-123.3785,0,False,True,0.0
-Victoria Chinatown Care Centre,9AC99,Vancouver Island Health,PNP,555 Herald Street,Victoria,V8W1S5,Community Care & Assisted Living Act,Accredited,31,29,1,0,48.42991129999999,-123.3676465,0,True,True,0.0
-Victorian Community Health Centre of Kaslo,98GA3,Interior Health,HA,673A Avenue,Kaslo,V0G1M0,Community Care & Assisted Living Act,Accredited,20,17,3,0,49.91347860000001,-116.9140496,0,True,True,0.0
-Villa Carital,9198G,Vancouver Coastal Health,PNP,3050 Penticton St,Vancouver,V5M4W2,Community Care & Assisted Living Act,Not Accredited,81,60,12,0,49.2565839,-123.0521465,0,True,True,0.06172839506172839
-Villa Cathay Care Home,999II,Vancouver Coastal Health,PNP,970 Union Street,Vancouver,V6A3V1,Community Care & Assisted Living Act,Not Accredited,134,112,19,0,49.277208,-123.084,1,True,True,0.029850746268656716
-Village at Mill Creek,9911G,Interior Health,PNP,1450 Sutherland Avenue,Kelowna,V1Y5Y5,Hospital Act,Unknown,96,96,0,0,49.8803526,-119.46813059999998,0,True,True,0.14583333333333334
-Village at Smith Creek,9C1H6,Interior Health,PNP,2425 Orlin Road,West Kelowna,V4T3C7,Community Care & Assisted Living Act,Unknown,139,130,8,0,49.8433445,-119.6279642,0,True,True,0.007194244604316547
-Village by the Station,92CBA,Interior Health,PNP,270 Hastings Avenue,Penticton,V2A2V6,Community Care & Assisted Living Act,Accredited,100,133,4,0,49.4851093,-119.5957646,0,True,True,0.0
-Waverly Seniors Village,922DF,Fraser Health,PFP,8445 Young Rd,Chilliwack,V2P4P2,Community Care & Assisted Living Act,Accredited,53,51,1,0,49.155593,-121.95191,0,True,True,0.41509433962264153
-West Shore Laylum,9927D,Fraser Health,PFP,4900 Central Ave,Delta,V4K2G7,Community Care & Assisted Living Act,Not Accredited,55,45,5,0,49.0482742,-122.7977542,0,True,True,0.0
-West Vancouver Care Centre,9B9IG,Vancouver Coastal Health,PFP,1675 27th Street,West Vancouver,V7V4K9,Hospital Act,Unknown,78,23,16,7,49.3404055,-123.18877820000002,0,True,True,0.038461538461538464
-Westhaven,9A642,Vancouver Island Health,HA,3949 Pt. Alberni Hwy,Port Alberni,V9Y4S1,Hospital Act,Accredited,32,32,0,0,49.2665244,-124.7749064,0,False,False,0.0
-Westview Extended Care - Pentiction Regional Hospital,9A6F7,Interior Health,HA,550 Carmi Ave,Penticton,V2A8P9,Hospital Act,Accredited,102,10,10,18,49.4826229,-119.5763397,0,True,True,0.0
-Wexford Creek Seniors Community,9358A,Vancouver Island Health,PFP,80 10th Street,Nanaimo,V9R0A8,Community Care & Assisted Living Act,Accredited,110,110,0,0,49.13114,-123.92518799999999,0,True,True,0.0
-White Rock Seniors Village,993I1,Fraser Health,PFP,1183 Maple Street,White Rock,V8B5K9,Community Care & Assisted Living Act,Accredited,71,59,6,0,49.0236424,-122.7891502,0,True,True,0.15492957746478872
-William Rudd House,91828,Fraser Health,HA,95 Blackberry Drive,New Westminster,V3L5S7,Hospital Act,Unknown,12,12,0,0,49.21725645,-122.90105809581377,0,True,False,0.0
-Williams Lake Seniors Village,92CIA,Interior Health,PFP,1455 Western Avenue,Williams Lake,V2G5N1,Community Care & Assisted Living Act,Accredited,113,113,0,0,52.1520084,-122.1593926,0,True,True,0.0
-Willingdon Care Centre,9B79H,Fraser Health,PFP,4435 Grange St,Burnaby,V5H1P4,Hospital Act,Unknown,95,10,23,10,49.23233265,-123.00484883141232,0,True,False,0.0
-Willingdon Creek Village,93FB0,Vancouver Coastal Health,HA,4980 Kiwanis Drive,Powell River,V8A5H5,Community Care & Assisted Living Act,Accredited,102,102,0,0,49.849859,-124.519,0,True,True,0.0
-Windermere Care Centre,9C2G9,Vancouver Coastal Health,PFP,900 West 12th Avenue,Vancouver,V5Z1N3,Community Care & Assisted Living Act,Not Accredited,210,170,22,0,49.260325,-123.125,1,True,True,0.02857142857142857
-Woodgrove Manor,91FGB,Vancouver Island Health,PFP,6304 Metral Drive,Nanaimo,V9T2L8,Community Care & Assisted Living Act,Not Accredited,43,39,0,0,49.229161100000006,-124.04333429999998,0,True,True,0.27906976744186046
-Wrinch Memorial Hospital,9A63B,Northern Health,HA,2510 West Hwy 62,Hazelton,V0J1Y0,Hospital Act,Accredited,10,1,5,0,55.25957560000001,-127.651258,0,False,False,0.0
-Yaletown House,9B0I5,Vancouver Coastal Health,PNP,1099 Cambie Street,Vancouver,V6B5A8,Community Care & Assisted Living Act,Not Accredited,127,127,0,0,49.275272,-123.119,0,True,True,0.0
-Youville Residence,99A15,Vancouver Coastal Health,PNP,4950 Heather Street,Vancouver,V5Z3L9,Community Care & Assisted Living Act,Accredited,42,42,0,0,49.24058,-123.12,0,True,True,0.0
-Yucalta Lodge,99EJC,Vancouver Island Health,HA,555 - 2nd Avenue,Campbell River,V9W3V1,Community Care & Assisted Living Act,Accredited,99,100,0,0,50.009873,-125.24531,0,True,False,0.0
-Zion Park Manor,99444,Fraser Health,PNP,5939-180th St,Surrey,V3S4L2,Community Care & Assisted Living Act,Not Accredited,99,99,0,0,49.1101454,-122.724215,0,True,True,0.29292929292929293
+FACILITY_NAME,HCC_CODE,HLTH_AUTH,OWNERSHIP,STREET_ADDRESS,CITY,POSTAL,REGULATION,ACCRED_STATUS,RESIDENT_COUNCIL,FAMILY_COUNCIL,BEDS_TOTAL,BEDS_PRIVATEprop,ROOMS_PRIVATE,ROOMS_SEMI,ROOMS_MULTI,latitude,longitude,outbreak
+Aberdeen Hospital,9A616,Vancouver Island Health,HA,1450 Hillside Ave.,Victoria,V8T2B7,Hospital Act,Accredited,True,True,100,0.0,19,4,25,48.4421967,-123.34324160465658,0
+Acacia Ty Mawr,99549,Vancouver Island Health,PFP,2655 E Shawnigan Lake Rd,Shawnigan Lake,V0R2W0,Community Care & Assisted Living Act,Accredited,False,True,35,0.0,31,2,0,48.64987100000001,-123.62358,0
+Acropolis Manor,9A8ID,Northern Health,HA,1325 Summit Avenue,Prince Rupert,V8J4C1,Community Care & Assisted Living Act,Accredited,True,True,61,0.0,49,6,0,54.30405500000001,-130.33,0
+Adanac Park Lodge,919G3,Vancouver Coastal Health,PNP,851 Boundary Road,Vancouver,V5K4T2,Community Care & Assisted Living Act,Not Accredited,True,False,73,0.0,67,3,0,49.2770771,-123.0245958,0
+Agassiz Seniors Community,936E0,Fraser Health,PFP,1525 MacKay Crescent,Agassiz,V0M1A3,Community Care & Assisted Living Act,Unknown,True,True,74,0.14864864864864866,68,0,0,49.2335015,-121.7681608,0
+Arbutus Care Centre,9B814,Vancouver Coastal Health,PFP,4505 Valley Drive,Vancouver,V6L2L1,Hospital Act,Accredited,True,True,156,0.02564102564102564,58,49,0,49.2478819,-123.1579085,1
+Arrowsmith Lodge,995A3,Vancouver Island Health,PNP,266 Moilliet St,Parksville,V9P1M9,Community Care & Assisted Living Act,Accredited,True,True,75,0.0,75,0,0,49.316385,-124.32359,0
+Ayre Manor,9357A,Vancouver Island Health,PNP,6764 Ayre Rd,Sooke,V9Z1K1,Community Care & Assisted Living Act,Accredited,True,True,33,0.030303030303030304,32,0,0,48.378338,-123.72716,0
+Baillie House,9A6G9,Fraser Health,HA,11666 Laity St,Maple Ridge,V2X7G5,Hospital Act,Unknown,True,True,148,0.0,116,16,0,49.2171373,-122.631898,0
+Banfield Pavilion - Vancouver General Hospital,9A52F,Vancouver Coastal Health,HA,2785 Ash Street,Vancouver,V5Z1M9,Hospital Act,Accredited,True,True,156,0.0,17,13,36,49.2611939,-123.1187682,0
+Bastion Place,9C094,Interior Health,HA,700 11 St. NE,Salmon Arm,V1E4P9,Hospital Act,Accredited,True,True,80,0.0,69,2,3,50.7378252,-119.2720293,0
+Beacon Hill Villa,91B60,Vancouver Island Health,PFP,635 Superior St,Victoria,V8V1V1,Community Care & Assisted Living Act,Accredited,True,True,80,0.0,66,7,0,48.4180655,-123.3670916,0
+Beckley Farm Lodge,9AB20,Vancouver Island Health,PNP,530 Simcoe St,Victoria,V8V4W4,Community Care & Assisted Living Act,Accredited,True,True,64,0.0,65,0,0,48.415112,-123.37239,0
+Bella Coola General Hospital,9A8DC,Vancouver Coastal Health,HA,1025 Elcho Street,Bella Coola,V0T1C0,Hospital Act,Accredited,True,True,5,0.0,5,0,0,52.37417620000001,-126.75795,0
+Belvedere Care Centre,9BG96,Fraser Health,PFP,739 Alderson Avenue,Coquitlam,V3K7B3,Hospital Act,Unknown,True,True,123,0.5447154471544715,146,2,0,49.24008325,-122.87856982297993,0
+Berkley Care Centre,91GB3,Vancouver Coastal Health,HA,2444 Burr Place,North Vancouver,V7H3A5,Community Care & Assisted Living Act,Accredited,True,True,177,0.0,159,9,0,49.312278000000006,-123.006,1
+Berkley Care Centre - Special Unit,93A60,Vancouver Coastal Health,HA,2444 Burr Place,North Vancouver,V7H3A5,Community Care & Assisted Living Act,Accredited,True,True,12,0.0,12,0,0,49.1415955,-122.9054267,0
+Bevan Village,923E0,Fraser Health,PFP,33386 Bevan Ave.,Abbotsford,V2S5G6,Community Care & Assisted Living Act,Not Accredited,True,True,122,0.819672131147541,105,5,0,49.0413325,-122.2992395,0
+Birchview Residences,93GDH,Northern Health,PNP,7780 Hart Highway,Prince George,V2K3B3,Community Care & Assisted Living Act,Not Accredited,False,True,21,0.6666666666666666,18,1,0,53.999924,-122.8011,0
+Blenheim Lodge,999BD,Vancouver Coastal Health,PNP,3263 Blenheim Street,Vancouver,V6L2X7,Community Care & Assisted Living Act,Not Accredited,True,True,100,0.06,65,17,0,49.2572761,-123.1791189,0
+Braddan Private Hospital,91997,Vancouver Coastal Health,PFP,2450 West 2nd Ave,Vancouver,V6K1J6,Hospital Act,Not Accredited,True,True,62,0.03225806451612903,22,20,0,49.2697848,-123.1610416529879,0
+Bradley Center,9A6JG,Fraser Health,HA,45600 Menholm Rd,Chilliwack,V2P1P7,Hospital Act,Unknown,True,False,90,0.0,8,1,20,49.16730645,-121.96485716719084,0
+Brandt's Creek Mews,937BA,Interior Health,PFP,2081 Cross Rd,Kelowna,V1V2G2,Community Care & Assisted Living Act,Accredited,True,True,102,0.0196078431372549,102,0,0,49.9200841,-119.4354247,0
+Brentwood House,93290,Vancouver Island Health,PNP,1167 Stelly's Cross Road,Brentwood Bay,V8M1H4,Community Care & Assisted Living Act,Accredited,True,True,17,0.11764705882352941,17,0,0,48.5794252,-123.4509233,0
+Broadway Pentecostal Lodge,9A9CE,Vancouver Coastal Health,PNP,1377 Lamey's Mill Rd,Vancouver,V6H3S9,Community Care & Assisted Living Act,Not Accredited,True,False,114,0.0,114,0,0,49.2674372,-123.1343725,0
+Brocklehurst Gemstone Care Centre,93E9A,Interior Health,PFP,1955 Tranquille Road,Kamloops,V2B3M4,Community Care & Assisted Living Act,Accredited,True,True,130,0.038461538461538464,126,4,0,50.6997303,-120.3999925,0
+Brookhaven Care Centre,917I9,Interior Health,HA,1775 Shannon Lake Rd,West Kelowna,V4T2N7,Hospital Act,Accredited,True,True,84,0.0,0,0,0,49.8648276,-119.5896005,0
+Brookside Lodge,937F0,Fraser Health,PFP,19550 Fraser Highway,Surrey,V3S6K5,Community Care & Assisted Living Act,Unknown,True,True,103,0.13592233009708737,93,5,0,49.114097,-122.681031,0
+Buchanan Lodge,9A500,Fraser Health,PNP,409 Blair Ave,New Westminster,V3L4A4,Community Care & Assisted Living Act,Unknown,True,True,112,0.0,104,4,0,49.22877315,-122.89808629846813,0
+Bulkley Lodge,9BDH1,Northern Health,HA,3668 11th Avenue,Smithers,V0J2N0,Community Care & Assisted Living Act,Accredited,True,True,70,0.0,67,3,0,54.779299,-127.15819,0
+Cairnsmore Place,9A5F3,Vancouver Island Health,HA,250 Cairnsmore Street,Duncan,V9L4H2,Hospital Act,Accredited,True,True,100,0.0,8,4,21,48.7854979,-123.71063329999998,0
+Capilano Care Centre,9C414,Vancouver Coastal Health,PFP,525 Clyde Avenue,West Vancouver,V7T1C4,Hospital Act & Community Care & Assisted Living Act,Accredited,True,True,205,0.0,76,48,11,49.329066,-123.13,0
+CareLife Fleetwood,9A5AD,Fraser Health,HA,8265 159th Street,Surrey,V4N5T5,Hospital Act,Unknown,True,False,191,0.0,167,12,0,49.1527,-122.7822,0
+Cariboo Place,93GGE,Interior Health,PFP,185 Fourth Ave N,Williams Lake,V2G2C8,Community Care & Assisted Living Act,Accredited,True,True,72,0.027777777777777776,72,0,0,52.1311279,-122.141753,0
+Carlton Gardens Care Centre,99FE5,Fraser Health,PFP,4108 Norfolk Street,Burnaby,V5G0B4,Community Care & Assisted Living Act,Accredited,True,True,128,0.0859375,120,4,0,49.2550436,-123.0128497,0
+Cartier House Seniors Community,992EJ,Fraser Health,PFP,1419 Cartier St,Coquitlam,V3K2C6,Community Care & Assisted Living Act,Unknown,True,True,78,0.0,30,24,0,49.28317715,-122.78734899022074,0
+Castleview Care Centre,9C017,Interior Health,PFP,2300 14th Ave.,Castlegar,V1N4A6,Community Care & Assisted Living Act,Unknown,True,True,61,0.26229508196721313,61,0,0,49.2881065,-117.6624447,0
+Cedarview Lodge,9AF9E,Vancouver Coastal Health,HA,1200 Cedar Village Close,North Vancouver,V7J3P3,Community Care & Assisted Living Act,Accredited,True,True,89,0.0,89,0,0,49.326053,-123.04,0
+Central City Lodge,99A78,Vancouver Coastal Health,PNP,415 West Pender St,Vancouver,V6B1V2,Community Care & Assisted Living Act,Not Accredited,True,False,100,0.0,84,8,0,49.28313320000001,-123.1119351,1
+Cerwydden Seniors Community,9244A,Vancouver Island Health,PFP,3243 Cowichan Lake R,Duncan,V9L4B8,Community Care & Assisted Living Act,Unknown,True,True,56,0.07142857142857142,44,6,0,48.77872,-123.69876000000001,0
+Chemainus Health Care Centre,9BF66,Vancouver Island Health,HA,9909 Esplanade Street,Chemainus,V0R1K1,Hospital Act,Accredited,True,True,75,0.0,55,10,0,48.927226,-123.715913,0
+Cherington Place,9B889,Fraser Health,PFP,13453 111A Ave,Surrey,V3R2C5,Community Care & Assisted Living Act,Unknown,True,False,75,0.0,33,21,0,49.20565300000001,-122.849334,0
+Chetwynd Hospital and Health Centre,922CD,Northern Health,HA,5500 Hospital road,Chetwynd,V0C1J0,Hospital Act,Accredited,False,False,7,0.0,7,0,0,55.695633,-121.645304,0
+Christenson Village,92I30,Vancouver Coastal Health,PNP,585 Shaw Road,Gibsons,V0N1V8,Community Care & Assisted Living Act,Accredited,True,True,80,0.0,80,0,0,49.4045,-123.519,0
+Columbia Garden Village,93DHA,Interior Health,PFP,"800-10 Ave., Box 578",Invermere,V0A1K0,Community Care & Assisted Living Act,Accredited,True,False,34,0.0,34,0,0,50.50146,-116.03312,0
+Columbia House - Invermere District Hospital,915C7,Interior Health,HA,1030 - 10th Street,Invermere,V0A1K0,Community Care & Assisted Living Act,Accredited,True,True,35,0.0,35,0,0,50.5060821,-116.0328794,0
+Columbia View Lodge,98H3C,Interior Health,HA,2920 Laburnum Dr,Trail,V1R4N2,Community Care & Assisted Living Act,Accredited,True,True,76,0.0,76,0,0,49.09953,-117.6793694,0
+Columbus Residence,9BHG7,Vancouver Coastal Health,PNP,704 West 69th Avenue,Vancouver,V6P2W3,Community Care & Assisted Living Act,Accredited,True,True,76,0.0,74,1,0,49.208775,-123.121,0
+Comox Valley Seniors Village,936F0,Vancouver Island Health,PFP,4640 Headquarters Rd.,Courtenay,V9N7J3,Community Care & Assisted Living Act,Accredited,True,True,136,0.11029411764705882,128,4,0,49.702595,-124.99339,0
+Cormorant Island Health Centre,9A72D,Vancouver Island Health,HA,49 School Road,Alert Bay,V0N1A0,Hospital Act,Accredited,True,True,10,0.0,10,0,0,50.594297,-126.9423575,0
+Cottage and Worthington Pavilions - MSA Hospital,9A6GA,Fraser Health,HA,33457 Cottage Lane,Abbotsford,V2S0B3,Hospital Act,Unknown,True,True,119,0.0,11,6,24,49.04118560000001,-122.2963164,1
+Cottonwoods Care Centre,9A6EF,Interior Health,HA,2255 Ethel Street,Kelowna,V1Y2Z9,Hospital Act,Accredited,True,True,221,0.0,34,29,33,49.8729257,-119.482555,0
+Creekside Landing,934BA,Interior Health,PFP,6190 Okanagan Landing Rd,Vernon,V1H1M3,Community Care & Assisted Living Act,Accredited,True,True,70,0.0,70,0,0,50.2465633,-119.3223493,0
+Crescent Gardens,91GD7,Fraser Health,PFP,1222 King George Boulevard,Surrey,V4A9W6,Community Care & Assisted Living Act,Unknown,True,True,75,0.29333333333333333,69,3,0,49.02467100000001,-122.76523600000002,0
+Crest View Village,92DG0,Interior Health,PFP,800 Cavell Street,Creston,V0B1G4,Community Care & Assisted Living Act,Accredited,True,True,32,0.0625,32,0,0,49.1042985,-116.5148918,0
+Cumberland Lodge,995I0,Vancouver Island Health,HA,2696 Windermere Ave,Cumberland,V0R1S0,Community Care & Assisted Living Act,Accredited,True,False,66,0.0,40,13,0,49.62206725,-125.03102586836599,0
+Czorny Alzheimer Centre,9327A,Fraser Health,HA,16850 66th Avenue,Surrey,V3S5M1,Hospital Act,Unknown,False,False,72,0.0,72,0,0,49.12241,-122.75509,1
+Dania Home,99C1E,Fraser Health,PNP,4175 Norland Avenue,Burnaby,V5G3S7,Community Care & Assisted Living Act,Accredited,True,True,102,0.0,102,0,0,49.247584,-122.975187,1
+David Lloyd Jones Home,99127,Interior Health,HA,934 Bernard Ave,Kelowna,V1Y6P8,Community Care & Assisted Living Act,Accredited,True,True,64,0.0,64,0,0,49.8869222,-119.4815286,0
+Delta View Habilitation Centre,9C280,Fraser Health,PFP,9341 Burns Drive,Delta,V4K3N3,Hospital Act,Accredited,True,True,80,0.1125,72,4,0,49.09220420000001,-122.96504725675072,0
+Delta View Life Enrichment Centre,9940H,Fraser Health,PFP,9321 Burns Drive,Delta,V4K3N3,Hospital Act,Accredited,True,True,212,0.29245283018867924,172,20,0,49.09130415,-122.96486604215154,1
+Deni House,93B40,Interior Health,HA,517 6th Ave N.,Williams Lake,V2G2G8,Hospital Act,Accredited,True,False,28,0.0,13,0,5,52.1378197,-122.1436286,0
+Discovery Harbour Seniors Community,9353A,Vancouver Island Health,PFP,850 14th Avenue,Campbell River,V9W4H4,Community Care & Assisted Living Act,Unknown,True,True,142,0.0,90,4,0,50.0293746,-125.2748504,0
+Dogwood Lodge,999F1,Vancouver Coastal Health,HA,500 West 57th Avenue,Vancouver,V6P6E8,Community Care & Assisted Living Act,Accredited,True,True,83,0.0,83,0,0,49.218578,-123.118,0
+Dr. Andrew Pavilion - Summerland Health Centre,9AJF4,Interior Health,HA,12815 Atkinson Rd.,Summerland,V0H1Z0,Hospital Act,Accredited,True,True,50,0.0,4,5,8,49.6027035,-119.6679222,0
+Dr. F. W. Green Memorial Home,98F1A,Interior Health,HA,1700 4th Street St. South,Cranbrook,V1C6E1,Community Care & Assisted Living Act,Accredited,False,True,58,0.0,60,0,0,49.50527,-115.75737,0
+Dufferin Care Centre,919C4,Fraser Health,PFP,1131 Dufferin St,Coquitlam,V3B7X5,Hospital Act,Accredited,False,False,153,0.16339869281045752,0,0,0,49.2791682,-122.80399579999998,1
+Dufferin Place,9A6D2,Vancouver Island Health,HA,1200 Dufferin Crescent,Nanaimo,V9S2B7,Hospital Act,Accredited,True,True,146,0.0,14,8,29,49.1848743,-123.96984534779169,0
+Dunrovin Park Lodge,99617,Northern Health,HA,900 St Laurent Avenue,Quesnel,V2J3S3,Community Care & Assisted Living Act,Accredited,True,True,117,0.0,107,3,0,52.979626,-122.48601,0
+Eagle Park Health Care Facility,9154A,Vancouver Island Health,HA,777 Jones St,Qualicum Beach,V9K2L1,Hospital Act,Accredited,True,True,75,0.0,55,20,0,49.3409296,-124.4492447,0
+Eagle Ridge Manor - Port Hardy,923C0,Vancouver Island Health,HA,9120 Granville Street,Port Hardy,V0N2P0,Hospital Act,Accredited,True,True,22,0.0,22,0,0,50.71997325,-127.5028512640254,0
+Eagle Ridge Manor - Port Moody,9C6EC,Fraser Health,HA,475 Guildford Way,Port Moody,V3H3W9,Hospital Act,Unknown,True,True,75,0.0,39,18,0,49.28553745,-122.82369973641943,0
+Echo Village,9C2F7,Vancouver Island Health,PNP,4200 10th Avenue,Port Alberni,V9Y4X3,Hospital Act,Accredited,True,False,67,0.029850746268656716,67,0,0,49.2367453,-124.7978368,0
+Eden Care Centre,9AB4F,Fraser Health,PFP,9100 Charles Street,Chilliwack,V2P5K6,Community Care & Assisted Living Act,Not Accredited,True,True,89,0.0,89,0,0,49.1672383,-121.9419001,1
+Eden Gardens,9951E,Vancouver Island Health,PNP,1917 Northfield Road,Nanaimo,V9S3B6,Community Care & Assisted Living Act,Unknown,True,True,130,0.0,130,0,0,49.191744,-123.98389,0
+Elim Village - The Harrison / Harrison West,9371A,Fraser Health,PNP,9025 160 Street,Surrey,V4N2X7,Community Care & Assisted Living Act,Accredited,True,True,194,0.09278350515463918,181,6,0,49.167023,-122.7815006,1
+Evergreen - The Terraces / The Pointe,99420,Fraser Health,PNP,1550 Oxford St,White Rock,V4B3R5,Community Care & Assisted Living Act,Accredited,True,True,252,0.011904761904761904,252,0,0,49.0264665,-122.8122029,0
+Evergreen Extended Care - Powell River Hospital,9A551,Vancouver Coastal Health,HA,4970 Joyce Ave.,Powell River,V8A5P2,Hospital Act,Accredited,True,True,75,0.0,6,4,15,49.8489957,-124.5226255,0
+Evergreen House - Lions Gate Hospital,9A55C,Vancouver Coastal Health,HA,231 East 15th Street,North Vancouver,V7L2L7,Hospital Act,Accredited,True,True,289,0.0,22,11,60,49.32097835,-123.06767192461285,1
+Evergreen Seniors Home,92J70,Vancouver Island Health,PFP,635 Evergreen Rd,Campbell River,V9W3R7,Community Care & Assisted Living Act,Accredited,True,True,64,0.65625,60,1,0,50.007318,-125.24818,0
+Fair Haven - Burnaby,99C49,Fraser Health,PNP,7557 Sussex Ave.,Burnaby,V5J3V6,Community Care & Assisted Living Act,Accredited,True,True,100,0.0,100,0,0,49.21526995,-123.0059056805597,0
+Fair Haven - Vancouver,999HG,Vancouver Coastal Health,PNP,2720 East 48th Ave.,Vancouver,V5S1G7,Community Care & Assisted Living Act,Accredited,True,True,82,0.0,70,6,0,49.225452,-123.0365843,0
+Fair Haven - Vancouver - Special Unit,93860,Vancouver Coastal Health,PNP,2720 East 48th Ave.,Vancouver,V5S1G7,Community Care & Assisted Living Act,Accredited,True,True,19,0.0,19,0,0,49.225452,-123.0365843,0
+Fellburn Care Centre,9A575,Fraser Health,HA,6050 Hastings St.,Burnaby,V5B1R6,Hospital Act,Accredited,True,True,81,0.0,10,16,10,49.2803168,-122.9624341,0
+Finnish Home,999CF,Vancouver Coastal Health,PNP,2288 Harrison Drive,Vancouver,V5P2P6,Community Care & Assisted Living Act,Not Accredited,True,True,64,0.0,64,0,0,49.20822879999999,-123.06074540000002,0
+Fir Park Village,9A919,Vancouver Island Health,PNP,4411 Wallace Street,Port Alberni,V9Y7Y5,Community Care & Assisted Living Act,Accredited,True,False,66,0.015151515151515152,66,0,0,49.250749,-124.79915,0
+Fischer Place/Mill Site Lodge,9B9DF,Interior Health,HA,555 Cedar Ave. South,100 Mile House,V0K2E0,Hospital Act & Community Care & Assisted Living Act,Accredited,True,False,93,0.0,93,0,0,51.6444141,-121.2939045,0
+Fleetwood Place,993E2,Fraser Health,PFP,16011 83rd Ave,Surrey,V4N0N2,Community Care & Assisted Living Act,Accredited,True,True,111,0.11711711711711711,108,0,0,49.153895,-122.778049,0
+Forest View Place,92960,Interior Health,HA,640 Park Dr.,Clearwater,V0E1N1,Hospital Act,Accredited,True,True,21,0.0,21,0,0,51.64507195,-120.01774781423934,0
+Fort Langley Seniors Community,9ACEC,Fraser Health,PFP,8838 Glover Road,Langley,V1M2R4,Hospital Act,Unknown,True,True,96,0.052083333333333336,68,14,0,49.1132513,-122.6442649,0
+Fort Nelson Multi Level Unit,91552,Northern Health,HA,5315 Liard St,Fort Nelson,V0C1R0,Hospital Act,Accredited,False,False,7,0.0,7,0,0,58.80894549999999,-122.7049735049242,0
+Foyer Maillard,992J9,Fraser Health,PNP,1010 Alderson Avenue,Coquitlam,V3K1W1,Community Care & Assisted Living Act,Not Accredited,True,True,125,0.0,125,0,0,49.23926289999999,-122.8662457,0
+Fraser Hope Lodge,9BJC6,Fraser Health,HA,1275-7th Avenue,Hope,V0X1L4,Hospital Act,Unknown,True,True,50,0.0,46,2,0,49.3773925,-121.42378463532327,0
+Fraserview,99BEI,Vancouver Coastal Health,PFP,9580 Williams Road,Richmond,V7A1H2,Community Care & Assisted Living Act,Accredited,True,True,101,0.0,33,37,0,49.140789700000006,-123.1141556,0
+Gateway Lodge Residential Care,937I0,Northern Health,HA,1488 20th Ave.,Prince George,V2L0A5,Community Care & Assisted Living Act,Accredited,True,True,120,0.0,120,0,0,53.905584,-122.7520213,0
+George Derby Centre,9BC9J,Fraser Health,PNP,7550 Cumberland St,Burnaby,V3N3X5,Community Care & Assisted Living Act,Accredited,True,True,300,0.0,284,8,0,49.23360200000001,-122.916488,1
+George Pearson Centre,9A5BF,Vancouver Coastal Health,HA,700 West 57th Ave.,Vancouver,V6P1S1,Hospital Act,Accredited,True,False,114,0.0,54,13,7,49.21877,-123.121144,0
+German Canadian Care Home,999D6,Vancouver Coastal Health,PNP,2010 Harrison Drive,Vancouver,V5P2P6,Community Care & Assisted Living Act,Accredited,True,True,132,0.0,76,29,0,49.2098793,-123.0651145,1
+Gillis House,9AAGI,Interior Health,HA,1699 Tutill Court,Merritt,V1K1C6,Hospital Act & Community Care & Assisted Living Act,Accredited,True,True,74,0.0,52,7,2,50.1075263,-120.7861348,0
+Glacier View Lodge,99605,Vancouver Island Health,PNP,2450 Back Road,Courtenay,V9N8B5,Community Care & Assisted Living Act,Accredited,True,True,102,0.0,102,0,0,49.690363,-124.96434,0
+Glengarry Hospital,9A60F,Vancouver Island Health,HA,1780 Fairfield Rd.,Victoria,V8S1G7,Hospital Act,Accredited,False,True,135,0.0,10,18,34,48.4152829,-123.3318857,0
+Glenmore Lodge,93GE4,Interior Health,PFP,325 Drysdale Blvd.,Kelowna,V1V1P5,Community Care & Assisted Living Act,Unknown,False,False,118,0.15254237288135594,0,0,0,49.9163179,-119.4400778,0
+Glenwarren Lodge,9B7A0,Vancouver Island Health,PFP,1230 Balmoral Rd,Victoria,V8T1B3,Hospital Act,Accredited,True,True,104,0.0,46,20,11,48.4283883,-123.3486649,0
+Glenwood Seniors Community,923FA,Fraser Health,PFP,1458 Glenwood Dr,Agassiz,V0M1A3,Community Care & Assisted Living Act,Unknown,True,True,44,0.18181818181818182,37,0,0,49.2308549,-121.75817859999998,0
+Gorge Road Hospital,93000,Vancouver Island Health,HA,63 Gorge Road East,Victoria,V9A1L2,Hospital Act,Accredited,True,True,111,0.0,11,4,27,48.44178385,-123.38810164430215,0
+Greenwoods,99DD4,Vancouver Island Health,PNP,133 Blain Road,Salt Spring Island,V8K1Z9,Community Care & Assisted Living Act,Accredited,False,True,51,0.0,51,0,0,48.86170900000001,-123.51033,0
+Guildford Seniors Village,926CA,Fraser Health,PFP,14568 104a Ave.,Surrey,V3R1R3,Community Care & Assisted Living Act,Accredited,True,True,101,0.37623762376237624,98,0,0,49.192422,-122.8183,1
+Haida Gwaii Hospital and Health Centre,9A76C,Northern Health,HA,3209 Oceanview Drive,Queen Charlotte,V0T1S0,Hospital Act,Accredited,False,False,8,0.0,0,2,2,53.254868,-132.070526,0
+Hardy View Lodge,9ADB9,Interior Health,HA,7649 22nd St.,Grand Forks,V0H1H2,Community Care & Assisted Living Act,Accredited,True,True,80,0.0,78,2,0,49.030261,-118.467798,0
+Harmony Court Care Centre,91BCE,Fraser Health,PFP,7195 Canada Way,Burnaby,V5E3R7,Community Care & Assisted Living Act,Unknown,False,True,55,0.0,7,24,0,49.224537,-122.942499,0
+Harmony Court Care Centre  - Special Unit,93A2A,Fraser Health,PFP,7195 Canada Way,Burnaby,V5E3R7,Community Care & Assisted Living Act,Unknown,False,True,25,0.0,25,0,0,49.25340870000001,-122.989119,0
+Haro Park Centre,9A4I4,Vancouver Coastal Health,PNP,1233 Haro Street,Vancouver,V6E3Y5,Community Care & Assisted Living Act,Unknown,True,False,154,0.0,154,0,0,49.285771,-123.129,1
+Haven Hill Retirement Centre,9C2CB,Interior Health,PFP,415 Haven Hill Road,Penticton,V2A4E9,Community Care & Assisted Living Act,Accredited,True,True,152,0.02631578947368421,152,0,0,49.497463,-119.58078,0
+Hawthorne Seniors Care Community,992JA,Fraser Health,PNP,2111 Hawthorne Ave,Port Coquitlam,V3C1W3,Hospital Act,Unknown,True,True,131,0.0,115,8,0,49.2570112,-122.7792222,0
+Henry Durand Manor,9A7GF,Interior Health,HA,803 9th St South,Golden,V0A1H0,Community Care & Assisted Living Act,Accredited,True,True,28,0.0,28,0,0,51.2961409,-116.9734392,0
+Heritage Square,9BI83,Interior Health,PFP,3904 27th St.,Vernon,V1T4X7,Community Care & Assisted Living Act,Accredited,True,True,50,0.0,50,0,0,50.270687,-119.26823,0
+Heritage Village,9C5BC,Fraser Health,HA,7525 Topaz Dr,Chilliwack,V2R3C9,Hospital Act,Accredited,True,True,100,0.0,64,12,3,49.1407098,-121.9665418,0
+Heron Grove,92IIA,Interior Health,PNP,4900 - 20th Street,Vernon,V1T9W3,Community Care & Assisted Living Act,Accredited,True,True,76,0.0,76,0,0,50.28272,-119.26055,0
+Hillside Village,92FC0,Interior Health,PNP,2891 15 Ave NE,Salmon Arm,V1E2B8,Community Care & Assisted Living Act,Accredited,True,True,112,0.0,112,0,0,50.71122329999999,-119.252111,0
+Hilltop House,9AIC3,Vancouver Coastal Health,HA,38146 Behrner Drive,Squamish,V8B0C8,Community Care & Assisted Living Act,Accredited,True,True,86,0.0,82,2,0,49.699648,-123.14,0
+Hilton Villa Seniors Community,917D8,Fraser Health,PFP,13525 Hilton Rd,Surrey,V3R5J3,Community Care & Assisted Living Act,Accredited,True,True,157,0.01910828025477707,83,36,0,49.20242145,-122.84672725264092,0
+Hogg and Weatherby Pavilions - Peace Arch Hospital,9A58I,Fraser Health,HA,15521 Russell Ave.,White Rock,V4B2R4,Hospital Act,Unknown,True,True,234,0.0,30,78,12,49.03015955,-122.79236955,0
+Holy Family Hospital,9A5D8,Vancouver Coastal Health,PNP,7801 Argyle St.,Vancouver,V5P3L6,Hospital Act,Accredited,True,True,126,0.0,9,6,21,49.213284,-123.073098,1
+Holyrood Manor,91842,Fraser Health,PFP,22710 Holyrood Ave,Maple Ridge,V2X3E6,Hospital Act,Accredited,False,True,125,0.016,0,0,0,49.2122959,-122.5939042,0
+Houston Health Centre,937C0,Northern Health,HA,3202 - 14th St,Houston,V0J1Z0,Community Care & Assisted Living Act,Accredited,False,False,6,0.0,6,0,0,54.39621800000001,-126.65281,0
+Inglewood Care Centre,999J9,Vancouver Coastal Health,PFP,725 Inglewood Avenue,West Vancouver,V7T1X5,Hospital Act & Community Care & Assisted Living Act,Unknown,True,True,230,0.0,196,17,0,49.3354367,-123.1356688,1
+Jackman Manor,9ADHD,Fraser Health,PNP,27477 28 Ave,Aldergrove,V4W3L9,Community Care & Assisted Living Act,Not Accredited,True,True,88,0.0,88,0,0,49.0538233,-122.4630403,0
+Jackson House - Ashcroft Hospital and Health Centre,9A6I3,Interior Health,HA,700 Ash-Cache Creek Hwy,Ashcroft,V0K1A0,Hospital Act,Accredited,True,True,22,0.0,20,1,1,50.731887,-121.278471,0
+James Bay Care Centre,9C426,Vancouver Island Health,PFP,336 Simcoe St.,Victoria,V8V1L2,Community Care & Assisted Living Act,Accredited,True,False,115,0.0,95,10,0,48.4173083,-123.376914,0
+Joseph Creek Village,92IJA,Interior Health,PFP,1901 Willowbrook Dr,Cranbrook,V1C6S4,Community Care & Assisted Living Act,Unknown,True,True,102,0.0196078431372549,102,0,0,49.5270986,-115.7452938,0
+Jubilee Lodge,9A69E,Northern Health,HA,1475 Edmonton Street,Prince George,V2M1S2,Hospital Act,Accredited,True,True,66,0.0,4,3,14,53.9120966,-122.7626315,0
+Jubilee Multi Generational Housing Society,99C25,Fraser Health,PNP,3460 Kalyk Avenue,Burnaby,V5G3B2,Community Care & Assisted Living Act,Not Accredited,True,True,60,0.0,12,18,3,49.2528169,-123.01300249999998,0
+Kamloops Seniors Village,92DCA,Interior Health,PFP,1220 Hugh Allan Dr.,Kamloops,V1S2B3,Community Care & Assisted Living Act,Accredited,True,True,114,0.12280701754385964,114,0,0,50.6499607,-120.3729788,0
+Kimberley Special Care Home,91711,Interior Health,HA,386 2nd Ave,Kimberley,V1A2Z8,Community Care & Assisted Living Act,Accredited,True,True,55,0.0,49,3,0,49.6899979,-115.9896466,0
+KinVillage West Court,9A4JH,Fraser Health,PNP,5410 10th Ave.,Delta,V4M3X8,Community Care & Assisted Living Act,Accredited,True,False,100,0.0,100,0,0,49.021494,-123.07365800000001,0
+Kinsmen Lodge,9942B,Fraser Health,PNP,9650 137A Street,Surrey,V3T4H9,Community Care & Assisted Living Act,Accredited,True,True,157,0.0,143,7,0,49.1777346,-122.8417995,0
+Kiwanis Care Centre,9AD1I,Fraser Health,PNP,35 Clute Street,New Westminster,V3L1Z5,Community Care & Assisted Living Act,Accredited,True,True,75,0.0,59,8,0,49.2232118,-122.9150878,0
+Kiwanis Pavilion,9AC36,Vancouver Island Health,PNP,3034 Cedar Hill Road,Victoria,V8T3J3,Community Care & Assisted Living Act,Accredited,False,True,122,0.04918032786885246,122,0,0,48.4464163,-123.3467929,0
+Kiwanis Village Lodge,995AE,Vancouver Island Health,PNP,1221 Kiwanis Crescent,Nanaimo,V9S5Y1,Community Care & Assisted Living Act,Unknown,True,True,75,0.0,75,0,0,49.186109,-123.96893,0
+Kopernik Lodge,99A2I,Vancouver Coastal Health,PNP,3150 Rosemont Drive,Vancouver,V5S2C9,Community Care & Assisted Living Act,Not Accredited,True,True,87,0.0,45,21,0,49.21522,-123.039,0
+Lady Minto Hospital,9A5G5,Vancouver Island Health,HA,135 Crofton Rd,Salt Spring Island,V8K1T1,Hospital Act,Accredited,True,True,29,0.0,1,4,5,48.8617,-123.5084,0
+Lake Country Lodge,9B969,Interior Health,PFP,100-10163 Konschuh Rd,Winfield,V4V2M2,Community Care & Assisted Living Act,Unknown,True,True,49,0.08163265306122448,41,4,0,50.0291435,-119.3984578,0
+Lakeshore Care Centre,992HG,Fraser Health,PFP,657 Gatensbury Street,Coquitlam,V3J5G9,Hospital Act,Not Accredited,True,True,56,0.375,42,7,0,49.2595472,-122.85635159999998,0
+Lakeview Care Centre,9C477,Vancouver Coastal Health,PFP,3490 Porter Street,Vancouver,V5N5W4,Hospital Act,Accredited,True,True,177,0.0,105,36,0,49.25348995,-123.06648814723715,0
+Lakeview Lodge,93DAA,Interior Health,PFP,2337 Butt Road,West Kelowna,V4T3L3,Community Care & Assisted Living Act,Unknown,True,True,114,0.12280701754385964,114,0,0,49.83701729999999,-119.6237769,0
+Langley Gardens,925CA,Fraser Health,PFP,8888 202nd Street,Langley,V1M4A7,Community Care & Assisted Living Act,Accredited,True,True,92,0.20652173913043478,86,6,0,49.1663494,-122.6609691,1
+Langley Lodge,98JIE,Fraser Health,PNP,5451-204th St,Langley,V3A5M9,Community Care & Assisted Living Act,Accredited,True,True,139,0.10071942446043165,127,6,0,49.10156729999999,-122.6573035,1
+Langley Memorial Hospital ECU,9A5E0,Fraser Health,HA,22051 Fraser Hwy,Langley,V3A4H4,Hospital Act,Unknown,True,False,230,0.0,8,4,44,49.0944775,-122.6116674454287,1
+Laurel Place,9359A,Fraser Health,PFP,9688 137A St,Surrey,V3T4H9,Community Care & Assisted Living Act,Accredited,True,True,215,0.06046511627906977,207,4,0,49.1784219,-122.8417807,0
+Little Mountain Place,9BA01,Vancouver Coastal Health,PNP,330 East 36th Avenue,Vancouver,V5W3Z4,Community Care & Assisted Living Act,Not Accredited,True,True,117,0.0,117,0,0,49.2376636,-123.0998532,1
+Louis Brier Home and Hospital,999G3,Vancouver Coastal Health,PNP,1055 West 41st Ave,Vancouver,V6M1W9,Hospital Act & Community Care & Assisted Living Act,Accredited,True,True,215,0.0,149,33,0,49.2346366,-123.12927274582044,0
+Luther Court,99DIG,Vancouver Island Health,PNP,1525 Cedar Hill Cross Rd,Victoria,V8P5M1,Community Care & Assisted Living Act,Accredited,False,False,60,0.0,60,0,0,48.4619202,-123.3364271,0
+Lynn Valley Care Centre,9B5JB,Vancouver Coastal Health,PFP,"1070 Lynn Valley Rd, North",North Vancouver,V7J1Z8,Hospital Act & Community Care & Assisted Living Act,Accredited,True,True,201,0.30845771144278605,178,13,0,49.33396,-123.045,1
+MSA Manor,98H7B,Fraser Health,PNP,2510 Gladwin Rd,Abbotsford,V2T3N9,Community Care & Assisted Living Act,Accredited,True,False,34,0.0,34,0,0,49.04747485,-122.31462286620344,1
+Mackenzie and District Hospital and Health Centre,93790,Northern Health,HA,45 Centennial Drive,Mackenzie,V0J2C0,Hospital Act,Accredited,False,False,5,0.0,4,0,0,55.3375782,-123.100648,0
+Malaspina Gardens,99I1B,Vancouver Island Health,PFP,100 Eleventh Street,Nanaimo,V9R6R6,Community Care & Assisted Living Act,Accredited,True,True,136,0.007352941176470588,136,0,0,49.1298617,-123.9227916,0
+Maple Ridge Seniors Village,9376A,Fraser Health,PFP,22141 - 119th Avenue,Maple Ridge,V2X2Y7,Community Care & Assisted Living Act,Accredited,True,True,108,0.16666666666666666,108,0,0,49.2193789,-122.6084592,1
+Maplewood House,9BE34,Fraser Health,PNP,1919 Jackson St.,Abbotsford,V2S2Z8,Community Care & Assisted Living Act,Accredited,True,False,78,0.0,78,0,0,49.03660720000001,-122.3091484,0
+Mariposa Gardens,935JA,Interior Health,PFP,8816 97th Street (highway 97),Osoyoos,V0H1V5,Community Care & Assisted Living Act,Unknown,True,True,109,0.045871559633027525,97,6,0,49.034727,-119.47705829999998,0
+McBride and District Hospital,9A681,Northern Health,HA,1136 5th Avenue,McBride,V0J2E0,Hospital Act,Accredited,False,False,9,0.0,7,1,0,53.30163979999999,-120.1608281,0
+McKinney Place - South Okanagan General Hospital,9A722,Interior Health,HA,911 McKinney Road,Oliver,V0H1T3,Hospital Act,Accredited,True,True,75,0.0,7,4,15,49.1835315,-119.53900043064311,0
+Menno Home,98H8D,Fraser Health,PNP,32910 Brundige Ave,Abbotsford,V2S1N2,Community Care & Assisted Living Act,Accredited,True,True,196,0.0,186,5,0,49.0401555,-122.3081538,0
+Menno Hospital,9A6H1,Fraser Health,PNP,32945 Marshall Road,Abbotsford,V2S1K1,Hospital Act,Accredited,True,True,151,0.0,59,43,2,49.03929855,-122.31110698892836,0
+Minoru Residence,9A5B4,Vancouver Coastal Health,HA,7333 Gollner Avenue,Richmond,V6Y0J1,Hospital Act,Accredited,True,True,250,0.0,70,90,0,49.16897,-123.15,0
+Minto House - Arrow Lakes Hospital,9A5A2,Interior Health,HA,97 1st Avenue NE,Nakusp,V0G1R0,Hospital Act,Accredited,True,True,16,0.0,15,0,0,50.2392729,-117.795712,0
+Mission Creek Landing,98J5G,Interior Health,PFP,3081 Hall Rd,Kelowna,V1W2R5,Community Care & Assisted Living Act,Accredited,True,True,104,0.038461538461538464,94,5,0,49.8697756,-119.429557,0
+Monashee Mews,93D80,Interior Health,PFP,2165 Norris Avenue,Lumby,V0E2G5,Community Care & Assisted Living Act,Accredited,True,True,46,0.0,46,0,0,50.2498936,-118.9617267,0
+Morgan Place,926A0,Fraser Health,PFP,3288 156a St,Surrey,V3Z9T1,Community Care & Assisted Living Act,Accredited,True,True,141,0.09219858156028368,111,5,0,49.062332,-122.790069,0
+Mount Cartier Court - Queen Victoria Hospital,92JJ0,Interior Health,HA,1200 Newlands Rd,Revelstoke,V0E2S1,Community Care & Assisted Living Act,Accredited,True,True,44,0.0,38,6,0,50.9769146,-118.1847111,0
+Mount Ida Mews,93D60,Interior Health,PFP,100 5th Avenue SE,Salmon Arm,V1E4H4,Community Care & Assisted Living Act,Accredited,True,True,132,0.007575757575757576,72,0,0,50.69600300000001,-119.28418,0
+Mount Saint Joseph Hospital,9A54J,Vancouver Coastal Health,PNP,3080 Prince Edward Street,Vancouver,V5T3N4,Hospital Act,Accredited,True,True,99,0.0,16,8,17,49.257699,-123.096358,0
+Mount St. Mary Hospital,9A6A6,Vancouver Island Health,PNP,861 Fairfield Rd.,Victoria,V8V5A9,Hospital Act,Unknown,True,True,200,0.0,184,8,0,48.4132064,-123.3446919,0
+Mount Tolmie Hospital,9A5JC,Vancouver Island Health,HA,3690 Richmond Rd.,Victoria,V8P4R6,Hospital Act,Accredited,True,True,72,0.0,9,14,9,48.459924,-123.330454,0
+Mountain Lake Seniors Community,92HIA,Interior Health,PFP,908 11th St,Nelson,V1L7A6,Community Care & Assisted Living Act,Unknown,True,True,92,0.07608695652173914,92,0,0,49.5081403,-117.26611815013092,0
+Mountain View Lodge - Lillooet Hospital and Health Centre,9A4E5,Interior Health,HA,951 Murray St. ,Lillooet,V0K1V0,Community Care & Assisted Living Act,Accredited,True,True,22,0.0,20,1,0,50.68929895,-121.93935595579315,0
+Mountain View Manor - Delta Hospital,9A56E,Fraser Health,HA,5800 Mountain View Boulevard,Delta,V4K3V6,Hospital Act,Unknown,True,True,92,0.0,12,4,18,49.085682399999996,-123.06125243089485,0
+Mountainview Lodge - Kitimat General Hospital,9A630,Northern Health,HA,920 Lahakas Blvd. S,Kitimat,V8C2S3,Hospital Act,Accredited,True,True,36,0.0,32,2,0,54.05427370000001,-128.6552266,0
+Mountainview Village,93240,Interior Health,PNP,1540 K.L.O. Road,Kelowna,V1W3P6,Community Care & Assisted Living Act,Accredited,True,True,90,0.0,90,0,0,49.8610063,-119.4565603,0
+Nanaimo Seniors Village,9261A,Vancouver Island Health,PFP,6085 Uplands Drive,Nanaimo,V9V1T8,Community Care & Assisted Living Act,Accredited,True,True,150,0.10666666666666667,150,0,0,49.236311,-124.03886,0
+Nelson Jubilee Manor,98G4A,Interior Health,HA,500 Beasley St West,Nelson,V1L6G9,Community Care & Assisted Living Act,Accredited,True,True,39,0.0,39,0,0,49.4795674,-117.29899609999998,0
+New Vista Care Home,99C37,Fraser Health,PNP,7550 Rosewood Street,Burnaby,V5E3Z3,Community Care & Assisted Living Act,Accredited,True,True,236,0.0,236,0,0,49.2239438,-122.94541269093858,1
+Nicola Lodge,93GBA,Fraser Health,PFP,2240 Hawkins St.,Port Coquitlam,V3B0M2,Community Care & Assisted Living Act,Unknown,False,False,230,0.0782608695652174,0,0,0,49.255787,-122.737523,1
+Noric House,98IF3,Interior Health,HA,1400 Mission Rd,Vernon,V1T9C3,Community Care & Assisted Living Act,Accredited,True,True,85,0.0,85,0,0,50.251193,-119.282587,0
+Normanna Rest Home,9C489,Fraser Health,PNP,7725-4th St,Burnaby,V3N5B6,Community Care & Assisted Living Act,Unknown,True,True,100,0.0,90,5,0,49.22202645,-122.92761074114857,0
+Northcrest Care Centre,9C5G2,Fraser Health,PFP,6771-120th Street,Delta,V4E2A7,Community Care & Assisted Living Act,Accredited,True,True,106,0.0,90,8,0,49.126449,-122.891122,0
+Northern Haida Gwaii Hospital and Health Centre,91F3C,Northern Health,HA,2520 Harrison Avenue,Masset,V0T1M0,Hospital Act,Accredited,False,False,5,0.0,4,0,0,54.020576,-132.157074,0
+Oak Bay Lodge,99D3D,Vancouver Island Health,HA,2251 Cadboro Bay Rd.,Victoria,V8R5H3,Community Care & Assisted Living Act,Accredited,False,False,235,0.0,87,74,0,48.432936,-123.3138,0
+Orchard Haven - South Similkameen Health Centre,9252A,Interior Health,HA,700 3rd St,Keremeos,V0X1N0,Community Care & Assisted Living Act,Accredited,True,True,38,0.0,38,0,0,49.2069196,-119.8315278,0
+Overlander Residential Care,9A708,Interior Health,HA,953 Southill Street,Kamloops,V2B7Z9,Hospital Act,Accredited,True,True,183,0.0,35,14,30,50.70373370000001,-120.3973241,0
+Oyster Harbour Seniors Community,99G47,Vancouver Island Health,PFP,1127 4th Ave,Ladysmith,V9G1A6,Community Care & Assisted Living Act,Not Accredited,True,True,89,0.0,87,2,0,48.9966463,-123.8287358,0
+Parkside Care,9AI58,Northern Health,HA,788 Ospika Boulevard,Prince George,V2M6Y2,Community Care & Assisted Living Act,Accredited,True,True,58,0.0,58,0,0,53.91781,-122.79478700000001,0
+Parkview Place,98IEB,Interior Health,HA,707 3rd Ave,Enderby,V0E1V0,Community Care & Assisted Living Act,Accredited,True,True,31,0.0,31,0,0,50.5466217,-119.1407493,0
+Peace Portal Seniors Village,9C47I,Fraser Health,PFP,15441 - 16th Avenue,Surrey,V4A8T8,Community Care & Assisted Living Act,Accredited,True,True,84,0.6785714285714286,67,7,0,49.031282,-122.7945296,0
+Peace Villa,9BDGA,Northern Health,HA,8407 112 Avenue,Fort St John,V1J0J5,Community Care & Assisted Living Act,Accredited,True,True,124,0.0,124,0,0,56.25673199999999,-120.81792,0
+Piccadilly Seniors Community,931AA,Interior Health,PFP,821 10th Avenue SW,Salmon Arm,V1E1T2,Community Care & Assisted Living Act,Accredited,True,True,59,0.13559322033898305,46,7,0,50.692591,-119.29439599999999,0
+Pine Acres Home,9BDAH,Interior Health,PNP,1902 Pheasant Lane,Westbank,V4T2H4,Community Care & Assisted Living Act,Accredited,True,True,63,0.36507936507936506,33,5,0,49.839286,-119.59551,0
+Pine Grove Seniors Community,9A9G2,Interior Health,PFP,313 Mcgowan Street,Kamloops,V2B2N8,Community Care & Assisted Living Act,Unknown,True,True,75,0.0,14,31,0,50.64479145,-120.3440998,0
+Pinegrove Place,9AG59,Vancouver Coastal Health,PNP,11331 Mellis Drive,Richmond,V6X1L8,Community Care & Assisted Living Act,Accredited,True,True,76,0.0,76,0,0,49.1867925,-123.0984471,0
+Pleasant Valley Manor,9BJG5,Interior Health,HA,3800 Patten Dr.,Armstrong,V0E1B2,Hospital Act,Accredited,True,True,82,0.0,82,0,0,50.43928579999999,-119.2079969,0
+Point Grey Private Hospital,9995A,Vancouver Coastal Health,PFP,2423 Cornwall Avenue,Vancouver,V6K1B9,Hospital Act,Not Accredited,True,False,72,0.06944444444444445,31,20,0,49.2724948,-123.1496031,0
+Polson Residential Care - Vernon Jubilee Hospital,9A628,Interior Health,HA,2101 32nd Street,Vernon,V1T5L2,Hospital Act,Accredited,True,True,97,0.0,15,9,16,50.256926,-119.271624,0
+Ponderosa Lodge,98FA9,Interior Health,HA,425 Columbia St,Kamloops,V2C2T4,Community Care & Assisted Living Act,Accredited,False,True,98,0.0,90,1,0,50.670828,-120.331933,0
+Poplar Ridge Pavilion - Kootenay Boundary Hospital,9A667,Interior Health,HA,1200 Hospital Bench,Trail,V1R4M1,Hospital Act,Accredited,True,True,49,0.0,5,14,4,49.1035546,-117.7011867,0
+Purdy Pavilion - UBC Hospital,9A5C6,Vancouver Coastal Health,HA,2221 Wesbrook Mall,Vancouver,V6T1Z9,Hospital Act,Accredited,True,True,199,0.0,23,0,60,49.2632866,-123.24586939010037,0
+Qualicum Manor,92EE0,Vancouver Island Health,PFP,124 Fourth Ave East,Qualicum Beach,V9K1N6,Community Care & Assisted Living Act,Unknown,True,True,59,0.3728813559322034,34,13,0,49.3449157,-124.4405245,0
+Queen's Park Care Centre,9A5GG,Fraser Health,HA,315 McBride Blvd.,New Westminster,V3L5E8,Hospital Act,Unknown,True,True,148,0.0,14,2,32,49.2158542,-122.9036695,1
+R. W. Large Memorial Hospital,9A773,Vancouver Coastal Health,HA,88 Waglisla Street,Bella Bella,V0T1Z0,Hospital Act,Accredited,False,False,7,0.0,7,0,0,52.1612112,-128.1433195843372,0
+Rainbow Lodge,9315A,Northern Health,HA,1000 Liard Drive,Prince George,V2M3Z3,Community Care & Assisted Living Act,Accredited,True,True,18,0.0,19,0,0,49.2238303,-122.9332908,0
+Renfrew Care Centre,9193F,Vancouver Coastal Health,PFP,1880 Renfrew Street,Vancouver,V5M3H9,Community Care & Assisted Living Act,Accredited,True,True,106,0.0,86,10,0,49.26786,-123.044,0
+Rest Haven Lodge,9ADH2,Vancouver Island Health,PNP,2281 Mills Road,Sidney,V8L2C3,Community Care & Assisted Living Act,Accredited,True,True,73,0.0,73,0,0,48.654974,-123.40484,0
+Richmond Lions Manor,99BGD,Vancouver Coastal Health,HA,9020 Bridgeport Road,Richmond,V6X1S1,Community Care & Assisted Living Act,Accredited,True,True,93,0.0,49,22,0,49.1914932,-123.1252982423324,1
+Ridgeview Lodge,93530,Interior Health,PFP,920 Desmond Street,Kamloops,V2B5K6,Community Care & Assisted Living Act,Unknown,False,False,129,0.17829457364341086,129,0,0,50.7034312,-120.39313490000002,0
+Ridgewood Lodge - Princeton General Hospital,9A4J6,Interior Health,HA,98 Ridgewood Drive,Princeton,V0X1W0,Community Care & Assisted Living Act,Accredited,True,True,37,0.0,33,2,0,49.45459015,-120.52645140910023,0
+Rocky Mountain Village,92D60,Interior Health,PFP,55 Cokato Road,Fernie,V0B1M4,Community Care & Assisted Living Act,Unknown,True,True,62,0.016129032258064516,62,0,0,49.4906726,-115.0647647,0
+Rose Wood Village,92CB0,Interior Health,PFP,8125 Devito Drive,Trail,V1R4X9,Community Care & Assisted Living Act,Unknown,True,True,46,0.021739130434782608,45,0,0,49.0957762,-117.64176299999998,0
+Rosemary Heights Seniors Village,935CA,Fraser Health,PFP,15240-34th Avenue,Surrey,V3Z2J9,Community Care & Assisted Living Act,Accredited,True,False,90,0.05555555555555555,85,2,0,49.0635552,-122.8006006,0
+Rosewood Manor,9ADI4,Vancouver Coastal Health,PNP,6260 Blundell Rd,Richmond,V7C5C4,Community Care & Assisted Living Act,Not Accredited,True,True,151,0.0,151,0,0,49.1551041,-123.1553156,0
+Rotary Manor,9976D,Northern Health,HA,1121 90th Avenue,Dawson Creek,V1G5A3,Community Care & Assisted Living Act,Accredited,True,False,115,0.0,115,0,0,55.773403,-120.23466,0
+Royal Arch Masonic Home,9AAG7,Vancouver Coastal Health,PNP,7850 Champlain Cresc,Vancouver,V5S4C7,Community Care & Assisted Living Act,Not Accredited,True,True,151,0.0,151,0,0,49.2135328,-123.0288043,1
+Royal Ascot Care Centre,917JC,Vancouver Coastal Health,PFP,2455 East Broadway,Vancouver,V5M1Y1,Hospital Act,Not Accredited,True,True,82,0.024390243902439025,64,9,0,49.26239535,-123.0555417,0
+Royal City Manor,91JJ3,Fraser Health,PFP,77 Jamieson Court,New Westminster,V3L5P8,Community Care & Assisted Living Act,Accredited,True,True,165,0.696969696969697,125,21,0,49.2153153,-122.8951618,0
+Saanich Peninsula Hospital Residential Care,9A6B8,Vancouver Island Health,HA,2166 Mt Newton X Rd,Saanichton,V8M2B2,Hospital Act,Accredited,True,True,143,0.0,17,10,116,48.596018,-123.40711499999999,0
+Selkirk Seniors Village,93570,Vancouver Island Health,PFP,385 Waterfront Crescent,Victoria,V8T5K7,Community Care & Assisted Living Act,Accredited,True,True,217,0.14746543778801843,195,11,0,48.441914,-123.37798,0
+Shorncliffe,9AHA5,Vancouver Coastal Health,HA,5847 Medusa Street,Sechelt,V0N3A0,Community Care & Assisted Living Act,Accredited,True,True,59,0.0,59,0,0,49.474191,-123.765,0
+Sidney Care Home,9BHDB,Vancouver Island Health,PFP,9888 Fifth St.,Sidney,V8L2X3,Community Care & Assisted Living Act,Unknown,False,True,54,0.0,44,5,0,48.6512125,-123.4010229,0
+Silver Kettle Village,93CIA,Interior Health,PFP,2350 72nd Avenue,Grand Forks,V0H1H4,Community Care & Assisted Living Act,Unknown,True,True,42,0.047619047619047616,42,0,0,49.0246317,-118.4649688,0
+Simon Fraser Lodge,9B65F,Northern Health,PFP,2410 Laurier Cres.,Prince George,V2M2B3,Hospital Act,Accredited,True,True,130,0.0,130,0,0,53.9153784,-122.7642509,0
+Simon K.Y. Lee Seniors Care Home,926I0,Vancouver Coastal Health,PNP,555 Carrall Street,Vancouver,V6B2J8,Community Care & Assisted Living Act,Unknown,True,True,114,0.03508771929824561,104,5,0,49.2814788,-123.1043333,0
+Slocan Community Health Centre - The Pavillion,98G52,Interior Health,HA,401 Galena Ave,New Denver,V0G1S0,Community Care & Assisted Living Act,Accredited,True,True,28,0.0,6,20,0,49.9843977,-117.3754623,0
+Sluggett House,9373A,Vancouver Island Health,PNP,1336 Marchant Rd.,Brentwood Bay,V8M1G5,Community Care & Assisted Living Act,Accredited,True,True,16,0.0,16,0,0,48.572695,-123.44301000000002,0
+Spring Valley Seniors Community,990F2,Interior Health,PFP,355 Terai Court,Kelowna,V1X5X6,Community Care & Assisted Living Act,Unknown,True,True,151,0.006622516556291391,114,8,0,49.8855029,-119.416278,0
+St. Jude's Anglican Home,999GE,Vancouver Coastal Health,PNP,810 West 27th Avenue,Vancouver,V5Z2G7,Community Care & Assisted Living Act,Not Accredited,True,True,55,0.03636363636363636,45,5,0,49.2468877,-123.1227326,0
+St. Michael's Centre,9A9FB,Fraser Health,PNP,7451 Sussex Avenue,Burnaby,V5J5C2,Hospital Act,Not Accredited,True,True,144,0.0,20,36,9,49.2157228,-123.0052424,0
+St. Vincent's - Brock Fahrni Pavilion,9A587,Vancouver Coastal Health,PNP,4650 Oak St.,Vancouver,V6H4J4,Hospital Act,Accredited,True,False,148,0.0,12,8,30,49.2432438,-123.12301099560094,0
+St. Vincent's - Langara,9C05H,Vancouver Coastal Health,PNP,255 W 62nd Ave,Vancouver,V5X4V4,Hospital Act,Accredited,True,True,197,0.0,17,8,41,49.2147869,-123.11081877119535,0
+Stanford Seniors Village,93590,Vancouver Island Health,PFP,250 Craig St,Parksville,V9P0A7,Community Care & Assisted Living Act,Accredited,True,True,182,0.11538461538461539,172,5,0,49.316749,-124.31121,0
+Stuart Lake Hospital,928GA,Northern Health,HA,600 Stuart Drive E,Fort St. James,V0J1P0,Hospital Act,Accredited,False,False,6,0.0,6,0,0,54.44140520000001,-124.242352,0
+Stuart Nechako Manor,997BF,Northern Health,HA,3277 Hospital Road,Vanderhoof,V0J3A2,Community Care & Assisted Living Act,Accredited,True,True,53,0.0,45,4,0,54.028787,-124.00926,0
+Summerland Seniors Village,92HB0,Interior Health,PFP,12803 Atkinson Road,Summerland,V0H1Z4,Community Care & Assisted Living Act,Accredited,True,True,112,0.33035714285714285,105,0,0,49.6000555,-119.6687918,0
+Sun Pointe Village,92450,Interior Health,PNP,700 Rutland Road N,Kelowna,V1X7W8,Community Care & Assisted Living Act,Unknown,True,True,100,0.0,100,0,0,49.8958819,-119.3870785,0
+Suncreek Village,9370A,Fraser Health,PFP,13687 62nd Avenue,Surrey,V3X0B5,Community Care & Assisted Living Act,Unknown,True,True,134,0.1044776119402985,120,0,0,49.1156408,-122.8450108,0
+Sunnybank Retirement Home,98IDJ,Interior Health,HA,6553 Park Drive,Oliver,V0H1T0,Community Care & Assisted Living Act,Accredited,True,True,51,0.0,51,0,0,49.18796645,-119.53956620008628,0
+Sunridge Place Seniors Community,93580,Vancouver Island Health,PFP,361 Bundock Ave,Duncan,V9L3P1,Community Care & Assisted Living Act,Not Accredited,True,True,160,0.0,160,0,0,48.7787315,-123.696975,0
+Sunset Lodge,99ICF,Vancouver Island Health,PNP,952 Arm Street,Esquimalt,V9A4G7,Community Care & Assisted Living Act,Accredited,True,True,108,0.0,108,0,0,48.441883,-123.393387,0
+Swan Valley Lodge,98F21,Interior Health,HA,818 Vancouver St,Creston,V0B1G4,Hospital Act & Community Care & Assisted Living Act,Accredited,True,True,90,0.0,90,0,0,49.097877200000006,-116.5163929,0
+Tabor Home,98H94,Fraser Health,PNP,31944 Sunrise Cres,Abbotsford,V2T1N5,Community Care & Assisted Living Act,Unknown,True,True,118,0.0,106,6,0,49.047016,-122.338899,1
+Talarico Place - Castlegar District Community Health Centre,9C0DE,Interior Health,HA,709 10th Street,Castlegar,V1N2H7,Community Care & Assisted Living Act,Accredited,True,True,60,0.0,38,11,0,49.3144174,-117.6608054,0
+Terraceview Lodge,9AIHF,Northern Health,HA,4707 Kerby Avenue,Terrace,V8G2W2,Community Care & Assisted Living Act,Accredited,True,True,99,0.0,95,0,0,54.533333,-128.59333999999998,0
+The Cascades Care Community,9A599,Fraser Health,PFP,45586 Mcintosh Drive,Chilliwack,V2P7W8,Community Care & Assisted Living Act,Unknown,True,True,119,0.1092436974789916,101,9,0,49.1608031,-121.9656901,0
+The Gardens at Qualicum Beach,9C6H8,Vancouver Island Health,PFP,650 Berwick Road North,Qualicum Beach,V9K2T8,Community Care & Assisted Living Act,Accredited,True,True,100,0.15,86,5,0,49.348341,-124.43764,0
+The Gateby,9AFCB,Interior Health,HA,3000 Gateby Place,Vernon,V1T8V8,Community Care & Assisted Living Act,Accredited,True,True,75,0.0,75,0,0,50.2642353,-119.28130149999998,0
+The Hamlets at Penticton,93510,Interior Health,PFP,103 Duncan Ave West,Penticton,V2A2Y3,Community Care & Assisted Living Act,Unknown,True,True,89,0.033707865168539325,94,2,0,49.4840616,-119.5897419,0
+The Hamlets at Westsyde,930H0,Interior Health,PFP,3255 Overlander Drive,Kamloops,V2B0A5,Community Care & Assisted Living Act,Unknown,True,True,112,0.026785714285714284,112,0,0,50.77082100000001,-120.341961,0
+The Heights at Mount View,93F7A,Vancouver Island Health,PNP,3814 Carey Road,Victoria,V8Z4C4,Community Care & Assisted Living Act,Unknown,False,True,260,0.0,260,0,0,48.459499,-123.38131,0
+The Madison Care Centre,935IA,Fraser Health,PFP,1399 Foster Avenue,Coquitlam,V3J2N1,Hospital Act,Not Accredited,True,True,137,0.29927007299270075,128,9,0,49.2568192,-122.89315220000002,0
+The Mayfair,9C3GE,Fraser Health,PNP,33433 Marshall Road,Abbotsford,V2S1K8,Community Care & Assisted Living Act,Not Accredited,True,True,91,0.32967032967032966,80,2,0,49.03936815,-122.29768336109244,0
+The Pines,9C373,Northern Health,HA,800 Centre St.,Burns Lake,V0J1E0,Hospital Act,Accredited,True,True,36,0.0,26,5,0,54.2365817,-125.7600106,0
+The Priory - Heritage Woods,921JD,Vancouver Island Health,HA,567 Goldstream Ave.,Langford,V9B2W4,Hospital Act,Accredited,True,True,75,0.0,75,0,0,48.44513565,-123.48827996082501,0
+The Priory - Hiscock,9A604,Vancouver Island Health,HA,567 Goldstream Ave.,Langford,V9B2W4,Hospital Act,Accredited,True,True,75,0.0,7,6,14,48.44513565,-123.48827996082501,0
+The Residence at Clayton Heights,93CAA,Fraser Health,PFP,18788 71st Avenue,Surrey,V4N6L9,Community Care & Assisted Living Act,Not Accredited,True,False,87,0.0,87,0,0,49.1317703,-122.7026815,1
+The Residence at Morgan Heights,9375A,Fraser Health,PFP,15955 27th Avenue,Surrey,V3Z3W3,Community Care & Assisted Living Act,Not Accredited,False,True,116,0.22413793103448276,108,4,0,49.051178,-122.779875,0
+The Residence in Mission,93F40,Fraser Health,HA,7324 Hurd Street,Mission,V2V3H5,Community Care & Assisted Living Act,Unknown,True,True,200,0.0,190,5,0,49.135354,-122.330124,0
+The Views - St. Joseph's General Hospital,9A6DD,Vancouver Island Health,PNP,2137 Comox Avenue,Comox,V9M1P2,Hospital Act,Accredited,True,True,145,0.0,23,21,13,49.67354215,-124.9422815862309,0
+Three Links Care Centre,9AC12,Vancouver Coastal Health,PNP,2934 East 22nd Ave,Vancouver,V5M2Y4,Community Care & Assisted Living Act,Accredited,True,True,90,0.0,90,0,0,49.2503144,-123.0429307,0
+Three Links Manor,9AHHB,Interior Health,HA,1449 Kelglen Cres,Kelowna,V1Y8P4,Community Care & Assisted Living Act,Accredited,True,True,82,0.0,82,0,0,49.883268,-119.4669195,0
+Totem Lodge - Sechelt Hospital,9A563,Vancouver Coastal Health,HA,5544 Sunshine Coast Highway,Sechelt,V0N3A0,Hospital Act,Accredited,True,True,49,0.0,3,3,10,49.50828092664089,-123.89803176719371,0
+Trillium Lodge,9AD7B,Vancouver Island Health,HA,401 Moilliet St,Parksville,V9P1N3,Hospital Act & Community Care & Assisted Living Act,Accredited,True,True,91,0.0,58,3,9,49.311376,-124.32514,0
+Trinity Care Centre,9AGF1,Interior Health,HA,75 Green Ave West,Penticton,V2A7N6,Community Care & Assisted Living Act,Accredited,True,True,75,0.0,75,0,0,49.46314520000001,-119.5894601,0
+Tsawaayuus - Rainbow Gardens,9C2FI,Vancouver Island Health,PNP,6151 Russell Place,Port Alberni,V9Y7W3,Hospital Act,Unknown,True,False,30,0.0,31,0,0,49.2690022,-124.8462038,0
+Valhaven Rest Home,98H9F,Fraser Health,PNP,4212 Balmoral St,Abbotsford,V4X1Y5,Community Care & Assisted Living Act,Accredited,True,True,26,0.15384615384615385,26,0,0,49.0789671,-122.3857153,1
+Valleyhaven,98HA8,Fraser Health,PFP,45450 Menholm Rd.,Chilliwack,V2P1M2,Community Care & Assisted Living Act,Accredited,True,True,91,0.01098901098901099,83,4,0,49.1664458,-121.96614440000002,0
+Veterans Memorial Lodge,916HD,Vancouver Island Health,PNP,4579 Chatterton Way,Saanich,V8X4Y7,Hospital Act,Accredited,False,True,225,0.0,201,12,0,48.4968,-123.3785,0
+Victoria Chinatown Care Centre,9AC99,Vancouver Island Health,PNP,555 Herald Street,Victoria,V8W1S5,Community Care & Assisted Living Act,Accredited,True,True,31,0.0,29,1,0,48.42991129999999,-123.3676465,0
+Victorian Community Health Centre of Kaslo,98GA3,Interior Health,HA,673A Avenue,Kaslo,V0G1M0,Community Care & Assisted Living Act,Accredited,True,True,20,0.0,17,3,0,49.91347860000001,-116.9140496,0
+Villa Carital,9198G,Vancouver Coastal Health,PNP,3050 Penticton St,Vancouver,V5M4W2,Community Care & Assisted Living Act,Not Accredited,True,True,81,0.06172839506172839,60,12,0,49.2565839,-123.0521465,0
+Villa Cathay Care Home,999II,Vancouver Coastal Health,PNP,970 Union Street,Vancouver,V6A3V1,Community Care & Assisted Living Act,Not Accredited,True,True,134,0.029850746268656716,112,19,0,49.277208,-123.084,1
+Village at Mill Creek,9911G,Interior Health,PNP,1450 Sutherland Avenue,Kelowna,V1Y5Y5,Hospital Act,Unknown,True,True,96,0.14583333333333334,96,0,0,49.8803526,-119.46813059999998,0
+Village at Smith Creek,9C1H6,Interior Health,PNP,2425 Orlin Road,West Kelowna,V4T3C7,Community Care & Assisted Living Act,Unknown,True,True,139,0.007194244604316547,130,8,0,49.8433445,-119.6279642,0
+Village by the Station,92CBA,Interior Health,PNP,270 Hastings Avenue,Penticton,V2A2V6,Community Care & Assisted Living Act,Accredited,True,True,100,0.0,133,4,0,49.4851093,-119.5957646,0
+Waverly Seniors Village,922DF,Fraser Health,PFP,8445 Young Rd,Chilliwack,V2P4P2,Community Care & Assisted Living Act,Accredited,True,True,53,0.41509433962264153,51,1,0,49.155593,-121.95191,0
+West Shore Laylum,9927D,Fraser Health,PFP,4900 Central Ave,Delta,V4K2G7,Community Care & Assisted Living Act,Not Accredited,True,True,55,0.0,45,5,0,49.0482742,-122.7977542,0
+West Vancouver Care Centre,9B9IG,Vancouver Coastal Health,PFP,1675 27th Street,West Vancouver,V7V4K9,Hospital Act,Unknown,True,True,78,0.038461538461538464,23,16,7,49.3404055,-123.18877820000002,0
+Westhaven,9A642,Vancouver Island Health,HA,3949 Pt. Alberni Hwy,Port Alberni,V9Y4S1,Hospital Act,Accredited,False,False,32,0.0,32,0,0,49.2665244,-124.7749064,0
+Westview Extended Care - Pentiction Regional Hospital,9A6F7,Interior Health,HA,550 Carmi Ave,Penticton,V2A8P9,Hospital Act,Accredited,True,True,102,0.0,10,10,18,49.4826229,-119.5763397,0
+Wexford Creek Seniors Community,9358A,Vancouver Island Health,PFP,80 10th Street,Nanaimo,V9R0A8,Community Care & Assisted Living Act,Accredited,True,True,110,0.0,110,0,0,49.13114,-123.92518799999999,0
+White Rock Seniors Village,993I1,Fraser Health,PFP,1183 Maple Street,White Rock,V8B5K9,Community Care & Assisted Living Act,Accredited,True,True,71,0.15492957746478872,59,6,0,49.0236424,-122.7891502,0
+William Rudd House,91828,Fraser Health,HA,95 Blackberry Drive,New Westminster,V3L5S7,Hospital Act,Unknown,True,False,12,0.0,12,0,0,49.21725645,-122.90105809581377,0
+Williams Lake Seniors Village,92CIA,Interior Health,PFP,1455 Western Avenue,Williams Lake,V2G5N1,Community Care & Assisted Living Act,Accredited,True,True,113,0.0,113,0,0,52.1520084,-122.1593926,0
+Willingdon Care Centre,9B79H,Fraser Health,PFP,4435 Grange St,Burnaby,V5H1P4,Hospital Act,Unknown,True,False,95,0.0,10,23,10,49.23233265,-123.00484883141232,0
+Willingdon Creek Village,93FB0,Vancouver Coastal Health,HA,4980 Kiwanis Drive,Powell River,V8A5H5,Community Care & Assisted Living Act,Accredited,True,True,102,0.0,102,0,0,49.849859,-124.519,0
+Windermere Care Centre,9C2G9,Vancouver Coastal Health,PFP,900 West 12th Avenue,Vancouver,V5Z1N3,Community Care & Assisted Living Act,Not Accredited,True,True,210,0.02857142857142857,170,22,0,49.260325,-123.125,1
+Woodgrove Manor,91FGB,Vancouver Island Health,PFP,6304 Metral Drive,Nanaimo,V9T2L8,Community Care & Assisted Living Act,Not Accredited,True,True,43,0.27906976744186046,39,0,0,49.229161100000006,-124.04333429999998,0
+Wrinch Memorial Hospital,9A63B,Northern Health,HA,2510 West Hwy 62,Hazelton,V0J1Y0,Hospital Act,Accredited,False,False,10,0.0,1,5,0,55.25957560000001,-127.651258,0
+Yaletown House,9B0I5,Vancouver Coastal Health,PNP,1099 Cambie Street,Vancouver,V6B5A8,Community Care & Assisted Living Act,Not Accredited,True,True,127,0.0,127,0,0,49.275272,-123.119,0
+Youville Residence,99A15,Vancouver Coastal Health,PNP,4950 Heather Street,Vancouver,V5Z3L9,Community Care & Assisted Living Act,Accredited,True,True,42,0.0,42,0,0,49.24058,-123.12,0
+Yucalta Lodge,99EJC,Vancouver Island Health,HA,555 - 2nd Avenue,Campbell River,V9W3V1,Community Care & Assisted Living Act,Accredited,True,False,99,0.0,100,0,0,50.009873,-125.24531,0
+Zion Park Manor,99444,Fraser Health,PNP,5939-180th St,Surrey,V3S4L2,Community Care & Assisted Living Act,Not Accredited,True,True,99,0.29292929292929293,99,0,0,49.1101454,-122.724215,0
