@@ -44,6 +44,11 @@ pairs(df2[,c(22,24:25)])
 ```
 
 ```{r}
+# assess councils
+cor(df2[,c(48:49)])
+```
+
+```{r}
 # drop unneccessary columns
 dr <- c(#"FACILITY_NAME", - keep for data quality analysis
         "HCC_CODE", "STREET_ADDRESS", "CITY", "POSTAL", # deemed irrelevant to inquiry
@@ -65,7 +70,6 @@ df2 <- df2[, -which(names(df2) %in% dr)]
 # dataframe without health authority - 
 df3 <- df2[, c(1, 3:length(df2))]
 names(df3)
-
 ```
 
 
@@ -119,12 +123,12 @@ df3[df3$AGE_UNDER_65 <= 0.94 & df3$AGE_UNDER_65 > 0.63,]$AGE_UNDER_65 <- "0.67-0
 ```
 
 
-  * Repeat for resident profile information
+  * Convert resident profile information to numeric
   * Convert`STAY_LENGTH`, `SUB_COMPLAINTS` to numeric
   
 ```{r}
-profile <- c("DEPRESSION", "ADL_DEPENDENT", "CPS_SEVERE", "DEMENTIA", "ABS_PHYS_ABUSIVE", 
-            "ISE_LOW", "MEDS_DEPRESSION", "MEDS_ANTIPSYCHOTICS")
+# profile <- c("DEPRESSION", "ADL_DEPENDENT", "CPS_SEVERE", "DEMENTIA", "ABS_PHYS_ABUSIVE", 
+            # "ISE_LOW", "MEDS_DEPRESSION", "MEDS_ANTIPSYCHOTICS")
 
 
 df3$DEPRESSION <- as.numeric(gsub("[\\%,]", "", df3$DEPRESSION))/100
@@ -137,10 +141,6 @@ df3$MEDS_DEPRESSION <- as.numeric(gsub("[\\%,]", "", df3$MEDS_DEPRESSION))/100
 df3$MEDS_ANTIPSYCHOTICS <- as.numeric(gsub("[\\%,]", "", df3$MEDS_ANTIPSYCHOTICS))/100
 ```
 
-```{r}
-levels(discretize(df3$DEPRESSION, method = "frequency", breaks = 2))
-
-```
 
 
 ```{r}
