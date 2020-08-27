@@ -10,54 +10,65 @@ output: html_document
 library(skimr)
 
 # Import the data
-df <- read.csv("../data/BC/ngan_bcLTC_foranalysis.csv", na.strings="", header=TRUE)
+# df <- read.csv("../data/BC/ngan_bcLTC_foranalysis.csv", na.strings="", header=TRUE)
+# str(df)
+
+df <- read.csv("../data/BC/bc_ltc_selected.csv", na.strings="", header=TRUE)
 str(df)
 
 ```
 
 ```{r, echo=FALSE}
-# Change data type of character
-listofcol = list('FACILITY_NAME', 'cleaned_name', 'facility_name')
+# Change data type to character
+listofcol = list('FACILITY_NAME', 'HCC_CODE', 'STREET_ADDRESS', 'CITY', 'POSTAL')
 for (each in listofcol){
   df[, each] <- as.character(df[, each])
 }
 
+df$outbreak <- as.factor(df$outbreak)
+str(df)
+colnames(df)
 ```
 
 ```{r, include=FALSE}
-# Generate the data for analysis
-# Create lists of variables used to filter data for analysis
+# # Generate the data for analysis
+# # Create lists of variables used to filter data for analysis
 
-incidents = c(
-  
-  # "INCIDENT_OUTBREAK", "INCIDENT_ABUSE", "INCIDENT_FALL",
-  # "INCIDENT_POISON", "INCIDENT_MEDICATION", "INCIDENT_WANDERING",
-  # "INCIDENT_INJURY", "INCIDENT_AGGRESSION", 
-  
-  "INCIDENT_OUTBREAK_100",
-  "INCIDENT_ABUSE_100", "INCIDENT_FALL_100", "INCIDENT_POISON_100",
-  "INCIDENT_MEDICATION_100", "INCIDENT_WANDERING_100", "INCIDENT_INJURY_100",
-  "INCIDENT_AGGRESSION_100")
+num <- c("BEDS_TOTAL", "BEDS_PRIVATEprop", "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI")
+cat <- c("HLTH_AUTH", "OWNERSHIP", "REGULATION", "ACCRED_STATUS", "RESIDENT_COUNCIL", "FAMILY_COUNCIL")
+data <- subset(df, select = c(num, cat, 'outbreak'))
 
-inspections = c("COMPLAINTS", "SUB_COMPLAINTS", "INSPECTIONS", "INFRACTIONS",
-  "INFRACTIONS_LICENSING",
-  "INFRACTIONS_LICENSING", "INFRACTIONS_FACILITY", "INFRACTIONS_STAFFING",
-  "INFRACTIONS_POLICY", "INFRACTIONS_CARE", "INFRACTIONS_DISEASE",
-  "INFRACTIONS_FOOD", "INFRACTIONS_MEDICATION", "INFRACTIONS_PROGRAM",
-  "INFRACTIONS_REPORTING", "INFRACTIONS_RIGHTS", "INFRACTIONS_OTHER")
 
-gen = c("OWNERSHIP", "REGULATION", "ACCRED_STATUS", "CMI", "facility_design",
-  "RESIDENT_COUNCIL", "FAMILY_COUNCIL")
-
-dch = c("DCH_NURSE_CURRENTYR", "DCH_ALLIED_CURRENTYR", "DCH_TOTAL_CURRENTYR")
-
-space = c("BEDS_PRIVATE", "BEDS_PUBLIC", "BEDS_TOTAL",
-  "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI",
-  "BEDS_PRIVATEprop", "BEDS_PUBLICprop", "ROOMS_TOTAL",
-  "ROOMS_PRIVATEprop", "ROOMS_SEMIprop", "ROOMS_MULTIprop")
-
-data <- subset(df, select = c(gen, incidents, inspections, dch, space, 'outbreak'))
-
+# incidents = c(
+#   
+#   # "INCIDENT_OUTBREAK", "INCIDENT_ABUSE", "INCIDENT_FALL",
+#   # "INCIDENT_POISON", "INCIDENT_MEDICATION", "INCIDENT_WANDERING",
+#   # "INCIDENT_INJURY", "INCIDENT_AGGRESSION", 
+#   
+#   "INCIDENT_OUTBREAK_100",
+#   "INCIDENT_ABUSE_100", "INCIDENT_FALL_100", "INCIDENT_POISON_100",
+#   "INCIDENT_MEDICATION_100", "INCIDENT_WANDERING_100", "INCIDENT_INJURY_100",
+#   "INCIDENT_AGGRESSION_100")
+# 
+# inspections = c("COMPLAINTS", "SUB_COMPLAINTS", "INSPECTIONS", "INFRACTIONS",
+#   "INFRACTIONS_LICENSING",
+#   "INFRACTIONS_LICENSING", "INFRACTIONS_FACILITY", "INFRACTIONS_STAFFING",
+#   "INFRACTIONS_POLICY", "INFRACTIONS_CARE", "INFRACTIONS_DISEASE",
+#   "INFRACTIONS_FOOD", "INFRACTIONS_MEDICATION", "INFRACTIONS_PROGRAM",
+#   "INFRACTIONS_REPORTING", "INFRACTIONS_RIGHTS", "INFRACTIONS_OTHER")
+# 
+# gen = c("OWNERSHIP", "REGULATION", "ACCRED_STATUS", "CMI", "facility_design",
+#   "RESIDENT_COUNCIL", "FAMILY_COUNCIL")
+# 
+# dch = c("DCH_NURSE_CURRENTYR", "DCH_ALLIED_CURRENTYR", "DCH_TOTAL_CURRENTYR")
+# 
+# space = c("BEDS_PRIVATE", "BEDS_PUBLIC", "BEDS_TOTAL",
+#   "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI",
+#   "BEDS_PRIVATEprop", "BEDS_PUBLICprop", "ROOMS_TOTAL",
+#   "ROOMS_PRIVATEprop", "ROOMS_SEMIprop", "ROOMS_MULTIprop")
+# 
+# data <- subset(df, select = c(gen, incidents, inspections, dch, space, 'outbreak'))
+# 
 str(data)
 ```
 
@@ -68,7 +79,8 @@ str(data)
 # Check for R skewness in numeric predictors
 library(e1071)
 
-listofcols = c(incidents, inspections, "CMI", dch, space)
+
+listofcols = c(num)
 
 for (each in listofcols){
   print(each)
@@ -77,7 +89,17 @@ for (each in listofcols){
   qqline(data[[each]], col = 'red')
 }
 
+# listofcols = c(incidents, inspections, "CMI", dch, space)
+# 
+# for (each in listofcols){
+#   print(each)
+#   print(skewness(data[[each]]))
+#   qqnorm(data[[each]], main = each)
+#   qqline(data[[each]], col = 'red')
+# }
+
 ```
+
 
 All the data are right skewed except for 
   1. BEDS_PUBLICprop 3.430426
@@ -104,20 +126,27 @@ Most numeric variables have 0s except for:
 
 ## Explore the variables for transformation
 ```{r, fig.show="hide"}
-# Create a list of right skewed numeric variables with 0 values
-space_non0s = c('BEDS_PUBLIC', 'BEDS_TOTAL', 'ROOMS_PRIVATE', 'ROOMS_TOTAL')
-space_0s = c("BEDS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI",
-  "BEDS_PRIVATEprop", "ROOMS_SEMIprop", "ROOMS_MULTIprop")
 
-list0s <- c(incidents, inspections, space_0s)
-list_non0s <- c(space_non0s, dch, 'CMI')
-left_skewed <- c('BEDS_PUBLICprop', 'ROOMS_PRIVATEprop')
+# Create a list of right skewed numeric variables with 0 values
+list_non0s = c('BEDS_TOTAL')
+list0s = c("ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI",
+  "BEDS_PRIVATEprop")
+
+
+# # Create a list of right skewed numeric variables with 0 values
+# space_non0s = c('BEDS_PUBLIC', 'BEDS_TOTAL', 'ROOMS_PRIVATE', 'ROOMS_TOTAL')
+# space_0s = c("BEDS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI",
+#   "BEDS_PRIVATEprop", "ROOMS_SEMIprop", "ROOMS_MULTIprop")
+# 
+# list0s <- c(incidents, inspections, space_0s)
+# list_non0s <- c(space_non0s, dch, 'CMI')
+# left_skewed <- c('BEDS_PUBLICprop', 'ROOMS_PRIVATEprop')
 
 library(rcompanion)
 # listofcols <- setdiff(listofcols, list0s)
 
 # Visualize the effect of square root transformations on the data with 0s
-for (each in list0s) {  
+for (each in c(list0s, list_non0s)) {  
   plotNormalHistogram(x = data[[each]], main = each)
   plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
 }
@@ -128,25 +157,27 @@ for (each in list_non0s) {
   plotNormalHistogram(x = log(data[[each]]), main = c(each, 'log trans'))
 }
 
-# Visualize the effect of transformations on the data that are left skewed
+Visualize the effect of transformations on the data that are left skewed
 # log10(max(x+1) - x)
 plotNormalHistogram(x = data[['BEDS_PUBLICprop']])
 plotNormalHistogram(x = sqrt(max(data[['BEDS_PUBLICprop']] + 1) - data[['BEDS_PUBLICprop']]))
 
-# sqrt(max(x+1) - x)
-plotNormalHistogram(x = data[['ROOMS_PRIVATEprop']])
-plotNormalHistogram(x = sqrt(max(data[['ROOMS_PRIVATEprop']] + 1) - data[['ROOMS_PRIVATEprop']]))
+# # sqrt(max(x+1) - x)
+# plotNormalHistogram(x = data[['ROOMS_PRIVATEprop']])
+# plotNormalHistogram(x = sqrt(max(data[['ROOMS_PRIVATEprop']] + 1) - data[['ROOMS_PRIVATEprop']]))
 
 ```
+Sqrt transformation is best for all the data.
+
 
 ## Transform the data
 ```{r }
-list0s
-# Log transform in place
-data[list0s] <- sqrt(data[list0s])
+# list0s
+# # Sqrt transform in place
+# data[list0s] <- log(data[list0s])
 
 # Square root transform in place
-data[list_non0s] <- log(data[list_non0s])
+data[num] <- sqrt(data[num])
 
 skim(data)
 ```
@@ -160,89 +191,36 @@ summary(fit)
 
 ### Backwards selection
 ```{r, include=FALSE}
-fit <- update(fit, .~. -pressure_ulcers_percent)
+fit <- update(fit, .~. -HLTH_AUTH)
 summary(fit)
-fit <- update(fit, .~. -X5y_complaints)
+fit <- update(fit, .~. -ACCRED_STATUS)
 summary(fit)
-fit <- update(fit, .~. -total_critical)
+fit <- update(fit, .~. -OWNERSHIP)
 summary(fit)
-fit <- update(fit, .~. -total_cc)
+fit <- update(fit, .~. -REGULATION)
 summary(fit)
-fit <- update(fit, .~. -X2y_withOrders)
+fit <- update(fit, .~. -BEDS_PRIVATEprop)
 summary(fit)
-fit <- update(fit, .~. -depression_percent)
+fit <- update(fit, .~. -ROOMS_PRIVATE  )
 summary(fit)
-fit <- update(fit, .~. -falls_percent)
+fit <- update(fit, .~. -ROOMS_MULTI)
 summary(fit)
-fit <- update(fit, .~. -X2y_complaints)
+fit <- update(fit, .~. -RESIDENT_COUNCIL)
 summary(fit)
-fit <- update(fit, .~. -residents_council)
-summary(fit)
-fit <- update(fit, .~. -short_stay)
-summary(fit)
-fit <- update(fit, .~. -X5y_ccw)
-summary(fit)
-fit <- update(fit, .~. -total_ccw)
-summary(fit)
-fit <- update(fit, .~. -total_withOrders)
-summary(fit)
-fit <- update(fit, .~. -X5y_cc)
-summary(fit)
-fit <- update(fit, .~. -X2y_inspections)
-summary(fit)
-fit <- update(fit, .~. -accreditation)
-summary(fit)
-fit <- update(fit, .~. -X5y_inspections)
-summary(fit)
-fit <- update(fit, .~. -antipsychotic_percent)
-summary(fit)
-fit <- update(fit, .~. -pain_percent)
-summary(fit)
-fit <- update(fit, .~. -X2y_noncomplaints)
-summary(fit)
-fit <- update(fit, .~. -X2y_ccw)
-summary(fit)
-fit <- update(fit, .~. -X2y_cc)
-summary(fit)
-fit <- update(fit, .~. -X2y_critical)
-summary(fit)
-fit <- update(fit, .~. -X5y_critical)
-summary(fit)
-fit <- update(fit, .~. -X5y_noncomplaints)
-summary(fit)
-fit <- update(fit, .~. -total_noncomplaints)
-summary(fit)
-fit <- update(fit, .~. -X5y_withOrders)
-summary(fit)
-fit <- update(fit, .~. -total_inspections)
-summary(fit)
-fit <- update(fit, .~. -home_type)
-fit <- update(fit, .~. -family_council)
+# fit <- update(fit, .~. -ROOMS_SEMI)
+# summary(fit)
 
 ```
 
+```{r }
 
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+```{r }
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
 ```
 
-## Including Plots
+```{r }
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
