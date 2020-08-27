@@ -12,391 +12,199 @@ output:
 library(skimr)
 
 # Import the data
-df <- read.csv("../data/bc_ltc_odhf_final.csv", na.strings="", header=TRUE)
+df <- read.csv("../data/BC/bc_ltc_complete_kt.csv", na.strings="", header=TRUE)
 colnames(df)
 ```
+Remove homes with suppressed data (4) and special units (3) as they are included as part of a major building already.
 
+```{r}
+rmv <- c(# suppressed data
+              "Bella Coola General Hospital", "Mackenzie and District Hospital and Health Centre",
+                "Northern Haida Gwaii Hospital and Health Centre", "R. W. Large Memorial Hospital",
+              
+         # special care units
+               "Berkley Care Centre - Special Unit", "Fair Haven - Vancouver - Special Unit",
+              "Harmony Court Care Centre  - Special Unit")
+
+df2 <- df[-which(df$FACILITY_NAME %in% rmv),]
+
+# remove granular infractions
+df2 <- df2[, -grep('^INFRACTIONS_.', colnames(df2))]
+
+# remove incidents that are NOT per 100 beds
+colnames(df2)
+df2 <- df2[, -c(22:29, 30:37)]
+```
+
+
+```{r}
+# assess age
+pairs(df2[,c(22,24:25)])
+# remove AGE as AGE_85_PLUS describes the same trend
+```
 
 ```{r}
 # drop unneccessary columns
-# incidents by category are removed, incidents per 100 beds is kept
-rmv <- c("facility_name", "HCC_CODE", "HLTH_AUTH", "STREET_ADDRESS", "CITY", "POSTAL", "PHONE", 
-         "OPEN_DATE", 
-         "COUNCIL", "ACCRED_STATUS", "INCIDENT_OUTBREAK", "INCIDENT_ABUSE", "INCIDENT_FALL", 
-         "INCIDENT_POISON", "INCIDENT_MEDICATION", "INCIDENT_WANDERING", "INCIDENT_INJURY", "INCIDENT_AGGRESSION",
-        'latitude', 'longitude', 'point', 'LATITUDE', 'LONGITUDE', 'geometry',
-        'Number.of.dead' # removing number of dead because we are using outbreak as a response
-  ) 
+dr <- c(#"FACILITY_NAME", - keep for data quality analysis
+        "HCC_CODE", "STREET_ADDRESS", "CITY", "POSTAL", # deemed irrelevant to inquiry
+        "COMPLAINTS", # substantiated complaints are more telling
+       "DCH_NURSE_LASTYR", "DCH_ALLIED_LASTYR", "DCH_TOTAL_LASTYR",
+       "DCH_NURSE_CURRENTYR", "DCH_ALLIED_CURRENTYR", "DCH_TOTAL_CURRENTYR", 
+       "THERAPY_PT", "THERAPY_RT", "THERAPY_OT", "RESTRAINTS",
+       "ISE", # high multicollinearity
+       "latitude", "longitude",
+       "AGE", # redundant - from pairs plot
+       "Total.Confirmed.Cases", "Total.Deaths" # focus on outbreak status first
+       )
 
-df2 <- df[, -which(names(df) %in% rmv)]
+df2 <- df2[, -which(names(df2) %in% dr)]
 
-# skim(df2)
 ```
-
-Numerical Variables are all right-skewed. Since they all have similar distributions - is it alright to leave them as is (no transformation)?
-
-
-#### Cleaning
-```{r}
-# Change time-related and ordinal categorical variables to factor
-# yrs <- c('years_operating', 'AGE', 'AGE_85_PLUS', 'AGE_UNDER_65')
-# 
-# for (i in yrs){
-#   df2[,i] <- as.factor(as.character(df2[,i]))
-# }
-
-# Convert beds, rooms, and infractions to a proportion of total
-# BEDS
-df2$BEDS_PRIV_PROP <- df2$BEDS_PRIVATE/df2$BEDS_TOTAL
-df2$BEDS_PUB_PROP <- df2$BEDS_PUBLIC/df2$BEDS_TOTAL
-
-# ROOMS
-df2$ROOMS_TOTAL <- df2$ROOMS_PRIVATE + df2$ROOMS_SEMI + df2$ROOMS_MULTI
-df2$ROOMS_PRIV_PROP <- df2$ROOMS_PRIVATE/df2$ROOMS_TOTAL
-df2$ROOMS_SEMI_PROP <- df2$ROOMS_SEMI/df2$ROOMS_TOTAL
-df2$ROOMS_MULTI_PROP <- df2$ROOMS_MULTI/df2$ROOMS_TOTAL
-
-
-# Remove redundant cols
-# removing AGE because AGE_UNDER_65 and AGE_85_AND_OVER are more descriptive
-# remove complaints because they include unsubstantiated complaints. Same logic for inspections (infractions are more telling).
-
-rmv2 <- c('BEDS_PRIVATE', 'BEDS_PUBLIC', 
-          'ROOMS_PRIVATE', 'ROOMS_SEMI', 'ROOMS_MULTI',
-          'AGE', 'COMPLAINTS', 'INSPECTIONS')
-
-df3 <- df2[, -which(names(df2) %in% rmv2)]
-```
-
-Group data for ease later
 
 ```{r}
-size <- c('BEDS_PRIV_PROP', 'BEDS_PUB_PROP', 'BEDS_TOTAL', 'ROOMS_PRIV_PROP', 'ROOMS_PUB_PROP', 'ROOMS_MULTI_PROP',
-          'ROOMS_TOTAL')
+# dataframe without health authority - 
+df3 <- df2[, c(1, 3:length(df2))]
+names(df3)
 
-resident_profile <- df3[,11:28]
-
-quality <- df3[,c(2:10, 29:41)]
-
-general<- df3[,42:48]
-
-# colnames(df3)
 ```
 
-Converting `INCIDENTS_*` and remaining resident profile predictors to numeric...
 
-**NOTE:** 'suppressed' converted to NA by coercion
+### Cleaning
+  * Convert `FEMALE` and `AGE` variables to numeric (from factor) decimals
+  * Convert NAs to "unknown"
+  * Bin `FEMALE` and `AGE` variables
 
-```{r, suppressMessages = T}
-# resident profile params
-df3[,names(resident_profile)] <- lapply(df3[,names(resident_profile)],FUN = as.character)
-df3[,names(resident_profile)] <- lapply(df3[,names(resident_profile)],FUN = as.numeric)
+```{r suppressMessages = TRUE}
+df3$FEMALE <- as.numeric(gsub("[\\%,]", "", df3$FEMALE))/100
+df3$AGE_85_PLUS <- as.numeric(gsub("[\\%,]", "", df3$AGE_85_PLUS))/100
+df3$AGE_UNDER_65 <- as.numeric(gsub("[\\%,]", "", df3$AGE_UNDER_65))/100
 
-# incidents
-df3[,grep('^INCIDENT.',colnames(df3))] <- lapply(df3[,grep('^INCIDENT.',colnames(df3))], FUN = as.character)
-df3[,grep('^INCIDENT.',colnames(df3))] <- lapply(df3[,grep('^INCIDENT.',colnames(df3))], FUN = as.numeric)
 
-# sub complaints
-df3$SUB_COMPLAINTS <- as.numeric(df3$SUB_COMPLAINTS)
+library(arules)
+# FEMALE
+levels(discretize(df3$FEMALE, method = "interval", breaks = 3))
 
-# years operating
-df3$years_operating <- as.numeric(as.character(df3$years_operating))
+# convert NAs
+df3$FEMALE <- replace_na(df3$FEMALE, "unknown")
 
-skim(df3)
+df3[df3$FEMALE < 0.45,]$FEMALE <- "<0.45"
+df3[df3$FEMALE > 0.45 & df3$FEMALE < 0.7,]$FEMALE <- "0.45-0.7"
+df3[df3$FEMALE > 0.7 & df3$FEMALE < 0.95,]$FEMALE <- "0.7-0.95"
+
+
+
+# AGE_85_PLUS
+levels(discretize(df3$AGE_85_PLUS, method = "interval", breaks = 3))
+
+# convert nas
+df3$AGE_85_PLUS <- replace_na(df3$AGE_85_PLUS, "unknown")
+
+df3[df3$AGE_85_PLUS < 0.34,]$AGE_85_PLUS <- "<0.34"
+df3[df3$AGE_85_PLUS < 0.67 & df3$AGE_85_PLUS >= 0.34,]$AGE_85_PLUS <- "0.34-0.67"
+df3[df3$AGE_85_PLUS <= 1 & df3$AGE_85_PLUS >= 0.67,]$AGE_85_PLUS <- "0.67-1"
+
+
+
+# AGE_UNDER_65
+levels(discretize(df3$AGE_UNDER_65, method = "interval", breaks = 3))
+
+# convert nas
+df3$AGE_UNDER_65 <- replace_na(df3$AGE_UNDER_65, "unknown")
+
+df3[df3$AGE_UNDER_65 < 0.3,]$AGE_UNDER_65 <- "<0.3"
+df3[df3$AGE_UNDER_65 < 0.63 & df3$AGE_UNDER_65 >= 0.3,]$AGE_UNDER_65 <- "0.3-0.63"
+df3[df3$AGE_UNDER_65 <= 0.94 & df3$AGE_UNDER_65 > 0.63,]$AGE_UNDER_65 <- "0.67-0.94"
+
+
 ```
 
-**Assessing sparsity of dataframe and handling NAs:**
 
-
-```{r handling NAs}
-colSums(is.na(df3))
-rowSums(is.na(df3))
-```
-
-NAs are often concentrated for particular homes and in incident/infraction predictors.
-
-```{r col sparsity}
-# columns with proportion of NAs and 0s > 0.01
-colnames(df3)[colSums(is.na(df3) | df3 == 0)/(dim(df3)[1]*dim(df3)[2]) > 0.01]
-```
-```{r row sparsity}
-# rows with proportion of NAs and 0s > 0.003 (those with almost all missing info)
-indices = rownames(df3)[rowSums(is.na(df3) | df3 == 0)/(dim(df3)[1]*dim(df3)[2]) > 0.003]
-df[indices,]$facility_name
-```
-
-**Remove sparse variables**
+  * Repeat for resident profile information
+  * Convert`STAY_LENGTH`, `SUB_COMPLAINTS` to numeric
+  
 ```{r}
-sparse_cols <- colnames(df3)[colSums(is.na(df3) | df3 == 0)/(dim(df3)[1]*dim(df3)[2]) > 0.01]
-sparse_rows <- rownames(df3)[rowSums(is.na(df3) | df3 == 0)/(dim(df3)[1]*dim(df3)[2]) > 0.003]
-df4 <- df3
+profile <- c("DEPRESSION", "ADL_DEPENDENT", "CPS_SEVERE", "DEMENTIA", "ABS_PHYS_ABUSIVE", 
+            "ISE_LOW", "MEDS_DEPRESSION", "MEDS_ANTIPSYCHOTICS")
 
-df4 <- df4[, -which(names(df4) %in% sparse_cols)]
-df4 <- df4[-which(rownames(df4) %in% sparse_rows),]
-colnames(df4)
 
-dim(df4)
+df3$DEPRESSION <- as.numeric(gsub("[\\%,]", "", df3$DEPRESSION))/100
+df3$ADL_DEPENDENT <- as.numeric(gsub("[\\%,]", "", df3$ADL_DEPENDENT))/100
+df3$CPS_SEVERE <- as.numeric(gsub("[\\%,]", "", df3$CPS_SEVERE))/100
+df3$DEMENTIA <- as.numeric(gsub("[\\%,]", "", df3$DEMENTIA))/100
+df3$ABS_PHYS_ABUSIVE <- as.numeric(gsub("[\\%,]", "", df3$ABS_PHYS_ABUSIVE))/100
+df3$ISE_LOW <- as.numeric(gsub("[\\%,]", "", df3$ISE_LOW))/100
+df3$MEDS_DEPRESSION <- as.numeric(gsub("[\\%,]", "", df3$MEDS_DEPRESSION))/100
+df3$MEDS_ANTIPSYCHOTICS <- as.numeric(gsub("[\\%,]", "", df3$MEDS_ANTIPSYCHOTICS))/100
 ```
-
-
-#### Transform Numerical Variables
-```{r}
-skim(df4)
-```
-
-No change in infractions distribution with sqrt or log transforms.
-
-```{r}
-# log transform
-# infractions
-df5 <- df4
-df5$ROOMS_SEMI_PROP <- log(df4$ROOMS_SEMI_PROP)
-
-
-par(mfrow=c(2,2))
-hist(xtabs(~ROOMS_SEMI_PROP + BEDS_TOTAL, data=df4), main = "ROOMS_SEMI_PROP Untransformed")
-hist(xtabs(~ROOMS_SEMI_PROP + BEDS_TOTAL, data=df5), main = "ROOMS_SEMI_PROP LOG Transformed")
-
-# sqrt transform
-hist(xtabs(~sqrt(ROOMS_SEMI_PROP) + BEDS_TOTAL, data=df4), main = "ROOMS_SEMI_PROP SQRT Transformed")
-
-
-
-# log transform
-# age under 65
-df5 <- df4
-df5$AGE_UNDER_65 <- log(df4$AGE_UNDER_65)
-
-
-par(mfrow=c(2,2))
-hist(xtabs(~AGE_UNDER_65 + BEDS_TOTAL, data=df4), main = "AGE_UNDER_65 Untransformed")
-hist(xtabs(~AGE_UNDER_65 + BEDS_TOTAL, data=df5), main = "AGE_UNDER_65 LOG Transformed")
-
-# sqrt transform
-hist(xtabs(~sqrt(AGE_UNDER_65) + BEDS_TOTAL, data=df4), main = "AGE_UNDER_65 SQRT Transformed")
-
-```
-
-No change in infractions or incident distribution with log or sqrt transforms.
-
-Original, skewed data will be used for now.
-
-
----
-
-#### Categorical Assessment
-```{r categorical assess}
-# Inspect the distribution of the categorical variables
-
-# hist(xtabs(~outbreak_status + FACILITY_NAME, data=df))
-summary(df4$outbreak_status)
-
-# hist(xtabs(~residents_council + FACILITY_NAME, data=df))
-summary(df4$residents_council)
-summary(df4$family_council)
-summary(df4$home_type)
-
-```
-
-
-```{r, include = F}
-# forward selection to determine cause of non-convergence
-# df4 <- df4[, -grep('^INFRACTIONS_.', colnames(df3))]
-# df4 <- df4[, -grep('INCIDENT.', colnames(df4))]
-# df4 <- df4[,-c(7:20)] # health of residents
-# df4 <- df4[,-c(3:5)] # age and gender proportions
-# df4 <- df4[, -grep('._PROP$', colnames(df4))] # size props
-# df4 <- df4[,-c(1:4, 12)] # remaining numericals, beds_total, sub_complaints, stay_length, infractions rooms_total
-
-
-# just removing line 104 because it caused non-convergence
-# trouble <- c('BEDS_TOTAL', "SUB_COMPLAINTS", "STAY_LENGTH", "INFRACTIONS", "ROOMS_TOTAL")
-# df4 <- df4[,-which(names(df4) %in% trouble)]
-
-# install.packages('')
-# fit = glm(outbreak_status~., family=binomial('logit'), data=df4, method="detect_separation")
-# summary(fit)
-
-```
-
----
-
-**Remove: `ROOMS_TOTAL` and `ISE` to eliminate multicolinearity according to VIF output.**
 
 ```{r}
-df4 <- df4[,-which(names(df4) %in% c('ROOMS_TOTAL', 'ISE'))]
-# colnames(df4)
+levels(discretize(df3$DEPRESSION, method = "frequency", breaks = 2))
+
 ```
 
-## Binary Logistic Regression with NAs
 
-```{r BLR with nas, eval = F}
-fit2 = glm(outbreak_status~., family=binomial, data=df4, maxit = 25, na.action = na.pass)
+```{r}
+df3$STAY_LENGTH <- as.numeric(as.character(df3$STAY_LENGTH))
+df3$SUB_COMPLAINTS <- as.numeric(as.character(df3$SUB_COMPLAINTS))
+```
+
+### Assess NAs
+
+```{r}
+colSums(is.na.data.frame(df3))
+``````
+
+
+
+# Binary Logistic Regression
+
+Remove `FACILITY_NAME`
+
+```{r}
+df4 <- df3[,-1]
+names(df4)
+```
+
+NAs will be omitted by default
+```{r}
+fit = glm(outbreak~., family=binomial, data=df4, maxit = 25)
+
+```
+
+## Removing all other homes with NAs
+```{r}
+df5 <- df4[-rowSums(is.na.data.frame(df4)),]
+
+fit2 = glm(outbreak~., family=binomial, data=df5, maxit = 25)
 summary(fit2)
 ```
-`Error in glm.fit(x = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, : NA/NaN/Inf in 'x'`
 
 
-
-## Binary Logistic Regression without cols that have NAs
-
-```{r}
-no_nas <- colnames(df4)[colSums(is.na(df4)) == 0]
-df_no_null <- df4[names(df4) %in% no_nas]
-```
-
-```{r BLR without na cols}
-fit3 = glm(outbreak_status~., family=binomial, data=df_no_null, maxit = 25)
-summary(fit3)
-```
-
-## Binary Logistic Regression where NA ==> 0
-
-Because each row represents an LTC, we do not want to omit any on the basis of NAs. Keeping NAs renders an error in LASSO so instead, 0s are imputed. ** Will this introduce bias? We dont know if LTCs that have NAs actually have high numbers or not.
-
-```{r NAs}
-# impute 0 where NAs exist
-df4[is.na(df4)] <- 0
-```
-
-
-```{r BLR without NAs}
-blr_fit <- glm(outbreak_status~., data = df4, family = binomial)
-summary(blr_fit)
-```
-
-
---- 
-
-## Binary Logistic Regression Assumptions
-
-assumption | check | result
-----------|--------------|-------------
-Linearity - linear relationship between continuous predictor variables and the logit of the outcome | visually - scatterplot | ok
-Influential values | Cook's distance plot of model fit | no obvious influential points
-Multicolinearity | `car::vif(model)` | **ISSUE 1:** potentially perfect multicollinearity between `ownership_type` and `home_type`. **ISSUE 2:** Variable inflation factor for assessing multicollinearity - `BEDS_TOTAL`, `ROOMS_TOTAL`, `ISE`, `ISE_LOW`  ~ $\ge 5$. **RESOLVED**
-
-```{r linearity check, suppressMessages = TRUE, eval = F}
-library(tidyverse)
-library(broom)
-
-mydata <- df4 %>%
-  dplyr::select_if(is.numeric)
-predictors <- colnames(mydata)
-
-# Bind the logit and tidying the data for plot
-probabilities <- predict(blr_fit, type = "response")
-predicted.classes <- ifelse(probabilities > 0.5, "yes", "no")
-
-mydata <- mydata %>%
-  mutate(logit = log(probabilities/(1-probabilities))) %>%
-  gather(key = "predictors", value = "predictor.value", -logit)
-
-
-ggplot(mydata, aes(logit, predictor.value))+
-  geom_point(size = 0.5, alpha = 0.5) +
-  geom_smooth(method = "loess") +
-  theme_bw() +
-  facet_wrap(~predictors, scales = "free_y")
-```
-
-```{r influential check, eval = F}
-plot(blr_fit, which = 4, id.n = 3)
-```
-
-```{r multicol check, eval = F}
-car::vif(blr_fit)
-```
-
-
-```{r, eval = F}
-# Further assessing correlation
-cor(df4$ISE, df4$ISE_LOW)
-
-cor(df4$ROOMS_TOTAL, df4$BEDS_TOTAL)
-```
-
-Warning in glm model implies potential separation of variables - for a particular value of a predictor, one outcome will always occur.
-**Determined `ownership_typepublic` caused perfect separation**
 
 ---
+## Separating hospitals and LTCs
 
-## LASSO with Imputed 0s
-LASSO removes multi-colinear predictors. 
-
-```{r lasso, suppressMessages = TRUE}
-library(glmnet)
-
-# setup
-# options(na.action="na.pass") #includes NA values
-
-x <- model.matrix(outbreak_status~., data=df4)[,-42]
-y <- df4$outbreak_status
-grid=10^seq(10,-2,length=100)
-
-fit_lasso = cv.glmnet(x,y, family="binomial", alpha = 1, lambda = grid, data=df4)
-plot(fit_lasso)
-
-```
-
-Around 2 or 3 predictors are necessary.
-
-```{r lassomin}
-fit_lasso$lambda.min
-```
-
-Lambda defines the amount of shrinkage required to minimize prediction error.
-
-
-```{r lasso coef}
-coef(fit_lasso, fit_lasso$lambda.min)
-```
-
-
-##### LASSO on non-null cols
-
-```{r lasso no nulls, suppressMessages = TRUE}
-x <- model.matrix(outbreak_status~., data=df_no_null)[,-2]
-y <- df_no_null$outbreak_status
-grid=10^seq(10,-2,length=100)
-
-fit_lasso2 = cv.glmnet(x,y, family="binomial", alpha = 1, lambda = grid, data=df4)
-plot(fit_lasso2)
-
-```
-
-0 predictors are necessary.
-
-```{r lassomin2}
-fit_lasso2$lambda.min
-```
-
-Lambda defines the amount of shrinkage required to minimize prediction error.
-
-
-```{r lasso2 coef}
-coef(fit_lasso2, fit_lasso2$lambda.min)
-```
----
-
-### Factor Analysis on Mixed Data
-
-```{r FAMD}
-library("FactoMineR")
-library("factoextra")
-
-res <- FAMD(df4, graph = F)
-eig.val <- get_eigenvalue(res)
-head(eig.val)
-
-fviz_famd_var(res, repel = TRUE)
-```
-
-quantitative variables
 ```{r}
-fviz_famd_var(res, "quanti.var", repel = TRUE,
-              col.var = "black", cex = 0.02)
+hospitals <- subset(df4, df4$REGULATION == "Hospital Act")
+ltcs <- subset(df4, df4$REGULATION == "Community Care & Assisted Living Act")
+
+paste('hospital dimensions: ', dim(hospitals))
+paste('ltc dimensions: ', dim(ltcs))
+
 ```
 
+```{r hospitals}
+colSums(is.na.data.frame(hospitals))
+hospitals[rowSums(is.na.data.frame(hospitals)),]
+```
 
+```{r ltcs}
+colSums(is.na.data.frame(ltcs))
+ltcs[rowSums(is.na.data.frame(ltcs)),]
+
+```
+
+```{r}
+
+```
 
