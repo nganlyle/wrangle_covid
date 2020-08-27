@@ -8,67 +8,82 @@ output: html_document
 ## Import and prepare the data
 ```{r results="hide"}
 library(skimr)
+library(dplyr)
+
+
 
 # Import the data
-# df <- read.csv("../data/BC/ngan_bcLTC_foranalysis.csv", na.strings="", header=TRUE)
-# str(df)
 
-df <- read.csv("../data/BC/bc_ltc_selected.csv", na.strings="", header=TRUE)
+# noNHorVIHA data
+df <- read.csv("../data/BC/bc_ltc_noNHorVIHA.csv", na.strings="", header=TRUE)
 str(df)
 
+# selected data (remove all predictors with missing values)
+# df <- read.csv("../data/BC/bc_ltc_selected.csv", na.strings="", header=TRUE)
+# 
+# # Remove the 3 homes that are considered "Special Units"
+# df <- df %>% 
+#   filter(!grepl('Special Unit', FACILITY_NAME))
+# 
+# str(df)
 ```
 
 ```{r, echo=FALSE}
-# Change data type to character
+# Change datatypes as needed
 listofcol = list('FACILITY_NAME', 'HCC_CODE', 'STREET_ADDRESS', 'CITY', 'POSTAL')
 for (each in listofcol){
   df[, each] <- as.character(df[, each])
 }
 
 df$outbreak <- as.factor(df$outbreak)
-str(df)
-colnames(df)
+# str(df)
+dput(names(df))
 ```
 
 ```{r, include=FALSE}
 # # Generate the data for analysis
 # # Create lists of variables used to filter data for analysis
 
-num <- c("BEDS_TOTAL", "BEDS_PRIVATEprop", "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI")
-cat <- c("HLTH_AUTH", "OWNERSHIP", "REGULATION", "ACCRED_STATUS", "RESIDENT_COUNCIL", "FAMILY_COUNCIL")
-data <- subset(df, select = c(num, cat, 'outbreak'))
+# # selected data
+# num <- c("BEDS_TOTAL", "BEDS_PRIVATEprop", "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI")
+# cat <- c("HLTH_AUTH", "OWNERSHIP", "REGULATION", "ACCRED_STATUS", "RESIDENT_COUNCIL", "FAMILY_COUNCIL")
+# data <- subset(df, select = c(num, cat, 'outbreak'))
 
+# noNHorVIHA data
+incidents = c(
+  "INCIDENT_OUTBREAK_100",
+  "INCIDENT_ABUSE_100", "INCIDENT_FALL_100", "INCIDENT_POISON_100",
+  "INCIDENT_MEDICATION_100", "INCIDENT_WANDERING_100",
+  "INCIDENT_INJURY_100", "INCIDENT_AGGRESSION_100"
+  )
 
-# incidents = c(
-#   
-#   # "INCIDENT_OUTBREAK", "INCIDENT_ABUSE", "INCIDENT_FALL",
-#   # "INCIDENT_POISON", "INCIDENT_MEDICATION", "INCIDENT_WANDERING",
-#   # "INCIDENT_INJURY", "INCIDENT_AGGRESSION", 
-#   
-#   "INCIDENT_OUTBREAK_100",
-#   "INCIDENT_ABUSE_100", "INCIDENT_FALL_100", "INCIDENT_POISON_100",
-#   "INCIDENT_MEDICATION_100", "INCIDENT_WANDERING_100", "INCIDENT_INJURY_100",
-#   "INCIDENT_AGGRESSION_100")
-# 
-# inspections = c("COMPLAINTS", "SUB_COMPLAINTS", "INSPECTIONS", "INFRACTIONS",
-#   "INFRACTIONS_LICENSING",
-#   "INFRACTIONS_LICENSING", "INFRACTIONS_FACILITY", "INFRACTIONS_STAFFING",
-#   "INFRACTIONS_POLICY", "INFRACTIONS_CARE", "INFRACTIONS_DISEASE",
-#   "INFRACTIONS_FOOD", "INFRACTIONS_MEDICATION", "INFRACTIONS_PROGRAM",
-#   "INFRACTIONS_REPORTING", "INFRACTIONS_RIGHTS", "INFRACTIONS_OTHER")
-# 
-# gen = c("OWNERSHIP", "REGULATION", "ACCRED_STATUS", "CMI", "facility_design",
-#   "RESIDENT_COUNCIL", "FAMILY_COUNCIL")
-# 
-# dch = c("DCH_NURSE_CURRENTYR", "DCH_ALLIED_CURRENTYR", "DCH_TOTAL_CURRENTYR")
-# 
-# space = c("BEDS_PRIVATE", "BEDS_PUBLIC", "BEDS_TOTAL",
-#   "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI",
-#   "BEDS_PRIVATEprop", "BEDS_PUBLICprop", "ROOMS_TOTAL",
-#   "ROOMS_PRIVATEprop", "ROOMS_SEMIprop", "ROOMS_MULTIprop")
-# 
-# data <- subset(df, select = c(gen, incidents, inspections, dch, space, 'outbreak'))
-# 
+inspections = c(
+  "COMPLAINTS", "SUB_COMPLAINTS", "INSPECTIONS",
+  "INFRACTIONS",
+  "INFRACTIONS_DISEASE")
+
+gen = c("OWNERSHIP", "REGULATION", "ACCRED_STATUS","RESIDENT_COUNCIL", "FAMILY_COUNCIL")
+
+dch = c(
+  "DCH_NURSE_LASTYR", 
+  "DCH_ALLIED_LASTYR", 
+  "DCH_NURSE_CURRENTYR",
+  "DCH_ALLIED_CURRENTYR",
+ )
+
+space = c("BEDS_PRIVATEprop", "BEDS_TOTAL",
+  "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI")
+
+dem = c(
+  "AGE", "FEMALE", 
+  "AGE_85_PLUS", "AGE_UNDER_65", "DEPRESSION", "ADL_DEPENDENT", 
+  "CPS_SEVERE", "DEMENTIA", "ABS_PHYS_ABUSIVE", "ISE_LOW", "CMI", 
+  "THERAPY_PT", "THERAPY_RT", "THERAPY_OT", "MEDS_DEPRESSION", 
+  "MEDS_ANTIPSYCHOTICS", "RESTRAINTS"
+)
+
+data <- subset(df, select = c(gen, incidents, inspections, dch, space, 'outbreak'))
+
 str(data)
 ```
 
@@ -78,7 +93,6 @@ str(data)
 ## Assessing skewness
 # Check for R skewness in numeric predictors
 library(e1071)
-
 
 listofcols = c(num)
 
@@ -145,8 +159,8 @@ list0s = c("ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI",
 library(rcompanion)
 # listofcols <- setdiff(listofcols, list0s)
 
-# Visualize the effect of square root transformations on the data with 0s
-for (each in c(list0s, list_non0s)) {  
+# Visualize the effect of square root transformations on the numeric predictors
+for (each in num) {  
   plotNormalHistogram(x = data[[each]], main = each)
   plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
 }
@@ -157,10 +171,10 @@ for (each in list_non0s) {
   plotNormalHistogram(x = log(data[[each]]), main = c(each, 'log trans'))
 }
 
-Visualize the effect of transformations on the data that are left skewed
-# log10(max(x+1) - x)
-plotNormalHistogram(x = data[['BEDS_PUBLICprop']])
-plotNormalHistogram(x = sqrt(max(data[['BEDS_PUBLICprop']] + 1) - data[['BEDS_PUBLICprop']]))
+# Visualize the effect of transformations on the data that are left skewed
+# # log10(max(x+1) - x)
+# plotNormalHistogram(x = data[['BEDS_PUBLICprop']])
+# plotNormalHistogram(x = sqrt(max(data[['BEDS_PUBLICprop']] + 1) - data[['BEDS_PUBLICprop']]))
 
 # # sqrt(max(x+1) - x)
 # plotNormalHistogram(x = data[['ROOMS_PRIVATEprop']])
@@ -193,10 +207,6 @@ summary(fit)
 ```{r, include=FALSE}
 fit <- update(fit, .~. -HLTH_AUTH)
 summary(fit)
-fit <- update(fit, .~. -ACCRED_STATUS)
-summary(fit)
-fit <- update(fit, .~. -OWNERSHIP)
-summary(fit)
 fit <- update(fit, .~. -REGULATION)
 summary(fit)
 fit <- update(fit, .~. -BEDS_PRIVATEprop)
@@ -207,13 +217,26 @@ fit <- update(fit, .~. -ROOMS_MULTI)
 summary(fit)
 fit <- update(fit, .~. -RESIDENT_COUNCIL)
 summary(fit)
-# fit <- update(fit, .~. -ROOMS_SEMI)
-# summary(fit)
+fit <- update(fit, .~. -ROOMS_SEMI)
+summary(fit)
+
+fit <- update(fit, .~. -ACCRED_STATUS)
+summary(fit)
+fit <- update(fit, .~. -OWNERSHIP)
+summary(fit)
 
 ```
 
 ```{r }
+hist(data$BEDS_TOTAL)
 
+# Most homes have a family_council
+# 8/46 homes without a family council had an outbreak
+# 26/251 with a family council had an outbreak
+xtabs(~outbreak + FAMILY_COUNCIL, data=df)
+
+# Review the minority of homes without a family council
+subset(df, FAMILY_COUNCIL == 'False')
 ```
 
 ```{r }
