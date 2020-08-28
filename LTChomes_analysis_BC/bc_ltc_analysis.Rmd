@@ -15,6 +15,27 @@ library(skimr)
 df <- read.csv("../data/BC/bc_ltc_complete_kt.csv", na.strings="", header=TRUE)
 colnames(df)
 ```
+
+```{r}
+# assess ROOMS and BEDS_TOTAL
+cor(df[, c(16:19)], use = "pairwise.complete.obs")
+```
+
+```{r}
+# assess complaints and subcomplaints
+df$COMPLAINTS <- as.numeric(as.character(df$COMPLAINTS))
+df$SUB_COMPLAINTS <- as.numeric(as.character(df$SUB_COMPLAINTS))
+cor(df[, c(10:15)], use = "pairwise.complete.obs")
+```
+
+```{r}
+# assess complaints and subcomplaints
+df$COMPLAINTS <- as.numeric(as.character(df$COMPLAINTS))
+df$SUB_COMPLAINTS <- as.numeric(as.character(df$SUB_COMPLAINTS))
+cor(df[, c(20,21)], use = "pairwise.complete.obs")
+```
+
+
 Remove homes with suppressed data (4) and special units (3) as they are included as part of a major building already.
 
 ```{r}
@@ -27,9 +48,6 @@ rmv <- c(# suppressed data
               "Harmony Court Care Centre  - Special Unit")
 
 df2 <- df[-which(df$FACILITY_NAME %in% rmv),]
-
-# remove granular infractions
-# df2 <- df2[, -grep('^INFRACTIONS_.', colnames(df2))]
 
 # remove incidents that are NOT per 100 beds
 colnames(df2)
@@ -56,9 +74,9 @@ df2 <- df2[, -which(names(df2) %in% dr)]
 ```
 
 ```{r}
-# dataframe without health authority - 
+# dataframe without health authority 
 df3 <- df2[, c(1, 3:length(df2))]
-names(df3)
+names(df2)
 ```
 
 
@@ -92,6 +110,7 @@ pairs(df3[,c(10,12:13)])
 ```{r}
 cor(df3[,c(10,12,13)], use = "pairwise.complete.obs")
 ```
+
 
 
 ```{r}
@@ -138,28 +157,33 @@ df3[df3$AGE_85_PLUS <= 1 & df3$AGE_85_PLUS >= 0.67,]$AGE_85_PLUS <- "0.67-1"
 
   * Convert resident profile information to numeric
   * Convert`STAY_LENGTH`, `SUB_COMPLAINTS`, `CMI` to numeric
+
+
   
 ```{r}
-# profile <- c("DEPRESSION", "ADL_DEPENDENT", "CPS_SEVERE", "DEMENTIA", "ABS_PHYS_ABUSIVE", 
-            # "ISE_LOW", "MEDS_DEPRESSION", "MEDS_ANTIPSYCHOTICS")
+## REMOVING PREDICTORS UNRELATED TO OUTBREAK - reverse commented code for predictors to deaths
+profile <- c("DEPRESSION", "ADL_DEPENDENT", "CPS_SEVERE", "DEMENTIA", "ABS_PHYS_ABUSIVE",
+             "MEDS_DEPRESSION", "MEDS_ANTIPSYCHOTICS", "STAY_LENGTH")
+df3 <- df3[, -which(names(df3) %in% profile)]
 
-
-df3$DEPRESSION <- as.numeric(gsub("[\\%,]", "", df3$DEPRESSION))/100
-df3$ADL_DEPENDENT <- as.numeric(gsub("[\\%,]", "", df3$ADL_DEPENDENT))/100
-df3$CPS_SEVERE <- as.numeric(gsub("[\\%,]", "", df3$CPS_SEVERE))/100
-df3$DEMENTIA <- as.numeric(gsub("[\\%,]", "", df3$DEMENTIA))/100
-df3$ABS_PHYS_ABUSIVE <- as.numeric(gsub("[\\%,]", "", df3$ABS_PHYS_ABUSIVE))/100
+# df3$DEPRESSION <- as.numeric(gsub("[\\%,]", "", df3$DEPRESSION))/100
+# df3$ADL_DEPENDENT <- as.numeric(gsub("[\\%,]", "", df3$ADL_DEPENDENT))/100
+# df3$CPS_SEVERE <- as.numeric(gsub("[\\%,]", "", df3$CPS_SEVERE))/100
+# df3$DEMENTIA <- as.numeric(gsub("[\\%,]", "", df3$DEMENTIA))/100
+# df3$ABS_PHYS_ABUSIVE <- as.numeric(gsub("[\\%,]", "", df3$ABS_PHYS_ABUSIVE))/100
 df3$ISE_LOW <- as.numeric(gsub("[\\%,]", "", df3$ISE_LOW))/100
-df3$MEDS_DEPRESSION <- as.numeric(gsub("[\\%,]", "", df3$MEDS_DEPRESSION))/100
-df3$MEDS_ANTIPSYCHOTICS <- as.numeric(gsub("[\\%,]", "", df3$MEDS_ANTIPSYCHOTICS))/100
-```
-
-
-```{r}
-df3$STAY_LENGTH <- as.numeric(gsub("[,]", "", as.character(df3$STAY_LENGTH)))
+# df3$MEDS_DEPRESSION <- as.numeric(gsub("[\\%,]", "", df3$MEDS_DEPRESSION))/100
+# df3$MEDS_ANTIPSYCHOTICS <- as.numeric(gsub("[\\%,]", "", df3$MEDS_ANTIPSYCHOTICS))/100
+# df3$STAY_LENGTH <- as.numeric(gsub("[,]", "", as.character(df3$STAY_LENGTH)))
 df3$SUB_COMPLAINTS <- as.numeric(as.character(df3$SUB_COMPLAINTS))
 df3$CMI <- as.numeric(as.character(df3$CMI))
 ```
+
+
+  * Bin `ISE_LOW`, `SUB_COMPLAINTS`, `CMI` to replace na's with "unknown" **will convert to character but preserve NAs**
+
+
+
 
 ### Assess NAs
 
@@ -218,22 +242,36 @@ skim(df3)
 
 # Binary Logistic Regression
 
-Remove `FACILITY_NAME`
+Remove `FACILITY_NAME` and `deaths`
 
 ```{r}
-df4 <- df3[,-1]
+df4 <- df3[,-c(1,22)]
 names(df4)
 ```
 
 NAs will be omitted by default.
 
-**To include `AGE` or not?**
 
 ```{r}
 fit2 = glm(outbreak~., family=binomial, data=df4, maxit = 25)
 summary(fit2)
 ```
 
+```{r}
+car::vif(fit2)
+```
+
+# binary logistic on deaths
+
+```{r}
+# df_deaths <- df3[,-c(1,23)]
+# 
+# df_deaths <- subset(df_deaths, df_deaths$deaths != "no outbreak")
+# 
+# fit3 = glm(deaths~., family=binomial, data=df_deaths, maxit = 25)
+# summary(fit3)
+
+```
 
 ## LASSO 
 **Should account for multicollinearity.**
