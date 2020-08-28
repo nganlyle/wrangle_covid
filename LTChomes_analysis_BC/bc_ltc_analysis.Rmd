@@ -29,24 +29,13 @@ rmv <- c(# suppressed data
 df2 <- df[-which(df$FACILITY_NAME %in% rmv),]
 
 # remove granular infractions
-df2 <- df2[, -grep('^INFRACTIONS_.', colnames(df2))]
+# df2 <- df2[, -grep('^INFRACTIONS_.', colnames(df2))]
 
 # remove incidents that are NOT per 100 beds
 colnames(df2)
 df2 <- df2[, -c(22:29, 30:37)]
 ```
 
-
-```{r}
-# assess age
-pairs(df2[,c(22,24:25)])
-# remove AGE as AGE_85_PLUS describes the same trend
-```
-
-```{r}
-# assess councils
-cor(df2[,c(48:49)])
-```
 
 ```{r}
 # drop unneccessary columns
@@ -58,7 +47,7 @@ dr <- c(#"FACILITY_NAME", - keep for data quality analysis
        "THERAPY_PT", "THERAPY_RT", "THERAPY_OT", "RESTRAINTS",
        "ISE", # high multicollinearity
        "latitude", "longitude",
-       "AGE", # redundant - from pairs plot
+       # "AGE", # redundant - from pairs plot
        "Total.Confirmed.Cases", "Total.Deaths" # focus on outbreak status first
        )
 
@@ -74,16 +63,53 @@ names(df3)
 
 
 ### Cleaning
+  * Remove unneccesary `INFRACTIONS_`
   * Convert `FEMALE` and `AGE` variables to numeric (from factor) decimals
+  * Assess collinearity
   * Convert NAs to "unknown"
   * Bin `FEMALE` and `AGE` variables
+  
 
-```{r suppressMessages = TRUE}
+```{r}
+df3 <- df3[,-c(26:37)]
+```
+
+  
+```{r}
 df3$FEMALE <- as.numeric(gsub("[\\%,]", "", df3$FEMALE))/100
+df3$AGE <- as.numeric(gsub("[\\%,]", "", df3$AGE))
 df3$AGE_85_PLUS <- as.numeric(gsub("[\\%,]", "", df3$AGE_85_PLUS))/100
 df3$AGE_UNDER_65 <- as.numeric(gsub("[\\%,]", "", df3$AGE_UNDER_65))/100
+```
+
+```{r}
+# assess age
+pairs(df3[,c(10,12:13)])
+```
+
+"pairwise.complete.obs" then the correlation or covariance between each pair of variables is computed using all complete pairs of observations on those variables.
+
+```{r}
+cor(df3[,c(10,12,13)], use = "pairwise.complete.obs")
+```
 
 
+```{r}
+# assess councils
+# names(df3)
+cor(df3[,c(28:29)])
+```
+
+I'm decided to keep `AGE_85_PLUS` because there are no missing variables (`AGE` has 3) and seems to be a comorbidity for COVID-19.
+
+
+```{r}
+df3 <- df3[,-c(10,13)]
+```
+
+
+```{r suppressMessages = TRUE}
+library(tidyr)
 library(arules)
 # FEMALE
 levels(discretize(df3$FEMALE, method = "interval", breaks = 3))
@@ -107,24 +133,11 @@ df3[df3$AGE_85_PLUS < 0.34,]$AGE_85_PLUS <- "<0.34"
 df3[df3$AGE_85_PLUS < 0.67 & df3$AGE_85_PLUS >= 0.34,]$AGE_85_PLUS <- "0.34-0.67"
 df3[df3$AGE_85_PLUS <= 1 & df3$AGE_85_PLUS >= 0.67,]$AGE_85_PLUS <- "0.67-1"
 
-
-
-# AGE_UNDER_65
-levels(discretize(df3$AGE_UNDER_65, method = "interval", breaks = 3))
-
-# convert nas
-df3$AGE_UNDER_65 <- replace_na(df3$AGE_UNDER_65, "unknown")
-
-df3[df3$AGE_UNDER_65 < 0.3,]$AGE_UNDER_65 <- "<0.3"
-df3[df3$AGE_UNDER_65 < 0.63 & df3$AGE_UNDER_65 >= 0.3,]$AGE_UNDER_65 <- "0.3-0.63"
-df3[df3$AGE_UNDER_65 <= 0.94 & df3$AGE_UNDER_65 > 0.63,]$AGE_UNDER_65 <- "0.67-0.94"
-
-
 ```
 
 
   * Convert resident profile information to numeric
-  * Convert`STAY_LENGTH`, `SUB_COMPLAINTS` to numeric
+  * Convert`STAY_LENGTH`, `SUB_COMPLAINTS`, `CMI` to numeric
   
 ```{r}
 # profile <- c("DEPRESSION", "ADL_DEPENDENT", "CPS_SEVERE", "DEMENTIA", "ABS_PHYS_ABUSIVE", 
@@ -142,10 +155,10 @@ df3$MEDS_ANTIPSYCHOTICS <- as.numeric(gsub("[\\%,]", "", df3$MEDS_ANTIPSYCHOTICS
 ```
 
 
-
 ```{r}
-df3$STAY_LENGTH <- as.numeric(as.character(df3$STAY_LENGTH))
+df3$STAY_LENGTH <- as.numeric(gsub("[,]", "", as.character(df3$STAY_LENGTH)))
 df3$SUB_COMPLAINTS <- as.numeric(as.character(df3$SUB_COMPLAINTS))
+df3$CMI <- as.numeric(as.character(df3$CMI))
 ```
 
 ### Assess NAs
@@ -156,6 +169,53 @@ colSums(is.na.data.frame(df3))
 
 
 
+### Skewness and Transformations
+
+```{r}
+library(skimr)
+```
+
+`ROOMS_PRIVATE` distribution not improved with square transform.
+
+`BEDS_TOTAL` distribution not imporved with log transform.
+
+```{r}
+# Create a list of right skewed numeric variables with 0 values
+# colSums(df3 == 0)
+
+list_non0s = c('BEDS_TOTAL')
+list0s = c("ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI",
+  "BEDS_PRIVATEprop")
+
+
+library(rcompanion)
+
+# Visualize the effect of square root transformations on the numeric predictors
+for (each in list0s) {  
+  plotNormalHistogram(x = df3[[each]], main = each)
+  plotNormalHistogram(x = sqrt(df3[[each]]), main = c(each, 'sqrt trans'))
+}
+
+# Visualize the effect of log transformations on the data with no 0s that are right skewed
+for (each in list_non0s) {  
+  plotNormalHistogram(x = df3[[each]], main = each)
+  plotNormalHistogram(x = log(df3[[each]]), main = c(each, 'log trans'))
+}
+
+
+```
+
+Apply transformations where suitable.
+
+```{r}
+transf = c("ROOMS_SEMI", "ROOMS_MULTI",
+  "BEDS_PRIVATEprop")
+
+df3[transf] <- sqrt(df3[transf])
+
+skim(df3)
+```
+
 # Binary Logistic Regression
 
 Remove `FACILITY_NAME`
@@ -165,46 +225,47 @@ df4 <- df3[,-1]
 names(df4)
 ```
 
-NAs will be omitted by default
+NAs will be omitted by default.
+
+**To include `AGE` or not?**
+
 ```{r}
-fit = glm(outbreak~., family=binomial, data=df4, maxit = 25)
-
-```
-
-## Removing all other homes with NAs
-```{r}
-df5 <- df4[-rowSums(is.na.data.frame(df4)),]
-
-fit2 = glm(outbreak~., family=binomial, data=df5, maxit = 25)
+fit2 = glm(outbreak~., family=binomial, data=df4, maxit = 25)
 summary(fit2)
 ```
 
 
-
----
-## Separating hospitals and LTCs
-
-```{r}
-hospitals <- subset(df4, df4$REGULATION == "Hospital Act")
-ltcs <- subset(df4, df4$REGULATION == "Community Care & Assisted Living Act")
-
-paste('hospital dimensions: ', dim(hospitals))
-paste('ltc dimensions: ', dim(ltcs))
-
-```
-
-```{r hospitals}
-colSums(is.na.data.frame(hospitals))
-hospitals[rowSums(is.na.data.frame(hospitals)),]
-```
-
-```{r ltcs}
-colSums(is.na.data.frame(ltcs))
-ltcs[rowSums(is.na.data.frame(ltcs)),]
-
-```
+## LASSO 
+**Should account for multicollinearity.**
 
 ```{r}
+library(glmnet)
+df_noNA <- na.omit(df4)
 
+x <- model.matrix(outbreak~., df_noNA)[,-37]
+y <- df_noNA$outbreak
+cv.lasso <- cv.glmnet(x, y, alpha = 1, family = "binomial")
+plot(cv.lasso)
 ```
+
+The plot displays the cross-validation error according to the log of lambda. The left dashed vertical line indicates that the log of the optimal value of lambda is approximately -5, which is the one that minimizes the prediction error. This lambda value will give the most accurate model. The exact value of lambda can be viewed as follow:
+
+```{r}
+coef(cv.lasso, cv.lasso$lambda.min)
+```
+
+Generally, the purpose of regularization is to balance accuracy and simplicity. This means, a model with the smallest number of predictors that also gives a good accuracy. To this end, the function cv.glmnet() finds also the value of lambda that gives the simplest model but also lies within one standard error of the optimal value of lambda. This value is called lambda.1se
+
+```{r}
+coef(cv.lasso, cv.lasso$lambda.1se)
+```
+
+Final LASSO model using `lambda.min`
+
+```{r}
+lasso.model <- glmnet(x, y, alpha = 1, family = "binomial",
+                      lambda = cv.lasso$lambda.min)
+lasso.model
+```
+
 
