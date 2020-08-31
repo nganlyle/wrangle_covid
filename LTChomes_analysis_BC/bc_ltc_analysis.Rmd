@@ -342,3 +342,14 @@ predict(groupfit, type="groups", lambda=groupfit$lambda.min)# Identity of nonzer
 predict(groupfit, type="vars", lambda=groupfit$lambda.min)# Identity of nonzero coefficients
 ```
 
+```{r}
+data <- read.csv('../data/BC/bc_ltc_selected.csv')
+subset(data, data$ROOMS_PRIVATE == 0 & data$ROOMS_SEMI == 0 & data$ROOMS_MULTI == 0)
+```
+
+```{r}
+data2 <- read.csv('../data/BC/bc_ltc_complete.csv')
+data2$SUM_BEDS_BY_ROOM <- data2$ROOMS_PRIVATE + data2$ROOMS_SEMI*2 + data2$ROOMS_MULTI*3
+subset(data2, data2$BEDS_TOTAL > data$)
+```
+
