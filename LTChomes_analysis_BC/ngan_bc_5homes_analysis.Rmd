@@ -1,0 +1,251 @@
+---
+title: "bc_ltc_5homes_analysis"
+author: "Ngan Lyle"
+date: "28/08/2020"
+output: html_document
+---
+
+## Import and prepare the data
+```{r results="hide"}
+library(skimr)
+library(dplyr)
+
+# Import the data
+df <- read.csv("../data/BC/ngan_bc_ltc_5homes.csv", na.strings="", header=TRUE)
+str(df)
+
+
+```
+
+```{r, echo=FALSE}
+# Change datatypes as needed
+listofcol = list('FACILITY_NAME', 'HCC_CODE', 'STREET_ADDRESS', 'CITY', 'POSTAL')
+
+for (each in listofcol){
+  df[, each] <- as.character(df[, each])
+}
+
+df$outbreak <- as.factor(df$outbreak)
+
+# str(df)
+dput(names(df))
+```
+
+
+```{r, include=FALSE}
+# Generate the data for analysis
+# Create lists of variables used to filter data for analysis
+
+cat <- c("HLTH_AUTH", "OWNERSHIP", "REGULATION", "ACCRED_STATUS",
+  "RESIDENT_COUNCIL", 
+"FAMILY_COUNCIL")
+
+num <- c("DCH_NURSE_CURRENTYR", "DCH_ALLIED_CURRENTYR", "DCH_TOTAL_CURRENTYR",
+  "BEDS_TOTAL", 
+"ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI", "INSPECTIONS", 
+"INFRACTIONS", "INFRACTIONS_LICENSING", "INFRACTIONS_FACILITY", 
+"INFRACTIONS_STAFFING", "INFRACTIONS_POLICY", "INFRACTIONS_CARE", 
+"INFRACTIONS_DISEASE", "INFRACTIONS_FOOD", "INFRACTIONS_MEDICATION", 
+"INFRACTIONS_PROGRAM", "INFRACTIONS_REPORTING", "INFRACTIONS_RIGHTS", 
+"INFRACTIONS_OTHER", "BEDS_PRIVATEprop")
+
+data <- subset(df, select = c(num, cat, 'outbreak'))
+
+str(data)
+
+```
+
+```{r, }
+## Assessing skewness
+# Check for R skewness in numeric predictors
+library(e1071)
+
+for (each in num){
+  print(each)
+  print(skewness(data[[each]]))
+  qqnorm(data[[each]], main = each)
+  qqline(data[[each]], col = 'red')
+}
+
+```
+
+We see above that all the numeric predictors are right skewed to various degrees. 
+  - Highly right skewed for skewness values > 1. 
+  - Mildly right skewed for skewness values between 0 and 1
+
+We explore the variables to assess for zero values prior to transformation. 
+
+
+```{r, }
+# Assess numeric predictors for 0s
+for (each in num){
+  print(each)
+  print(summary(df[[each]]))
+}
+```
+Predictors with no 0s:
+DCH_NURSE_CURRENTYR
+DCH_TOTAL_CURRENTYR
+BEDS_TOTAL
+
+## Explore the variables for transformation
+```{r, }
+# Create a list of numeric variables with 0 values
+list_non0s <- c(
+  'DCH_NURSE_CURRENTYR',
+  'DCH_TOTAL_CURRENTYR',
+  'BEDS_TOTAL'
+)
+
+list_0s <- setdiff(num, list_non0s)
+
+library(rcompanion)
+
+# Visualize the effect of square root and log transformations on the data without 0s
+for (each in list_non0s) {  
+  plotNormalHistogram(x = data[[each]], main = each)
+  plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
+  plotNormalHistogram(x = log(data[[each]]), main = c(each, 'log trans'))
+}
+
+```
+Log transform:
+DCH_NURSE_CURRENTYR
+DCH_TOTAL_CURRENTYR
+
+Sqrt transform:
+BEDS_TOTAL
+
+```{r, }
+# Visualize the effect of a square root transformation on the variables with 0s
+for (each in list_0s) {  
+  plotNormalHistogram(x = data[[each]], main = each)
+  plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
+}
+
+```
+
+As shown, in all cases where predictors contain 0s, a square root transformation seems to improve the distribution. 
+
+## Transform the data
+```{r }
+# Log transform in place
+data[c('DCH_NURSE_CURRENTYR', 'DCH_TOTAL_CURRENTYR')] <- log(data[c('DCH_NURSE_CURRENTYR', 'DCH_TOTAL_CURRENTYR')])
+
+# Square root transform in place
+data[c('BEDS_TOTAL', list_0s)] <- sqrt(data[c('BEDS_TOTAL', list_0s)])
+
+skim(data)
+```
+
+```{r }
+cat
+# Inspect the distribution of the categorical variables
+xtabs(~HLTH_AUTH + OWNERSHIP, data=df)
+xtabs(~HLTH_AUTH + REGULATION, data=df)
+xtabs(~HLTH_AUTH + ACCRED_STATUS, data=df) # Many unknown ACCRED_STATUS value
+xtabs(~HLTH_AUTH + RESIDENT_COUNCIL, data=df)
+xtabs(~HLTH_AUTH + FAMILY_COUNCIL, data=df)
+xtabs(~OWNERSHIP + REGULATION, data=df)
+xtabs(~OWNERSHIP + ACCRED_STATUS, data=df) 
+xtabs(~OWNERSHIP + RESIDENT_COUNCIL, data=df)
+xtabs(~OWNERSHIP + FAMILY_COUNCIL, data=df)
+xtabs(~REGULATION + ACCRED_STATUS, data=df)
+xtabs(~REGULATION + RESIDENT_COUNCIL, data=df)
+xtabs(~REGULATION + FAMILY_COUNCIL, data=df)
+xtabs(~ACCRED_STATUS + RESIDENT_COUNCIL, data=df)
+xtabs(~ACCRED_STATUS + FAMILY_COUNCIL, data=df)
+xtabs(~RESIDENT_COUNCIL + FAMILY_COUNCIL, data=df)
+
+
+
+```
+
+
+## Fit logistic regression
+```{r }
+# Fit logistic regression using transformed data
+fit = glm(outbreak~., family=binomial, data=data)
+summary(fit)
+```
+
+### Backwards selection
+```{r, include=FALSE}
+fit <- update(fit, .~. -ROOMS_MULTI)
+summary(fit)
+fit <- update(fit, .~. -INFRACTIONS_PROGRAM)
+summary(fit)
+fit <- update(fit, .~. -INFRACTIONS_OTHER)
+summary(fit)
+fit <- update(fit, .~. -INFRACTIONS_MEDICATION)
+summary(fit)
+fit <- update(fit, .~. -INFRACTIONS_FACILITY)
+summary(fit)
+fit <- update(fit, .~. -INFRACTIONS_REPORTING)
+summary(fit)
+fit <- update(fit, .~. -INFRACTIONS_POLICY)
+summary(fit)
+fit <- update(fit, .~. -INFRACTIONS_FOOD)
+summary(fit)
+fit <- update(fit, .~. -INFRACTIONS_STAFFING)
+summary(fit)
+fit <- update(fit, .~. -DCH_NURSE_CURRENTYR)
+summary(fit)
+fit <- update(fit, .~. -DCH_TOTAL_CURRENTYR)
+summary(fit)
+fit <- update(fit, .~. -DCH_ALLIED_CURRENTYR)
+summary(fit)
+fit <- update(fit, .~. -INFRACTIONS_RIGHTS)
+summary(fit)
+fit <- update(fit, .~. -INFRACTIONS_DISEASE)
+summary(fit)
+fit <- update(fit, .~. -INFRACTIONS_CARE)
+summary(fit)
+fit <- update(fit, .~. -INFRACTIONS_LICENSING)
+summary(fit)
+fit <- update(fit, .~. -INFRACTIONS)
+summary(fit)
+fit <- update(fit, .~. -ACCRED_STATUS)
+summary(fit)
+fit <- update(fit, .~. -INSPECTIONS)
+summary(fit)
+fit <- update(fit, .~. -OWNERSHIP)
+summary(fit)
+fit <- update(fit, .~. -HLTH_AUTH)
+summary(fit)
+fit <- update(fit, .~. -ROOMS_SEMI)
+summary(fit)
+fit <- update(fit, .~. -ROOMS_PRIVATE)
+summary(fit)
+fit <- update(fit, .~. -BEDS_PRIVATEprop)
+summary(fit)
+fit <- update(fit, .~. -RESIDENT_COUNCIL)
+summary(fit)
+fit <- update(fit, .~. -REGULATION)
+summary(fit)
+
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

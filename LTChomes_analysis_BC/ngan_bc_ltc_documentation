@@ -1,0 +1,53 @@
+**Complete and Selected Dataset**
+
+Input: ngan_merged_OSAtoCOVID.csv
+
+Script: ngan_bc_ltc_com_sel
+
+Complete Dataset
+- Define new variables for resident and family councils
+- Define proportion of private vs public beds
+- Removed irrelevent predictors
+
+Selected Dataset
+- As above
+- Removed all preditors with missing values
+- Binary logistic regression showed 2 significant predictors
+  - FAMILY_COUNCIL
+  - BEDS_TOTAL
+
+**5homes Dataset**
+
+Input: bc_ltc_complete.csv
+
+Script: ngan_bc_filter_5homes
+
+- Merged "Special Unit" homes with the parent homes
+  - Weighted average of DCH and demographic predictors
+  - Sum of the number of beds/rooms
+  - Keep complaints, incident, inspections data from the parent home
+
+
+- Removed 4 homes with suppressed data
+  - Data on complaints, incidents and demographics suppressed
+
+
+- Removed 1 new home with limited data
+  - Data on DCH, complaints, incidents, demographic etc. missing
+
+
+- Removed the predictors with missing values from what is left
+  - Preserved infractions and DCH current year data
+
+Analysis:
+  - Binary logistic regression showed 2 significant predictors
+    - FAMILY_COUNCIL
+    - BEDS_TOTAL
+
+
+None
+CPS_SEVERE
+ABS_PHYS_ABUSIVE
+
+left
+Dementia

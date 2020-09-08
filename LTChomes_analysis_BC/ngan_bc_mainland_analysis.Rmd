@@ -1,0 +1,269 @@
+---
+title: "bc_mainland_analysis"
+author: "Ngan Lyle"
+date: "28/08/2020"
+output: html_document
+---
+## Import and prepare the data
+```{r results="hide"}
+library(skimr)
+library(dplyr)
+
+# Import the data
+df <- read.csv("../data/BC/ngan_bc_ltc_mainland.csv", na.strings="", header=TRUE)
+str(df)
+
+```
+
+
+```{r, echo=FALSE}
+# Change datatypes as needed
+listofcol = list('FACILITY_NAME', 'HCC_CODE', 'STREET_ADDRESS', 'CITY', 'POSTAL')
+for (each in listofcol){
+  df[, each] <- as.character(df[, each])
+}
+
+df$outbreak <- as.factor(df$outbreak)
+# str(df)
+dput(names(df))
+```
+
+```{r, include=FALSE}
+# # Generate the data for analysis
+# # Create lists of variables used to filter data for analysis
+
+num <- c("DCH_NURSE_LASTYR", 
+"DCH_ALLIED_LASTYR", "DCH_TOTAL_LASTYR", "DCH_NURSE_CURRENTYR", 
+"DCH_ALLIED_CURRENTYR", "DCH_TOTAL_CURRENTYR", "BEDS_TOTAL", 
+"ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI", "COMPLAINTS", "SUB_COMPLAINTS", 
+  "INCIDENT_OUTBREAK_100", "INCIDENT_ABUSE_100", 
+"INCIDENT_FALL_100", "INCIDENT_POISON_100", "INCIDENT_MEDICATION_100", 
+"INCIDENT_WANDERING_100", "INCIDENT_INJURY_100", "INCIDENT_AGGRESSION_100", 
+"AGE", "FEMALE", "DEPRESSION", 
+"ADL_DEPENDENT", "CPS_SEVERE", "DEMENTIA", "ABS_PHYS_ABUSIVE",
+  "ISE_LOW", "CMI", "THERAPY_PT", "THERAPY_RT", "THERAPY_OT", 
+"MEDS_DEPRESSION", "MEDS_ANTIPSYCHOTICS", "RESTRAINTS", "INSPECTIONS", 
+"INFRACTIONS", "INFRACTIONS_LICENSING", "INFRACTIONS_FACILITY", 
+"INFRACTIONS_STAFFING", "INFRACTIONS_POLICY", "INFRACTIONS_CARE", 
+"INFRACTIONS_DISEASE", "INFRACTIONS_FOOD", "INFRACTIONS_MEDICATION", 
+"INFRACTIONS_PROGRAM", "INFRACTIONS_REPORTING", "INFRACTIONS_RIGHTS", 
+"INFRACTIONS_OTHER", "BEDS_PRIVATEprop")
+
+cat <- c("HLTH_AUTH", "OWNERSHIP", "REGULATION", "ACCRED_STATUS",
+  "RESIDENT_COUNCIL", 
+"FAMILY_COUNCIL")
+
+data <- subset(df, select = c(num, cat, 'outbreak'))
+
+str(data)
+```
+
+```{r, }
+## Assessing skewness
+# Check for R skewness in numeric predictors
+
+for (each in num){
+  print(each)
+  print(skewness(data[[each]]))
+  # qqnorm(data[[each]], main = each)
+  # qqline(data[[each]], col = 'red')
+}
+
+```
+
+We see above that most of the numeric predictors are right skewed to various degrees. 
+  - Highly right skewed for skewness values > 1. 
+  - Mildly right skewed for skewness values between 0 and 1
+
+There are some left skewed predictors:
+
+[1] "AGE"
+[1] -4.35839
+[1] "FEMALE"
+[1] -1.039271
+[1] "ADL_DEPENDENT"
+[1] -0.03933123
+[1] "DEMENTIA"
+[1] -1.643361
+[1] "ISE_LOW"
+[1] -0.3928765
+[1] "MEDS_DEPRESSION"
+[1] -0.2032298
+
+We explore the variables to assess for zero values prior to transformation. 
+
+```{r, }
+# Assess numeric predictors for 0s
+for (each in num){
+  print(each)
+  print(summary(df[[each]]))
+}
+```
+
+## Explore the variables for transformation
+```{r, }
+# Create a list of numeric variables with 0 values
+list_non0s <- c(
+  'DCH_NURSE_LASTYR',
+  'DCH_ALLIED_LASTYR',
+  'DCH_TOTAL_LASTYR',
+  'DCH_NURSE_CURRENTYR',
+  'DCH_ALLIED_CURRENTYR',
+  'DCH_TOTAL_CURRENTYR',
+  # 'AGE',
+  # 'FEMALE',
+  'DEPRESSION',
+  # 'ADL_DEPENDENT',
+  # 'ISE_LOW',
+  'CMI',
+  # 'MEDS_DEPRESSION',
+  'MEDS_ANTIPSYCHOTICS',
+  'BEDS_TOTAL'
+)
+
+list_0s <- setdiff(num, list_non0s)
+
+library(rcompanion)
+
+# Visualize the effect of square root and log transformations on the data without 0s
+for (each in list_non0s) {  
+  plotNormalHistogram(x = data[[each]], main = each)
+  plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
+  plotNormalHistogram(x = log(data[[each]]), main = c(each, 'log trans'))
+}
+
+```
+
+
+```{r, }
+# Visualize the effect of a square root transformation on the variables with 0s
+for (each in list_0s) {  
+  plotNormalHistogram(x = data[[each]], main = each)
+  plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
+}
+
+```
+
+## Transform the data
+```{r }
+
+# list_non0s <- c(
+#   'DCH_NURSE_LASTYR',
+#   'DCH_ALLIED_LASTYR',
+#   'DCH_TOTAL_LASTYR',
+#   'DCH_NURSE_CURRENTYR',
+#   'DCH_ALLIED_CURRENTYR',
+#   'DCH_TOTAL_CURRENTYR',
+#   'AGE',
+#   # 'FEMALE',
+#   # 'DEPRESSION',
+#   # 'ADL_DEPENDENT',
+#   # 'ISE_LOW',
+#   'CMI',
+#   # 'MEDS_DEPRESSION',
+#   # 'MEDS_ANTIPSYCHOTICS',
+#   # 'BEDS_TOTAL'
+# )
+
+# Log transform in place
+data[c(
+  'DCH_NURSE_LASTYR',
+  'DCH_ALLIED_LASTYR',
+  'DCH_TOTAL_LASTYR',
+  'DCH_NURSE_CURRENTYR',
+  'DCH_ALLIED_CURRENTYR',
+  'DCH_TOTAL_CURRENTYR',
+  'AGE',
+  # 'FEMALE',
+  # 'DEPRESSION',
+  # 'ADL_DEPENDENT',
+  # 'ISE_LOW',
+  'CMI'
+  # 'MEDS_DEPRESSION',
+  # 'MEDS_ANTIPSYCHOTICS',
+  # 'BEDS_TOTAL'
+)] <- log(data[c(
+  'DCH_NURSE_LASTYR',
+  'DCH_ALLIED_LASTYR',
+  'DCH_TOTAL_LASTYR',
+  'DCH_NURSE_CURRENTYR',
+  'DCH_ALLIED_CURRENTYR',
+  'DCH_TOTAL_CURRENTYR',
+  'AGE',
+  # 'FEMALE',
+  # 'DEPRESSION',
+  # 'ADL_DEPENDENT',
+  # 'ISE_LOW',
+  'CMI'
+  # 'MEDS_DEPRESSION',
+  # 'MEDS_ANTIPSYCHOTICS',
+  # 'BEDS_TOTAL'
+)])
+
+list_0s_sqrt <- setdiff(list_0s, c('CPS_SEVERE',
+'ABS_PHYS_ABUSIVE',
+'AGE',
+'Dementia'))
+
+# Square root transform in place
+data[c('DEPRESSION',
+'MEDS_ANTIPSYCHOTICS',
+'BEDS_TOTAL', list_0s_sqrt)] <- sqrt(data[c('DEPRESSION',
+'MEDS_ANTIPSYCHOTICS',
+'BEDS_TOTAL', list_0s_sqrt)])
+
+skim(data)
+
+```
+
+sqrt
+DEPRESSION
+MEDS_ANTIPSYCHOTICS
+BEDS_TOTAL
+
+none
+FEMALE
+ISE_LOW
+ADL_DEPENDENT
+MEDS_DEPRESSION
+
+0s
+CPS_SEVERE
+ABS_PHYS_ABUSIVE
+
+left
+AGE
+Dementia
+
+## Fit logistic regression
+```{r }
+# Fit logistic regression using transformed data
+fit = glm(outbreak~., family=binomial, data=data)
+summary(fit)
+```
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
