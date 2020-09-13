@@ -42,6 +42,7 @@ The following information was scraped:
             - Total available
             - Total in the last 5 years (since January 1, 2015)
             - Total in the last 2 years (since January 1, 2018)
+        5. Date of the first inspection report
 
 On initial webscraping 651 homes were identified. Subsequently, 26 homes were removed (leaving 625) as follows:
 
@@ -80,7 +81,7 @@ The file `hqo-2020-long-term-care-indicators.xlsx` was downloaded from [Health Q
 
 Type | Name
 --|--
-Script | merge_LTC_quality.ipynb
+Script | merge_LTC_odhf_WITHquality.ipynb
 Input files |  <ul><li>hqo-2020-quality.csv</li><li>merged_LTC_odhf.csv</li></ul>
 Output file | merged_LTC_odhf_quality.csv
 
