@@ -12,6 +12,7 @@ library(skimr)
 # Import the data
 df <- read.csv("merged_LTC_odhf_quality.csv", na.strings="", header=TRUE)
 skim(df)
+head(df)
 ```
 
 
@@ -43,6 +44,10 @@ df$total_noncomplaints <- df$total_inspections - df$total_complaints
 df$X5y_noncomplaints <- df$X5y_inspections - df$X5y_complaints
 df$X2y_noncomplaints <- df$X2y_inspections - df$X2y_complaints
 
+# Number of complaints/beds
+df$complaints_norm <- df$total_complaints/df$number_beds
+df$X5y_complaints_norm <- df$X5y_complaints/df$number_beds
+df$X2y_complaints_norm <- df$X2y_complaints/df$number_beds
 ```
 
 ```{r, echo=FALSE}
@@ -78,7 +83,9 @@ cc_ccw = c("total_cc", "X5y_cc", "X2y_cc", "total_ccw", "X5y_ccw", "X2y_ccw")
 
 covid = c("confirmed_resident_cases", "resident_deaths", "confirmed_staff_cases")
 
-data <- subset(df, select = c(keep, profile, 'region', quality, all_inspections, complaints, critical, noncomplaints, withOrders, cc_ccw))
+# data <- subset(df, select = c(keep, profile, 'region', quality, all_inspections, complaints, critical, noncomplaints, withOrders, cc_ccw))
+
+data <- subset(df, select = c(keep, profile, quality, all_inspections, complaints))
 
 ```
 
@@ -89,6 +96,8 @@ data <- subset(df, select = c(keep, profile, 'region', quality, all_inspections,
 library(e1071)
 
 listofcols = c('number_beds', quality, all_inspections, complaints, noncomplaints, critical, withOrders, cc_ccw)
+
+# listofcols = c('number_beds', quality, all_inspections, complaints)
 
 for (each in listofcols){
   print(each)
@@ -161,7 +170,9 @@ As shown, in all cases where variables contain 0s, a square root transformation 
 ## Transform the data
 ```{r }
 # Log transform in place
-data[c(all_inspections, 'total_noncomplaints', 'X5y_noncomplaints', 'total_ccw', 'X5y_ccw')] <- log(data[c(all_inspections, 'total_noncomplaints', 'X5y_noncomplaints', 'total_ccw', 'X5y_ccw')])
+# data[c(all_inspections, 'total_noncomplaints', 'X5y_noncomplaints', 'total_ccw', 'X5y_ccw')] <- log(data[c(all_inspections, 'total_noncomplaints', 'X5y_noncomplaints', 'total_ccw', 'X5y_ccw')])
+
+data[c(all_inspections)] <- log(data[c(all_inspections)])
 
 # Square root transform in place
 data[c('number_beds', list0s)] <- sqrt(data[c('number_beds', list0s)])
