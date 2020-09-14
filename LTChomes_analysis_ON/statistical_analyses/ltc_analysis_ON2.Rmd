@@ -55,7 +55,10 @@ df$total_inspections_norm <- df$total_inspections/df$number_beds/df$years_since_
 df$X5y_inspections_norm <- df$X5y_inspections/df$number_beds
 df$X2y_inspections_norm <- df$X2y_inspections/df$number_beds
 
-
+# Number of inspections/beds
+df$total_noncomplaints_norm <- (df$total_inspections - df$total_complaints)/df$number_beds/df$years_since_first
+df$X5y_noncomplaints_norm <- (df$X5y_inspections - df$X5y_complaints)/df$number_beds
+df$X2y_noncomplaints_norm <- (df$X2y_inspections - df$X2y_complaints)/df$number_beds
 
 ```
 
@@ -83,11 +86,13 @@ location = c('address', 'LHIN', 'city', 'postal_code', 'CSDname', 'CSDuid', 'lat
 
 all_inspections = c("total_inspections_norm", "X5y_inspections_norm", "X2y_inspections_norm")
 complaints = c("total_complaints_norm", "X5y_complaints_norm", "X2y_complaints_norm")
+noncomplaints = c("total_noncomplaints_norm", "X5y_noncomplaints_norm", "X2y_noncomplaints_norm")
 
 covid = c("confirmed_resident_cases", "resident_deaths", "confirmed_staff_cases")
 
-data <- subset(df, select = c(keep, profile, all_inspections, complaints))
+data <- subset(df, select = c(keep, profile, noncomplaints, complaints))
 
+# dput(names(df))
 ```
 
 ```{r, }
@@ -95,7 +100,7 @@ data <- subset(df, select = c(keep, profile, all_inspections, complaints))
 # Check for R skewness in numeric predictors
 library(e1071)
 
-listofcols = c('number_beds', complaints, all_inspections)
+listofcols = c('number_beds', complaints, noncomplaints)
 
 for (each in listofcols){
   print(each)
@@ -120,7 +125,7 @@ We see that the following variables contain zeros:
 ## Explore the variables for transformation
 ```{r, fig.show="hide"}
 # Create a list of numeric variables with 0 values
-list0s <- c(complaints)
+list0s <- c(complaints, "X2y_noncomplaints_norm")
 
 library(rcompanion)
 listofcols <- setdiff(listofcols, list0s)
@@ -149,6 +154,7 @@ As shown, in all cases where variables contain 0s, a square root transformation 
 
 A square root transformation seems best for the following data:
   - number_beds
+  - X2y_noncomplaints_norm
   
 A log transformation seems better for the following data:
   - inspections
@@ -158,7 +164,7 @@ A log transformation seems better for the following data:
 ```{r }
 # Log transform in place
 
-data[c(all_inspections)] <- log(data[c(all_inspections)])
+data[c("total_noncomplaints_norm", "X5y_noncomplaints_norm")] <- log(data[c("total_noncomplaints_norm", "X5y_noncomplaints_norm")])
 
 # Square root transform in place
 data[c('number_beds', list0s)] <- sqrt(data[c('number_beds', list0s)])
@@ -179,11 +185,13 @@ summary(fit)
 ```{r, include=FALSE}
 fit <- update(fit, .~. -X2y_complaints_norm)
 summary(fit)
-fit <- update(fit, .~. -X2y_inspections_norm)
+fit <- update(fit, .~. -X2y_noncomplaints_norm)
 summary(fit)
 fit <- update(fit, .~. -X5y_complaints_norm)
 summary(fit)
-fit <- update(fit, .~. -X5y_inspections_norm)
+fit <- update(fit, .~. -total_noncomplaints_norm)
+summary(fit)
+fit <- update(fit, .~. -X5y_noncomplaints_norm)
 summary(fit)
 fit <- update(fit, .~. -family_council)
 summary(fit)
@@ -195,7 +203,12 @@ fit <- update(fit, .~. -short_stay)
 summary(fit)
 
 
+fit <- update(fit, .~. -X2y_noncomplaints_norm)
+summary(fit)
 
+
+fit <- update(fit, .~. -total_complaints_norm)
+summary(fit)
 
 
 
