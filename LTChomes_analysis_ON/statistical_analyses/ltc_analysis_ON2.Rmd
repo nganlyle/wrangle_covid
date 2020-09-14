@@ -249,16 +249,70 @@ ggplot(data = predicted.data, aes(x=rank, y=probability.of.outbreak)) +
 
 ```
 
-## R Markdown
+RR, Lasso and Elastic Net Regression
+```{r }
+# Divide the data into train/test sets
+x <- subset(data, select=-c(outbreak))
+x <- data.matrix(x)
+y <- subset(data, select = c('outbreak'))
+y <- as.matrix(y)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+train_rows <- sample(1:nrow(data), 0.66*nrow(data))
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+x.train <- x[train_rows, ]
+x.test <- x[-train_rows, ]
+y.train <- y[train_rows, ]
+y.test <- y[-train_rows, ]
 
-```{r cars}
-summary(cars)
 ```
 
+```{r }
+library(glmnet)
+
+# RR
+alpha0.fit <- cv.glmnet(x.train, y.train, type.measure='mse', alpha=0, family='binomial')
+alpha0.predicted <- predict(alpha0.fit, s=alpha0.fit$lambda.1se, newx = x.test)
+# mean((y.test - alpha0.predicted)^2)
+
+# Lasso
+alpha1.fit <- cv.glmnet(x.train, y.train, type.measure='mse', alpha=1, family='binomial')
+alpha1.predicted <- predict(alpha1.fit, s=alpha1.fit$lambda.1se, newx = x.test)
+# mean((y.test - alpha1.predicted)^2)
+
+# Elastic net
+alpha0.5.fit <- cv.glmnet(x.train, y.train, type.measure='mse', alpha=0.5, family='binomial')
+alpha0.5.predicted <- predict(alpha0.5.fit, s=alpha0.5.fit$lambda.1se, newx = x.test)
+
+list.of.fits <- list()
+for (i in 1:10){
+  fit.name <- paste0("alpha", i/10)
+  list.of.fits[[fit.name]] <- 
+    cv.glmnet(x.train, y.train, type.measure = 'mse', alpha=i/10, family='binomial')
+}
+
+```
+
+
+```{r }
+mod <- glmnet(x, y=as.factor(y), alpha = 1, family = 'binomial')
+plot(mod, xvar = 'lambda')
+```
+
+
+```{r }
+coef(mod)
+```
+
+
+```{r }
+cv.mod <- cv.glmnet(x, y, alpha=1)
+plot(cv.mod)
+```
+
+
+```{r }
+
+```
 ## Including Plots
 
 You can also embed plots, for example:
