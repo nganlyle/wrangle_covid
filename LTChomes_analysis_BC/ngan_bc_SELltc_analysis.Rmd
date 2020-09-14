@@ -10,32 +10,27 @@ output: html_document
 library(skimr)
 library(dplyr)
 
-
-
 # Import the data
+# selected data
+df <- read.csv("../data/BC/bc_ltc_selected.csv", na.strings="", header=TRUE)
 
-# noNHorVIHA data
-df <- read.csv("../data/BC/bc_ltc_noNHorVIHA.csv", na.strings="", header=TRUE)
+# Remove the 3 homes that are considered "Special Units"
+df <- df %>%
+  filter(!grepl('Special Unit', FACILITY_NAME))
+
 str(df)
-
-# selected data (remove all predictors with missing values)
-# df <- read.csv("../data/BC/bc_ltc_selected.csv", na.strings="", header=TRUE)
-# 
-# # Remove the 3 homes that are considered "Special Units"
-# df <- df %>% 
-#   filter(!grepl('Special Unit', FACILITY_NAME))
-# 
-# str(df)
 ```
 
 ```{r, echo=FALSE}
 # Change datatypes as needed
 listofcol = list('FACILITY_NAME', 'HCC_CODE', 'STREET_ADDRESS', 'CITY', 'POSTAL')
+
 for (each in listofcol){
   df[, each] <- as.character(df[, each])
 }
 
 df$outbreak <- as.factor(df$outbreak)
+
 # str(df)
 dput(names(df))
 ```
@@ -65,8 +60,8 @@ inspections = c(
 gen = c("OWNERSHIP", "REGULATION", "ACCRED_STATUS","RESIDENT_COUNCIL", "FAMILY_COUNCIL")
 
 dch = c(
-  "DCH_NURSE_LASTYR", 
-  "DCH_ALLIED_LASTYR", 
+  "DCH_NURSE_LASTYR",
+  "DCH_ALLIED_LASTYR",
   "DCH_NURSE_CURRENTYR",
   "DCH_ALLIED_CURRENTYR"
  )
@@ -75,16 +70,17 @@ space = c("BEDS_PRIVATEprop", "BEDS_TOTAL",
   "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI")
 
 dem = c(
-  "AGE", "FEMALE", 
-  "AGE_85_PLUS", "AGE_UNDER_65", "DEPRESSION", "ADL_DEPENDENT", 
-  "CPS_SEVERE", "DEMENTIA", "ABS_PHYS_ABUSIVE", "ISE_LOW", "CMI", 
-  "THERAPY_PT", "THERAPY_RT", "THERAPY_OT", "MEDS_DEPRESSION", 
+  "AGE", "FEMALE",
+  "AGE_85_PLUS", "AGE_UNDER_65", "DEPRESSION", "ADL_DEPENDENT",
+  "CPS_SEVERE", "DEMENTIA", "ABS_PHYS_ABUSIVE", "ISE_LOW", "CMI",
+  "THERAPY_PT", "THERAPY_RT", "THERAPY_OT", "MEDS_DEPRESSION",
   "MEDS_ANTIPSYCHOTICS", "RESTRAINTS"
 )
 
 data <- subset(df, select = c(gen, incidents, inspections, dch, space, 'outbreak'))
 
 str(data)
+
 ```
 
 
@@ -94,82 +90,43 @@ str(data)
 # Check for R skewness in numeric predictors
 library(e1071)
 
-listofcols = c(num)
+listofcol = c(num)
 
-for (each in listofcols){
+for (each in listofcol){
   print(each)
   print(skewness(data[[each]]))
   qqnorm(data[[each]], main = each)
   qqline(data[[each]], col = 'red')
 }
 
-# listofcols = c(incidents, inspections, "CMI", dch, space)
-# 
-# for (each in listofcols){
-#   print(each)
-#   print(skewness(data[[each]]))
-#   qqnorm(data[[each]], main = each)
-#   qqline(data[[each]], col = 'red')
-# }
-
 ```
-
-
-All the data are right skewed except for 
-  1. BEDS_PUBLICprop 3.430426
-  2. ROOMS_PRIVATEprop -1.486055
 
 ```{r, include=FALSE}
 # Assess variables for 0s
-for (each in listofcols){
+for (each in listofcol){
   print(each)
   print(summary(df[[each]]))
 }
 
 ```
 
-Most numeric variables have 0s except for:
-- CMI
-- all DCH variables
-- BEDS_PUBLIC, 1.142218
-- BEDS_TOTAL, 1.03226
-- ROOMS_PRIVATE, 0.944784
-- BEDS_PUBLICprop, 3.430426 highly L skewed
-- ROOMS_TOTAL, 1.103714
-- ROOMS_PRIVATEprop, -1.486055 slightly R skewed
+All the variables above have 0s except for BEDS_TOTAL so will square root transform
 
 ## Explore the variables for transformation
 ```{r, fig.show="hide"}
-
-# Create a list of right skewed numeric variables with 0 values
-list_non0s = c('BEDS_TOTAL')
-list0s = c("ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI",
-  "BEDS_PRIVATEprop")
-
-
-# # Create a list of right skewed numeric variables with 0 values
-# space_non0s = c('BEDS_PUBLIC', 'BEDS_TOTAL', 'ROOMS_PRIVATE', 'ROOMS_TOTAL')
-# space_0s = c("BEDS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI",
-#   "BEDS_PRIVATEprop", "ROOMS_SEMIprop", "ROOMS_MULTIprop")
-# 
-# list0s <- c(incidents, inspections, space_0s)
-# list_non0s <- c(space_non0s, dch, 'CMI')
-# left_skewed <- c('BEDS_PUBLICprop', 'ROOMS_PRIVATEprop')
-
 library(rcompanion)
-# listofcols <- setdiff(listofcols, list0s)
 
-# Visualize the effect of square root transformations on the numeric predictors
-for (each in num) {  
+# Visualize the effect of square root transformations on the  predictors
+for (each in listofcol) {  
   plotNormalHistogram(x = data[[each]], main = each)
   plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
 }
 
-# Visualize the effect of log transformations on the data with no 0s that are right skewed
-for (each in list_non0s) {  
-  plotNormalHistogram(x = data[[each]], main = each)
-  plotNormalHistogram(x = log(data[[each]]), main = c(each, 'log trans'))
-}
+# # Visualize the effect of log transformations on the data with no 0s that are right skewed
+# for (each in list_non0s) {  
+#   plotNormalHistogram(x = data[[each]], main = each)
+#   plotNormalHistogram(x = log(data[[each]]), main = c(each, 'log trans'))
+# }
 
 # Visualize the effect of transformations on the data that are left skewed
 # # log10(max(x+1) - x)
@@ -183,7 +140,6 @@ for (each in list_non0s) {
 ```
 Sqrt transformation is best for all the data.
 
-
 ## Transform the data
 ```{r }
 # list0s
@@ -191,7 +147,7 @@ Sqrt transformation is best for all the data.
 # data[list0s] <- log(data[list0s])
 
 # Square root transform in place
-data[num] <- sqrt(data[num])
+data[listofcol] <- sqrt(data[listofcol])
 
 skim(data)
 ```
@@ -207,6 +163,10 @@ summary(fit)
 ```{r, include=FALSE}
 fit <- update(fit, .~. -HLTH_AUTH)
 summary(fit)
+fit <- update(fit, .~. -ACCRED_STATUS)
+summary(fit)
+fit <- update(fit, .~. -OWNERSHIP)
+summary(fit)
 fit <- update(fit, .~. -REGULATION)
 summary(fit)
 fit <- update(fit, .~. -BEDS_PRIVATEprop)
@@ -220,16 +180,9 @@ summary(fit)
 fit <- update(fit, .~. -ROOMS_SEMI)
 summary(fit)
 
-fit <- update(fit, .~. -ACCRED_STATUS)
-summary(fit)
-fit <- update(fit, .~. -OWNERSHIP)
-summary(fit)
-
 ```
 
 ```{r }
-hist(data$BEDS_TOTAL)
-
 # Most homes have a family_council
 # 8/46 homes without a family council had an outbreak
 # 26/251 with a family council had an outbreak
@@ -246,4 +199,3 @@ subset(df, FAMILY_COUNCIL == 'False')
 ```{r }
 
 ```
-
