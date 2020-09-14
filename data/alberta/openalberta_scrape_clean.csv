@@ -1,0 +1,348 @@
+,Location,Facility Name,Facility Address,Operator Name,Operator Type,DSL-3,DSL-4,DSL-4-Dementia,LTC-Auxilary Hospital,LTC-Nursing Home
+0,Edson,Edson Healthcare Centre (LTC) [Edson Continuing Care],"3825 - 6th Avenue EDSON, Alberta T7E0C5",Alberta Health Services,Alberta Health Services,False,False,False,False,True
+1,Edmonton,Allen Gray Continuing Care Centre,"5005 28 Avenue EDMONTON, Alberta T6L 7G1",The Gray House Guild,Voluntary,False,False,False,True,False
+2,Jasper,Alpine Summit Seniors Lodge,"509 Turret Street JASPER, Alberta T0E 1E0",The Evergreens Foundation,Voluntary,False,True,False,False,False
+3,Edmonton,Ashbourne,"11148 84 Avenue EDMONTON, Alberta T6G 0V8",Garneau United Assisted Living Place,Voluntary,False,True,False,False,False
+4,Morinville,Aspen House,"9706 100 Avenue MORINVILLE, Alberta T8R 1T2",Alberta Health Services,Alberta Health Services,False,True,True,False,False
+5,Athabasca,Athabasca Healthcare Centre,"3100 48 Avenue ATHABASCA, Alberta T9S1M9",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+6,Alexander Reserve,Kipohtakawmik Elders Lodge,"SE of Section 3 TWNSHP 57, Range 27, West of 4th, Alexander Reserve, PO Box 2570 Alberta T8R1S3",Alexander First Services Nation,Voluntary,False,True,False,False,False
+7,Edmonton,BRaosseadnaole H Aeta Glthri eCsebnatcrhe,"4480 McCrae Avenue EDMONTON Alberta, T5E0Y5",Rosedale Partnership,Private,False,True,True,False,False
+8,Raymond,The Good Samaritan Society - Prairie Ridge,"328 Broadway South RAYMOND, Alberta T0K2S0",The Good Samaritan Alberta Health Society (A Lutheran Social Service Organization),Voluntary,False,True,True,False,False
+9,DBaidsssbaunroy,BaAssspaenno  RHidegaelth L Codegnetre,"1610080  52 0A Avevennuue e BADSIDSSABNUOR, YA,l bAelrbtear Tta0 J T0M0B 00W0",MAlobuenrttaa iHn eVaieltwh SenSioerr vHicoeussing,Voluntary,False,True,True,True,False
+10,Edmonton,Balwin Villa – Excel Society [Balwin Villa],"6920 128 Avenue NW EDMONTON, Alberta T5C 1S7",Excel Resources Society,Voluntary,False,True,True,False,False
+11,Calgary,Bow View Manor,"4628 Montgomery NW, CALGARY, Alberta T3B0K7",The Brenda Strafford Foundation,Voluntary,False,False,False,True,True
+12,Calgary,Carewest Sarcee,"3504 Sarcee Road SW 608 5 Avenue CALGARY, Alberta T3E BASSANO, Alberta T0J4T4",Carewest,Alberta Health Services,False,False,False,True,True
+13,Bashaw,Bashaw Meadows,"5502 56 Avenue PO BAG 2000 BASHAW, Alberta T0B 0H0",The Bethany Group,Voluntary,False,True,True,False,False
+14,Airdrie,Bethany Airdrie,"1736 1 Avenue NW 608 5 Avenue AIRDRIE, Alberta T4B BASSANO, Alberta T0J2C4",Bethany Care Society,Voluntary,False,False,False,True,True
+15,Bassano,Bassano Health Centre,"608 5 Avenue BASSANO, Alberta T0J 0B0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+16,Brooks,Sunrise Gardens,"1235 3 Street West BROOKS, Alberta T1R0P7",Age Care Health Services Inc.[Sunrise Gardens General Partnership],Private,False,True,True,False,False
+17,Bentley,Bentley Care Centre,"4834 52 Avenue BENTLEY, Alberta T0C 0J0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+18,Calgary,Bethany Calgary,"916 18A Street NW CALGARY, Alberta T2N 1C6",Bethany Care Society,Voluntary,False,False,False,True,False
+19,Cochrane,Bethany Cochrane,"302 Quigley Drive COCHRANE, Alberta T4C 1X9",Bethany Care Society,Voluntary,False,False,False,False,True
+20,Red Deer,Bethany Collegeside (Red Deer),"99 College Circle RED DEER, Alberta, T4R0M3",Bethany Care Society,Voluntary,False,False,False,False,True
+21,Didsbury,Bethany Didsbury,"1201 15 Avenue DIDSBURY, Alberta T0M 0W0",Bethany Care Society,Voluntary,False,True,True,False,False
+22,Calgary,Bethany Harvest Hills,"19 Harvest Gold Manor NE CALGARY, Alberta T3K 4Y1",Bethany Care Society,Voluntary,False,False,False,False,True
+23,Camrose,Bethany Meadows (DSL),"4209 55 Street CAMROSE, Alberta T4V 1Y6",The Bethany Group,Voluntary,False,True,False,False,False
+24,Camrose,Bethany Meadows (LTC),"4209 55 Street CAMROSE, Alberta T4V 1Y6",The Bethany Group,Voluntary,False,False,False,True,False
+25,Sylvan Lake,Bethany Sylvan Lake (DSL),"4700 47 Avenue SYLVAN LAKE, Alberta T4S 2M3",Bethany Care Society,Voluntary,False,True,False,False,False
+26,Sylvan Lake,Bethany Sylvan Lake (LTC),"4700 47 Avenue SYLVAN LAKE, Alberta T4S 2M3",Bethany Care Society,Voluntary,False,False,False,False,True
+27,Calgary,Beverly Centre Glenmore,"1729 90 Avenue SW CALGARY, Alberta T2V 4S1",Age Care Investments Ltd [AgeCare Ltd.],Private,False,False,False,False,True
+28,Calgary,Beverly Centre Lake Midnapore,"500 Midpark Way SE CALGARY, Alberta T2X 3S3",Age Care Investments Ltd [AgeCare Ltd.],Private,False,False,False,False,True
+29,Oyen,Big Country Hospital,312 3 Avenue East OYEN Alberta T0J2J0,Alberta Health  Services,Alberta Health Services,False,False,False,True,False
+30,Bonnyville,Bonnyville Healthcare Centre,"5001 Lakeshore Drive BONNYVILLE, Alberta T9N 2J7",Covenant Health,Voluntary,False,False,False,True,False
+31,Calgary,Bow Crest Care Centre,"5927 Bowness Road, NW CALGARY, Alberta T3B 0C7",Revera Long Term Care Inc.,Private,False,False,False,False,True
+32,Bow Island,Bow Island Health Centre,"938 Centre Street,   PO Bag 3990 BOW ISLAND, Alberta T0K 0G0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+33,Breton,Breton Health Centre,"4919 49 Avenue BRETON, Alberta T0C 0P0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+34,Brooks,Brooks Health Centre,"440 Third Street East (Bag 300, T1R 1B3) BROOKS, Alberta T1R 0X8",Alberta Health Services,Alberta Health Services,False,False,False,False,True
+35,Canmore,Canmore General Hospital [Golden Eagle View LTC],"1100 Hospital Place CANMORE, Alberta T1W 1N2",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+36,Edmonton,CapitalCare Dickinsfield,"14225 94 Street NW EDMONTON, Alberta T5E 6C6",Capital Care Group Inc.,Alberta Health Services,False,False,False,True,True
+37,Edmonton,CapitalCare Dickinsfield Duplexes [CapitalCare Adult Duplexes; Two Locations],"9943/47 178 Avenue NW & 9935/39 178 Avenue NW EDMONTON, Alberta T5X5X2",Capital Care Group Inc.,Alberta Health Services,True,False,False,False,False
+38,Edmonton,CapitalCare Grandview,"6215 124 Street EDMONTON, Alberta T6H 3V1",Capital Care Group Inc.,Alberta Health Services,False,False,False,True,False
+39,Edmonton,CapitalCare Laurier House Lynnwood [Laurier House Lynnwood],"16815 88 Avenue EDMONTON, Alberta T5R 5Y7",Capital Care Group Inc.,Alberta Health Services,False,True,False,False,False
+40,Edmonton,CapitalCare Lynnwood,"8740 165 Street EDMONTON, Alberta, T5R2R8",Capital Care Group Inc.,Alberta Health Services,False,False,False,True,True
+41,Edmonton,CapitalCare McConnell Place North [Mcconnell Place North],"9113 144 Avenue EDMONTON, Alberta T5E 6K2",Capital Care Group Inc.,Alberta Health Services,False,False,True,False,False
+42,Edmonton,CapitalCare Mcconnell Place West [McConnell Place West],"8720 165 Street EDMONTON, Alberta T5R 5Y8",Capital Care Group Inc.,Alberta Health Services,False,False,True,False,False
+43,Edmonton,CapitalCare Norwood,"10410 111 Avenue EDMONTON, Alberta T5G 3A2",Capital Care Group Inc.,Alberta Health Services,False,False,False,True,False
+44,Sherwood Park,CapitalCare Strathcona (DSL),"12 Brower Drive SHERWOOD PARK, Alberta T8H 1V3",Capital Care Group Inc.,Alberta Health Services,False,True,False,False,False
+45,Sherwood Park,CapitalCare Strathcona (LTC),"12 Brower Drive SHERWOOD PARK, Alberta T8H 1V3",Capital Care Group Inc.,Alberta Health Services,False,False,False,False,True
+46,Cardston,Cardston Health Centre,"144 2 Street West PO Box 1440 CARDSTON, Alberta T0K 0K0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+47,Calgary,Carewest Colonel Belcher (DSL),"1939 Veterans Way NW CALGARY, Alberta T3B 5Y8",Carewest,Alberta Health Services,False,True,False,False,False
+48,Calgary,Carewest Colonel Belcher (LTC),"1939 Veterans Way NW CALGARY, Alberta T3B 5Y8",Carewest,Alberta Health Services,False,False,False,True,False
+49,Calgary,Carewest Dr. Vernon Fanning Centre,"722 16th Avenue NE CALGARY, Alberta T2E6V7",Carewest,Alberta Health Services,False,False,False,True,False
+50,Calgary,Carewest Garrison Green,"3108 Don Ethell Boulevard SW CALGARY, Alberta T3E 6Z5",Carewest,Alberta Health Services,False,False,False,False,True
+51,Calgary,Carewest George Boyack,"1203 Centre Avenue NE CALGARY, Alberta T2E 0A5",Carewest,Alberta Health Services,False,False,False,False,True
+52,Calgary,Carewest Nickle House,"950 Robert Road NE CALGARY, Alberta T2E 7T4",Carewest,Alberta Health Services,False,True,False,False,False
+53,Calgary,Carewest Rouleau Manor,"2208 2 Street SW CALGARY, Alberta T2S 3C3",Carewest,Alberta Health Services,False,False,False,False,True
+54,Calgary,Carewest Royal Park,"4222 Sarcee Road SW CALGARY, Alberta T3E 7J8",Carewest,Alberta Health Services,False,False,False,False,True
+55,Calgary,Carewest Signal Pointe,"6363 Simcoe Road SW CALGARY, Alberta T3H 4M3",Carewest,Alberta Health Services,False,False,False,False,True
+56,Spirit River,Central Peace Health Complex,"5010 45 Avenue SPIRIT RIVER, Alberta T0H 3G0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+57,Onoway,Chateau Lac St. Anne,"5123 49 Avenue ONOWAY, Alberta T0E 1V0",Lac Ste. Anne Foundation,Private,True,False,False,False,False
+58,Three Hills,Chateau Three Hills,"920 Main Street THREE HILLS, Alberta T0M 2A0",Continuum Health Care (Alberta) Ltd.,Private,True,False,False,False,False
+59,Cardston,Chinook Lodge,"451 3 Street W Box 2730 CARDSTON, Alberta T0K 0K0",Chinook Foundation,Voluntary,True,False,False,False,False
+60,Edmonton,Churchill Retirement Community (The),"10015 103 Avenue EDMONTON, Alberta T5J 0H1",HCN-Revera Lessee (The Churchill) GP Inc.,Private,False,True,True,False,False
+61,St. Albert,Citadel Care Centre,"25 Erin Ridge Road ST. ALBERT, Alberta T8N 7K8",Citadel Care Corporation [Qualicare Corporation],Private,False,False,False,False,True
+62,St. Albert,Citadel Mews West,"35 Erin Ridge Road ST. ALBERT, Alberta T8N 5S8",Citadel Mews West Ltd.,Private,False,True,False,False,False
+63,Taber,Clearview Lodge,"4730 50 Avenue TABER, Alberta T1G 1N6",Taber & District Housing Foundation,Voluntary,True,False,False,False,False
+64,Rocky Mountain House,Clearwater Centre (Rocky Mountain House) (DSL),"5615 60 St, Rocky Mountain House, Alberta T4T1W2",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,True,True,True,False,False
+65,Rocky Mountain House,Clearwater Centre (Rocky Mountain House) (LTC),"5615 60 St, Rocky Mountain House, Alberta T4T1W2",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,False,False,False,True
+66,Calgary,Clifton Manor,"4726 8 Avenue SE CALGARY, Alberta T2A 0A8",The Brenda Strafford Foundation,Private,False,False,False,False,True
+67,Medicine Hat,Club Sierra at River Ridge (LTC),"4 River Ridge Drive NW MEDICINE HAT, Alberta T1A 8V1",Club Sierra Lifestyles At River Ridge Inc.,Private,False,False,False,False,True
+68,Coaldale,Coaldale Health Centre,"2100 11 Street COALDALE, Alberta T1M 1L2",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+69,Cold Lake,Cold Lake Healthcare Centre,"314 25 Street COLD LAKE, Alberta T9M 1G6",Alberta Health  Services,Alberta Health Services,False,False,False,True,False
+70,Lethbridge,Columbia House Lethbridge [Columbia Assisted Living],"785 Columbia Boulevard  West LETHBRIDGE, Alberta T1K 4T8",Age Care Health Services Inc. [Age Care Investments Ltd.],Voluntary,True,False,False,False,False
+71,Consort,Consort Hospital And Care Centre,"5402 52 Avenue CONSORT, Alberta T0C 1B0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+72,Spruce Grove,Copper Sky Lodge,"100 McLaughlin Drive SPRUCE GROVE, Alberta T7X 0N1",Choices In Community Living Inc.,Private,False,True,True,False,False
+73,Coronation,Coronation Hospital And Care Centre,"5000 Municipal Road CORONATION, Alberta T0C 1C0",Alberta Health Services,Alberta Health Services,True,False,False,True,False
+74,Sherwood Park,Country Cottage Seniors Residence [Chartwell Country Cottage Retirement Residence],"75 Cranford Way, T0J SHERWOOD PARK, Alberta T8H2B9",Chartwell Master Services Care Corporation,Private,False,True,False,False,False
+75,Beaumont,Covenant Care Chateau Vitaline,"5018 52 Avenue BEAUMONT, Alberta T4X 1P3",Convenant Care,Voluntary,False,True,True,False,False
+76,Blairmore,Crowsnest Pass Health Centre,"2001 107 Street BLAIRMORE, Alberta T0K 0E0",Alberta Health Services,Alberta Health Services,False,False,False,True,True
+77,Medicine Hat,Cypress View Foundation [Cypress View],"722 Bassett Crescent  NW MEDICINE HAT, Alberta T1A 7W8",Cypress View Foundation,Voluntary,True,False,False,False,False
+78,Devon,Devon General Hospital,"101 Erie Street South DEVON, Alberta T9G 1A6",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+79,Edmonton,Devonshire Care Centre,"1808 142 Street NW EDMONTON, Alberta T6R 3H2",Park Place Seniors Living Inc.,Private,False,False,False,False,True
+80,Edmonton,Devonshire Manor,"1718 Rabbit Hill Road NW EDMONTON, Alberta T6R 3N6",Devonshire Manor Ltd.,Private,False,True,False,False,False
+81,Didsbury,Didsbury District Health Services,"1210 20 Avenue DIDSBURY, Alberta T0M 0W0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+82,Lloydminster,Dr. Cooke Extended Care Centre,"3915 56 Avenue LLOYDMINSTER, Alberta T9V 1N9",Prairie North Regional Health Authority,RHA,False,False,False,True,False
+83,Barrhead,Dr. W.R. Keir - Barrhead Continuing Care Centre,"5336 59 Avenue BARRHEAD, Alberta T7N 1L2",Alberta Health Services,Alberta Health Services,False,False,False,False,True
+84,Drayton Valley,Drayton Valley Hospital And Care Centre,"4550 Madsen Avenue DRAYTON VALLEY, Alberta T7A 1N8",Alberta Health Services,Alberta Health Services,False,False,False,True,True
+85,Drumheller,Drumheller Health Centre,"351 9 Street NW DRUMHELLER, Alberta T0J 0Y1",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+86,Myrnam,Eagle View Lodge [Eagle View Lodge And Villa],"4802 49 Avenue MYRNAM, Alberta T0B 3K0",Eagle Hill Foundation,Private,True,False,False,False,False
+87,Calgary,Eau Claire Retirement Residence,"301 7 Street SW CALGARY, Alberta T2P 1Y6",Chartwell Seniors Housing REIT,Private,False,True,True,False,False
+88,Eckville,Eckville Manor House,"5111 51 Avenue ECKVILLE, Alberta T0M 0X0",Operator: Lacombe Foundation Management Body: The Bethany Group,Voluntary,True,False,False,False,False
+89,Calgary,Edgemont Retirement Residence,"80 Edenwold Drive NW CALGARY, Alberta T3A 5R9",Revera Long Term Care Inc.,Private,False,True,False,False,False
+90,Lethbridge,Edith Cavell Care Centre,"1255 5 Avenue South LETHBRIDGE, Alberta T1J 0V6",Chantelle Management Ltd.,Private,False,False,False,False,True
+91,Edmonton,Edmonton Chinatown Care Centre (DSL),"9539 102A Avenue EDMONTON, Alberta T5H 0G2",Hong Lok Management Services Ltd.,Voluntary,False,True,False,False,False
+92,Edmonton,Edmonton General Continuing Care Centre,"11111 Jasper Avenue EDMONTON, Alberta T5K 0L4",Covenant Health,Voluntary,False,False,False,True,False
+93,Edmonton,Edmonton People in Need Shelter Society,"10303 96 Street EDMONTON, ALberta T5H2H2",Edmonton People in Need Shelter Society,Voluntary,False,True,False,False,False
+94,Edson,Edson Healthcare Centre (DSL) [Edson Continuing Care],"3825 - 6th Avenue EDSON, Alberta T7E0C5",Alberta Health Services,Alberta Health Services,False,True,True,False,False
+95,Elk Point,Elk Point Healthcare Centre,"5310 50 Avenue ELK POINT, Alberta T0A 1A0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+96,Elk Point,Elk Point Heritage Lodge [Heritage Lodge],"5338 50 Avenue Box 780 ELK POINT, Alberta T0A 1A0",M.D. Of St. Paul Foundation,Voluntary,True,False,False,False,False
+97,Edmonton,Emmanuel Home,"13425 57 Street EDMONTON, Alberta T5A 2G1",Christian Senior Citizens Homes Society of Northern Alberta,Voluntary,False,True,False,False,False
+98,Calgary,Evanston Grand Village,"40 Evanston Way NW CALGARY, Alberta T3P 1C5",Golden Life Management Corp.,Private,False,True,True,False,False
+99,Athabasca,Extendicare Athabasca,"4517 53 Street ATHABASCA, Alberta T9S 1K4",Extendicare (Canada) Inc.,Private,False,False,False,False,True
+100,Bonnyville,Extendicare Bonnyville,"4602 47 Avenue BONNYVILLE, Alberta T9N 2E8",Extendicare (Canada) Inc.,Private,False,False,False,False,True
+101,Calgary,Extendicare Cedars Villa,"3330 8 Avenue SW CALGARY, Alberta T3C 0E7",Extendicare (Canada) Inc.,Private,False,False,False,False,True
+102,Edmonton,Extendicare Eaux Claires,"16503 95 Street EDMONTON, Alberta T5Z 0G7",Extendicare (Canada) Inc.,Private,False,False,False,False,True
+103,Lethbridge,Extendicare Fairmont Park,"115 Fairmont Boulevard South LETHBRIDGE, Alberta T1K 5V2",Extendicare (Canada) Inc.,Private,False,True,True,False,False
+104,Fort MacLeod,Extendicare Fort MacLeod,"654 29 Street Box 189 FORT MACLEOD, Alberta T0L 0Z0",Extendicare (Canada) Inc.,Private,False,False,False,False,True
+105,Calgary,Extendicare Hillcrest,"1512 8 Avenue NW CALGARY, Alberta T2N 1C1",Extendicare (Canada) Inc.,Private,False,False,False,False,True
+106,Edmonton,Extendicare Holyrood [Extendicare Holyrood (South)],"8008 95 Avenue EDMONTON, Alberta T6C 2T1",Extendicare (Canada) Inc.,Private,False,False,False,False,True
+107,Leduc,Extendicare Leduc,"4309 50 Street Box 280 LEDUC, Alberta T9E 6K6",Extendicare (Canada) Inc.,Private,False,False,False,False,True
+108,Mayerthorpe,Extendicare Mayerthorpe,"4706 54 Street MAYERTHORPE, Alberta T0E 1N0",Extendicare (Canada) Inc.,Private,False,False,False,False,True
+109,Red Deer,Extendicare Michener Hill (DSL),"12 Michener Boulevard RED DEER, Alberta T4P 0M1",Extendicare (Canada) Inc.,Private,False,True,False,False,False
+110,Red Deer,Extendicare Michener Hill (LTC),"12 Michener Boulevard RED DEER, Alberta T4P 0M1",Extendicare (Canada) Inc.,Private,False,False,False,False,True
+111,St Paul,Extendicare St. Paul,"4614 47 Avenue ST. PAUL, Alberta T0A 3A3",Extendicare (Canada) Inc.,Private,False,False,False,False,True
+112,Viking,Extendicare Viking,"5020 57 Avenue Box 430 VIKING, Alberta T0B 4N0",Extendicare (Canada) Inc.,Private,False,False,False,False,True
+113,Vulcan,Extendicare Vulcan,"715 2 Avenue South VULCAN, Alberta T0L 2B0",Extendicare (Canada) Inc.,Private,False,False,False,False,True
+114,Fairview,Fairview Health Complex [Continuing Care Centre],"10628 110 Street FAIRVIEW, Alberta T0H 1L0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+115,Camrose,Faith House,"4832 54 Street CAMROSE, Alberta T4V 2A4",The Bethany Group,Voluntary,True,False,False,False,False
+116,Calgary,Father Lacombe Care Centre,"270 Providence Boulevard SE, CALGARY, Alberta T2X0V6",The Father Albert Lacombe Home,Voluntary,False,False,False,False,True
+117,St. Albert,Foyer Lacombe,"1 St. Vital Avenue ST. ALBERT, Alberta T8N1K1",Convenant Care,Voluntary,False,False,False,False,True
+118,Edmonton,Good Samaritan Society Southgate Care Centre,"4225 107 Street, EDMONTON, Alberta T6J2P1",The Good Samaritan Alberta Health Society (A Lutheran Social Service Organization),Voluntary,False,False,False,False,True
+119,Evansburg,Good Samaritan Society Pembina Village,"5225 50 Street Evansburg, Alberta T0E0T0",The Good Samaritan Alberta Health Society (A Lutheran Social Service Organization),Voluntary,False,False,False,False,True
+120,Galahad,Galahad Care Centre,"1 Main St GALAHAD, Alberta T0B 1R0",Alberta Health Services,Alberta Health Services,False,False,False,False,True
+121,Edmonton,Garneau Hall,"10923 82 Avenue EDMONTON, Alberta T6G 2N9",Unicare Homes Inc.,Private,False,True,True,False,False
+122,Smoky Lake,George McDougall - Smoky Lake Healthcare Centre,"4212 55 Avenue SMOKY LAKE, Alberta T0A 3C0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+123,Calgary,Glamorgan Care Centre,"105 Galbraith Drive SW CALGARY, Alberta T3E 4Z5",Travois Holdings Ltd.,Private,False,False,False,False,True
+124,Edmonton,Glastonbury Mews,"1585 Glastonbury Boulevard EDMONTON, Alberta T5T 6S8",Glastonbury Village Ltd.,Private,False,True,False,False,False
+125,Lethbridge,Golden Acres Lodge,"1615 13 Street North LETHBRIDGE, Alberta T1H 2V2",Green Acres Foundation,Voluntary,True,False,False,False,False
+126,Edmonton,Good Samaritan Dr. Gerald Zetter Care Centre,"9649 71 Avenue NW EDMONTON, Alberta T6E 5J2",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,False,False,True,False
+127,Wetaskiwin,Good Samaritan Good Shepherd Lutheran Home,"4702 Northmount Drive WETASKIWIN, Alberta T9A 3T3",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,True,True,True,False,False
+128,Magrath,Good Samaritan Society Garden Vista,"37 East and 2nd Avenue North MAGRATH, Alberta T0K 1J0",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,True,True,False,False
+129,Stony Plain,Good Samaritan Society George Hennig Place,"4808 57 Avenue STONY PLAIN, Alberta T7Z 2J9",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,True,False,False,False
+130,Taber,Good Samaritan Society Linden View,"4700 64 Avenue TABER, Alberta T1G 0C6",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,True,True,False,False
+131,Edmonton,Good Samaritan Society Millwoods Centre,"101 Youville Drive East EDMONTON, Alberta T6L 7A4",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,False,False,False,True
+132,Lethbridge,Good Samaritan Society Park Meadows Village,"1511 – 15 Avenue N. LETHBRIDGE, Alberta T1H 1W2",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,True,True,False,False
+133,Stony Plain,Good Samaritan Society Stony Plain Care Centre (DSL),"4800 55 Avenue STONY PLAIN, Alberta T7Z 1P9",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,False,True,False,False
+134,Stony Plain,Good Samaritan Society Stony Plain Care Centre (LTC),"4800 55 Avenue STONY PLAIN, Alberta T7Z 1P9",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,False,False,False,True
+135,Pincher Creek,Good Samaritan Society Vista Village,"1240 Ken Thornton Blvd. PINCHER CREEK, Alberta T0K 1W0",The Good Samaritan Society (A Lutheran Social S  e  r vice Organization),Voluntary,True,True,True,False,False
+136,Lethbridge,Good Samaritan Society West Highland Centre,"2641 Garry Drive West LETHBRIDGE, Alberta T1J 5A3",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,True,True,False,False
+137,Medicine Hat,Good Samaritan South Ridge Village (DSL),"550 Spruce Way SE MEDICINE HAT, Alberta T1B 4P1",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,True,True,False,False
+138,Medicine Hat,Good Samaritan South Ridge Village (LTC),"550 Spruce Way SE MEDICINE HAT, Alberta T1B 4P1",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,False,False,False,True
+139,Spruce Grove,Good Samaritan Spruce Grove Centre,"415 King Street SPRUCE GROVE, Alberta T7X 3Y8",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,True,False,False,False
+140,Edmonton,Good Samaritan Wedman House [Good Samaritan Society Wedman House (The)],"10525 19 Avenue NW EDMONTON, Alberta T6J 6X9",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,True,False,False,False
+141,Edmonton,Grand Manor,"10766 - 97 Street EDMONTON, Alberta T5H 4R2",Excel Resources Society,Voluntary,False,True,False,False,False
+142,Grande Prairie,Grande Prairie Care Centre,"9705 94 Avenue GRANDE PRAIRIE, Alberta T8V3A2",Chantelle Management Ltd.,Private,False,False,False,False,True
+143,Grande Prairie,Grande Prairie Care Centre (LTC),"9705 94 Avenue GRANDE PRAIRIE, Alberta T8V3A2",Chantelle Management Ltd.,Private,False,False,False,False,True
+144,Grimshaw,Grimshaw/Berwyn And District Community Health Centre,"5621 Wilcox Road GRIMSHAW, Alberta T0H 1W0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+145,Hanna,Hanna Health Centre,"904 Centre Street N, Box 830 HANNA, Alberta T0J 1P0",Alberta Health Services,Alberta Health Services,False,False,False,False,True
+146,Edmonton,Hardisty Care Centre,"6420 101 Avenue EDMONTON, Alberta T6A 0H5",Hardisty Care Centre Ltd.,Private,False,False,False,False,True
+147,Hardisty,Hardisty Health Centre,"4531 47 Avenue, Box 269 HARDISTY, Alberta T0B1V0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+148,La Crete,Heimstaed Lodge [Heimstaed Seniors Lodge],"9806 105 Street LA CRETE, Alberta T0H 2H0",MacKenzie Housing Management Board,Private,True,True,True,False,False
+149,Vegreville,Heritage House,"4570 60 Street VEGREVILLE, Alberta T9C 1X2",Points West Living Heritage House Inc.,Private,False,True,False,False,False
+150,High River,High River General Hospital,"560 9 Avenue SW HIGH RIVER, Alberta T1V 1B3",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+151,Drumheller,Hillview Lodge,"696 6 Avenue East DRUMHELLER, Alberta T0J 0Y5",Drumheller & District Seniors Foundation,Voluntary,True,False,False,False,False
+152,Calgary,Holy Cross Manor [Covenant Care Holy Cross Manor],"70 Evanspark Manor NW CALGARY, Alberta T3P 0N4",Covenant Care,Voluntary,False,True,True,False,False
+153,Hythe,Hythe Continuing Care Centre,"10307 100 Street PO Box 100 HYTHE, Alberta T0H 2C0",Alberta Health Services,Alberta Health Services,False,False,False,False,True
+154,Innisfail,Innisfail Health Centre,"5023 42 Street INNISFAIL, Alberta T4G 1A9",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+155,Calgary,Intercare Brentwood Care Centre,"2727 16 Avenue NW CALGARY, Alberta T2N 3Y6",Intercare Corporate Group Inc.,Private,False,False,False,False,True
+156,Calgary,Intercare Chinook Care Centre,"1261 Glenmore Trail SW CALGARY, Alberta T2V 4Y8",Intercare Corporate Group Inc.,Private,False,False,False,False,True
+157,Calgary,Intercare Southwood Care Centre,"211 Heritage Drive, SE CALGARY, Alberta T2H 1M9",Intercare Corporate Group Inc.,Private,False,False,False,False,True
+158,Islay,Islay Assisted Living,"5016 53  Street ISLAY, Alberta T0B2J0",Alberta Health Services,Alberta Health Services,True,False,False,False,False
+159,High Prairie,J.B. Wood Continuing Care Centre,"46206 53 Avenue HIGH PRAIRIE, Alberta T0G1E0",Alberta Health Services,Alberta Health Services,False,False,False,False,True
+160,Edmonton,Jasper Place Continuing Care Centre,"8903 168 Street EDMONTON, Alberta T5R 2V6",Revera Long Term Care Inc,Private,False,False,False,False,True
+161,Edmonton,Jubilee Lodge Nursing Home,"10333 76 Street EDMONTON, Alberta T6A 3A8",Jubilee Lodge Nursing Home Ltd. [Qualicare Corporation],Private,False,False,False,False,True
+162,Edmonton,Kensington Village Continuing Care Centre (LTC),"12603 135 Avenue EDMONTON, Alberta T5L 5B2",Shepherd's Care Foundation,Voluntary,False,False,False,False,True
+163,Killam,Killam Health Care Centre,"5203 49 Avenue, Box 40 KILLAM, Alberta T0B 2L0",Covenant Health,Voluntary,False,False,False,True,False
+164,Calgary,Kingsland Terrace,"835 68 Avenue SW CALGARY, Alberta T2V 0N5",Intercare Corporate Group Inc.,Private,False,True,False,False,False
+165,La Crete,La Crete Continuing Care Centre,"10601 100 Avenue Box 295 LA CRETE, Alberta T0H 2H0",Alberta Health Services,Alberta Health Services,False,False,False,False,True
+166,Lacombe,Lacombe Hospital And Care Centre,"5430 47 Avenue LACOMBE, Alberta T4L 1G8",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+167,Lamont,Lamont Health Care Centre,"5216 53 Street Bag 10 LAMONT, Alberta T0B 2R0",The United Church Of Canada,Voluntary,False,False,False,True,True
+168,Edmonton,Laurel Heights [Laurel Heights Retirement Residence],"3110 22 Avenue NW EDMONTON, Alberta T6T 0R2",Laurel Facility Partnership,Private,False,True,True,False,False
+169,Lethbridge,Legacy Lodge,"335 Lettice Perry Road North LETHBRIDGE, Alberta T1H5V7",Choices In Community Living Inc.,Private,False,True,True,False,False
+170,Medicine Hat,Leisure Way [Leisure Way Community Group Home and Consulting Services Inc.],"PO Box 1267 (11404 Range Road 52) MEDICINE HAT, Alberta T1A7M6",Leisure Way Community Group Home and Consulting Services Inc.,Private,False,True,True,False,False
+171,Edmonton,Lewis Estates Retirement Residences,"9310 211  Street NW EDMONTON, Alberta T5T4N8",Lewis Estates Seniors Facility Limited Partnership,Private,False,False,True,False,False
+172,Leduc,Lifestyle Options Leduc [Alberta Life Care Housing Foundation],"108 West Haven Drive LEDUC, Alberta T9E 0R7",Lifestyle Options Ltd.,Private,False,True,True,False,False
+173,Edmonton,Lifestyle Options Riverbend [Alberta Life Care Housing Foundation],"200 Falconer Court NW EDMONTON, Alberta T6R 2V9",Lifestyle Options Ltd.,Private,False,True,False,False,False
+174,Edmonton,Lifestyle Options Terra Losa [Alberta Life Care Housing Foundation],"17203 99 Avenue EDMONTON, Alberta T5T 6S5",Lifestyle Options Ltd.,Private,False,False,True,False,False
+175,Edmonton,Lifestyle Options Whitemud [Alberta Life Care Housing Foundation],"4069 106 Street EDMONTON, Alberta T6J 2S3",Lifestyle Options Ltd.,Private,False,True,True,False,False
+176,Lloydminster,Lloydminster Continuing Care Centre,"7402 – 29th Street, LLOYDMINSTER, Alberta, T9V 3N1",Prairie North Regional Health Authority,RHA,False,False,False,True,False
+177,Camrose,Louise Jensen Care Centre,"5400 46 Avenue CAMROSE, Alberta T4V 4P8",The Bethany Group,Voluntary,False,False,False,True,False
+178,Fort MacLeod,MacLeod Pioneer Lodge,"660 28 Street FORT MACLEOD, Alberta T0L0Z0",AWlbiellortwa HCereaeltkh  FSouenrvdiacetiosn,Voluntary,True,False,False,False,False
+179,Milk River,Milk River Health Centre,"517 Centre Avenue East MILK RIVER, Alberta T0K1M0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+180,Manning,Manning Community Health Centre,"600 2 Street NE MANNING, Alberta T0H 2M0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+181,Mannville,Mannville Care Centre,"5007 46 Street MANNVILLE, Alberta T0B 2W0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+182,McLennan,Manoir Du Lac (DSL),"164 3 Avenue NW MCLENNAN, Alberta T0H 2L0",Integrated Life Care Inc.,Private,True,True,True,False,False
+183,McLennan,Manoir Du Lac (LTC),"164 3 Avenue NW MCLENNAN, Alberta T0H 2L0",Integrated Life Care Inc.,Private,False,False,False,False,True
+184,Mundare,Mary Immaculate Hospital,"Polomark Drive and 53 Street Box 349 MUNDARE,  Alberta  T0B3H0",Convent Health,Voluntary,False,False,False,True,False
+185,Medicine Hat,Masterpiece River Ridge (DSL),"4 River Ridge Drive NW MEDICINE HAT, Alberta T1A 8V1",Club Sierra Lifestyles At River Ridge Inc.,Private,False,True,True,False,False
+186,Mayerthorpe,Mayerthorpe Healthcare Centre,"4417 45 Street MAYERTHORPE, Alberta T0E1N0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+187,Calgary,Mayfair Care Centre,"8240 Collicut Street SW CALGARY, Alberta T2V 2X1",Travois Holdings Ltd.,Private,False,False,False,False,True
+188,Calgary,McKenzie Towne Care Centre,"80 Promenade Way SE CALGARY,  Alberta  T2Z4G4",Revera Long Term Care Inc.,Private,False,False,False,False,True
+189,Calgary,McKenzie Towne Retirement Residence,"20 Promenade Park SE CALGARY, Alberta T2Z 4A5",HCN-Revera Lessee (McKenzie Towne) GP Inc.,Private,False,True,True,False,False
+190,Medicine Hat,Meadow Ridge Seniors Village,"259 Park Meadows Drive MEDICINE HAT, Alberta T1B 4E3",Meadow Ridge Seniors Village Partnership,Private,False,True,True,False,False
+191,Camrose,Memory Lane [Rosehaven Care Centre],"4612 53 Street CAMROSE, Alberta T4V 1Y6",The Bethany Group,Voluntary,False,False,True,False,False
+192,Edmonton,Miller Crossing Care Centre,"14251 50 Street NW EDMONTON, Alberta T5A 5J4",Revera Long Term Care Inc.,Private,False,False,False,False,True
+193,Calgary,Millrise Place (DSL),"14911 5 Street SW CALGARY, Alberta T2Y 5B9",Millrise Seniors Village LP,Private,False,True,True,False,False
+194,Calgary,Millrise Place (LTC),"14911 5 Street SW CALGARY, Alberta T2Y 5B9",Millrise Seniors Village LP,Private,False,False,False,False,True
+195,Edmonton,Millwoods Shepherd’s Care Centre,"6620 28 Avenue EDMONTON, Alberta T6K 2R1",Shepherd's Care Foundation,Voluntary,False,False,False,True,True
+196,Banff,Mineral Springs Hospital,"305 Lynx Street PO Box 1050 BANFF, Alberta T1L 1H7",Covenant Health,Voluntary,False,False,False,True,False
+197,Calgary,Monterey Place,"4288 Catalina Boulevard NE CALGARY, Alberta T1Y 7J5",Monterey Seniors Village LP,Private,False,True,True,False,False
+198,Calgary,Mount Royal Care Centre,"1813 9 Street SW CALGARY, Alberta T2T 3C2",Revera Long Term Care Inc.,Private,False,False,False,False,True
+199,Hinton,Mountain View Centre [Good Samaritan Society Mountain View Centre],"1290 Switzer Drive HINTON, Alberta T7V 2E9",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,True,True,False,False
+200,Calgary,Newport Harbour Care Centre,"10 Country Village Cove NE CALGARY, Alberta T3K 6B4",Park Place Seniors Living Inc.,Private,False,False,False,False,True
+201,Ponoka,Northcott Care Centre (Ponoka),"4209 48 Avenue PONOKA, Alberta T5J 1P4",Northcott Lodge Nursing Home Ltd.,Private,False,False,False,False,True
+202,Fort McMurray,Northern Lights Regional Health Centre,"7 Hospital Street FORT MCMURRAY, Alberta T9H 1P2",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+203,High Level,Northwest Health Centre,"11202 100 Avenue HIGH LEVEL, Alberta T0H 1Z0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+204,Black Diamond,Oilfields General Hospital,"717 Government Road BLACK DIAMOND, Alberta T0L 0H0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+205,Olds,Olds Hospital And Care Centre,"3901 57 Avenue OLDS, Alberta T4H 1T4",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+206,Brooks,Orchard Manor,"951 Cassils Road West BROOKS, Alberta T1R 1K9",Age Care Health Services Inc. [Age Care Investments Ltd.],Private,True,False,False,False,False
+207,Castor,Our Lady Of The Rosary Hospital,"5402 47 Street CASTOR, Alberta T0C 0X0",Covenant Health,Voluntary,False,False,False,True,False
+208,Edmonton,Our Parents' Home [Beit Horim Our Parents Home],"10112 119 Street EDMONTON, Alberta T5K 1Y9",Christenson Communities Ltd.,Private,False,True,True,False,False
+209,Edson,Parkland Lodge,"4619 9 Avenue EDSON, Alberta T7E 1R7",The Evergreens Foundation,Private,True,False,False,False,False
+210,Peace River,Peace River Community Health Centre,"10101 68 Street PEACE RIVER, Alberta T8S 1T6",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+211,Pincher Creek,Pincher Creek Health Centre,"1222 Mill Ave PINCHER CREEK, Alberta T0K 1W0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+212,Red Deer,Pines Lodge [Pines Lodge And Supportive Living],"52 Piper Drive RED DEER, Alberta T4P 1H8",Piper Creek Foundation,Voluntary,True,False,False,False,False
+213,Picture Butte,Piyami Lodge,"301 Rogers Avenue PICTURE BUTTE, Alberta T0K 1V0",Green Acres Foundation,Voluntary,True,True,False,False,False
+214,Picture Butte,Piyami Place,"301 Cowan Avenue PICTURE BUTTE, Alberta T0K 1V0",Green Acres Foundation,Voluntary,False,True,True,False,False
+215,Mayerthorpe,Pleasant View Lodge,"4606 54 Street MAYERTHORPE, Alberta T0E 1N0",Lac Ste. Anne Foundation,Private,True,False,False,False,False
+216,Bow Island,Pleasant View Lodge,"1039 1 Street East Bag 6700 BOW ISLAND, Alberta T0K 0G0",Forty Mile Foundation,Voluntary,True,False,False,False,False
+217,Vegreville,Points West Living Century Park,"4613 50 Street VEGREVILLE, Alberta T9C 1L7",Connecting Care,Private,False,True,True,False,False
+218,Cold Lake,Points West Living Cold Lake,"512 25 Street COLD LAKE, Alberta T9M 1G6",Points West L iving Cold Lake Inc.,Private,True,True,True,False,False
+219,Grande Prairie,Points West Living Grande Prairie (DSL),"11460 104 Avenue GRANDE PRAIRIE, Alberta T8V 3G9",Points West Living Grande Prairie Inc. [Connecting Care],Private,False,True,True,False,False
+220,Grande Prairie,Points West Living Grande Prairie (LTC),"11460 104 Avenue GRANDE PRAIRIE, Alberta T8V 3G9",Points West Living Grande Prairie Inc. [Connecting Care],Private,False,False,False,False,True
+221,Lloydminister,Points West Living Lloydminster,"4025 56 Avenue LLOYDMINSTER, Alberta T9V 1N9",Connecting Care,Private,False,True,False,False,False
+222,Peace River,Points West Living Peace River,"11011 99 Street PEACE RIVER, Alberta T8S 1B3",Connecting Care,Private,True,True,True,False,False
+223,Slave Lake,Points West Living Slave Lake,"105 6 Avenue NE SLAVE LAKE, Alberta T0G2A2",Points West Living Slave Lake Inc.,Private,False,True,True,False,False
+224,Stettler,Points West Living Stettler,"4501 70 Street STETTLER, Alberta T0J2L3",Connecting Care,Private,False,True,True,False,False
+225,Wainwright,Points West Living Wainwright,"2710 11 Avenue WAINWRIGHT, Alberta T9W 0B1",Connecting Care,Private,False,True,True,False,False
+226,Ponoka,Ponoka Hospital And Care Centre,"5800 57 Avenue PONOKA, Alberta T4J 1P1",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+227,Milk River,Prairie Rose Lodge,"117 3 Avenue NW PO Box 489 MILK RIVER, Alberta T0K 1M0",Ridge Country Housing,Voluntary,True,False,False,False,False
+228,Calgary,Prince Of Peace Harbour,"243205 Garden Road NE CALGARY, Alberta T1X 1M9",Sage Properties  Corp.,Private,False,False,True,False,False
+229,Calgary,Prince Of Peace Manor,"285030 Luther Rose Boulevard CALGARY, Alberta T1X1M9",Sage Properties Corp.,Private,False,True,False,False,False
+230,Calgary,Providence Care Centre (DSL),"149 Providence Boulevard SE CALGARY, Alberta, T2X 0X2",The Father Albert Lacombe Home,Voluntary,False,True,True,False,False
+231,Calgary,Providence Care Centre (LTC),"149 Providence Boulevard SE CALGARY, Alberta, T2X 0X2",The Father Albert Lacombe Home,Voluntary,False,False,False,False,True
+232,Daysland,Providence Place,"6120 51 Avenue DAYSLAND, Alberta T0B 1A0",Daysland & District Aging in Place Foundation,Private,True,False,False,False,False
+233,Provost,Provost Health Centre,"5002 54 Avenue Box 270 PROVOST, Alberta T0B 3S0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+234,Grande Prairie,Queen Elizabeth II Hospital [Mackenzie Place - One West],"10409 98 Street GRANDE PRAIRIE, Alberta T8V 2E8",Alberta Health Services,Alberta Health Services,False,True,False,False,False
+235,Camrose,Rosehaven Care Centre,"4612 53 Street CAMROSE,  Alberta  T4V1Y6",The Bethany Group,Voluntary,False,False,False,True,False
+236,Radway,Radway Continuing Care Centre,"Hwy 28, Range Road 205 RADWAY, Alberta T0A 2V0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+237,Raymond,Raymond Health Centre,"150 N 4 Street East RAYMOND, Alberta T0K 2S0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+238,Redwater,Redwater Health Centre,"4812 58 Street REDWATER, Alberta T0A 2W0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+239,Okotoks,Revera Heartland [The Heartland Retirement Residence],"47 Riverside Gate OKOTOKS, Alberta T1S 0J2",Revera Long Term Care Inc.,Private,False,True,False,False,False
+240,Crooked Creek,Ridgevalley Seniors Home [Ridgevalley Home],"SE Quarter of 22-71 26- W5, RR 1, Site 1, Box 9 CROOKED CREEK, Alberta         T0H 0Y0",Church of God in Christ Mennonite Rosedale Congregation,Private,True,False,False,False,False
+241,Rimbey,Rimbey Hospital And Care Centre,"5228 50 Avenue RIMBEY, Alberta T0C 2J0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+242,Edmonton,Riverbend Retirement Residence,"103 Rabbit Hill Court NW EDMONTON, Alberta T6R 2V3",HCN-Revera Lessee (Riverbend) GP Inc.,Private,False,True,True,False,False
+243,Fort Saskatchewan,Rivercrest Care Centre,"10104 101 Avenue FORT SASKATCHEWAN, Alberta T8L 2A5",Rivercrest Lodge Nursing Home Ltd. [Qualicare Corporation],Private,False,False,False,False,True
+244,Medicine Hat,Riverview Care Centre,"603 Prospect Drive SW MEDICINE HAT, Alberta T1A 4C2",Revera Long Term Care Inc.,Private,False,False,False,False,True
+245,Calgary,Rocky Ridge Retirement Community,"10715 Rocky Ridge Boulevard NW CALGARY, Alberta T3G 4G1",Signature Living Corporation,Private,False,False,True,False,False
+246,Edmonton,Rosedale Estates,"10101 111 Street EDMONTON, Alberta T5K 2W4",Rosedale Partnership,Private,True,True,False,False,False
+247,St. Albert,Rosedale St. Albert,"20 Hebert Road ST. ALBERT, Alberta T8N 3Y6",Rosedale Partnership,Private,False,True,False,False,False
+248,Lacombe,Royal Oak Manor,"4501 College Avenue LACOMBE, Alberta T4L2M8",Royal Oak Dev. Lacombe Ltd.,Private,True,True,True,False,False
+249,Edmonton,Rutherford Heights Retirement Residence,"949 Rutherford Road SW EDMONTON, Alberta T6W 0E5",All Seniors Care Living Centres Ltd.,Private,False,True,True,False,False
+250,Strathmore,Sagewood Seniors Community,"140 Cambridge Glen Drive STRATHMORE, Alberta T1P1N3",AgeCare Ltd.,Private,False,True,True,False,False
+251,Strathmore,Sagewood Seniors Community (LTC),"140 Cambridge Glen Drive STRATHMORE, Alberta T1P1N3",AgeCare Ltd.,Private,False,False,False,False,True
+252,Edmonton,Saint Thomas Assisted Living Centre [Saint Thomas Health Centre - Covenant Care],"8411 91 Street NW EDMONTON, Alberta T6C 1E4",Covenant Care,Voluntary,False,True,True,False,False
+253,Leduc,Salem Manor Nursing Home,"4419 46 Street LEDUC, Alberta T9E 6L2",Salem Manor Society,Voluntary,False,False,False,False,True
+254,Edmonton,Salvation Army Grace Manor,"12510 140 Avenue EDMONTON, Alberta T5X 6C4",The Governing Council Of The Salvation Army,Voluntary,False,True,False,False,False
+255,Edmonton,Salvation Army Stepping Stone Supportive Residence [Stepping Stone Supportive Residence],"9304 103A Avenue NW EDMONTON, Alberta T5H 4R4",The Governing Council Of The Salvation Army,Voluntary,False,True,False,False,False
+256,Calgary,Scenic Acres Retirement Residence,"150 Scotia Landing NW CALGARY, Alberta T3L 2K1",Revera Long Term Care Inc.,Private,False,True,True,False,False
+257,Drayton Valley,Serenity House,"4548 Madsen Avenue DRAYTON VALLEY, Alberta T7A 1T2",Alberta Health Services,Alberta Health Services,True,False,False,False,False
+258,Edmonton,Edmonton Chinatown Care Centre (LTC),"9539 102A Avenue EDMONTON, Alberta T5H 0G2",Hong Lok Management Services Ltd.,Voluntary,False,False,False,False,True
+259,Calgary,Seton Seniors Community (DSL),"4963 Front Street SE CALGARY, Alberta, T3M 2M3",Age Care Health Services Inc.,Private,False,True,True,False,False
+260,Calgary,Seton Seniors Community (LTC),"4963 Front Street SE CALGARY, Alberta, T3M 2M3",Age Care Health Services Inc.,Private,False,False,False,False,True
+261,Barrhead,Shepherd's Care Barrhead,"5236 59 Avenue BARRHEAD, Alberta T7N 0A3",Shepherd's Care Foundation,Voluntary,False,True,False,False,False
+262,Edmonton, Shepherd's Care Greenfield,"3820 114 Street EDMONTON, Alberta T6J1M5",Shepherd's Care Foundation,Voluntary,False,False,True,False,False
+263,Edmonton,Shepherd's Care Kensington Village (DSL),"12603 135 Avenue EDMONTON, Alberta T5L 5B2",Shepherd's Care Foundation,Voluntary,False,True,True,False,False
+264,Edmonton,Shepherd's Care Vanguard,"10311 122 Avenue EDMONTON, Alberta T5G0K8",Shepherd's Care Foundation,Voluntary,True,True,True,False,False
+265,Edmonton,Shepherd's Gardens,"6608 28 Avenue EDMONTON, Alberta T6K 2R1",Shepherd's Care Foundation,Voluntary,False,True,False,False,False
+266,Sherwood Park,Sherwood Care,"2020 Brentwood Boulevard N SHERWOOD PARK, Alberta T8A 0X1",Sherwood Care [Adventists Health Systems Alberta],Voluntary,False,False,False,False,True
+267,Nanton,Silver Willow Lodge,"2007 22 Avenue NANTON, Alberta T0L 1R0",Mosquito Creek Foundation,Private,True,True,True,False,False
+268,Slave Lake,Slave Lake Healthcare Centre,"309 6 Street NE SLAVE LAKE, Alberta T0G 2A2",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+269,Westlock,Smithfield Lodge,"10203 97 Street WESTLOCK, Alberta T7P 2H1",Alberta Health Services,Alberta Health Services,True,True,False,False,False
+270,Smoky Lake,Smoky Lake Continuing Care Centre,"4607 52 Avenue SMOKY LAKE, Alberta T0A 3C0",Alberta Health Services,Alberta Health Services,False,False,False,False,True
+271,Edmonton,South Terrace Continuing Care Centre,"5905 112 Street EDMONTON, Alberta T6H 3J4",Revera Long Term Care Inc.,Private,False,False,False,False,True
+272,Whitecourt,Spruce View Lodge and Heights,"12 Sunset Boulevard WHITECOURT, Alberta T7S 1S9",Lac Ste. Anne Foundation,Private,True,False,False,False,False
+273,Edmonton,Sprucewood Place Housing Community Partnership,"11418 97 Street EDMONTON, Alberta T5G 1X5",Sprucewood Place Housing Community Partnership,Voluntary,False,True,False,False,False
+274,St. Albert,St. Albert Retirement Residence,"125 Everitt Drive North ST. ALBERT, Alberta T8N 7R9",ASC (SA) Facility Limited Partnership,Private,False,False,True,False,False
+275,Edmonton,St. Joseph's Auxiliary Hospital,"10707 29 Avenue EDMONTON, Alberta T6J 6W1",Covenant Health,Voluntary,False,False,False,True,False
+276,Medicine Hat,St. Joseph's Home,"156 3 Street NE MEDICINE HAT, Alberta T1A 5M1",Covenant Health,Voluntary,False,True,False,False,False
+277,Calgary,St. Marguerite Manor,"110 Evanspark Manor NW CALGARY, Alberta T3P 0N4",Covenant Care,Voluntary,False,True,True,False,False
+278,Trochu,St. Mary's Health Care Centre,"451 Dechauney Avenue TROCHU, Alberta T0M 2C0",Covenant Health,Voluntary,False,False,False,True,False
+279,Lethbridge,St. Michael's Health Centre,"1400 9 Avenue South LETHBRIDGE, Alberta T1J 4V5",Covenant Health,Voluntary,False,True,True,True,False
+280,Edmonton,St. Michael's Long Term Care Centre,"7404 139 Avenue EDMONTON, Alberta T5C3H7",St. Michael's Health Group,Voluntary,False,False,False,True,True
+281,St Paul,St. Paul Abilities Network [Aspen House],"4606 48 Avenue ST. PAUL, Alberta T0A 3A3",St. Paul Abilities Network,Voluntary,True,False,False,False,False
+282,Fort Vermilion,St. Theresa General Hospital,"4506 46 Avenue FORT VERMILION, Alberta T0H 1N0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+283,St Paul,St. Therese - St. Paul Healthcare Centre,"4713 48 Avenue ST. PAUL, Alberta T0A 3A3",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+284,Lethbridge,St. Therese Villa,"253 Southgate Boulevard LETHBRIDGE, Alberta T1K 2S1",Covenant Health,Voluntary,False,True,True,False,False
+285,Stettler,Stettler Hospital And Care Centre,"5912 47 Avenue STETTLER, Alberta T0C 2L0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+286,Grimshaw,Stone Brook,"4902 59 Street GRIMSHAW, Alberta T0H 1W0",Accredited Supportive Living Services Limited,Private,True,True,True,False,False
+287,Okotoks,Strafford Foundation Tudor Manor [Tudor Manor],"200 Sandstone Drive OKOTOKS, Alberta T1S 1R1",The Brenda Strafford Foundation,Voluntary,False,True,True,False,False
+288,Sherwood Park,Summerwood Village Retirement Residence,"4255 Clover Bar Road SHERWOOD PARK, Alberta T8H 0C9",All Seniors Care Living Centres,Private,False,True,True,False,False
+289,Sundre,Sundre Hospital And Care Centre,"709 1 Street NE SUNDRE, Alberta T0M 1X0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+290,Coaldale,Sunny South Lodge,"1122 20 Avenue COALDALE, Alberta T1M 1L4",Green Acres Foundation,Voluntary,True,True,True,False,False
+291,Medicine Hat,Sunnyside Care Centre [Haven of Rest of Medicine Hat] (DSL),"1720 Bell Street SW MEDICINE HAT, Alberta T1A 5G1",Sunnyside Nursing Home Society,Voluntary,False,True,False,False,False
+292,Medicine Hat,Sunnyside Care Centre [South Country Village Campus]               (LTC),"1720 Bell Street SW MEDICINE HAT, Alberta T1A 5G1",Sunnyside Nursing Home Society,Voluntary,False,False,False,False,True
+293,Olds,Sunrise Encore Olds,"3300 57 Avenue OLDS, Alberta T4H1C4",Seasons Retirement Communities (Encore Olds) GP Inc.,Private,False,True,True,False,False
+294,Camrose,Sunrise Village Camrose,"6821 50 Avenue CAMROSE, Alberta T4V 5G5",Seasons Retirement Communities (Camrose) GP Inc.,Private,False,True,True,False,False
+295,Drayton Valley,Sunrise Village Drayton Valley [Sunrise Village (Drayton) Holdings Ltd.],"3902 47 Street DRAYTON VALLEY, Alberta T7AA02",Seasons Retirement Communities (Drayton Valley) GP Inc.,Private,True,False,False,True,False
+296,Olds,Sunrise Village Olds,"5600 Sunrise Crescent OLDS, Alberta T4H 1W4",Seasons Retirement Communities (Olds) GP Inc.,Private,True,False,False,False,False
+297,Ponoka,Sunrise Village Ponoka,"4004 40 Street Close PONOKA, Alberta T4J 0A3",Seasons Retirement Communities (Ponoka) GP Inc.,Private,True,False,False,False,False
+298,Wetaskiwin,Sunrise Village Wetaskiwin,"5430 37A Avenue WETASKIWIN, Alberta T9A 3A8",Continuum Health Care (Alberta) Ltd.,Private,True,False,False,False,False
+299,High River,Sunrise Village – High River,"660 7 Street NW HIGH RIVER, Alberta T1V 1S7",Seasons Retirement Communities (High River) GP Inc.,Private,False,True,True,False,False
+300,Innisfail,Sunset Manor - Legacy West,"3312 52 Avenue INNISFAIL, Alberta T4G 0C3",Chantelle Management Ltd.,Private,True,True,True,False,False
+301,Taber,Taber Health Centre,"4326 50 Avenue TABER, Alberta T1G 1N9",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+302,Edmonton,The Dianne And Irving Kipnes Centre For Veterans,"4470 McCrae Avenue EDMONTON, Alberta T5E 6M8",Capital Care Group Inc.,Alberta Health Services,False,False,False,True,False
+303,Grande Prairie,The Gardens At Emerald Park,"10402 111 Street GRANDE PRAIRIE, Alberta T8V 8G4",Connecting Care,Private,True,False,False,False,False
+304,Cardston,The Good Samaritan Society Lee Crest,"989 1 Street East CARDSTON, Alberta T0K 0K0",The Good Samaritan Society (A Lutheran Social Service Organization),Voluntary,False,True,True,False,False
+305,Medicine Hat,The Meadow Lands Retirement Residence,"223 Park Meadows Drive SE MEDICINE HAT, Alberta T1B 4K7",HCN-Revera Lessee (Meadowlands) GP Inc.,Private,False,True,False,False,False
+306,Medicine Hat,The Valleyview (LTC),"65 Valleyview Drive SW MEDICINE HAT, Alberta T1A 7K5",Age Care Investments Ltd.,Private,False,False,False,False,True
+307,Medicine Hat,The Valleyview Supportive Living (DSL),"65 Valleyview Drive SW MEDICINE HAT, Alberta T1A 7K5",Age Care Investments Ltd.,Private,False,True,False,False,False
+308,Three Hills,Three Hills Health Centre,"1504 2 Street North THREE HILLS, Alberta T0M 2A0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+309,Tofield,Tofield Health Centre,"5543 44 Street Box 1200 TOFIELD, Alberta T0B 4J0",Alberta Health Services,Alberta Health Services,False,False,False,True,True
+310,Edmonton,Touchmark At Wedgewood,"18333 Lessard Road EDMONTON, Alberta T6M 2Y5",Touchmark at Wedgewood (Edmonton) Inc.,Private,False,False,False,False,True
+311,Edmonton,Tuoi Hac - Golden Age Manor,"12607 148 Avenue EDMONTON, Alberta T5X 0C2",Edmonton Buddhist Research Institute,Voluntary,False,True,False,False,False
+312,Two Hills,Two Hills Health Centre,"4401 53 Avenue TWO HILLS, Alberta T0B 4K0",Alberta Health Services,Alberta Health Services,False,False,False,True,True
+313,Valleyview,Valleyview Health Centre,"4802 Highway Street East VALLEYVIEW, Alberta T0H3N0",Alberta Health Alberta Health Services Services,Alberta Health Alberta Health Services Services,False,False,False,True,False
+314,Slave Lake,Vanderwell Heritage Place,"301 6 Avenue NE SLAVE LAKE, Alberta T0G 2A0",Lesser Slave Lake Regional Housing Authority,Private,True,False,False,False,False
+315,Vegreville,Vegreville Care Centre,"4525 50 Street VEGREVILLE, Alberta T9A0A1",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+316,Vegreville,Vegreville Manor,"5913 49 Street VEGREVILLE, Alberta T9C 1X4",St. Michael's Health Group,Private,True,False,False,False,False
+317,Edmonton,Venta Care Centre,"13525 102 Street EDMONTON, Alberta T5E 4K3",Venta Nursing Home Ltd.,Private,False,False,False,False,True
+318,Vermilion,Vermilion Health Centre,"5720 50 Avenue VERMILION, Alberta T9X 1K7",Alberta Health Services,Alberta Health Services,False,False,False,False,True
+319,Vermilion,Vermilion Valley Lodge,"4610 53 Avenue VERMILION, Alberta T9X 1G6",Vermilion And District Housing Foundation,Private,True,False,False,False,False
+320,Camrose,Viewpoint,"4503 48 Street CAMROSE, Alberta T4V 4Z7",The Bethany Group,Voluntary,True,False,False,False,False
+321,Edmonton,Villa Marguerite Seniors Community Partnership,"9810 165 Street EDMONTON, Alberta T5P 3S7",Villa Marguerite Seniors Community Partnership,Voluntary,False,True,True,False,False
+322,Red Deer,Villa Marie,"10 Carrington Drive RED DEER, Alberta T4P 0S3",Covenant Care,Voluntary,False,True,True,False,False
+323,Vilna,Vilna Villa [Vilna Lodge],"5404 50 Street VILNA, Alberta T0A 3L0",The Smoky Lake Foundation,Voluntary,True,False,False,False,False
+324,Vulcan,Vulcan Community Health Centre,"610 Elizabeth Street S VULCAN, Alberta T0L 2B0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+325,Wainwright,Wainwright Health Centre,"530 6 Avenue WAINWRIGHT, Alberta T9W 1R6",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+326,Calgary,Walden Heights Seniors Community (DSL),"250 Walden Drive SE CALGARY, Alberta T2X 0V1",Age Care Health Services Inc.,Private,False,True,True,False,False
+327,Calgary,Walden Heights Seniors Community (LTC),"250 Walden Drive SE CALGARY, Alberta T2X 0V1",Age Care Health Services Inc.,Private,False,False,False,False,True
+328,Medicine Hat,Wellington Retirement Residence (The),"1595 Southview Drive SE MEDICINE HAT, Alberta T1B 0A1",Wellington Retirement Residence Partnership,Private,False,True,False,False,False
+329,Calgary,Wentworth Manor - The Court,"5717 14 Avenue SW CALGARY, Alberta T3H3M2",The Brenda Strafford Foundation,Voluntary,False,True,True,False,False
+330,Calgary,Wentworth Manor – The Court (LTC),"5717 14 Avenue SW CALGARY, Alberta T3H3M2",The Brenda Strafford Foundation,Voluntary,False,False,False,False,True
+331,Villeneuve,West Country Hearth,"26504 Sec Hwy 633 STURGEON COUNTY, Alberta T8T 1R9",West Sturgeon People Aging In Place Foundation,Voluntary,False,True,True,False,False
+332,Red Deer,West Park Lodge,"5715 41 Street Crescent RED DEER, Alberta T4N 1B3",Choices in Community living Inc.,Private,False,True,True,False,False
+333,Westlock,Westlock Healthcare Centre [Westlock Continuing Care Centre],"10220 93 Street WESTLOCK, Alberta T7P2G4",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+334,Linden,Westview Care Community,"700 Nursing Home Road LINDEN, Alberta T0M 1J0",Church Of God In Christ Mennonite,Voluntary,False,False,False,False,True
+335,Stony Plain,Westview Health Centre - Stony Plain,"4405 Southpark Drive STONY PLAIN, Alberta T7Z2M7",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+336,Wetaskiwin,Wetaskiwin Hospital and Care Centre,"6910 47 Street WETASKIWIN, Alberta T9A3N3",Alberta Health Services,Alberta Health Services,False,False,False,False,True
+337,Wetaskiwin,Wetaskiwin Meadows,"4501 60 Street WETASKIWIN, Alberta T9A 1X7",The Bethany Group,Voluntary,True,False,False,False,False
+338,Grande Cache,Whispering Pines Seniors Lodge [Whispering Pines Lodge],"10210 Shand Avenue GRANDE CACHE, Alberta T0E 0Y0",The Evergreens Foundation,Private,False,True,False,False,False
+339,Calgary,Whitehorn Village [Whitehorn Village Retirement Community],"5200 44 Avenue NE CALGARY, Alberta T1Y 7L4",Origin Active Lifestyles Communities,Private,False,True,True,False,False
+340,Edmonton,Wild Rose Cottage,"9612 172 Street EDMONTON, Alberta T5T 6C7",Chartwell Master Care Corporation,Private,False,True,False,False,False
+341,Lac La Biche,William J. Cadzow - Lac La Biche Healthcare Centre,"9110 93 Street LAC LA BICHE, Alberta T0A 2C0",Alberta Health Services,Alberta Health Services,False,False,False,True,False
+342,Claresholm,Willow Creek Continuing Care Centre,"4221 8 Street West CLARESHOLM, Alberta T0L 0T0",Alberta Health Services,Alberta Health Services,False,False,False,True,True
+343,Calgary,Wing Kei Care Centre,"1212 Centre Street NE CALGARY, Alberta T2E 2R4",Chinese Christian Wing Kei Nursing Home Association,Voluntary,False,False,False,False,True
+344,Calgary,Wing Kei Greenview,"307 35 Avenue NE CALGARY, Alberta T2E 2K6",Chinese Christian Wing Kei Nursing Home Association,Voluntary,False,True,True,False,False
+345,Blairmore,York Creek Lodge,"1810 112 Street BLAIRMORE, Alberta T0K 0E0",Crowsnest Pass Senior Housing,Voluntary,True,False,False,False,False
+346,St. Albert,Youville Auxiliary Hospital (Grey Nuns) Of St. Albert,"9 St. Vital Avenue ST. ALBERT, Alberta T8N 1K1",Covenant Health,Voluntary,False,False,False,True,False

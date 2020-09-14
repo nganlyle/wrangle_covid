@@ -1,0 +1,416 @@
+Site Name,Address 1,Visit Type,Visit Result,Site Name
+AGECARE SAGEWOOD,140 Cambridge Glen Drive,Consultation,Compliant,1
+AGECARE SAGEWOOD,140 Cambridge Glen Drive,Inspection Visit,Compliant,1
+AGECARE SETON,4963 Front Street SE,Consultation,Compliant,1
+AGECARE SETON,4963 Front Street SE,Inspection Visit,Compliant,1
+AGECARE SKYPOINTE,179 Skyview Circle NE,Consultation,Compliant,1
+AGECARE SKYPOINTE,179 Skyview Circle NE,Inspection Visit,Compliant,1
+ALLEN GRAY CONTINUING CARE,5005 28 Avenue,Consultation,Compliant,1
+ASTER JOINT VENTURE LIMITED PARTNERSHIP A/O AGECARE WALDEN HEIGHTS,250 Walden Drive SE,Consultation,Compliant,1
+ASTER JOINT VENTURE LIMITED PARTNERSHIP A/O AGECARE WALDEN HEIGHTS,250 Walden Drive SE,Inspection Visit,Compliant,1
+ATHABASCA HEALTHCARE CENTRE,3100 48 Avenue,Consultation,Non-Compliant,3
+ATHABASCA HEALTHCARE CENTRE,3100 48 Avenue,Inspection Visit,Compliant,1
+ATHABASCA HEALTHCARE CENTRE,3100 48 Avenue,Inspection Visit,Non-Compliant,4
+BASSANO HEALTH CENTRE,608 5 Avenue,Consultation,Compliant,1
+BASSANO HEALTH CENTRE,608 5 Avenue,Inspection Visit,Compliant,1
+BASSANO HEALTH CENTRE,608 5 Avenue,Mini Inspection Visit,Compliant,1
+BENEVOLENCE CARE CENTRE,9810 165 Street,Consultation,Compliant,1
+BENEVOLENCE CARE CENTRE,9810 165 Street,Inspection Visit,Compliant,1
+BENEVOLENCE CARE CENTRE,9810 165 Street,Inspection Visit,Non-Compliant,1
+BENTLEY CARE CENTRE,4834 52 Avenue,Consultation,Compliant,1
+BENTLEY CARE CENTRE,4834 52 Avenue,Inspection Visit,Compliant,1
+BENTLEY CARE CENTRE,4834 52 Avenue,Inspection Visit,Non-Compliant,2
+BETHANY CALGARY,916 18A Street NW,Consultation,Compliant,1
+BETHANY CALGARY,916 18A Street NW,Inspection Visit,Compliant,1
+BETHANY CALGARY,916 18A Street NW,Inspection Visit,Non-Compliant,2
+BETHANY CARE CENTRE - HARVEST HILLS,19 Harvest Gold Manor NE,Consultation,Compliant,1
+BETHANY CARE CENTRE - HARVEST HILLS,19 Harvest Gold Manor NE,Inspection Visit,Compliant,2
+BETHANY CARE CENTRE AIRDRIE,1736 1 Avenue NW,Consultation,Compliant,1
+BETHANY CARE CENTRE AIRDRIE,1736 1 Avenue NW,Inspection Visit,Compliant,2
+BETHANY CARE CENTRE COCHRANE,1000-32 Quigley Drive,Consultation,Compliant,1
+BETHANY CARE CENTRE COCHRANE,1000-32 Quigley Drive,Inspection Visit,Compliant,1
+BETHANY CARE CENTRE COCHRANE,1000-32 Quigley Drive,Mini Inspection Visit,Compliant,1
+BETHANY COLLEGESIDE,99 College Circle,Consultation,Compliant,1
+BETHANY COLLEGESIDE,99 College Circle,Inspection Visit,Compliant,2
+BETHANY MEADOWS,4209 55 Street,Consultation,Compliant,1
+BETHANY MEADOWS,4209 55 Street,Inspection Visit,Non-Compliant,1
+BETHANY MEADOWS,4209 55 Street,Mini Inspection Visit,Compliant,1
+BETHANY RIVERVIEW,2915 26 Avenue SE,Inspection Visit,Compliant,2
+BETHANY SYLVAN LAKE,4700 47 Avenue,Consultation,Compliant,1
+BETHANY SYLVAN LAKE,4700 47 Avenue,Inspection Visit,Compliant,1
+BETHANY SYLVAN LAKE,4700 47 Avenue,Mini Inspection Visit,Compliant,1
+BEVERLY CENTRE GLENMORE,1729 90 Avenue SW,Consultation,Compliant,1
+BEVERLY CENTRE LAKE MIDNAPORE/BEVERLY ESTATE,500 Midpark Way SE,Inspection Visit,Compliant,1
+BEVERLY CENTRE LAKE MIDNAPORE/BEVERLY ESTATE,500 Midpark Way SE,Mini Inspection Visit,Compliant,1
+BIG COUNTRY HOSPITAL,312 3 Avenue East,Consultation,Compliant,1
+BIG COUNTRY HOSPITAL,312 3 Avenue East,Inspection Visit,Non-Compliant,3
+BONNYVILLE HEALTHCARE CENTRE,5001 Lakeshore Drive,Consultation,Non-Compliant,2
+BONNYVILLE HEALTHCARE CENTRE,5001 Lakeshore Drive,Inspection Visit,Compliant,1
+BONNYVILLE HEALTHCARE CENTRE,5001 Lakeshore Drive,Inspection Visit,Non-Compliant,3
+BOW CREST CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,5927 Bowness Road NW,Consultation,Compliant,1
+BOW CREST CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,5927 Bowness Road NW,Inspection Visit,Compliant,2
+BOW ISLAND HEALTH CENTRE,"938 Centre Street, PO Bag 3990",Consultation,Compliant,1
+BOW VIEW MANOR,4628 Montgomery Boulevard NW,Consultation,Compliant,1
+BRENTWOOD CARE CENTRE,2727 16 Avenue NW,Consultation,Compliant,1
+BRETON HEALTH CENTRE,4919 49 Avenue,Consultation,Compliant,1
+BROOKS HEALTH CENTRE,440 Third Street East,Consultation,Compliant,1
+BROOKS HEALTH CENTRE,440 Third Street East,Inspection Visit,Compliant,2
+CANMORE GENERAL HOSPITAL (GOLDEN EAGLE VIEW LTC),1100 Hospital Place,Consultation,Compliant,1
+CANMORE GENERAL HOSPITAL (GOLDEN EAGLE VIEW LTC),1100 Hospital Place,Inspection Visit,Compliant,2
+CAPITAL CARE DICKINSFIELD,14225 94 Street NW,Consultation,Compliant,1
+CAPITAL CARE DICKINSFIELD,14225 94 Street NW,Follow-Up Visit,Compliant,1
+CAPITAL CARE DICKINSFIELD,14225 94 Street NW,Inspection Visit,Non-Compliant,1
+CAPITAL CARE DICKINSFIELD,14225 94 Street NW,Mini Inspection Visit,Non-Compliant,1
+CAPITAL CARE GRANDVIEW,6215 124 Street,Consultation,Compliant,1
+CAPITAL CARE GRANDVIEW,6215 124 Street,Inspection Visit,Compliant,1
+CAPITAL CARE GRANDVIEW,6215 124 Street,Mini Inspection Visit,Compliant,1
+CAPITAL CARE LYNNWOOD,8740 165 Street,Consultation,Compliant,1
+CAPITAL CARE LYNNWOOD,8740 165 Street,Inspection Visit,Compliant,1
+CAPITAL CARE LYNNWOOD,8740 165 Street,Mini Inspection Visit,Compliant,1
+CAPITAL CARE NORWOOD,10410 111 Avenue,Consultation,Compliant,1
+CAPITAL CARE NORWOOD,10410 111 Avenue,Inspection Visit,Compliant,1
+CAPITAL CARE NORWOOD,10410 111 Avenue,Mini Inspection Visit,Compliant,1
+CAPITAL CARE STRATHCONA,12 Brower Drive,Consultation,Compliant,1
+CAPITAL CARE STRATHCONA,12 Brower Drive,Follow-Up Visit,Non-Compliant,2
+CAPITAL CARE STRATHCONA,12 Brower Drive,Inspection Visit,Compliant,1
+CAPITAL CARE STRATHCONA,12 Brower Drive,Inspection Visit,Non-Compliant,2
+CARDSTON HEALTH CENTRE,144 2 Street West,Consultation,Compliant,1
+CARDSTON HEALTH CENTRE,144 2 Street West,Follow-Up Visit,Compliant,1
+CARDSTON HEALTH CENTRE,144 2 Street West,Inspection Visit,Compliant,1
+CARDSTON HEALTH CENTRE,144 2 Street West,Inspection Visit,Non-Compliant,4
+CAREWEST COLONEL BELCHER,1939 Veterans Way NW,Consultation,Compliant,1
+CAREWEST COLONEL BELCHER,1939 Veterans Way NW,Inspection Visit,Compliant,2
+CAREWEST DR. VERNON FANNING CENTRE,722 16 Avenue NE,Complaint,Compliant,1
+CAREWEST DR. VERNON FANNING CENTRE,722 16 Avenue NE,Consultation,Compliant,1
+CAREWEST DR. VERNON FANNING CENTRE,722 16 Avenue NE,Inspection Visit,Compliant,2
+CAREWEST GARRISON GREEN,3108 Don Ethell Boulevard SW,Consultation,Compliant,1
+CAREWEST GARRISON GREEN,3108 Don Ethell Boulevard SW,Inspection Visit,Compliant,1
+CAREWEST GARRISON GREEN,3108 Don Ethell Boulevard SW,Mini Inspection Visit,Compliant,1
+CAREWEST GEORGE BOYACK,1203 Centre Avenue NE,Consultation,Compliant,1
+CAREWEST GEORGE BOYACK,1203 Centre Avenue NE,Inspection Visit,Compliant,2
+CAREWEST ROULEAU MANOR,2208 2 Street SW,Consultation,Compliant,1
+CAREWEST ROULEAU MANOR,2208 2 Street SW,Inspection Visit,Compliant,2
+CAREWEST ROYAL PARK,4222 Sarcee Road SW,Consultation,Compliant,1
+CAREWEST ROYAL PARK,4222 Sarcee Road SW,Inspection Visit,Compliant,2
+CAREWEST SARCEE,3504 Sarcee Road SW,Inspection Visit,Compliant,2
+CAREWEST SIGNAL POINTE,6363 Simcoe Road SW,Consultation,Compliant,1
+CAREWEST SIGNAL POINTE,6363 Simcoe Road SW,Inspection Visit,Compliant,2
+CENTRAL PEACE HEALTH COMPLEX,5010 45 Avenue,Consultation,Compliant,1
+CENTRAL PEACE HEALTH COMPLEX,5010 45 Avenue,Inspection Visit,Non-Compliant,2
+CHINOOK CARE CENTRE,1261 Glenmore Trail SW,Consultation,Compliant,1
+CITADEL CARE CENTRE,25 Erin Ridge Road,Consultation,Compliant,1
+CITADEL CARE CENTRE,25 Erin Ridge Road,Inspection Visit,Compliant,1
+CITADEL CARE CENTRE,25 Erin Ridge Road,Mini Inspection Visit,Compliant,1
+CLIFTON MANOR,4726 8 Avenue SE,Consultation,Compliant,1
+CLIFTON MANOR,4726 8 Avenue SE,Inspection Visit,Compliant,2
+COALDALE HEALTH CENTRE,2100 11 Street,Consultation,Compliant,1
+COLD LAKE HEALTHCARE CENTRE,314 25 Street,Consultation,Compliant,1
+CONSORT HOSPITAL AND CARE CENTRE,5402 52 Avenue,Consultation,Compliant,1
+CONSORT HOSPITAL AND CARE CENTRE,5402 52 Avenue,Inspection Visit,Non-Compliant,2
+CORONATION HOSPITAL AND CARE CENTRE,5000 Municipal Road,Consultation,Compliant,1
+CORONATION HOSPITAL AND CARE CENTRE,5000 Municipal Road,Inspection Visit,Non-Compliant,5
+CROWSNEST PASS HEALTH CENTRE,2001 107 Street,Consultation,Compliant,1
+DEVON GENERAL HOSPITAL,101 Erie Street South,Consultation,Compliant,1
+DEVON GENERAL HOSPITAL,101 Erie Street South,Inspection Visit,Compliant,1
+DEVON GENERAL HOSPITAL,101 Erie Street South,Inspection Visit,Non-Compliant,1
+DEVONSHIRE CARE CENTRE,1808 142 Street,Consultation,Compliant,1
+DIANE AND IRVING KIPNES CENTRE FOR VETERANS,4470 McCrae Avenue,Consultation,Compliant,1
+DIANE AND IRVING KIPNES CENTRE FOR VETERANS,4470 McCrae Avenue,Inspection Visit,Compliant,1
+DIANE AND IRVING KIPNES CENTRE FOR VETERANS,4470 McCrae Avenue,Mini Inspection Visit,Compliant,1
+DIDSBURY DISTRICT HEALTH SERVICES,1210 20 Avenue,Consultation,Compliant,1
+DIDSBURY DISTRICT HEALTH SERVICES,1210 20 Avenue,Inspection Visit,Compliant,2
+DR. COOKE EXTENDED CARE CENTRE,3915 56 Avenue,Consultation,Compliant,1
+DR. COOKE EXTENDED CARE CENTRE,3915 56 Avenue,Inspection Visit,Compliant,2
+DR. W. R. KEIR - BARRHEAD CONTINUING CARE CENTRE,5336 59 Avenue,Consultation,Compliant,1
+DR. W. R. KEIR - BARRHEAD CONTINUING CARE CENTRE,5336 59 Avenue,Inspection Visit,Compliant,1
+DR. W. R. KEIR - BARRHEAD CONTINUING CARE CENTRE,5336 59 Avenue,Inspection Visit,Non-Compliant,1
+DRAYTON VALLEY HOSPITAL AND CARE CENTRE,4550 Madsen Avenue,Consultation,Compliant,1
+DRAYTON VALLEY HOSPITAL AND CARE CENTRE,4550 Madsen Avenue,Inspection Visit,Compliant,2
+DRUMHELLER HEALTH CENTRE,351  9 Street NW,Consultation,Compliant,1
+DRUMHELLER HEALTH CENTRE,351  9 Street NW,Follow-Up Visit,Compliant,1
+DRUMHELLER HEALTH CENTRE,351  9 Street NW,Inspection Visit,Compliant,1
+DRUMHELLER HEALTH CENTRE,351  9 Street NW,Inspection Visit,Non-Compliant,4
+EDITH CAVELL CARE CENTRE,1255 5 Avenue South,Consultation,Compliant,1
+EDITH CAVELL CARE CENTRE,1255 5 Avenue South,Inspection Visit,Compliant,2
+EDMONTON CHINATOWN CARE CENTRE,9539 102A Avenue,Consultation,Compliant,1
+EDMONTON CHINATOWN CARE CENTRE,9539 102A Avenue,Inspection Visit,Compliant,1
+EDMONTON CHINATOWN CARE CENTRE,9539 102A Avenue,Mini Inspection Visit,Compliant,1
+EDMONTON GENERAL CONTINUING CARE,11111 Jasper Avenue,Complaint,Non-Compliant,5
+EDMONTON GENERAL CONTINUING CARE,11111 Jasper Avenue,Consultation,Non-Compliant,3
+EDMONTON GENERAL CONTINUING CARE,11111 Jasper Avenue,Inspection Visit,Compliant,1
+EDMONTON GENERAL CONTINUING CARE,11111 Jasper Avenue,Inspection Visit,Non-Compliant,5
+EDSON CONTINUING CARE,3825 6 Avenue,Consultation,Non-Compliant,2
+EDSON CONTINUING CARE,3825 6 Avenue,Inspection Visit,Non-Compliant,16
+ELK POINT HEALTHCARE CENTRE,5221 52 Avenue,Consultation,Compliant,1
+ELK POINT HEALTHCARE CENTRE,5221 52 Avenue,Inspection Visit,Compliant,1
+ELK POINT HEALTHCARE CENTRE,5221 52 Avenue,Mini Inspection Visit,Compliant,1
+EXTENDICARE ATHABASCA,4517 53 Street,Consultation,Compliant,1
+EXTENDICARE ATHABASCA,4517 53 Street,Inspection Visit,Compliant,2
+EXTENDICARE BONNYVILLE,4602 47 Avenue,Consultation,Compliant,1
+EXTENDICARE BONNYVILLE,4602 47 Avenue,Inspection Visit,Compliant,1
+EXTENDICARE BONNYVILLE,4602 47 Avenue,Mini Inspection Visit,Compliant,1
+EXTENDICARE CEDARS VILLA,3330 8 Avenue SW,Complaint,Compliant,1
+EXTENDICARE CEDARS VILLA,3330 8 Avenue SW,Inspection Visit,Compliant,2
+EXTENDICARE EAUX CLAIRES,16503 95 Street,Consultation,Compliant,1
+EXTENDICARE EAUX CLAIRES,16503 95 Street,Inspection Visit,Compliant,1
+EXTENDICARE EAUX CLAIRES,16503 95 Street,Mini Inspection Visit,Compliant,1
+EXTENDICARE FORT MACLEOD ,654 29 Street ,Consultation,Compliant,1
+EXTENDICARE FORT MACLEOD ,654 29 Street ,Inspection Visit,Compliant,2
+EXTENDICARE HILLCREST,1512 8 Avenue NW,Consultation,Compliant,1
+EXTENDICARE HILLCREST,1512 8 Avenue NW,Inspection Visit,Compliant,2
+EXTENDICARE HOLYROOD (SOUTH),8008 95 Avenue,Complaint,Compliant,2
+EXTENDICARE HOLYROOD (SOUTH),8008 95 Avenue,Consultation,Compliant,1
+EXTENDICARE LEDUC,4309 50 Street,Consultation,Compliant,1
+EXTENDICARE LEDUC,4309 50 Street,Inspection Visit,Compliant,2
+EXTENDICARE MAYERTHORPE,4706 54 Street,Consultation,Compliant,1
+EXTENDICARE MAYERTHORPE,4706 54 Street,Inspection Visit,Compliant,2
+EXTENDICARE MICHENER HILL,12 Michener Boulevard,Consultation,Compliant,2
+EXTENDICARE MICHENER HILL,12 Michener Boulevard,Inspection Visit,Compliant,1
+EXTENDICARE MICHENER HILL,12 Michener Boulevard,Inspection Visit,Non-Compliant,3
+EXTENDICARE ST. PAUL,4614 47 Avenue ,Consultation,Compliant,1
+EXTENDICARE ST. PAUL,4614 47 Avenue ,Inspection Visit,Compliant,1
+EXTENDICARE ST. PAUL,4614 47 Avenue ,Inspection Visit,Non-Compliant,1
+EXTENDICARE VIKING,5020 57 Avenue ,Consultation,Compliant,1
+EXTENDICARE VIKING,5020 57 Avenue ,Inspection Visit,Compliant,2
+EXTENDICARE VULCAN ,715 2 Avenue South ,Consultation,Compliant,1
+EXTENDICARE VULCAN ,715 2 Avenue South ,Inspection Visit,Compliant,2
+FAIRVIEW HEALTH COMPLEX (CONTINUING CARE CENTRE),10628 110 Street,Consultation,Non-Compliant,1
+FAIRVIEW HEALTH COMPLEX (CONTINUING CARE CENTRE),10628 110 Street,Follow-Up Visit,Non-Compliant,2
+FAIRVIEW HEALTH COMPLEX (CONTINUING CARE CENTRE),10628 110 Street,Inspection Visit,Non-Compliant,3
+FATHER LACOMBE CARE CENTRE,270 Providence Boulevard SE,Consultation,Compliant,1
+FATHER LACOMBE CARE CENTRE,270 Providence Boulevard SE,Inspection Visit,Compliant,1
+FATHER LACOMBE CARE CENTRE,270 Providence Boulevard SE,Mini Inspection Visit,Compliant,1
+FOYER LACOMBE,1 St. Vital Avenue,Consultation,Non-Compliant,1
+FOYER LACOMBE,1 St. Vital Avenue,Inspection Visit,Compliant,1
+FOYER LACOMBE,1 St. Vital Avenue,Inspection Visit,Non-Compliant,1
+GALAHAD CARE CENTRE,102 Lady Helen Avenue East,Consultation,Compliant,1
+GALAHAD CARE CENTRE,102 Lady Helen Avenue East,Inspection Visit,Compliant,2
+GEORGE MCDOUGALL - SMOKY LAKE HEALTHCARE CENTRE,4212 55 Avenue,Consultation,Compliant,1
+GEORGE MCDOUGALL - SMOKY LAKE HEALTHCARE CENTRE,4212 55 Avenue,Inspection Visit,Non-Compliant,16
+GLAMORGAN NURSING HOME,105 Galbraith Drive SW,Consultation,Compliant,1
+GOOD SAMARITAN SOCIETY CLEARWATER CENTRE,(Main Office) 8861 75 Street,Consultation,Compliant,1
+GOOD SAMARITAN SOCIETY DR. GERALD ZETTER,9649 71 Avenue NW,Consultation,Non-Compliant,1
+GOOD SAMARITAN SOCIETY DR. GERALD ZETTER,9649 71 Avenue NW,Inspection Visit,Compliant,1
+GOOD SAMARITAN SOCIETY DR. GERALD ZETTER,9649 71 Avenue NW,Inspection Visit,Non-Compliant,1
+GOOD SAMARITAN SOCIETY MILLWOODS CENTRE,101 Youville Drive East,Consultation,Compliant,1
+GOOD SAMARITAN SOCIETY MILLWOODS CENTRE,101 Youville Drive East,Inspection Visit,Compliant,1
+GOOD SAMARITAN SOCIETY MILLWOODS CENTRE,101 Youville Drive East,Mini Inspection Visit,Non-Compliant,1
+GOOD SAMARITAN SOCIETY PEMBINA VILLAGE,5225 50 Street,Consultation,Compliant,1
+GOOD SAMARITAN SOCIETY SOUTH RIDGE VILLAGE (THE),550 Spruce Way SE,Consultation,Compliant,1
+GOOD SAMARITAN SOCIETY SOUTH RIDGE VILLAGE (THE),550 Spruce Way SE,Inspection Visit,Compliant,2
+GOOD SAMARITAN SOCIETY SOUTHGATE,4225 107 Street NW,Consultation,Compliant,1
+GOOD SAMARITAN SOCIETY SOUTHGATE,4225 107 Street NW,Inspection Visit,Compliant,2
+GRANDE PRAIRIE CARE CENTRE,9705 94 Avenue,Consultation,Compliant,1
+GRIMSHAW/BERWYN AND DISTRICT COMMUNITY HEALTH CENTRE,5621 Wilcox Road,Consultation,Compliant,1
+HANNA HEALTH CENTRE,904 Centre Street North,Consultation,Compliant,1
+HANNA HEALTH CENTRE,904 Centre Street North,Inspection Visit,Compliant,1
+HANNA HEALTH CENTRE,904 Centre Street North,Inspection Visit,Non-Compliant,2
+HARDISTY CARE CENTRE,6420 101 Avenue,Consultation,Compliant,1
+HARDISTY CARE CENTRE,6420 101 Avenue,Inspection Visit,Non-Compliant,1
+HARDISTY CARE CENTRE,6420 101 Avenue,Mini Inspection Visit,Compliant,1
+HARDISTY HEALTH CENTRE,4531 47 Avenue,Consultation,Compliant,1
+HIGH RIVER GENERAL HOSPITAL,560 9 Avenue SW,Consultation,Compliant,1
+HIGH RIVER GENERAL HOSPITAL,560 9 Avenue SW,Inspection Visit,Compliant,2
+HYTHE CONTINUING CARE CENTRE,10307 100 Street,Consultation,Compliant,1
+INNISFAIL HEALTH CENTRE,5023 42 Street,Consultation,Compliant,1
+INNISFAIL HEALTH CENTRE,5023 42 Street,Inspection Visit,Compliant,1
+INNISFAIL HEALTH CENTRE,5023 42 Street,Inspection Visit,Non-Compliant,2
+J.B. WOOD CONTINUING CARE CENTRE,5101 38 Street,Consultation,Compliant,1
+J.B. WOOD CONTINUING CARE CENTRE,5101 38 Street,Inspection Visit,Compliant,1
+J.B. WOOD CONTINUING CARE CENTRE,5101 38 Street,Mini Inspection Visit,Compliant,1
+JASPER PLACE CONTINUING CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,8903 168 Street,Consultation,Compliant,1
+JASPER PLACE CONTINUING CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,8903 168 Street,Follow-Up Visit,Compliant,1
+JASPER PLACE CONTINUING CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,8903 168 Street,Inspection Visit,Non-Compliant,2
+JUBILEE LODGE NURSING HOME,10333 76 Street,Consultation,Compliant,1
+JUBILEE LODGE NURSING HOME,10333 76 Street,Inspection Visit,Compliant,1
+JUBILEE LODGE NURSING HOME,10333 76 Street,Mini Inspection Visit,Compliant,1
+KAINAI CONTINUING CARE (BLOOD TRIBE) ,P.O Box 380,Consultation,Compliant,1
+KILLAM HEALTH CARE CENTRE,5203 49 Avenue,Consultation,Compliant,1
+KILLAM HEALTH CARE CENTRE,5203 49 Avenue,Follow-Up Visit,Compliant,1
+KILLAM HEALTH CARE CENTRE,5203 49 Avenue,Inspection Visit,Compliant,1
+KILLAM HEALTH CARE CENTRE,5203 49 Avenue,Inspection Visit,Non-Compliant,1
+LA CRETE CONTINUING CARE CENTRE,10603 100 Avenue,Consultation,Compliant,1
+LACOMBE HOSPITAL AND CARE CENTRE,5430 47 Avenue,Consultation,Compliant,1
+LACOMBE HOSPITAL AND CARE CENTRE,5430 47 Avenue,Follow-Up Visit,Compliant,1
+LACOMBE HOSPITAL AND CARE CENTRE,5430 47 Avenue,Follow-Up Visit,Non-Compliant,2
+LACOMBE HOSPITAL AND CARE CENTRE,5430 47 Avenue,Inspection Visit,Non-Compliant,5
+LAMONT HEALTH CARE CENTRE,5216 53 Street,Consultation,Compliant,1
+LOUISE JENSEN CARE CENTRE,5400 46 Avenue,Consultation,Compliant,1
+LOUISE JENSEN CARE CENTRE,5400 46 Avenue,Inspection Visit,Compliant,2
+MANNING COMMUNITY HEALTH CENTRE,600 2 Street NE,Consultation,Compliant,1
+MANNVILLE CARE CENTRE,5007 46 Street,Consultation,Compliant,1
+MANNVILLE CARE CENTRE,5007 46 Street,Inspection Visit,Compliant,2
+MANOIR DU LAC,164 3 Avenue NW,Complaint,Non-Compliant,8
+MANOIR DU LAC,164 3 Avenue NW,Consultation,Non-Compliant,3
+MANOIR DU LAC,164 3 Avenue NW,Follow-Up Visit,Compliant,1
+MANOIR DU LAC,164 3 Avenue NW,Follow-Up Visit,Non-Compliant,18
+MARY IMMACULATE CARE CENTRE,Polomark Drive and 53 Street,Consultation,Compliant,1
+MARY IMMACULATE CARE CENTRE,Polomark Drive and 53 Street,Follow-Up Visit,Non-Compliant,2
+MARY IMMACULATE CARE CENTRE,Polomark Drive and 53 Street,Inspection Visit,Non-Compliant,4
+MASTERPIECE SOUTHLAND MEADOWS LTD.,4401 Southlands Drive SE,Complaint,Non-Compliant,1
+MASTERPIECE SOUTHLAND MEADOWS LTD.,4401 Southlands Drive SE,Consultation,Compliant,1
+MAYERTHORPE HEALTHCARE CENTRE,4417 45 Street,Inspection Visit,Compliant,1
+MAYERTHORPE HEALTHCARE CENTRE,4417 45 Street,Inspection Visit,Non-Compliant,8
+MAYFAIR CARE CENTRE,8240 Collicut Street SW,Consultation,Compliant,1
+MCKENZIE TOWNE CONTINUING CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,80 Promenade Way SE,Complaint,Compliant,1
+MCKENZIE TOWNE CONTINUING CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,80 Promenade Way SE,Follow-Up Visit,Non-Compliant,2
+MCKENZIE TOWNE CONTINUING CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,80 Promenade Way SE,Inspection Visit,Compliant,1
+MCKENZIE TOWNE CONTINUING CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,80 Promenade Way SE,Inspection Visit,Non-Compliant,3
+MILK RIVER HEALTH CENTRE,517 Centre Avenue East,Consultation,Compliant,1
+MILK RIVER HEALTH CENTRE,517 Centre Avenue East,Inspection Visit,Compliant,1
+MILK RIVER HEALTH CENTRE,517 Centre Avenue East,Mini Inspection Visit,Compliant,1
+MILLER CROSSING CONTINUING CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,14251 50 Street NW,Consultation,Compliant,1
+MILLER CROSSING CONTINUING CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,14251 50 Street NW,Follow-Up Visit,Compliant,1
+MILLER CROSSING CONTINUING CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,14251 50 Street NW,Inspection Visit,Compliant,2
+MILLRISE SENIORS VILLAGE,14911 5 Street SW,Inspection Visit,Compliant,2
+MILLWOODS SHEPHERD'S CARE CENTRE,6620C 28 Avenue,Consultation,Compliant,1
+MILLWOODS SHEPHERD'S CARE CENTRE,6620C 28 Avenue,Inspection Visit,Compliant,1
+MILLWOODS SHEPHERD'S CARE CENTRE,6620C 28 Avenue,Inspection Visit,Non-Compliant,1
+MOUNT ROYAL CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,1813 9 Street SW,Consultation,Compliant,1
+MOUNT ROYAL CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,1813 9 Street SW,Inspection Visit,Compliant,2
+MULTI GENERATIONAL HOUSING AND COMMUNITY CENTRE,120 Skyview Ranch Drive NE,Consultation,Non-Compliant,1
+MULTI GENERATIONAL HOUSING AND COMMUNITY CENTRE,120 Skyview Ranch Drive NE,Follow-Up Visit,Non-Compliant,1
+MULTI GENERATIONAL HOUSING AND COMMUNITY CENTRE,120 Skyview Ranch Drive NE,Inspection Visit,Non-Compliant,6
+NEWPORT HARBOUR CARE CENTRE,10 Country Village Cove NE,Consultation,Compliant,1
+NEWPORT HARBOUR CARE CENTRE,10 Country Village Cove NE,Inspection Visit,Compliant,1
+NEWPORT HARBOUR CARE CENTRE,10 Country Village Cove NE,Inspection Visit,Non-Compliant,2
+NORTHCOTT CARE CENTRE,4209 48 Avenue,Consultation,Compliant,1
+NORTHCOTT CARE CENTRE,4209 48 Avenue,Inspection Visit,Compliant,1
+NORTHCOTT CARE CENTRE,4209 48 Avenue,Mini Inspection Visit,Compliant,1
+NORTHERN LIGHTS REGIONAL HEALTH CENTRE,7 Hospital Street,Consultation,Compliant,1
+NORTHERN LIGHTS REGIONAL HEALTH CENTRE,7 Hospital Street,Inspection Visit,Compliant,1
+NORTHERN LIGHTS REGIONAL HEALTH CENTRE,7 Hospital Street,Inspection Visit,Non-Compliant,2
+NORTHWEST HEALTH CENTRE,11202 100 Avenue,Consultation,Compliant,1
+OILFIELDS GENERAL HOSPITAL (RISING SUN LTC),717 Government Road,Inspection Visit,Compliant,2
+OLDS HOSPITAL AND CARE CENTRE,3901 57 Avenue,Consultation,Compliant,1
+OLDS HOSPITAL AND CARE CENTRE,3901 57 Avenue,Inspection Visit,Compliant,2
+OUR LADY OF THE ROSARY HOSPITAL,5402 47 Street,Consultation,Compliant,1
+OUR LADY OF THE ROSARY HOSPITAL,5402 47 Street,Inspection Visit,Compliant,1
+OUR LADY OF THE ROSARY HOSPITAL,5402 47 Street,Mini Inspection Visit,Compliant,1
+PONOKA HOSPITAL AND CARE CENTRE,5800 57 Avenue,Consultation,Compliant,1
+PONOKA HOSPITAL AND CARE CENTRE,5800 57 Avenue,Inspection Visit,Compliant,1
+PONOKA HOSPITAL AND CARE CENTRE,5800 57 Avenue,Inspection Visit,Non-Compliant,1
+PRAIRIE LAKE SENIORS COMMUNITY,11460 104 Avenue,Consultation,Compliant,1
+PRAIRIE LAKE SENIORS COMMUNITY,11460 104 Avenue,Inspection Visit,Compliant,2
+PROVIDENCE CARE CENTRE,149 Providence Boulevard SE,Consultation,Compliant,1
+PROVIDENCE CARE CENTRE,149 Providence Boulevard SE,Inspection Visit,Compliant,2
+PROVOST HEALTH CENTRE,5002 54 Avenue,Consultation,Compliant,1
+PROVOST HEALTH CENTRE,5002 54 Avenue,Inspection Visit,Compliant,1
+PROVOST HEALTH CENTRE,5002 54 Avenue,Inspection Visit,Non-Compliant,1
+RADWAY CONTINUING CARE CENTRE,"Hwy 28, Range Road 205",Consultation,Non-Compliant,4
+RADWAY CONTINUING CARE CENTRE,"Hwy 28, Range Road 205",Inspection Visit,Non-Compliant,5
+RAYMOND HEALTH CENTRE,150 N 4 Street East,Consultation,Compliant,1
+RAYMOND HEALTH CENTRE,150 N 4 Street East,Inspection Visit,Compliant,2
+REDWATER HEALTH CENTRE,Box 39,Consultation,Compliant,1
+RIMBEY HOSPITAL AND CARE CENTRE,Box 440,Consultation,Compliant,1
+RIVER RIDGE SENIORS VILLAGE,4 River Ridge Drive NW,Consultation,Non-Compliant,3
+RIVER RIDGE SENIORS VILLAGE,4 River Ridge Drive NW,Inspection Visit,Compliant,1
+RIVER RIDGE SENIORS VILLAGE,4 River Ridge Drive NW,Inspection Visit,Non-Compliant,3
+RIVERCREST CARE CENTRE,10104 101 Avenue,Consultation,Compliant,1
+RIVERCREST CARE CENTRE,10104 101 Avenue,Inspection Visit,Compliant,1
+RIVERCREST CARE CENTRE,10104 101 Avenue,Mini Inspection Visit,Compliant,1
+RIVERVIEW CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,603 Prospect Drive SW,Consultation,Compliant,1
+RIVERVIEW CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,603 Prospect Drive SW,Inspection Visit,Compliant,2
+ROSEHAVEN CARE CENTRE,4612 53 Street,Consultation,Compliant,1
+ROSEHAVEN CARE CENTRE,4612 53 Street,Inspection Visit,Compliant,1
+ROSEHAVEN CARE CENTRE,4612 53 Street,Mini Inspection Visit,Compliant,1
+SALEM MANOR NURSING HOME,4419 46 Street,Consultation,Non-Compliant,3
+SALEM MANOR NURSING HOME,4419 46 Street,Inspection Visit,Compliant,1
+SALEM MANOR NURSING HOME,4419 46 Street,Mini Inspection Visit,Non-Compliant,4
+SHEPHERD'S CARE EDEN HOUSE,2759 109 Street NW,Consultation,Compliant,1
+SHEPHERD'S CARE EDEN HOUSE,2759 109 Street NW,Inspection Visit,Non-Compliant,4
+SHEPHERD'S CARE KENSINGTON VILLAGE,12603 135 Avenue,Consultation,Compliant,1
+SHEPHERD'S CARE KENSINGTON VILLAGE,12603 135 Avenue,Inspection Visit,Compliant,1
+SHEPHERD'S CARE KENSINGTON VILLAGE,12603 135 Avenue,Mini Inspection Visit,Compliant,1
+SHERWOOD CARE,2020 Brentwood Boulevard N,Consultation,Non-Compliant,1
+SHERWOOD CARE,2020 Brentwood Boulevard N,Inspection Visit,Compliant,1
+SHERWOOD CARE,2020 Brentwood Boulevard N,Inspection Visit,Non-Compliant,1
+SLAVE LAKE HEALTHCARE CENTRE,309 6 Street NE,Consultation,Compliant,1
+SLAVE LAKE HEALTHCARE CENTRE,309 6 Street NE,Inspection Visit,Compliant,1
+SLAVE LAKE HEALTHCARE CENTRE,309 6 Street NE,Inspection Visit,Non-Compliant,1
+SOUTH TERRACE CONTINUING CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,5905 112 Street,Consultation,Compliant,1
+SOUTH TERRACE CONTINUING CARE CENTRE - AXR OPERATING (NATIONAL) GP INC.,5905 112 Street,Inspection Visit,Compliant,2
+SOUTHWOOD CARE CENTRE,"211 Heritage Drive, SE",Consultation,Compliant,1
+SOUTHWOOD CARE CENTRE,"211 Heritage Drive, SE",Inspection Visit,Compliant,2
+ST. JOSEPH'S AUXILIARY HOSPITAL,10707 29 Avenue,Consultation,Compliant,1
+ST. JOSEPH'S AUXILIARY HOSPITAL,10707 29 Avenue,Inspection Visit,Compliant,3
+ST. JOSEPH'S AUXILIARY HOSPITAL,10707 29 Avenue,Inspection Visit,Non-Compliant,2
+ST. JOSEPH'S HOME,156 3 Street NE,Consultation,Compliant,1
+ST. JOSEPH'S HOME,156 3 Street NE,Inspection Visit,Compliant,2
+ST. MARTHA'S PLACE/BANFF MINERAL SPRINGS HOSPITAL,305 Lynx Street,Consultation,Compliant,1
+ST. MARTHA'S PLACE/BANFF MINERAL SPRINGS HOSPITAL,305 Lynx Street,Inspection Visit,Compliant,2
+ST. MARY'S HEALTH CARE CENTRE,451 Dechauney Avenue,Consultation,Compliant,1
+ST. MARY'S HEALTH CARE CENTRE,451 Dechauney Avenue,Inspection Visit,Non-Compliant,1
+ST. MARY'S HEALTH CARE CENTRE,451 Dechauney Avenue,Mini Inspection Visit,Compliant,1
+ST. MICHAEL'S HEALTH CENTRE (COVENANT HEALTH),1400 9 Avenue South,Complaint,Compliant,1
+ST. MICHAEL'S HEALTH CENTRE (COVENANT HEALTH),1400 9 Avenue South,Complaint,Non-Compliant,3
+ST. MICHAEL'S HEALTH CENTRE (COVENANT HEALTH),1400 9 Avenue South,Consultation,Compliant,1
+ST. MICHAEL'S HEALTH CENTRE (COVENANT HEALTH),1400 9 Avenue South,Follow-Up Visit,Compliant,1
+ST. MICHAEL'S HEALTH CENTRE (COVENANT HEALTH),1400 9 Avenue South,Follow-Up Visit,Non-Compliant,1
+ST. MICHAEL'S LONG TERM CARE CENTRE,7404 139 Avenue,Consultation,Compliant,1
+ST. MICHAEL'S LONG TERM CARE CENTRE,7404 139 Avenue,Inspection Visit,Compliant,2
+ST. THERESA GENERAL HOSPITAL,4506 46 Avenue,Consultation,Compliant,1
+ST. THERESE - ST. PAUL HEALTHCARE CENTRE,4713 48 Avenue,Consultation,Compliant,1
+ST. THERESE - ST. PAUL HEALTHCARE CENTRE,4713 48 Avenue,Inspection Visit,Compliant,1
+ST. THERESE - ST. PAUL HEALTHCARE CENTRE,4713 48 Avenue,Inspection Visit,Non-Compliant,1
+STETTLER HOSPITAL AND CARE CENTRE,5912 47 Avenue,Inspection Visit,Compliant,1
+STETTLER HOSPITAL AND CARE CENTRE,5912 47 Avenue,Inspection Visit,Non-Compliant,1
+STONY PLAIN CARE CENTRE,4800 55 Avenue,Consultation,Compliant,1
+STONY PLAIN CARE CENTRE,4800 55 Avenue,Inspection Visit,Compliant,1
+STONY PLAIN CARE CENTRE,4800 55 Avenue,Inspection Visit,Non-Compliant,2
+SUNDRE HOSPITAL AND CARE CENTRE,709 1 Street NE,Consultation,Compliant,1
+SUNDRE HOSPITAL AND CARE CENTRE,709 1 Street NE,Inspection Visit,Compliant,2
+SUNNYSIDE CARE CENTRE (SOUTH COUNTRY VILLAGE),1720 Bell Street SW,Consultation,Compliant,1
+TABER HEALTH CENTRE,4326 50 Avenue,Consultation,Compliant,1
+THE VALLEYVIEW SUPPORTIVE LIVING,65 Valleyview Drive SW,Consultation,Compliant,1
+THE VALLEYVIEW SUPPORTIVE LIVING,65 Valleyview Drive SW,Inspection Visit,Compliant,1
+THE VALLEYVIEW SUPPORTIVE LIVING,65 Valleyview Drive SW,Mini Inspection Visit,Compliant,1
+THREE HILLS HEALTH CENTRE,1504 2 Street North,Consultation,Non-Compliant,1
+THREE HILLS HEALTH CENTRE,1504 2 Street North,Inspection Visit,Compliant,1
+THREE HILLS HEALTH CENTRE,1504 2 Street North,Inspection Visit,Non-Compliant,3
+TOFIELD HEALTH CENTRE,5543 44 Street,Consultation,Compliant,1
+TOFIELD HEALTH CENTRE,5543 44 Street,Inspection Visit,Compliant,2
+TOUCHMARK AT WEDGEWOOD THE GRANDE,18333 Lessard Road,Consultation,Compliant,1
+TWO HILLS HEALTH CENTRE,4401 53 Avenue,Consultation,Compliant,1
+VALLEYVIEW HEALTH CENTRE,4802 Highway Street East,Consultation,Compliant,1
+VALLEYVIEW HEALTH CENTRE,4802 Highway Street East,Inspection Visit,Compliant,2
+VEGREVILLE CARE CENTRE,4525 50 Street,Consultation,Compliant,1
+VEGREVILLE CARE CENTRE,4525 50 Street,Inspection Visit,Compliant,2
+VENTA CARE CENTRE,13525 102 Street,Consultation,Compliant,1
+VERMILION HEALTH CENTRE,5720 50 Avenue,Consultation,Compliant,1
+VERMILION HEALTH CENTRE,5720 50 Avenue,Inspection Visit,Compliant,2
+VILLA MARIE,10 Carrington Drive,Consultation,Compliant,1
+VILLA MARIE,10 Carrington Drive,Inspection Visit,Compliant,3
+VILLA MARIE,10 Carrington Drive,Inspection Visit,Non-Compliant,1
+VULCAN COMMUNITY HEALTH CENTRE,610 Elizabeth Street S,Consultation,Compliant,1
+VULCAN COMMUNITY HEALTH CENTRE,610 Elizabeth Street S,Inspection Visit,Compliant,2
+WAINWRIGHT HEALTH CENTRE,530 6 Avenue,Consultation,Compliant,1
+WAINWRIGHT HEALTH CENTRE,530 6 Avenue,Inspection Visit,Compliant,1
+WAINWRIGHT HEALTH CENTRE,530 6 Avenue,Mini Inspection Visit,Compliant,1
+WENTWORTH MANOR - THE COURT,5709 14 Avenue SW,Consultation,Compliant,1
+WENTWORTH MANOR - THE COURT,5709 14 Avenue SW,Inspection Visit,Compliant,1
+WENTWORTH MANOR - THE COURT,5709 14 Avenue SW,Mini Inspection Visit,Compliant,1
+WESTLOCK CONTINUING CARE CENTRE,10203 96 Street,Consultation,Compliant,1
+WESTLOCK CONTINUING CARE CENTRE,10203 96 Street,Inspection Visit,Compliant,1
+WESTLOCK CONTINUING CARE CENTRE,10203 96 Street,Inspection Visit,Non-Compliant,1
+WESTVIEW CARE COMMUNITY,PO Box 220,Consultation,Compliant,1
+WESTVIEW CARE COMMUNITY,PO Box 220,Inspection Visit,Compliant,1
+WESTVIEW CARE COMMUNITY,PO Box 220,Mini Inspection Visit,Compliant,1
+WESTVIEW HEALTH CENTRE,4405 Southpark Drive,Consultation,Non-Compliant,2
+WESTVIEW HEALTH CENTRE,4405 Southpark Drive,Inspection Visit,Compliant,1
+WESTVIEW HEALTH CENTRE,4405 Southpark Drive,Inspection Visit,Non-Compliant,2
+WETASKIWIN HOSPITAL AND CARE CENTRE,6910 47 Street,Complaint,Non-Compliant,1
+WETASKIWIN HOSPITAL AND CARE CENTRE,6910 47 Street,Consultation,Compliant,1
+WETASKIWIN HOSPITAL AND CARE CENTRE,6910 47 Street,Inspection Visit,Compliant,1
+WETASKIWIN HOSPITAL AND CARE CENTRE,6910 47 Street,Inspection Visit,Non-Compliant,3
+WILLIAM J. CADZOW - LAC LA BICHE HEALTHCARE CENTRE,9110 93 Street,Consultation,Non-Compliant,3
+WILLIAM J. CADZOW - LAC LA BICHE HEALTHCARE CENTRE,9110 93 Street,Inspection Visit,Compliant,1
+WILLIAM J. CADZOW - LAC LA BICHE HEALTHCARE CENTRE,9110 93 Street,Inspection Visit,Non-Compliant,3
+WILLOW CREEK CONTINUING CARE CENTRE,4221 8 Street West,Consultation,Compliant,1
+WILLOW CREEK CONTINUING CARE CENTRE,4221 8 Street West,Inspection Visit,Compliant,2
+WING KEI CARE CENTRE,1212 Centre Street NE,Inspection Visit,Compliant,2
+WING KEI GREENVIEW,307 35 Avenue NE,Consultation,Compliant,1
+YOUVILLE AUXILIARY HOSPITAL (GREY NUNS) OF ST. ALBERT,9 St. Vital Avenue,Complaint,Non-Compliant,2
+YOUVILLE AUXILIARY HOSPITAL (GREY NUNS) OF ST. ALBERT,9 St. Vital Avenue,Consultation,Non-Compliant,2
+YOUVILLE AUXILIARY HOSPITAL (GREY NUNS) OF ST. ALBERT,9 St. Vital Avenue,Inspection Visit,Compliant,1
+YOUVILLE AUXILIARY HOSPITAL (GREY NUNS) OF ST. ALBERT,9 St. Vital Avenue,Inspection Visit,Non-Compliant,5
