@@ -40,44 +40,9 @@ dput(names(df))
 # # Create lists of variables used to filter data for analysis
 
 # # selected data
-# num <- c("BEDS_TOTAL", "BEDS_PRIVATEprop", "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI")
-# cat <- c("HLTH_AUTH", "OWNERSHIP", "REGULATION", "ACCRED_STATUS", "RESIDENT_COUNCIL", "FAMILY_COUNCIL")
-# data <- subset(df, select = c(num, cat, 'outbreak'))
-
-# noNHorVIHA data
-incidents = c(
-  "INCIDENT_OUTBREAK_100",
-  "INCIDENT_ABUSE_100", "INCIDENT_FALL_100", "INCIDENT_POISON_100",
-  "INCIDENT_MEDICATION_100", "INCIDENT_WANDERING_100",
-  "INCIDENT_INJURY_100", "INCIDENT_AGGRESSION_100"
-  )
-
-inspections = c(
-  "COMPLAINTS", "SUB_COMPLAINTS", "INSPECTIONS",
-  "INFRACTIONS",
-  "INFRACTIONS_DISEASE")
-
-gen = c("OWNERSHIP", "REGULATION", "ACCRED_STATUS","RESIDENT_COUNCIL", "FAMILY_COUNCIL")
-
-dch = c(
-  "DCH_NURSE_LASTYR",
-  "DCH_ALLIED_LASTYR",
-  "DCH_NURSE_CURRENTYR",
-  "DCH_ALLIED_CURRENTYR"
- )
-
-space = c("BEDS_PRIVATEprop", "BEDS_TOTAL",
-  "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI")
-
-dem = c(
-  "AGE", "FEMALE",
-  "AGE_85_PLUS", "AGE_UNDER_65", "DEPRESSION", "ADL_DEPENDENT",
-  "CPS_SEVERE", "DEMENTIA", "ABS_PHYS_ABUSIVE", "ISE_LOW", "CMI",
-  "THERAPY_PT", "THERAPY_RT", "THERAPY_OT", "MEDS_DEPRESSION",
-  "MEDS_ANTIPSYCHOTICS", "RESTRAINTS"
-)
-
-data <- subset(df, select = c(gen, incidents, inspections, dch, space, 'outbreak'))
+num <- c("BEDS_TOTAL", "BEDS_PRIVATEprop", "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI")
+cat <- c("HLTH_AUTH", "OWNERSHIP", "REGULATION", "ACCRED_STATUS", "RESIDENT_COUNCIL", "FAMILY_COUNCIL")
+data <- subset(df, select = c(num, cat, 'outbreak'))
 
 str(data)
 
@@ -122,30 +87,11 @@ for (each in listofcol) {
   plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
 }
 
-# # Visualize the effect of log transformations on the data with no 0s that are right skewed
-# for (each in list_non0s) {  
-#   plotNormalHistogram(x = data[[each]], main = each)
-#   plotNormalHistogram(x = log(data[[each]]), main = c(each, 'log trans'))
-# }
-
-# Visualize the effect of transformations on the data that are left skewed
-# # log10(max(x+1) - x)
-# plotNormalHistogram(x = data[['BEDS_PUBLICprop']])
-# plotNormalHistogram(x = sqrt(max(data[['BEDS_PUBLICprop']] + 1) - data[['BEDS_PUBLICprop']]))
-
-# # sqrt(max(x+1) - x)
-# plotNormalHistogram(x = data[['ROOMS_PRIVATEprop']])
-# plotNormalHistogram(x = sqrt(max(data[['ROOMS_PRIVATEprop']] + 1) - data[['ROOMS_PRIVATEprop']]))
-
 ```
 Sqrt transformation is best for all the data.
 
 ## Transform the data
 ```{r }
-# list0s
-# # Sqrt transform in place
-# data[list0s] <- log(data[list0s])
-
 # Square root transform in place
 data[listofcol] <- sqrt(data[listofcol])
 

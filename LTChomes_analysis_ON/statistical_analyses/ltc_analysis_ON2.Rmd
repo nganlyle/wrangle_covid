@@ -24,8 +24,7 @@ summary(df[['first_inspection_year']])
 
 # Create a new column with number of years since the first inspection was reported
 df$years_since_first <- 2020 - df$first_inspection_year
-summary(df[['years_since_first']])
-
+# summary(df[['years_since_first']])
 
 ```
 
@@ -55,7 +54,7 @@ df$total_inspections_norm <- df$total_inspections/df$number_beds/df$years_since_
 df$X5y_inspections_norm <- df$X5y_inspections/df$number_beds
 df$X2y_inspections_norm <- df$X2y_inspections/df$number_beds
 
-# Number of inspections/beds
+# Number of noncomplaints/beds
 df$total_noncomplaints_norm <- (df$total_inspections - df$total_complaints)/df$number_beds/df$years_since_first
 df$X5y_noncomplaints_norm <- (df$X5y_inspections - df$X5y_complaints)/df$number_beds
 df$X2y_noncomplaints_norm <- (df$X2y_inspections - df$X2y_complaints)/df$number_beds
@@ -90,8 +89,8 @@ noncomplaints = c("total_noncomplaints_norm", "X5y_noncomplaints_norm", "X2y_non
 
 covid = c("confirmed_resident_cases", "resident_deaths", "confirmed_staff_cases")
 
-data <- subset(df, select = c(keep, profile, noncomplaints, complaints))
-
+data <- subset(df, select = c(keep, profile, all_inspections, noncomplaints, complaints))
+skim(data)
 # dput(names(df))
 ```
 
@@ -100,7 +99,7 @@ data <- subset(df, select = c(keep, profile, noncomplaints, complaints))
 # Check for R skewness in numeric predictors
 library(e1071)
 
-listofcols = c('number_beds', complaints, noncomplaints)
+listofcols = c('number_beds', complaints, noncomplaints, all_inspections)
 
 for (each in listofcols){
   print(each)
@@ -164,7 +163,7 @@ A log transformation seems better for the following data:
 ```{r }
 # Log transform in place
 
-data[c("total_noncomplaints_norm", "X5y_noncomplaints_norm")] <- log(data[c("total_noncomplaints_norm", "X5y_noncomplaints_norm")])
+data[c("total_noncomplaints_norm", "X5y_noncomplaints_norm", all_inspections)] <- log(data[c("total_noncomplaints_norm", "X5y_noncomplaints_norm", all_inspections)])
 
 # Square root transform in place
 data[c('number_beds', list0s)] <- sqrt(data[c('number_beds', list0s)])
@@ -183,6 +182,13 @@ summary(fit)
 
 ### Backwards selection
 ```{r, include=FALSE}
+fit <- update(fit, .~. -total_inspections_norm)
+summary(fit)
+fit <- update(fit, .~. -X2y_inspections_norm)
+summary(fit)
+fit <- update(fit, .~. -X5y_inspections_norm)
+summary(fit)
+
 fit <- update(fit, .~. -X2y_complaints_norm)
 summary(fit)
 fit <- update(fit, .~. -X2y_noncomplaints_norm)
@@ -264,10 +270,53 @@ x.test <- x[-train_rows, ]
 y.train <- y[train_rows, ]
 y.test <- y[-train_rows, ]
 
+dput(colnames(x))
 ```
 
 ```{r }
 library(glmnet)
+# x <- subset(data, select=-c(outbreak))
+x <- data.matrix(data)
+
+outbreak <- x[,1]
+home_type <- as.factor(x[,2])
+short_stay <- as.factor(x[,4])
+residents_council <- as.factor(x[,5])
+family_council <- as.factor(x[,6])
+accreditation <- as.factor(x[,7])
+
+
+xfactors <- model.matrix(outbreak~home_type+short_stay+residents_council+family_council+accreditation)[,-1]
+
+x <- as.matrix(data.frame(x[,-c(1, 2, 4, 5, 6, 7)], xfactors))
+
+# Note alpha=1 for lasso only and can blend with ridge penalty down to
+# alpha=0 ridge only.
+glmmod <- glmnet(x, y=as.factor(outbreak), alpha=1, family="binomial")
+
+# Plot variable coefficients vs. shrinkage parameter lambda.
+plot(glmmod, xvar="lambda")
+
+# total_inspections_norm
+# X5y_inspections_norm
+# X2y_inspections_norm
+# total_noncomplaints_norm
+# X5y_noncomplaints_norm
+# X2y_noncomplaints_norm
+# total_complaints_norm
+# X5y_complaints_norm
+# X2y_complaints_norm
+
+# dput(colnames(data))
+```
+
+
+```{r }
+coef(glmmod)
+```
+
+```{r }
+
 
 # RR
 alpha0.fit <- cv.glmnet(x.train, y.train, type.measure='mse', alpha=0, family='binomial')
@@ -299,9 +348,6 @@ plot(mod, xvar = 'lambda')
 ```
 
 
-```{r }
-coef(mod)
-```
 
 
 ```{r }
