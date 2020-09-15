@@ -188,7 +188,6 @@ fit <- update(fit, .~. -X2y_inspections_norm)
 summary(fit)
 fit <- update(fit, .~. -X5y_inspections_norm)
 summary(fit)
-
 fit <- update(fit, .~. -X2y_complaints_norm)
 summary(fit)
 fit <- update(fit, .~. -X2y_noncomplaints_norm)
@@ -211,8 +210,6 @@ summary(fit)
 
 fit <- update(fit, .~. -X2y_noncomplaints_norm)
 summary(fit)
-
-
 fit <- update(fit, .~. -total_complaints_norm)
 summary(fit)
 
@@ -274,6 +271,7 @@ dput(colnames(x))
 ```
 
 ```{r }
+# https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
 library(glmnet)
 # x <- subset(data, select=-c(outbreak))
 x <- data.matrix(data)
@@ -312,7 +310,11 @@ plot(glmmod, xvar="lambda")
 
 
 ```{r }
-coef(glmmod)
+coef(glmmod)[,10]
+
+cv.glmmod <- cv.glmnet(x, y=outbreak, alpha=1)
+plot(cv.glmmod)
+cv.glmmod$lambda.min
 ```
 
 ```{r }
