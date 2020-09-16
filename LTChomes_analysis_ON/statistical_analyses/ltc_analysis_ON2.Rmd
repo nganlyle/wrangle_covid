@@ -254,67 +254,61 @@ ggplot(data = predicted.data, aes(x=rank, y=probability.of.outbreak)) +
 
 RR, Lasso and Elastic Net Regression
 ```{r }
-# Divide the data into train/test sets
-x <- subset(data, select=-c(outbreak))
-x <- data.matrix(x)
-y <- subset(data, select = c('outbreak'))
-y <- as.matrix(y)
+library(glmnet)
 
-train_rows <- sample(1:nrow(data), 0.66*nrow(data))
+# model.matrix() automatically transforms any qualitative variables into dummy variables
+# Trim the first column leaving only predictors
+x = model.matrix(outbreak~., data = data)[,-1]
+y <- as.matrix(subset(data, select = c('outbreak')))
 
-x.train <- x[train_rows, ]
-x.test <- x[-train_rows, ]
-y.train <- y[train_rows, ]
-y.test <- y[-train_rows, ]
+glmmod <- glmnet(x, y=as.factor(y), alpha = 1, family = 'binomial')
+plot(glmmod, xvar = 'lambda')
 
-dput(colnames(x))
+cv.glmmod <- cv.glmnet(x, y=outbreak, alpha=1)
+plot(cv.glmmod)
+cv.glmmod$lambda.min
+
+coef(cv.glmmod, s = "lambda.1se")
+
 ```
 
 ```{r }
 # https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
 library(glmnet)
-# x <- subset(data, select=-c(outbreak))
-x <- data.matrix(data)
 
-outbreak <- x[,1]
-home_type <- as.factor(x[,2])
-short_stay <- as.factor(x[,4])
-residents_council <- as.factor(x[,5])
-family_council <- as.factor(x[,6])
-accreditation <- as.factor(x[,7])
+# model.matrix() automatically transforms any qualitative variables into dummy variables
+# Trim the first column leaving only predictors
+x = model.matrix(outbreak~., data = data)[,-1]
 
+# x <- data.matrix(data)
+outbreak <- data.matrix(data[,1])
+# home_type <- as.factor(x[,2])
+# short_stay <- as.factor(x[,4])
+# residents_council <- as.factor(x[,5])
+# family_council <- as.factor(x[,6])
+# accreditation <- as.factor(x[,7])
 
-xfactors <- model.matrix(outbreak~home_type+short_stay+residents_council+family_council+accreditation)[,-1]
+# 
+# xfactors <- model.matrix(outbreak~home_type+short_stay+residents_council+family_council+accreditation)[,-1]
 
-x <- as.matrix(data.frame(x[,-c(1, 2, 4, 5, 6, 7)], xfactors))
+# x <- as.matrix(data.frame(x[,-c(1, 2, 4, 5, 6, 7)], xfactors))
 
 # Note alpha=1 for lasso only and can blend with ridge penalty down to
 # alpha=0 ridge only.
 glmmod <- glmnet(x, y=as.factor(outbreak), alpha=1, family="binomial")
 
 # Plot variable coefficients vs. shrinkage parameter lambda.
-plot(glmmod, xvar="lambda")
+plot(glmmod, xvar="lambda", label = TRUE)
 
-# total_inspections_norm
-# X5y_inspections_norm
-# X2y_inspections_norm
-# total_noncomplaints_norm
-# X5y_noncomplaints_norm
-# X2y_noncomplaints_norm
-# total_complaints_norm
-# X5y_complaints_norm
-# X2y_complaints_norm
-
-# dput(colnames(data))
 ```
 
 
 ```{r }
-coef(glmmod)[,10]
-
-cv.glmmod <- cv.glmnet(x, y=outbreak, alpha=1)
+cv.glmmod <- cv.glmnet(x, y=as.factor(outbreak), alpha=1)
 plot(cv.glmmod)
 cv.glmmod$lambda.min
+
+coef(cv.glmmod, s = "lambda.1se")
 ```
 
 ```{r }
@@ -345,16 +339,14 @@ for (i in 1:10){
 
 
 ```{r }
-mod <- glmnet(x, y=as.factor(y), alpha = 1, family = 'binomial')
-plot(mod, xvar = 'lambda')
+
 ```
 
 
 
 
 ```{r }
-cv.mod <- cv.glmnet(x, y, alpha=1)
-plot(cv.mod)
+
 ```
 
 
