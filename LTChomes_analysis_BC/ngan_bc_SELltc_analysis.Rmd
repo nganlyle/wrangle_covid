@@ -29,7 +29,7 @@ for (each in listofcol){
   df[, each] <- as.character(df[, each])
 }
 
-listofcol = list('RESIDENT_COUNCIL', 'FAMILY_COUNCIL', 'BEDS_PRIVATEbinary', 'rooms_shared', 'outbreak')
+listofcol = list('RESIDENT_COUNCIL', 'FAMILY_COUNCIL', 'BEDS_PRIVATEbinary', 'rooms_shared', 'outbreak', 'hospital_act', 'community_act')
 for (each in listofcol){
   df[, each] <- as.factor(df[, each])
 }
@@ -45,8 +45,10 @@ str(df)
 # # Create lists of variables used to filter data for analysis
 
 # # Selected data
-num <- c("BEDS_TOTAL", "BEDS_PRIVATEprop", "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI")
-cat <- c("HLTH_AUTH", "OWNERSHIP", "REGULATION", "ACCRED_STATUS", "RESIDENT_COUNCIL", "FAMILY_COUNCIL", "BEDS_PRIVATEbinary", "rooms_shared")
+num <- c("BEDS_TOTAL")
+cat <- c("HLTH_AUTH", "OWNERSHIP", "ACCRED_STATUS", 
+         "RESIDENT_COUNCIL", "FAMILY_COUNCIL", "BEDS_PRIVATEbinary", 
+         "rooms_shared","community_act", "hospital_act")
 data <- subset(df, select = c(num, cat, 'outbreak'))
 
 str(data)
@@ -101,6 +103,7 @@ Sqrt transformation is best for all the data.
 data[listofcol] <- sqrt(data[listofcol])
 
 skim(data)
+
 ```
 
 ## Fit logistic regression
@@ -114,25 +117,19 @@ summary(fit)
 ```{r, include=FALSE}
 fit <- update(fit, .~. -HLTH_AUTH)
 summary(fit)
+fit <- update(fit, .~. -rooms_shared)
+summary(fit)
+fit <- update(fit, .~. -hospital_act)
+summary(fit)
+fit <- update(fit, .~. -community_act)
+summary(fit)
 fit <- update(fit, .~. -BEDS_PRIVATEbinary)
+summary(fit)
+fit <- update(fit, .~. -RESIDENT_COUNCIL)
 summary(fit)
 fit <- update(fit, .~. -ACCRED_STATUS)
 summary(fit)
 fit <- update(fit, .~. -OWNERSHIP)
-summary(fit)
-fit <- update(fit, .~. -REGULATION)
-summary(fit)
-fit <- update(fit, .~. -BEDS_PRIVATEprop)
-summary(fit)
-fit <- update(fit, .~. -ROOMS_PRIVATE  )
-summary(fit)
-fit <- update(fit, .~. -ROOMS_MULTI)
-summary(fit)
-fit <- update(fit, .~. -RESIDENT_COUNCIL)
-summary(fit)
-fit <- update(fit, .~. -ROOMS_SEMI)
-summary(fit)
-fit <- update(fit, .~. -rooms_shared)
 summary(fit)
 
 ```
@@ -145,6 +142,35 @@ xtabs(~outbreak + FAMILY_COUNCIL, data=df)
 
 # Review the minority of homes without a family council
 subset(df, FAMILY_COUNCIL == 'False')
+```
+
+
+LASSO
+```{r }
+# https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
+library(glmnet)
+
+# model.matrix() automatically transforms any qualitative variables into dummy variables
+# Trim the first column leaving only predictors
+x = model.matrix(outbreak~., data = data)[,-1]
+# y <- as.matrix(subset(data, select = c('outbreak')))
+y <- data.matrix(data[,11])
+
+# Note alpha=1 for lasso only and can blend with ridge penalty down to
+# alpha=0 ridge only
+glmmod <- glmnet(x, y, alpha = 1, family = 'binomial')
+
+# Plot variable coefficients vs. shrinkage parameter lambda
+plot(glmmod, xvar = 'lambda', label = TRUE)
+
+cv.glmmod <- cv.glmnet(x, y, alpha=1, family = 'binomial')
+
+
+plot(cv.glmmod)
+cv.glmmod$lambda.min
+
+coef(cv.glmmod, s = "lambda.min")
+
 ```
 
 ```{r }
