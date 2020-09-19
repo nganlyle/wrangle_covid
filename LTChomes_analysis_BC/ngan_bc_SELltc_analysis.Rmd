@@ -29,7 +29,7 @@ for (each in listofcol){
   df[, each] <- as.character(df[, each])
 }
 
-listofcol = list('RESIDENT_COUNCIL', 'FAMILY_COUNCIL', 'BEDS_PRIVATEbinary', 'rooms_shared', 'outbreak', 'hospital_act', 'community_act')
+listofcol = list('RESIDENT_COUNCIL', 'FAMILY_COUNCIL', 'BEDS_PRIVATEbinary', 'rooms_shared', 'outbreak', 'hospital_act', 'community_act', 'ROOMS_SEMIbinary', 'ROOMS_MULTIbinary')
 for (each in listofcol){
   df[, each] <- as.factor(df[, each])
 }
@@ -48,7 +48,8 @@ str(df)
 num <- c("BEDS_TOTAL")
 cat <- c("HLTH_AUTH", "OWNERSHIP", "ACCRED_STATUS", 
          "RESIDENT_COUNCIL", "FAMILY_COUNCIL", "BEDS_PRIVATEbinary", 
-         "rooms_shared","community_act", "hospital_act")
+         "rooms_shared","community_act", "hospital_act", 
+         "ROOMS_SEMIbinary", "ROOMS_MULTIbinary")
 data <- subset(df, select = c(num, cat, 'outbreak'))
 
 str(data)
@@ -113,11 +114,16 @@ fit = glm(outbreak~., family=binomial, data=data)
 summary(fit)
 ```
 
-### Backwards selection
+### Backwards Selection
 ```{r, include=FALSE}
+# Manual
 fit <- update(fit, .~. -HLTH_AUTH)
 summary(fit)
 fit <- update(fit, .~. -rooms_shared)
+summary(fit)
+fit <- update(fit, .~. -ROOMS_SEMIbinary)
+summary(fit)
+fit <- update(fit, .~. -ROOMS_MULTIbinary)
 summary(fit)
 fit <- update(fit, .~. -hospital_act)
 summary(fit)
@@ -133,6 +139,106 @@ fit <- update(fit, .~. -OWNERSHIP)
 summary(fit)
 
 ```
+
+```{r }
+# Backward selection using AIC
+fit_back_aic = step(fit, direction = "backward")
+
+coef(fit_back_aic)
+```
+
+```{r }
+# Bacward selection using BIC
+n = length((resid(fit)))
+fit_back_bic = step(fit, direction = "backward", k = log(n))
+
+coef(fit_back_bic)
+```
+
+
+```{r }
+
+```
+
+```{r }
+# A function which calculates the LOOCV RMSE
+calc_loocv_rmse = function(model) {
+  sqrt(mean((resid(model) / (1 - hatvalues(model))) ^ 2))
+}
+
+# Calculate LOOCV RMSE for each model
+calc_loocv_rmse(fit)
+calc_loocv_rmse(fit_back_aic)
+calc_loocv_rmse(fit_back_bic)
+```
+
+### Forward Selection
+```{r }
+fit_start = glm(outbreak ~ 1, family=binomial, data = data)
+fit_fwd_aic = step(
+  fit_start, 
+  scope = outbreak ~ BEDS_TOTAL + HLTH_AUTH + OWNERSHIP + 
+    ACCRED_STATUS + FAMILY_COUNCIL + RESIDENT_COUNCIL + BEDS_PRIVATEbinary + rooms_shared + 
+    community_act + hospital_act + ROOMS_SEMIbinary + ROOMS_MULTIbinary, 
+  direction = "forward")
+```
+
+## Stepwise Selection
+```{r }
+fit_both_aic = step(
+  fit_start, 
+  scope = outbreak ~ BEDS_TOTAL + HLTH_AUTH + OWNERSHIP + 
+    ACCRED_STATUS + FAMILY_COUNCIL + BEDS_PRIVATEbinary + rooms_shared + 
+    community_act + hospital_act + ROOMS_SEMIbinary + ROOMS_MULTIbinary, 
+  direction = "both")
+
+fit_both_bic = step(
+  fit_start, 
+  scope = outbreak ~ BEDS_TOTAL + HLTH_AUTH + OWNERSHIP + 
+    ACCRED_STATUS + FAMILY_COUNCIL + BEDS_PRIVATEbinary + rooms_shared + 
+    community_act + hospital_act + ROOMS_SEMIbinary + ROOMS_MULTIbinary, 
+  direction = "both", k = log(n))
+```
+
+### All Possible Models
+```{r }
+library(leaps)
+all_fit = summary(regsubsets(outbreak ~ ., data = data))
+
+# Determine the best model for a given size based on RSS
+all_fit$which
+all_fit$rss
+all_fit$adjr2
+
+# Model with highest adjusted R2
+best_r2_ind = which.max(all_fit$adjr2)
+all_fit$which[best_r2_ind,] # extract predictors
+
+# Calculate the AIC and BIC for each of the models with the best RSS
+p = length(coef(fit))
+n = length(resid(fit))
+fit_aic = n * log(all_fit$rss / n) + 2 * (2:p)
+
+best_aic_ind = which.min(fit_aic)
+all_fit$which[best_aic_ind,]
+
+fit_best_aic = glm(outbreak ~ BEDS_TOTAL + HLTH_AUTH + rooms_shared, family = 'binomial', data = data)
+summary(fit_best_aic)
+
+```
+
+
+```{r }
+# Compare AIC for our fitted models
+extractAIC(fit_best_aic)
+extractAIC(fit_back_aic)
+extractAIC(fit_fwd_aic)
+
+plot(fit_aic ~ I(2:p), ylab = "AIC", xlab = "p, number of parameters", 
+     pch = 20, col = "dodgerblue", type = "b", cex = 2,
+     main = "AIC vs Model Complexity")
+```
+
 
 ```{r }
 # Most homes have a family_council
@@ -154,7 +260,7 @@ library(glmnet)
 # Trim the first column leaving only predictors
 x = model.matrix(outbreak~., data = data)[,-1]
 # y <- as.matrix(subset(data, select = c('outbreak')))
-y <- data.matrix(data[,11])
+y <- data.matrix(data[,13])
 
 # Note alpha=1 for lasso only and can blend with ridge penalty down to
 # alpha=0 ridge only
