@@ -155,11 +155,6 @@ fit_back_bic = step(fit, direction = "backward", k = log(n))
 coef(fit_back_bic)
 ```
 
-
-```{r }
-
-```
-
 ```{r }
 # A function which calculates the LOOCV RMSE
 calc_loocv_rmse = function(model) {
@@ -170,6 +165,17 @@ calc_loocv_rmse = function(model) {
 calc_loocv_rmse(fit)
 calc_loocv_rmse(fit_back_aic)
 calc_loocv_rmse(fit_back_bic)
+```
+
+
+
+```{r }
+
+```
+
+
+```{r }
+
 ```
 
 ### Forward Selection
@@ -250,8 +256,20 @@ xtabs(~outbreak + FAMILY_COUNCIL, data=df)
 subset(df, FAMILY_COUNCIL == 'False')
 ```
 
+## Using the stepAIC() function
+```{r }
+library(MASS)
 
-LASSO
+null <- glm(outbreak ~ 1, family = "binomial", data=data) # 1 here means the intercept 
+full <- glm(outbreak ~ BEDS_TOTAL + HLTH_AUTH + OWNERSHIP + 
+    ACCRED_STATUS + FAMILY_COUNCIL + RESIDENT_COUNCIL + BEDS_PRIVATEbinary + rooms_shared + 
+    community_act + hospital_act + ROOMS_SEMIbinary + ROOMS_MULTIbinary, family = "binomial", data=data)
+
+stepAIC(full, scope=list(lower=null, upper=full), data=data, direction='backward')
+stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='forward')
+```
+
+### LASSO
 ```{r }
 # https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
 library(glmnet)

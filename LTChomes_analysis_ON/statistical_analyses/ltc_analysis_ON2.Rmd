@@ -182,6 +182,7 @@ summary(fit)
 
 ### Backwards selection
 ```{r, include=FALSE}
+# Manual
 fit <- update(fit, .~. -total_inspections_norm)
 summary(fit)
 fit <- update(fit, .~. -X2y_inspections_norm)
@@ -219,7 +220,6 @@ summary(fit)
 
 
 ```
-
 
 ```{r }
 # Calculate McFadden's pseudo R2
@@ -281,7 +281,17 @@ coef(cv.glmmod, s = "lambda.min")
 ```
 
 ```{r }
+library(MASS)
 
+null <- glm(outbreak ~ 1, family = "binomial", data=data) # 1 here means the intercept 
+full <- glm(outbreak ~ total_inspections_norm + home_type + number_beds + short_stay + 
+    residents_council + family_council + accreditation + X5y_inspections_norm + 
+    X2y_inspections_norm + total_noncomplaints_norm + X5y_noncomplaints_norm + 
+    X2y_noncomplaints_norm + total_complaints_norm + X5y_complaints_norm + 
+    X2y_complaints_norm, family = binomial, data = data)
+
+stepAIC(full, scope=list(lower=null, upper=full), data=data, direction='backward')
+stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='forward')
 
 
 ```
