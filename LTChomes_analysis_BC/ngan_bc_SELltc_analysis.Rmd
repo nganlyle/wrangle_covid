@@ -12,7 +12,7 @@ library(dplyr)
 
 # Import the data
 # selected data
-df <- read.csv("../data/BC/bc_ltc_selected.csv", na.strings="", header=TRUE)
+df <- read.csv("../data/BC/bc_ltc_selected_sep18.csv", na.strings="", header=TRUE)
 
 # Remove the 3 homes that are considered "Special Units"
 df <- df %>%
@@ -29,19 +29,24 @@ for (each in listofcol){
   df[, each] <- as.character(df[, each])
 }
 
-df$outbreak <- as.factor(df$outbreak)
+listofcol = list('RESIDENT_COUNCIL', 'FAMILY_COUNCIL', 'BEDS_PRIVATEbinary', 'rooms_shared', 'outbreak')
+for (each in listofcol){
+  df[, each] <- as.factor(df[, each])
+}
 
-# str(df)
-dput(names(df))
+# df$outbreak <- as.factor(df$outbreak)
+
+str(df)
+# dput(names(df))
 ```
 
 ```{r, include=FALSE}
 # # Generate the data for analysis
 # # Create lists of variables used to filter data for analysis
 
-# # selected data
+# # Selected data
 num <- c("BEDS_TOTAL", "BEDS_PRIVATEprop", "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI")
-cat <- c("HLTH_AUTH", "OWNERSHIP", "REGULATION", "ACCRED_STATUS", "RESIDENT_COUNCIL", "FAMILY_COUNCIL")
+cat <- c("HLTH_AUTH", "OWNERSHIP", "REGULATION", "ACCRED_STATUS", "RESIDENT_COUNCIL", "FAMILY_COUNCIL", "BEDS_PRIVATEbinary", "rooms_shared")
 data <- subset(df, select = c(num, cat, 'outbreak'))
 
 str(data)
@@ -109,6 +114,8 @@ summary(fit)
 ```{r, include=FALSE}
 fit <- update(fit, .~. -HLTH_AUTH)
 summary(fit)
+fit <- update(fit, .~. -BEDS_PRIVATEbinary)
+summary(fit)
 fit <- update(fit, .~. -ACCRED_STATUS)
 summary(fit)
 fit <- update(fit, .~. -OWNERSHIP)
@@ -124,6 +131,8 @@ summary(fit)
 fit <- update(fit, .~. -RESIDENT_COUNCIL)
 summary(fit)
 fit <- update(fit, .~. -ROOMS_SEMI)
+summary(fit)
+fit <- update(fit, .~. -rooms_shared)
 summary(fit)
 
 ```
