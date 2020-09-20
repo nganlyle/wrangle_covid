@@ -10,7 +10,7 @@ library(skimr)
 library(dplyr)
 
 # Import the data
-df <- read.csv("../data/BC/ngan_bc_ltc_mainland.csv", na.strings="", header=TRUE)
+df <- read.csv("../data/BC/ngan_bc_ltc_mainland_sel.csv", na.strings="", header=TRUE)
 str(df)
 
 ```
@@ -18,69 +18,40 @@ str(df)
 
 ```{r, echo=FALSE}
 # Change datatypes as needed
-listofcol = list('FACILITY_NAME', 'HCC_CODE', 'STREET_ADDRESS', 'CITY', 'POSTAL')
+listofcol = list('FACILITY_NAME', 'HCC_CODE')
 for (each in listofcol){
   df[, each] <- as.character(df[, each])
 }
 
-df$outbreak <- as.factor(df$outbreak)
-# str(df)
-dput(names(df))
+listofcol = list('RESIDENT_COUNCIL', 'FAMILY_COUNCIL', 'BEDS_PRIVATEbinary', 'rooms_shared', 'outbreak', 'hospital_act', 'community_act', 'ROOMS_SEMIbinary', 'ROOMS_MULTIbinary')
+for (each in listofcol){
+  df[, each] <- as.factor(df[, each])
+}
+
+# df$outbreak <- as.factor(df$outbreak)
+
+str(df)
+# dput(names(df))
 ```
 
 ```{r, include=FALSE}
 # # Generate the data for analysis
 # # Create lists of variables used to filter data for analysis
 
-num <- c("DCH_NURSE_LASTYR", 
-  "DCH_ALLIED_LASTYR", 
-  "DCH_TOTAL_LASTYR", 
-  "DCH_NURSE_CURRENTYR", 
-  "DCH_ALLIED_CURRENTYR", 
-  "DCH_TOTAL_CURRENTYR", 
+num <- c(
   "BEDS_TOTAL", 
-  "ROOMS_PRIVATE", 
-  "ROOMS_SEMI", 
-  "ROOMS_MULTI", 
   "COMPLAINTS", 
   "SUB_COMPLAINTS", 
-  "INCIDENT_OUTBREAK_100",
-  "INCIDENT_ABUSE_100", 
-  "INCIDENT_FALL_100", 
-  "INCIDENT_POISON_100", 
-  "INCIDENT_MEDICATION_100", 
-  "INCIDENT_WANDERING_100", 
-  "INCIDENT_INJURY_100", 
-  "INCIDENT_AGGRESSION_100", 
   "AGE", 
   "FEMALE", 
-  "DEPRESSION", 
-  "ADL_DEPENDENT", 
-  "CPS_SEVERE", 
-  "DEMENTIA", 
-  "ABS_PHYS_ABUSIVE",
   "ISE_LOW", 
   "CMI", 
-  "THERAPY_PT", 
-  "THERAPY_RT", 
-  "THERAPY_OT", 
-  "MEDS_DEPRESSION", 
-  "MEDS_ANTIPSYCHOTICS", 
-  "RESTRAINTS", 
   "INSPECTIONS", 
   "INFRACTIONS", 
-  "INFRACTIONS_LICENSING", 
-  "INFRACTIONS_FACILITY", 
-  "INFRACTIONS_STAFFING", 
-  "INFRACTIONS_POLICY", 
-  "INFRACTIONS_CARE", 
-  "INFRACTIONS_DISEASE", 
-  "INFRACTIONS_FOOD", 
-  "INFRACTIONS_MEDICATION", 
-  "INFRACTIONS_PROGRAM", 
-  "INFRACTIONS_REPORTING", 
-  "INFRACTIONS_RIGHTS", 
-  "INFRACTIONS_OTHER", 
+  "INCIDENTS_100sum",
+  "DCH_NURSE",
+  "DCH_ALLLIED",
+  "DCH_TOTAL",
   "BEDS_PRIVATEprop")
 
 cat <- c(
@@ -89,7 +60,13 @@ cat <- c(
   "REGULATION", 
   "ACCRED_STATUS",
   "RESIDENT_COUNCIL", 
-  "FAMILY_COUNCIL")
+  "FAMILY_COUNCIL",
+  "BEDS_PRIVATEbinary", 
+  "rooms_shared",
+  "community_act", 
+  "hospital_act", 
+  "ROOMS_SEMIbinary", 
+  "ROOMS_MULTIbinary")
 
 data <- subset(df, select = c(num, cat, 'outbreak'))
 
@@ -143,21 +120,16 @@ for (each in num){
 ```{r, }
 # Create a list of numeric variables with 0 values
 list_non0s <- c(
-  'DCH_NURSE_LASTYR',
-  'DCH_ALLIED_LASTYR',
-  'DCH_TOTAL_LASTYR',
-  'DCH_NURSE_CURRENTYR',
-  'DCH_ALLIED_CURRENTYR',
-  'DCH_TOTAL_CURRENTYR',
-  # 'AGE',
-  # 'FEMALE',
+
+  'AGE',
+  'FEMALE',
   'DEPRESSION',
-  # 'ADL_DEPENDENT',
-  # 'ISE_LOW',
+  'ISE_LOW',
   'CMI',
-  # 'MEDS_DEPRESSION',
-  'MEDS_ANTIPSYCHOTICS',
-  'BEDS_TOTAL'
+  'BEDS_TOTAL',
+  'DCH_NURSE',
+  'DCH_ALLLIED',
+  'DCH_TOTAL'
 )
 
 list_0s <- setdiff(num, list_non0s)
@@ -205,39 +177,39 @@ for (each in list_0s) {
 # )
 
 # Log transform in place
-data[c(
-  'DCH_NURSE_LASTYR',
-  'DCH_ALLIED_LASTYR',
-  'DCH_TOTAL_LASTYR',
-  'DCH_NURSE_CURRENTYR',
-  'DCH_ALLIED_CURRENTYR',
-  'DCH_TOTAL_CURRENTYR',
-  'AGE',
-  # 'FEMALE',
-  # 'DEPRESSION',
-  # 'ADL_DEPENDENT',
-  # 'ISE_LOW',
-  'CMI'
-  # 'MEDS_DEPRESSION',
-  # 'MEDS_ANTIPSYCHOTICS',
-  # 'BEDS_TOTAL'
-)] <- log(data[c(
-  'DCH_NURSE_LASTYR',
-  'DCH_ALLIED_LASTYR',
-  'DCH_TOTAL_LASTYR',
-  'DCH_NURSE_CURRENTYR',
-  'DCH_ALLIED_CURRENTYR',
-  'DCH_TOTAL_CURRENTYR',
-  'AGE',
-  # 'FEMALE',
-  # 'DEPRESSION',
-  # 'ADL_DEPENDENT',
-  # 'ISE_LOW',
-  'CMI'
-  # 'MEDS_DEPRESSION',
-  # 'MEDS_ANTIPSYCHOTICS',
-  # 'BEDS_TOTAL'
-)])
+# data[c(
+#   'DCH_NURSE_LASTYR',
+#   'DCH_ALLIED_LASTYR',
+#   'DCH_TOTAL_LASTYR',
+#   'DCH_NURSE_CURRENTYR',
+#   'DCH_ALLIED_CURRENTYR',
+#   'DCH_TOTAL_CURRENTYR',
+#   'AGE',
+#   # 'FEMALE',
+#   # 'DEPRESSION',
+#   # 'ADL_DEPENDENT',
+#   # 'ISE_LOW',
+#   'CMI'
+#   # 'MEDS_DEPRESSION',
+#   # 'MEDS_ANTIPSYCHOTICS',
+#   # 'BEDS_TOTAL'
+# )] <- log(data[c(
+#   'DCH_NURSE_LASTYR',
+#   'DCH_ALLIED_LASTYR',
+#   'DCH_TOTAL_LASTYR',
+#   'DCH_NURSE_CURRENTYR',
+#   'DCH_ALLIED_CURRENTYR',
+#   'DCH_TOTAL_CURRENTYR',
+#   'AGE',
+#   # 'FEMALE',
+#   # 'DEPRESSION',
+#   # 'ADL_DEPENDENT',
+#   # 'ISE_LOW',
+#   'CMI'
+#   # 'MEDS_DEPRESSION',
+#   # 'MEDS_ANTIPSYCHOTICS',
+#   # 'BEDS_TOTAL'
+# )])
 
 list_0s_sqrt <- setdiff(list_0s, c('CPS_SEVERE',
 'ABS_PHYS_ABUSIVE',
@@ -245,11 +217,7 @@ list_0s_sqrt <- setdiff(list_0s, c('CPS_SEVERE',
 'Dementia'))
 
 # Square root transform in place
-data[c('DEPRESSION',
-'MEDS_ANTIPSYCHOTICS',
-'BEDS_TOTAL', list_0s_sqrt)] <- sqrt(data[c('DEPRESSION',
-'MEDS_ANTIPSYCHOTICS',
-'BEDS_TOTAL', list_0s_sqrt)])
+data[c(list_0s)] <- sqrt(data[c(list_0s)])
 
 skim(data)
 
