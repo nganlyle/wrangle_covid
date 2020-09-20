@@ -7,7 +7,7 @@ output: html_document
 ## Import and prepare the data
 ```{r results="hide"}
 library(skimr)
-library(dplyr)
+# library(dplyr)
 
 # Import the data
 df <- read.csv("../data/BC/ngan_bc_ltc_mainland_sel.csv", na.strings="", header=TRUE)
@@ -18,6 +18,7 @@ str(df)
 
 ```{r, echo=FALSE}
 # Change datatypes as needed
+
 listofcol = list('FACILITY_NAME', 'HCC_CODE')
 for (each in listofcol){
   df[, each] <- as.character(df[, each])
@@ -28,15 +29,15 @@ for (each in listofcol){
   df[, each] <- as.factor(df[, each])
 }
 
-# df$outbreak <- as.factor(df$outbreak)
-
 str(df)
-# dput(names(df))
+dput(names(df))
+
+# 34/131 homes had an outbreak
+table(df['outbreak'])
 ```
 
 ```{r, include=FALSE}
-# # Generate the data for analysis
-# # Create lists of variables used to filter data for analysis
+# Divide the variables into numeric and categorical types
 
 num <- c(
   "BEDS_TOTAL", 
@@ -55,22 +56,25 @@ num <- c(
   "BEDS_PRIVATEprop")
 
 cat <- c(
-  "HLTH_AUTH", 
-  "OWNERSHIP", 
-  "REGULATION", 
-  "ACCRED_STATUS",
-  "RESIDENT_COUNCIL", 
-  "FAMILY_COUNCIL",
-  "BEDS_PRIVATEbinary", 
-  "rooms_shared",
-  "community_act", 
-  "hospital_act", 
-  "ROOMS_SEMIbinary", 
-  "ROOMS_MULTIbinary")
+    "HLTH_AUTH", 
+    "OWNERSHIP", 
+    # "REGULATION", 
+    "ACCRED_STATUS",
+    "BEDS_PRIVATEbinary", 
+    "rooms_shared",
+    "ROOMS_SEMIbinary", 
+    "ROOMS_MULTIbinary",
+    "RESIDENT_COUNCIL", 
+    "FAMILY_COUNCIL",
+    "hospital_act",
+    "community_act"
+)
 
+# Subset the data for analysis
 data <- subset(df, select = c(num, cat, 'outbreak'))
 
-str(data)
+dput(names(data))
+# str(data)
 ```
 
 ```{r, }
@@ -92,19 +96,13 @@ We see above that most of the numeric predictors are right skewed to various deg
   - Mildly right skewed for skewness values between 0 and 1
 
 There are some left skewed predictors:
-
 [1] "AGE"
 [1] -4.35839
 [1] "FEMALE"
 [1] -1.039271
-[1] "ADL_DEPENDENT"
-[1] -0.03933123
-[1] "DEMENTIA"
-[1] -1.643361
 [1] "ISE_LOW"
 [1] -0.3928765
-[1] "MEDS_DEPRESSION"
-[1] -0.2032298
+
 
 We explore the variables to assess for zero values prior to transformation. 
 
@@ -114,133 +112,115 @@ for (each in num){
   print(each)
   print(summary(df[[each]]))
 }
+
 ```
 
-## Explore the variables for transformation
-```{r, }
-# Create a list of numeric variables with 0 values
-list_non0s <- c(
+Variables without 0s:
+  "BEDS_TOTAL", 
+  "AGE", 
+  "FEMALE", 
+  "ISE_LOW", 
+  "CMI", 
+  "DCH_NURSE",
+  "DCH_ALLLIED",
+  "DCH_TOTAL"
 
-  'AGE',
-  'FEMALE',
-  'DEPRESSION',
-  'ISE_LOW',
-  'CMI',
-  'BEDS_TOTAL',
-  'DCH_NURSE',
-  'DCH_ALLLIED',
-  'DCH_TOTAL'
+Variables with 0s:  
+  "COMPLAINTS", 
+  "SUB_COMPLAINTS", 
+  "INSPECTIONS", 
+  "INFRACTIONS", 
+  "INCIDENTS_100sum",
+  "BEDS_PRIVATEprop"
+
+  
+## Explore the variables for transformation
+It is often a good idea to apply the sqrt transformation to count data:
+  "BEDS_TOTAL", 
+  "COMPLAINTS", 
+  "SUB_COMPLAINTS", 
+  "INSPECTIONS",
+  "INCIDENTS_100sum"
+  
+
+```{r, }
+summary(data['INCIDENTS_100sum'])
+```
+
+```{r, }
+# List of numeric variables without 0s
+list_non0s <- c(
+  "BEDS_TOTAL", 
+  "AGE", 
+  "FEMALE", 
+  "ISE_LOW", 
+  "CMI", 
+  "DCH_NURSE",
+  "DCH_ALLLIED",
+  "DCH_TOTAL"
 )
 
+# List of numeric variables with 0s
 list_0s <- setdiff(num, list_non0s)
+
+# List of numeric variables without 0s that are right skewed
+list_non0s_right <- c(
+  "BEDS_TOTAL", 
+  "CMI", 
+  "DCH_NURSE",
+  "DCH_ALLLIED",
+  "DCH_TOTAL"
+)
+
+# List of numeric variables without 0s that are left skewed
+list_non0s_left <- c(
+  "AGE", 
+  "FEMALE", 
+  "ISE_LOW"
+)
+
+```
+
+```{r }
 
 library(rcompanion)
 
-# Visualize the effect of square root and log transformations on the data without 0s
-for (each in list_non0s) {  
+# Visualize the effect of square root and log transformations on right skewed data without 0s
+for (each in list_non0s_right) {  
   plotNormalHistogram(x = data[[each]], main = each)
   plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
   plotNormalHistogram(x = log(data[[each]]), main = c(each, 'log trans'))
 }
 
+# Can log transform all except BEDS_TOTAL
+
+# Visualize the effect of square root and cube root transformation on right skewed data with 0s
+for (each in list_0s) {  
+  plotNormalHistogram(x = data[[each]], main = each)
+  plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
+  plotNormalHistogram(x = (data[[each]])^1/3, main = c(each, 'cube rt'))
+}
+
+# Generally the cube root transformation does not add much to a square root transformation
+
+
+
 ```
 
 
 ```{r, }
-# Visualize the effect of a square root transformation on the variables with 0s
-for (each in list_0s) {  
-  plotNormalHistogram(x = data[[each]], main = each)
-  plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
-}
 
 ```
 
 ## Transform the data
 ```{r }
-
-# list_non0s <- c(
-#   'DCH_NURSE_LASTYR',
-#   'DCH_ALLIED_LASTYR',
-#   'DCH_TOTAL_LASTYR',
-#   'DCH_NURSE_CURRENTYR',
-#   'DCH_ALLIED_CURRENTYR',
-#   'DCH_TOTAL_CURRENTYR',
-#   'AGE',
-#   # 'FEMALE',
-#   # 'DEPRESSION',
-#   # 'ADL_DEPENDENT',
-#   # 'ISE_LOW',
-#   'CMI',
-#   # 'MEDS_DEPRESSION',
-#   # 'MEDS_ANTIPSYCHOTICS',
-#   # 'BEDS_TOTAL'
-# )
-
-# Log transform in place
-# data[c(
-#   'DCH_NURSE_LASTYR',
-#   'DCH_ALLIED_LASTYR',
-#   'DCH_TOTAL_LASTYR',
-#   'DCH_NURSE_CURRENTYR',
-#   'DCH_ALLIED_CURRENTYR',
-#   'DCH_TOTAL_CURRENTYR',
-#   'AGE',
-#   # 'FEMALE',
-#   # 'DEPRESSION',
-#   # 'ADL_DEPENDENT',
-#   # 'ISE_LOW',
-#   'CMI'
-#   # 'MEDS_DEPRESSION',
-#   # 'MEDS_ANTIPSYCHOTICS',
-#   # 'BEDS_TOTAL'
-# )] <- log(data[c(
-#   'DCH_NURSE_LASTYR',
-#   'DCH_ALLIED_LASTYR',
-#   'DCH_TOTAL_LASTYR',
-#   'DCH_NURSE_CURRENTYR',
-#   'DCH_ALLIED_CURRENTYR',
-#   'DCH_TOTAL_CURRENTYR',
-#   'AGE',
-#   # 'FEMALE',
-#   # 'DEPRESSION',
-#   # 'ADL_DEPENDENT',
-#   # 'ISE_LOW',
-#   'CMI'
-#   # 'MEDS_DEPRESSION',
-#   # 'MEDS_ANTIPSYCHOTICS',
-#   # 'BEDS_TOTAL'
-# )])
-
-list_0s_sqrt <- setdiff(list_0s, c('CPS_SEVERE',
-'ABS_PHYS_ABUSIVE',
-'AGE',
-'Dementia'))
-
-# Square root transform in place
-data[c(list_0s)] <- sqrt(data[c(list_0s)])
-
-skim(data)
+# # Square root transform in place
+# data[c(list_0s)] <- sqrt(data[c(list_0s)])
+# 
+# skim(data)
 
 ```
 
-sqrt
-DEPRESSION
-MEDS_ANTIPSYCHOTICS
-BEDS_TOTAL
-
-none
-FEMALE
-ISE_LOW
-ADL_DEPENDENT
-MEDS_DEPRESSION
-
-0s
-CPS_SEVERE
-ABS_PHYS_ABUSIVE
-
-left
-AGE
-Dementia
 
 ## Fit logistic regression
 ```{r }
@@ -250,6 +230,47 @@ summary(fit)
 ```
 
 
+```{r }
+# Backward selection using AIC
+fit_back_aic = step(fit, direction = "backward")
+coef(fit_back_aic)
+```
+
+
+```{r }
+# Bacward selection using BIC
+n = length((resid(fit)))
+fit_back_bic = step(fit, direction = "backward", k = log(n))
+
+coef(fit_back_bic)
+```
+
+```{r }
+# A function which calculates the LOOCV RMSE
+calc_loocv_rmse = function(model) {
+  sqrt(mean((resid(model) / (1 - hatvalues(model))) ^ 2))
+}
+
+# Calculate LOOCV RMSE for each model
+calc_loocv_rmse(fit)
+calc_loocv_rmse(fit_back_aic)
+calc_loocv_rmse(fit_back_bic)
+```
+
+## Using the stepAIC() function
+```{r }
+library(MASS)
+
+null <- glm(outbreak ~ 1, family = "binomial", data=data) # 1 here means the intercept 
+full <- glm(outbreak ~ BEDS_TOTAL + COMPLAINTS + SUB_COMPLAINTS + AGE + FEMALE + ISE_LOW + CMI +
+    INSPECTIONS + INFRACTIONS + INCIDENTS_100sum + DCH_NURSE + DCH_ALLLIED + DCH_TOTAL +
+    HLTH_AUTH + OWNERSHIP + ACCRED_STATUS + FAMILY_COUNCIL + RESIDENT_COUNCIL + BEDS_PRIVATEbinary +
+    rooms_shared + community_act + hospital_act + ROOMS_SEMIbinary + ROOMS_MULTIbinary, 
+  family = "binomial", data=data)
+
+stepAIC(full, scope=list(lower=null, upper=full), data=data, direction='backward')
+stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='forward')
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -261,8 +282,8 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
+```{r }
+
 ```
 
 ## Including Plots

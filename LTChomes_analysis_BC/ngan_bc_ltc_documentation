@@ -11,6 +11,7 @@ Complete Dataset
 - Define binary variables for resident and family councils
 - Define proportion of private vs public beds
 - Define a binary variable for the presence of private beds
+- Define binary variables for presence of semi or multi rooms
 - Define a binary variable for the presence of shared rooms
 - Removed irrelevant predictors
 
