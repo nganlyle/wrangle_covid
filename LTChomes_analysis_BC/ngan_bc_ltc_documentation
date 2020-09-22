@@ -1,3 +1,10 @@
+**Merge Data**
+LTC homes metadata from OSA was merged with COVID-19 data from the ministry
+Three homes that had an outbreak in the ministry list is not in the OSA list
+1. Chartwell Willow long-term care in Fraser
+2. Kootenay Street Village in IH
+3. Hawthorn Park / Orchard Manor in IH
+
 **Complete and Selected Dataset**
 
 Input: ngan_merged_OSAtoCOVID.csv

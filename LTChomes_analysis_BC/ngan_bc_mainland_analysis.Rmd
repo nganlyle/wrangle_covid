@@ -269,7 +269,7 @@ full <- glm(outbreak ~ BEDS_TOTAL + COMPLAINTS + SUB_COMPLAINTS + AGE + FEMALE +
   family = "binomial", data=data)
 
 stepAIC(full, scope=list(lower=null, upper=full), data=data, direction='backward')
-stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='forward')
+# stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='forward')
 ```
 
 ```{r setup, include=FALSE}
