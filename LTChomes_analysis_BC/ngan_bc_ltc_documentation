@@ -1,17 +1,30 @@
+**Merge Data**
+LTC homes metadata from OSA was merged with COVID-19 data from the ministry
+Three homes that had an outbreak in the ministry list is not in the OSA list
+1. Chartwell Willow long-term care in Fraser
+2. Kootenay Street Village in IH
+3. Hawthorn Park / Orchard Manor in IH
+
 **Complete and Selected Dataset**
 
 Input: ngan_merged_OSAtoCOVID.csv
 
-Script: ngan_bc_ltc_com_sel
+Script: ngan_bc_ltc_com_sel.ipynb
+
 
 Complete Dataset
-- Define new variables for resident and family councils
+
+- Impute inaccurate values for ROOMS_* predictors
+- Define binary variables for resident and family councils
 - Define proportion of private vs public beds
-- Removed irrelevent predictors
+- Define a binary variable for the presence of private beds
+- Define binary variables for presence of semi or multi rooms
+- Define a binary variable for the presence of shared rooms
+- Removed irrelevant predictors
 
 Selected Dataset
 - As above
-- Removed all preditors with missing values
+- Removed all predictors with missing values
 - Binary logistic regression showed 2 significant predictors
   - FAMILY_COUNCIL
   - BEDS_TOTAL
@@ -20,7 +33,7 @@ Selected Dataset
 
 Input: bc_ltc_complete.csv
 
-Script: ngan_bc_filter_5homes
+Script: ngan_bc_filter_5homes.ipynb
 
 - Merged "Special Unit" homes with the parent homes
   - Weighted average of DCH and demographic predictors
@@ -44,6 +57,21 @@ Analysis:
     - FAMILY_COUNCIL
     - BEDS_TOTAL
 
+**mainland Dataset**
+
+Input: bc_ltc_complete.csv
+
+Script: ngan_bc_filter_homes.ipynb
+
+- Merged "Special Unit" homes with the parent homes
+- Filter for homes only in Vancouver Coastal or Fraser
+- Remove 3 homes with missing values
+
+  - 'Bella Coola General Hospital'
+  - 'Delta View Habilitation Centre'
+  - 'R. W. Large Memorial Hospital'
+
+- Remove STAY_LENGTH predictor, which is the only predictor with missing values from the remaining dataset
 
 None
 CPS_SEVERE

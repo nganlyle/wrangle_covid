@@ -101,11 +101,11 @@ biplot(pca, col = c("blue", "red"), cex = c(0.5,0.5))
 pcs <- pca$x[,c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6")]
 
 # Create a dataframe with reponse variable TOTAL proportion of COVID cases and explanatory variables (the PCs)
-pcr_data <- as.data.frame(cbind(df[,"count_prop"], pcs))
+pcr_data <- as.data.frame(cbind(df_source[,"HSDPOP"], df[,"count_prop"], pcs))
 head(pcr_data)
 
-# Perform linear regression
-phu_lm_total <- lm(V1~., data = pcr_data)
+# Perform regression
+phu_lm_total <- lm(V2 ~ . -V1, data = pcr_data, weights = V1)
 summary(phu_lm_total)
 
 # # Backwards Selection

@@ -11,13 +11,7 @@ library(skimr)
 library(dplyr)
 
 # Import the data
-# selected data
-df <- read.csv("../data/BC/bc_ltc_selected.csv", na.strings="", header=TRUE)
-
-# Remove the 3 homes that are considered "Special Units"
-df <- df %>%
-  filter(!grepl('Special Unit', FACILITY_NAME))
-
+df <- read.csv("../data/BC/bc_ltc_selected_sep18.csv", na.strings="", header=TRUE)
 str(df)
 ```
 
@@ -29,63 +23,249 @@ for (each in listofcol){
   df[, each] <- as.character(df[, each])
 }
 
-df$outbreak <- as.factor(df$outbreak)
+listofcol = list('outbreak', 'rooms_semi_binary', 'rooms_multi_binary', 'rooms_shared', 'resident_council', 'family_council', 'res_fam_council', 'beds_privatebinary')
 
-# str(df)
-dput(names(df))
+for (each in listofcol){
+  df[, each] <- as.factor(df[, each])
+}
+
+str(df)
+# dput(names(df))
 ```
 
 ```{r, include=FALSE}
 # # Generate the data for analysis
 # # Create lists of variables used to filter data for analysis
 
-# # selected data
-# num <- c("BEDS_TOTAL", "BEDS_PRIVATEprop", "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI")
-# cat <- c("HLTH_AUTH", "OWNERSHIP", "REGULATION", "ACCRED_STATUS", "RESIDENT_COUNCIL", "FAMILY_COUNCIL")
-# data <- subset(df, select = c(num, cat, 'outbreak'))
-
-# noNHorVIHA data
-incidents = c(
-  "INCIDENT_OUTBREAK_100",
-  "INCIDENT_ABUSE_100", "INCIDENT_FALL_100", "INCIDENT_POISON_100",
-  "INCIDENT_MEDICATION_100", "INCIDENT_WANDERING_100",
-  "INCIDENT_INJURY_100", "INCIDENT_AGGRESSION_100"
-  )
-
-inspections = c(
-  "COMPLAINTS", "SUB_COMPLAINTS", "INSPECTIONS",
-  "INFRACTIONS",
-  "INFRACTIONS_DISEASE")
-
-gen = c("OWNERSHIP", "REGULATION", "ACCRED_STATUS","RESIDENT_COUNCIL", "FAMILY_COUNCIL")
-
-dch = c(
-  "DCH_NURSE_LASTYR",
-  "DCH_ALLIED_LASTYR",
-  "DCH_NURSE_CURRENTYR",
-  "DCH_ALLIED_CURRENTYR"
- )
-
-space = c("BEDS_PRIVATEprop", "BEDS_TOTAL",
-  "ROOMS_PRIVATE", "ROOMS_SEMI", "ROOMS_MULTI")
-
-dem = c(
-  "AGE", "FEMALE",
-  "AGE_85_PLUS", "AGE_UNDER_65", "DEPRESSION", "ADL_DEPENDENT",
-  "CPS_SEVERE", "DEMENTIA", "ABS_PHYS_ABUSIVE", "ISE_LOW", "CMI",
-  "THERAPY_PT", "THERAPY_RT", "THERAPY_OT", "MEDS_DEPRESSION",
-  "MEDS_ANTIPSYCHOTICS", "RESTRAINTS"
-)
-
-data <- subset(df, select = c(gen, incidents, inspections, dch, space, 'outbreak'))
+# # Selected data
+num <- c("BEDS_TOTAL", "INSPECTIONS", 
+  # "beds_privateprop", 
+  "infractions_100", "infractions_disease_100")
+cat <- c(
+  "HLTH_AUTH", "OWNERSHIP", "REGULATION", "ACCRED_STATUS", 
+  "rooms_semi_binary", "rooms_multi_binary", "rooms_shared",
+  "resident_council", "family_council", 
+  # "res_fam_council",
+  "beds_privatebinary")
+data <- subset(df, select = c(num, cat, 'outbreak'))
 
 str(data)
+```
+
+## Fit logistic regression
+```{r }
+# Fit logistic regression using transformed data
+fit = glm(outbreak~., family=binomial, data=data)
+summary(fit)
+```
+
+### Backwards Selection
+```{r, include=FALSE}
+# Manual
+fit <- update(fit, .~. -rooms_semi_binary)
+summary(fit)
+fit <- update(fit, .~. -res_fam_council)
+summary(fit)
+fit <- update(fit, .~. -rooms_multi_binary)
+summary(fit)
+fit <- update(fit, .~. -ACCRED_STATUS)
+summary(fit)
+fit <- update(fit, .~. -OWNERSHIP)
+summary(fit)
+fit <- update(fit, .~. -beds_privateprop)
+summary(fit)
+fit <- update(fit, .~. -REGULATION)
+summary(fit)
+fit <- update(fit, .~. -INSPECTIONS)
+summary(fit)
+fit <- update(fit, .~. -infractions_100)
+summary(fit)
+fit <- update(fit, .~. -resident_council)
+summary(fit)
+fit <- update(fit, .~. -infractions_disease_100)
+summary(fit)
+fit <- update(fit, .~. -beds_privatebinary)
+summary(fit)
+fit <- update(fit, .~. -family_council)
+summary(fit)
+fit <- update(fit, .~. -HLTH_AUTH)
+summary(fit)
+
+
+```
+
+### LASSO
+```{r }
+# https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
+library(glmnet)
+
+# model.matrix() automatically transforms any qualitative variables into dummy variables
+# Trim the first column leaving only predictors
+x = model.matrix(outbreak~. , data = data)[,-1]
+# y <- as.matrix(subset(data, select = c('outbreak')))
+y <- data.matrix(data[,15])
+
+# Note alpha=1 for lasso only and can blend with ridge penalty down to
+# alpha=0 ridge only
+glmmod <- glmnet(x, y, alpha = 1, family = 'binomial')
+
+# Plot variable coefficients vs. shrinkage parameter lambda
+plot(glmmod, xvar = 'lambda', label = TRUE)
+
+cv.glmmod <- cv.glmnet(x, y, alpha=1, family = 'binomial')
+
+
+plot(cv.glmmod)
+cv.glmmod$lambda.min
+
+coef(cv.glmmod, s = "lambda.min")
+
+```
+
+## Using the stepAIC() function
+```{r }
+library(MASS)
+
+null <- glm(outbreak ~ 1, family = "binomial", data=data) # 1 here means the intercept 
+full <- glm(
+  outbreak ~ BEDS_TOTAL + INSPECTIONS + 
+    # beds_privateprop + 
+    infractions_100 + infractions_disease_100 + 
+    HLTH_AUTH + OWNERSHIP + REGULATION + ACCRED_STATUS + 
+    rooms_semi_binary + rooms_multi_binary + rooms_shared + 
+    resident_council + family_council + 
+    # res_fam_council + 
+    beds_privatebinary, family = "binomial", data=data)
+
+stepAIC(full, scope=list(lower=null, upper=full), data=data, direction='backward')
+# stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='forward')
+```
+
+```{r }
+# Backward selection using AIC
+fit_back_aic = step(fit, direction = "backward")
+coef(fit_back_aic)
+
+# Backward selection using BIC
+n = length((resid(fit)))
+fit_back_bic = step(fit, direction = "backward", k = log(n))
+coef(fit_back_bic)
+
+# A function which calculates the LOOCV RMSE
+calc_loocv_rmse = function(model) {
+  sqrt(mean((resid(model) / (1 - hatvalues(model))) ^ 2))
+}
+
+# Calculate LOOCV RMSE for each model
+calc_loocv_rmse(fit)
+calc_loocv_rmse(fit_back_aic)
+calc_loocv_rmse(fit_back_bic)
+
+# Forward selection
+null <- glm(outbreak ~ 1, family = "binomial", data=data) # 1 here means the intercept 
+full <- glm(
+  outbreak ~ BEDS_TOTAL + INSPECTIONS + 
+    # beds_privateprop + 
+    infractions_100 + infractions_disease_100 + 
+    HLTH_AUTH + OWNERSHIP + REGULATION + ACCRED_STATUS + 
+    rooms_semi_binary + rooms_multi_binary + rooms_shared + 
+    resident_council + family_council + 
+    # res_fam_council + 
+    beds_privatebinary, family = "binomial", data=data)
+
+fit_start = glm(outbreak ~ 1, family=binomial, data = data)
+fit_fwd_aic = step(
+  fit_start, 
+  scope = outbreak ~ BEDS_TOTAL + INSPECTIONS + 
+    # beds_privateprop + 
+    infractions_100 + infractions_disease_100 + 
+    HLTH_AUTH + OWNERSHIP + REGULATION + ACCRED_STATUS + 
+    rooms_semi_binary + rooms_multi_binary + rooms_shared + 
+    resident_council + family_council + 
+    # res_fam_council + 
+    beds_privatebinary, 
+  direction = "forward")
+```
+
+## Stepwise Selection
+```{r }
+fit_both_aic = step(
+  fit_start, 
+  scope = outbreak ~ BEDS_TOTAL + INSPECTIONS + 
+    # beds_privateprop + 
+    infractions_100 + infractions_disease_100 + 
+    HLTH_AUTH + OWNERSHIP + REGULATION + ACCRED_STATUS + 
+    rooms_semi_binary + rooms_multi_binary + rooms_shared + 
+    resident_council + family_council + 
+    # res_fam_council + 
+    beds_privatebinary, 
+  direction = "both")
+
+fit_both_bic = step(
+  fit_start, 
+  scope = outbreak ~ BEDS_TOTAL + INSPECTIONS + 
+    # beds_privateprop + 
+    infractions_100 + infractions_disease_100 + 
+    HLTH_AUTH + OWNERSHIP + REGULATION + ACCRED_STATUS + 
+    rooms_semi_binary + rooms_multi_binary + rooms_shared + 
+    resident_council + family_council + 
+    # res_fam_council + 
+    beds_privatebinary, 
+  direction = "both", k = log(n))
+```
+
+### All Possible Models
+```{r }
+library(leaps)
+all_fit = summary(regsubsets(outbreak ~ ., data = data))
+
+# Determine the best model for a given size based on RSS
+all_fit$which
+all_fit$rss
+all_fit$adjr2
+
+# Model with highest adjusted R2
+best_r2_ind = which.max(all_fit$adjr2)
+all_fit$which[best_r2_ind,] # extract predictors
+
+# Calculate the AIC and BIC for each of the models with the best RSS
+p = length(coef(fit))
+n = length(resid(fit))
+fit_aic = n * log(all_fit$rss / n) + 2 * (2:p)
+
+best_aic_ind = which.min(fit_aic)
+all_fit$which[best_aic_ind,]
+
+fit_best_aic = glm(outbreak ~ BEDS_TOTAL + HLTH_AUTH + rooms_shared, family = 'binomial', data = data)
+summary(fit_best_aic)
 
 ```
 
 
+```{r }
+# Compare AIC for our fitted models
+extractAIC(fit_best_aic)
+extractAIC(fit_back_aic)
+extractAIC(fit_fwd_aic)
 
-```{r, }
+plot(fit_aic ~ I(2:p), ylab = "AIC", xlab = "p, number of parameters", 
+     pch = 20, col = "dodgerblue", type = "b", cex = 2,
+     main = "AIC vs Model Complexity")
+```
+
+
+```{r }
+# Most homes have a family_council
+# 8/46 homes without a family council had an outbreak
+# 26/251 with a family council had an outbreak
+xtabs(~outbreak + rooms_shared, data=df)
+
+# Review the minority of homes without a family council
+subset(df, FAMILY_COUNCIL == 'False')
+```
+
+## Transforming covariates
+```{r, include=FALSE}
 ## Assessing skewness
 # Check for R skewness in numeric predictors
 library(e1071)
@@ -99,98 +279,28 @@ for (each in listofcol){
   qqline(data[[each]], col = 'red')
 }
 
-```
-
-```{r, include=FALSE}
 # Assess variables for 0s
 for (each in listofcol){
   print(each)
   print(summary(df[[each]]))
 }
 
-```
-
-All the variables above have 0s except for BEDS_TOTAL so will square root transform
-
-## Explore the variables for transformation
-```{r, fig.show="hide"}
 library(rcompanion)
 
+## Explore the variables for transformation
 # Visualize the effect of square root transformations on the  predictors
 for (each in listofcol) {  
   plotNormalHistogram(x = data[[each]], main = each)
   plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
 }
 
-# # Visualize the effect of log transformations on the data with no 0s that are right skewed
-# for (each in list_non0s) {  
-#   plotNormalHistogram(x = data[[each]], main = each)
-#   plotNormalHistogram(x = log(data[[each]]), main = c(each, 'log trans'))
-# }
-
-# Visualize the effect of transformations on the data that are left skewed
-# # log10(max(x+1) - x)
-# plotNormalHistogram(x = data[['BEDS_PUBLICprop']])
-# plotNormalHistogram(x = sqrt(max(data[['BEDS_PUBLICprop']] + 1) - data[['BEDS_PUBLICprop']]))
-
-# # sqrt(max(x+1) - x)
-# plotNormalHistogram(x = data[['ROOMS_PRIVATEprop']])
-# plotNormalHistogram(x = sqrt(max(data[['ROOMS_PRIVATEprop']] + 1) - data[['ROOMS_PRIVATEprop']]))
-
-```
-Sqrt transformation is best for all the data.
-
 ## Transform the data
-```{r }
-# list0s
-# # Sqrt transform in place
-# data[list0s] <- log(data[list0s])
-
 # Square root transform in place
 data[listofcol] <- sqrt(data[listofcol])
 
 skim(data)
 ```
 
-## Fit logistic regression
-```{r }
-# Fit logistic regression using transformed data
-fit = glm(outbreak~., family=binomial, data=data)
-summary(fit)
-```
-
-### Backwards selection
-```{r, include=FALSE}
-fit <- update(fit, .~. -HLTH_AUTH)
-summary(fit)
-fit <- update(fit, .~. -ACCRED_STATUS)
-summary(fit)
-fit <- update(fit, .~. -OWNERSHIP)
-summary(fit)
-fit <- update(fit, .~. -REGULATION)
-summary(fit)
-fit <- update(fit, .~. -BEDS_PRIVATEprop)
-summary(fit)
-fit <- update(fit, .~. -ROOMS_PRIVATE  )
-summary(fit)
-fit <- update(fit, .~. -ROOMS_MULTI)
-summary(fit)
-fit <- update(fit, .~. -RESIDENT_COUNCIL)
-summary(fit)
-fit <- update(fit, .~. -ROOMS_SEMI)
-summary(fit)
-
-```
-
-```{r }
-# Most homes have a family_council
-# 8/46 homes without a family council had an outbreak
-# 26/251 with a family council had an outbreak
-xtabs(~outbreak + FAMILY_COUNCIL, data=df)
-
-# Review the minority of homes without a family council
-subset(df, FAMILY_COUNCIL == 'False')
-```
 
 ```{r }
 
