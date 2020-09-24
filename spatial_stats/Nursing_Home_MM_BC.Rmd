@@ -25,7 +25,7 @@ library(leaflet)
 
 ```{r Get Data: Pollution Stations and Boundary shp, include=FALSE}
 nursing_home <- read.csv2('/Users/kt/Documents/covid-research/wrangle_covid/data/BC/bc_ltc_selected_sep18.csv', sep=',')
-nursing_home
+nursing_home$Total.Confirmed.Cases <- as.numeric(as.character(nursing_home$Total.Confirmed.Cases))
 #Canada = raster::getData('GADM', country='CA', level=1)
 nursing_home$latitude <- as.numeric(as.character(nursing_home$latitude))
 nursing_home$longitude <- as.numeric(as.character(nursing_home$longitude))
@@ -35,11 +35,15 @@ nursing_home$longitude <- as.numeric(as.character(nursing_home$longitude))
 i = 1
 for (i in 1:294) {
   if (nursing_home$Total.Confirmed.Cases[i] == 0.0) {
+    # print(TRUE)
     nursing_home$anyCases[i] = 0
   } else {
     nursing_home$anyCases[i] = 1
+    # print(FALSE)
   }
 }
+
+nursing_home$anyCases
 ```
 
 ```{r prepareData}
@@ -71,8 +75,9 @@ addLegendCustom <- function(map, colors, labels, sizes, font.sizes, opacity = 0.
 
 ```
 
+### By Number of Deaths
 
-```{r all nursing homes}
+```{r all nursing homes, echo = F}
 library(shiny)
 
 ## All Nursing Homes in BC Leaflet Map
@@ -98,7 +103,9 @@ leaflet(nursing_home) %>%
 
 ```
 
-```{r}
+### By Ownership Type
+
+```{r, echo = F}
 ptCol2 <- colorFactor("YlOrRd", levels(nursing_home$OWNERSHIP), na.color = "#000000")
 legendLabs2 <- levels(nursing_home$OWNERSHIP)
 
@@ -110,6 +117,25 @@ leaflet(nursing_home) %>%
     label = ~ OWNERSHIP, 
              fillColor = ptCol2(nursing_home$OWNERSHIP), fillOpacity = 0.8, radius = 4, stroke = FALSE) %>%
   addLegendCustom(colors = mapcolours, labels = legendLabs2, sizes = 6, font.sizes = 2, group='Ownership Type')
+
+```
+
+
+### By Outbreak Status
+
+```{r, echo = F}
+nursing_home
+ptCol2 <- colorFactor("YlOrRd", nursing_home$anyCases, na.color = "#000000")
+legendLabs2 <- unique(nursing_home$anyCases)
+
+mapcolours <- unique(ptCol2(nursing_home$anyCases))
+
+leaflet(nursing_home) %>%
+  addTiles() %>%
+  addCircleMarkers(#lng = ~longitude, lat = ~latitude, 
+    label = ~ anyCases, 
+             fillColor = ptCol2(nursing_home$anyCases), fillOpacity = 0.8, radius = 4, stroke = FALSE) %>%
+  addLegendCustom(colors = mapcolours, labels = legendLabs2, sizes = 6, font.sizes = 2, group='Outbreak Status')
 
 ```
 
