@@ -1,5 +1,5 @@
 ---
-title: "bc_mainland_analysis"
+title: "bc_xNHorVIHA_analysis"
 author: "Ngan Lyle"
 date: "28/08/2020"
 output: html_document
@@ -10,9 +10,9 @@ library(skimr)
 # library(dplyr)
 
 # Import the data
-df <- read.csv("../data/BC/ngan_bc_ltc_mainland.csv", na.strings="", header=TRUE)
+df <- read.csv("../data/BC/ngan_bc_ltc_xNHorVIHA.csv", na.strings="", header=TRUE)
 str(df)
-# dput(names(df))
+dput(names(df))
 ```
 
 
@@ -43,7 +43,6 @@ num <- c(
   "BEDS_TOTAL", 
   "INSPECTIONS", 
   "INCIDENT_OUTBREAK_100",
-
   "AGE", "FEMALE", "AGE_85_PLUS", "AGE_UNDER_65",
   "DEPRESSION", "ADL_DEPENDENT", "CPS_SEVERE", "DEMENTIA", "ABS_PHYS_ABUSIVE",
   # "ISE",
@@ -127,10 +126,10 @@ full <- glm(outbreak ~
     INSPECTIONS + 
     beds_privateprop +
     complaints_100 + sub_complaints_100 +
-    # incident_100sum +
+    incident_100sum +
     incident_100sumXoutbreak +
-    # infractions_100 +
-    infractions_disease_100 +
+    infractions_100 +
+    infractions_disease_100 + 
     infractions_100Xdisease +
     HLTH_AUTH + 
     OWNERSHIP +

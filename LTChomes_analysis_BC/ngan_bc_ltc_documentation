@@ -1,9 +1,12 @@
 **Merge Data**
-LTC homes metadata from OSA was merged with COVID-19 data from the ministry
-Three homes that had an outbreak in the ministry list is not in the OSA list
+
+LTC homes metadata from OSA (including latitude and longitude data) was merged with COVID-19 data from the ministry.
+Three homes that had an outbreak in the ministry list is not in the OSA list.
 1. Chartwell Willow long-term care in Fraser
 2. Kootenay Street Village in IH
 3. Hawthorn Park / Orchard Manor in IH
+
+An outbreak status column was added.
 
 **Complete and Selected Dataset**
 
@@ -15,11 +18,44 @@ Script: ngan_bc_ltc_com_sel.ipynb
 Complete Dataset
 
 - Impute inaccurate values for ROOMS_* predictors
-- Define binary variables for resident and family councils
-- Define proportion of private vs public beds
-- Define a binary variable for the presence of private beds
-- Define binary variables for presence of semi or multi rooms
-- Define a binary variable for the presence of shared rooms
+- Convert all "suppressed" values to NA
+- Convert NA values in the "Total Confirmed Cases" and "Total Deaths" columns to 0s
+- Merge Special Unit Homes with their parent home
+
+Adjust Covariates/Predictors
+- ROOMS_*
+  - Define binary variables for presence of semi or multi rooms
+    - 248/297 (83%) homes have 0 multi-rooms
+    - 128/297 (43%) homes have 0 semi-rooms
+  - Define a binary variable for the presence of shared rooms
+  - Remove the original ROOMS_* predictors
+
+- Define binary variables for:
+  - Resident council
+  - Family council
+  - Resident and Family councils
+
+- Private beds
+  - 205/297 of homes have 0 private beds
+  - Define proportion, private beds/total beds
+  - Define a binary variable for the presence of private beds
+
+- Define complaints/sub_complaints per 100 beds variable
+
+- Incident
+  - Sum incident_100
+  - Sum incident_100 except outbreaks
+  - Keep incident_outbreak_100
+  - Remove other subcategories of incident data
+
+- Infractions
+  - Define infractions/infractions_disease per 100 beds covariate
+  - Define infractions - infractions_disease per 100 beds covariate
+  - Remove subcategories of infractions data except disease
+
+- Ownership
+  - Define a binary variable for HA ownership vs not
+
 - Removed irrelevant predictors
 
 Selected Dataset
@@ -57,7 +93,7 @@ Analysis:
     - FAMILY_COUNCIL
     - BEDS_TOTAL
 
-**mainland Dataset**
+**Mainland Dataset**
 
 Input: bc_ltc_complete.csv
 
@@ -72,10 +108,3 @@ Script: ngan_bc_filter_homes.ipynb
   - 'R. W. Large Memorial Hospital'
 
 - Remove STAY_LENGTH predictor, which is the only predictor with missing values from the remaining dataset
-
-None
-CPS_SEVERE
-ABS_PHYS_ABUSIVE
-
-left
-Dementia

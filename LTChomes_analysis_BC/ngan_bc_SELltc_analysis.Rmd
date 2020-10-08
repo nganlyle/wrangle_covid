@@ -23,7 +23,10 @@ for (each in listofcol){
   df[, each] <- as.character(df[, each])
 }
 
-listofcol = list('outbreak', 'rooms_semi_binary', 'rooms_multi_binary', 'rooms_shared', 'resident_council', 'family_council', 'res_fam_council', 'beds_privatebinary')
+listofcol = list('outbreak',
+  # 'ownership_HA',
+  'rooms_semi_binary', 'rooms_multi_binary', 'rooms_shared', 'resident_council', 'family_council',
+  'res_fam_council', 'beds_privatebinary')
 
 for (each in listofcol){
   df[, each] <- as.factor(df[, each])
@@ -34,23 +37,129 @@ str(df)
 ```
 
 ```{r, include=FALSE}
-# # Generate the data for analysis
-# # Create lists of variables used to filter data for analysis
+# Generate the data for analysis
+# Create lists of variables used to filter data for analysis
 
-# # Selected data
+# Selected data
 num <- c("BEDS_TOTAL", "INSPECTIONS", 
-  # "beds_privateprop", 
-  "infractions_100", "infractions_disease_100")
+  # "beds_privateprop",
+  "infractions_100Xdisease", "infractions_disease_100")
 cat <- c(
-  "HLTH_AUTH", "OWNERSHIP", "REGULATION", "ACCRED_STATUS", 
+  "HLTH_AUTH", 
+  # 'ownership_HA',
+  "OWNERSHIP",
+  "REGULATION", "ACCRED_STATUS", 
   "rooms_semi_binary", "rooms_multi_binary", "rooms_shared",
-  "resident_council", "family_council", 
-  # "res_fam_council",
-  "beds_privatebinary")
-data <- subset(df, select = c(num, cat, 'outbreak'))
+  "resident_council", "family_council",
+  "res_fam_council",
+  "beds_privatebinary"
+  )
 
-str(data)
+# Data with outbreak as outcome
+data <- subset(df, select = c('outbreak', num, cat))
+
+# Data with cases/deaths as outcome
+# As cases/deaths can only occur in homes with an outbreak will subset to include only homes with an outbreak
+df_outbreak <- subset(df, outbreak == 1)
+data_cases <- subset(df_outbreak, select = c('Total.Confirmed.Cases', num, cat))
+data_deaths <- subset(df_outbreak, select = c('Total.Deaths', num, cat))
+
+# str(data)
 ```
+
+## LASSO
+```{r }
+# https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
+library(glmnet)
+
+# model.matrix() automatically transforms any qualitative variables into dummy variables
+# Trim the first column leaving only predictors
+x = model.matrix(outbreak~. , data = data)[,-1]
+# y <- as.matrix(subset(data, select = c('outbreak')))
+y <- data.matrix(data[,1])
+
+# Note alpha=1 for lasso only and can blend with ridge penalty down to
+# alpha=0 ridge only
+glmmod <- glmnet(x, y, alpha = 1, family = 'binomial')
+
+# Plot variable coefficients vs. shrinkage parameter lambda
+plot(glmmod, xvar = 'lambda', label = TRUE)
+
+cv.glmmod <- cv.glmnet(x, y, alpha=1, family = 'binomial')
+
+
+plot(cv.glmmod)
+cv.glmmod$lambda.min
+
+coef(cv.glmmod, s = "lambda.min")
+
+```
+
+## Using the stepAIC() function
+```{r }
+library(MASS)
+
+null <- glm(outbreak ~ 1, family = "binomial", data=data) # 1 here means the intercept 
+full <- glm(
+  outbreak ~ BEDS_TOTAL + INSPECTIONS + 
+    # beds_privateprop + 
+    infractions_100Xdisease + infractions_disease_100 + 
+    HLTH_AUTH + 
+    OWNERSHIP +
+    # ownership_HA +
+    REGULATION + ACCRED_STATUS + 
+    rooms_semi_binary + rooms_multi_binary + rooms_shared +
+    resident_council + family_council +
+    res_fam_council +
+    beds_privatebinary
+  , family = "binomial", data=data)
+
+stepAIC(full, scope=list(lower=null, upper=full), data=data, direction='backward')
+# stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='forward')
+```
+
+# Poisson regression
+```{r }
+# fit_poi <- glm(Total.Confirmed.Cases/BEDS_TOTAL~ ., family = poisson, data = data_cases, weight = BEDS_TOTAL)
+# summary(fit_poi)
+
+fit_poi <- glm(Total.Confirmed.Cases~ 
+    INSPECTIONS + 
+    # beds_privateprop +
+    infractions_100Xdisease + infractions_disease_100 + 
+    HLTH_AUTH + 
+    OWNERSHIP +
+    # ownership_HA +
+    REGULATION + ACCRED_STATUS + 
+    rooms_semi_binary + rooms_multi_binary + 
+    # rooms_shared +
+    resident_council + family_council +
+    # res_fam_council +
+    beds_privatebinary, 
+    family = poisson, data = data_cases, offset = log(BEDS_TOTAL))
+summary(fit_poi)
+
+fit_poi <- glm(Total.Deaths~ 
+    INSPECTIONS + 
+    # beds_privateprop +
+    infractions_100Xdisease + infractions_disease_100 + 
+    HLTH_AUTH + 
+    OWNERSHIP +
+    # ownership_HA +
+    REGULATION + ACCRED_STATUS + 
+    rooms_semi_binary + rooms_multi_binary + 
+    # rooms_shared +
+    resident_council + family_council +
+    # res_fam_council +
+    beds_privatebinary,
+  family = poisson, data = data_deaths, offset = log(BEDS_TOTAL))
+summary(fit_poi)
+```
+
+```{r }
+
+```
+
 
 ## Fit logistic regression
 ```{r }
@@ -91,55 +200,8 @@ summary(fit)
 fit <- update(fit, .~. -HLTH_AUTH)
 summary(fit)
 
-
 ```
 
-### LASSO
-```{r }
-# https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
-library(glmnet)
-
-# model.matrix() automatically transforms any qualitative variables into dummy variables
-# Trim the first column leaving only predictors
-x = model.matrix(outbreak~. , data = data)[,-1]
-# y <- as.matrix(subset(data, select = c('outbreak')))
-y <- data.matrix(data[,15])
-
-# Note alpha=1 for lasso only and can blend with ridge penalty down to
-# alpha=0 ridge only
-glmmod <- glmnet(x, y, alpha = 1, family = 'binomial')
-
-# Plot variable coefficients vs. shrinkage parameter lambda
-plot(glmmod, xvar = 'lambda', label = TRUE)
-
-cv.glmmod <- cv.glmnet(x, y, alpha=1, family = 'binomial')
-
-
-plot(cv.glmmod)
-cv.glmmod$lambda.min
-
-coef(cv.glmmod, s = "lambda.min")
-
-```
-
-## Using the stepAIC() function
-```{r }
-library(MASS)
-
-null <- glm(outbreak ~ 1, family = "binomial", data=data) # 1 here means the intercept 
-full <- glm(
-  outbreak ~ BEDS_TOTAL + INSPECTIONS + 
-    # beds_privateprop + 
-    infractions_100 + infractions_disease_100 + 
-    HLTH_AUTH + OWNERSHIP + REGULATION + ACCRED_STATUS + 
-    rooms_semi_binary + rooms_multi_binary + rooms_shared + 
-    resident_council + family_council + 
-    # res_fam_council + 
-    beds_privatebinary, family = "binomial", data=data)
-
-stepAIC(full, scope=list(lower=null, upper=full), data=data, direction='backward')
-# stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='forward')
-```
 
 ```{r }
 # Backward selection using AIC
@@ -258,9 +320,10 @@ plot(fit_aic ~ I(2:p), ylab = "AIC", xlab = "p, number of parameters",
 # Most homes have a family_council
 # 8/46 homes without a family council had an outbreak
 # 26/251 with a family council had an outbreak
-xtabs(~outbreak + rooms_shared, data=df)
+xtabs(~OWNERSHIP + rooms_shared, data=df)
+xtabs(~OWNERSHIP + rooms_multi_binary, data=df)
 
-# Review the minority of homes without a family council
+Review the minority of homes without a family council
 subset(df, FAMILY_COUNCIL == 'False')
 ```
 
