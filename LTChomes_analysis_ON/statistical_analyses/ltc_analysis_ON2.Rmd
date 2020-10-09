@@ -9,7 +9,7 @@ output: html_document
 library(skimr)
 
 # Import the data
-df <- read.csv("merged_LTC_odhf.csv", na.strings="", header=TRUE)
+df <- read.csv("../data_output/merged_LTC_odhf_quality.csv", na.strings="", header=TRUE)
 skim(df)
 head(df)
 str(df)
@@ -26,7 +26,7 @@ summary(df[['first_inspection_year']])
 df$years_since_first <- 2020 - df$first_inspection_year
 # summary(df[['years_since_first']])
 
-# There is only 1 home with fewer than 5 years of inspections
+# There is only 1 home with fewer than 5 years of inspections, Royal Rose Place
 table(df['years_since_first'])
 subset(df, years_since_first == 4)
 
@@ -34,19 +34,19 @@ subset(df, years_since_first == 4)
 
 
 ```{r, include=FALSE}
-# Replace NAN values with 0 for inspections data
-dput(names(df))
-
-ls = c("total_inspections", "X5y_inspections", "X2y_inspections", 
-       "total_complaints", "X5y_complaints", "X2y_complaints", "total_critical", 
-       "X5y_critical", "X2y_critical", "total_withOrders", "X5y_withOrders", 
-       "X2y_withOrders")
-
-df[ls][is.na(df[ls])] <- 0
+# # Replace NAN values with 0 for inspections data
+# dput(names(df))
+# 
+# ls = c("total_inspections", "X5y_inspections", "X2y_inspections", 
+#        "total_complaints", "X5y_complaints", "X2y_complaints", "total_critical", 
+#        "X5y_critical", "X2y_critical", "total_withOrders", "X5y_withOrders", 
+#        "X2y_withOrders")
+# 
+# df[ls][is.na(df[ls])] <- 0
 
 # Add derived variables
 # Add a column with outbreak status
-df$outbreak <- with(df, ifelse(is.na(Status), 'no', 'yes'))
+# df$outbreak <- with(df, ifelse(is.na(Status), 'no', 'yes'))
 
 # Number of complaints/beds
 df$total_complaints_norm <- df$total_complaints/df$number_beds/df$years_since_first
@@ -103,15 +103,23 @@ noncomplaints = c("total_noncomplaints_norm"
   , "X2y_noncomplaints_norm"
   )
 
-# all_inspections_recent = c("X5y_inspections_norm", "X2y_inspections_norm")
-# complaints_recent = c("X5y_complaints_norm", "X2y_complaints_norm")
-# noncomplaints_recent = c("X5y_noncomplaints_norm", "X2y_noncomplaints_norm")
+all_inspections_recent = c("X5y_inspections_norm", "X2y_inspections_norm")
+complaints_recent = c("X5y_complaints_norm", "X2y_complaints_norm")
+noncomplaints_recent = c("X5y_noncomplaints_norm", "X2y_noncomplaints_norm")
 
-covid = c("confirmed_resident_cases", "resident_deaths", "confirmed_staff_cases")
+# covid = c("confirmed_resident_cases", "resident_deaths", "confirmed_staff_cases")
 
-# data <- subset(df, select = c(keep, profile, all_inspections, noncomplaints, complaints))
-data <- subset(df, select = c(keep, profile, noncomplaints, all_inspections, complaints))
+```
+
+
+```{r }
+# data <- subset(df, select = c(keep, profile, all_inspections, complaints))
+# data <- subset(df, select = c(keep, profile, noncomplaints, complaints))
 # data <- subset(df, select = c(keep, profile, noncomplaints_recent, complaints_recent))
+# data <- subset(df, select = c(keep, profile, all_inspections_recent, complaints_recent))
+
+data_lr <- subset(df, select = c(keep, profile, 'total_noncomplaints_norm', 'total_complaints_norm'))
+data_lr_recent <- subset(df, select = c(keep, profile, 'X5y_noncomplaints_norm', 'X5y_complaints_norm'))
 
 skim(data)
 # dput(names(df))
@@ -146,6 +154,7 @@ coef(cv.glmmod, s = "lambda.min")
 summary(glmmod)
 
 ```
+
 ```{r }
 library(MASS)
 null <- glm(outbreak ~ 1, family = "binomial", data=data) # 1 here means the intercept 
@@ -182,10 +191,11 @@ stepAIC(full, scope=list(lower=null, upper=full), data=data, direction='backward
 
 ## Fit logistic regression
 ```{r }
-
 # fit logistic regression using transformed data
-fit = glm(outbreak~., family='binomial', data=data)
+fit = glm(outbreak~., family='binomial', data=data_lr)
+fit_recent = glm(outbreak~., family='binomial', data=data_lr_recent)
 summary(fit)
+summary(fit_recent)
 ```
 
 ### Backwards selection
