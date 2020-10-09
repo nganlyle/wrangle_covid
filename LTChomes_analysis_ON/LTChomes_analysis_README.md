@@ -32,16 +32,16 @@ The following information was scraped:
             - Total in the last 2 years (since January 1, 2018)
         2. Total number of complaints inspections
             - Total available
-            - Total in the last 5 years (since January 1, 2015)
-            - Total in the last 2 years (since January 1, 2018)
+            - Total in the last 5 years (since Dec 31, 2014)
+            - Total in the last 2 years (since Dec 31, 2017)
         3. Total number of critical incident inspections
             - Total available
-            - Total in the last 5 years (since January 1, 2015)
-            - Total in the last 2 years (since January 1, 2018)
+            - Total in the last 5 years (since Dec 31, 2014)
+            - Total in the last 2 years (since Dec 31, 2017)
         4. Total number of inspections accompanied by an order(s) of the inspector
             - Total available
-            - Total in the last 5 years (since January 1, 2015)
-            - Total in the last 2 years (since January 1, 2018)
+            - Total in the last 5 years (since Dec 31, 2014)
+            - Total in the last 2 years (since Dec 31, 2017)
         5. Date of the first inspection report
 
 On initial webscraping 651 homes were identified. Subsequently, 26 homes were removed (leaving 625) as follows:
@@ -49,7 +49,7 @@ On initial webscraping 651 homes were identified. Subsequently, 26 homes were re
         1. Closed, 20
         2. Merged with another home, 1
         3. Missing all profile information, 2
-        4. No inspections since January 2018, 3
+        4. No inspections for for 2 years, 3
 
 **2. ODHF Data Preparation**
 
@@ -76,12 +76,12 @@ Output file | ltc_outbreaks0731.csv
 Type | Name
 --|--
 Script | merge_genLTC_covidLTC_odhf.ipynb
-Input files |  <ul><li>webscrape_ltc_general_database.csv</li><li>merged_ltc.csv (scraped in May 13, 2020)</li><li>merged_ltc_secondScrape.csv (scraped Jun 5, 2020)</li><li>ohdf_v1_ontario.csv</li>
+Input files |  <ul><li>webscrape_ltc_general_database.csv</li><li>*merged_ltc.csv (scraped in May 13, 2020)*</li><li>*merged_ltc_secondScrape.csv (scraped Jun 5, 2020)*</li><li>ltc_outbreaks0731.csv</li><li>ohdf_v1_ontario.csv</li>
 Output file | merged_LTC_odhf.csv
 
 In this step the general LTC homes data was merged with the COVID LTC homes data and the ODHF.
 
-**5. Long Term Care Home Quality Data**
+**5. LTC Home Quality Data**
 
 1. Data Preparation
 
@@ -95,6 +95,6 @@ Script | merge_LTC_odhf_WITHquality.ipynb
 Input files |  <ul><li>hqo-2020-quality.csv</li><li>merged_LTC_odhf.csv</li></ul>
 Output file | merged_LTC_odhf_quality.csv
 
-Note for 10 homes from step 4:
+Note for 10 homes:
   - 4 homes did not have any quality data
   - 6 homes had incomplete quality data
