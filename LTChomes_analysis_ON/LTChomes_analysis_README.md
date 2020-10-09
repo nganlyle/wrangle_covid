@@ -61,7 +61,17 @@ Output file | odhf_v1_ontario.csv
 
 The ODHF data was filtered for facilities in Ontario only.
 
-**3. Merge LTC Homes Datasets**
+**3. COVID Data Preparation**
+
+The COVID data were downloaded from the Ontario [Data Catalogue](https://data.ontario.ca/dataset/long-term-care-home-covid-19-data). Homes with an active or resolved outbreak on July 31, 2020 were extracted.
+
+Type | Name
+--|--
+Script | outbreaks_0731.ipynb
+Input files |  <ul><li>activeltcoutbreak_oct8.csv</li><li>resolvedltc_oct8.csv</li>
+Output file | ltc_outbreaks0731.csv
+
+**4. Merge LTC Homes Datasets**
 
 Type | Name
 --|--
@@ -71,7 +81,7 @@ Output file | merged_LTC_odhf.csv
 
 In this step the general LTC homes data was merged with the COVID LTC homes data and the ODHF.
 
-**4. Long Term Care Home Quality Data**
+**5. Long Term Care Home Quality Data**
 
 1. Data Preparation
 
@@ -85,6 +95,6 @@ Script | merge_LTC_odhf_WITHquality.ipynb
 Input files |  <ul><li>hqo-2020-quality.csv</li><li>merged_LTC_odhf.csv</li></ul>
 Output file | merged_LTC_odhf_quality.csv
 
-Note that 10 homes from step 3 were removed leaving 615 homes with complete data:
+Note for 10 homes from step 4:
   - 4 homes did not have any quality data
   - 6 homes had incomplete quality data
