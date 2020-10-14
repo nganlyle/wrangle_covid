@@ -14,8 +14,22 @@ skim(df)
 head(df)
 str(df)
 
-# Convert date column into date format
+# Change variable data types
+df[, 'outbreak'] <- as.factor(df[, 'outbreak'])
+
 df$first_inspection_date <- as.Date(df$first_inspection_date)
+
+listofcol = list('name', 'cleaned_name', 'address', 'city', 'postal_code', 'CSDname')
+for (each in listofcol){
+  df[, each] <- as.character(df[, each])
+}
+
+skim(df)
+
+```
+
+```{r, echo=FALSE}
+# Create a new column for first inspection year
 df$first_inspection_year <- format(df$first_inspection_date,"%Y")
 df$first_inspection_year <- as.numeric(df$first_inspection_year)
 
@@ -29,24 +43,15 @@ df$years_since_first <- 2020 - df$first_inspection_year
 # There is only 1 home with fewer than 5 years of inspections, Royal Rose Place
 table(df['years_since_first'])
 subset(df, years_since_first == 4)
-
 ```
 
-
+### Normalize the number of inspections
 ```{r, include=FALSE}
-# # Replace NAN values with 0 for inspections data
-# dput(names(df))
-# 
-# ls = c("total_inspections", "X5y_inspections", "X2y_inspections", 
-#        "total_complaints", "X5y_complaints", "X2y_complaints", "total_critical", 
-#        "X5y_critical", "X2y_critical", "total_withOrders", "X5y_withOrders", 
-#        "X2y_withOrders")
-# 
-# df[ls][is.na(df[ls])] <- 0
-
-# Add derived variables
-# Add a column with outbreak status
-# df$outbreak <- with(df, ifelse(is.na(Status), 'no', 'yes'))
+# Number of inspections/beds
+df$total_inspections_norm <- df$total_inspections/df$number_beds/df$years_since_first
+df$X5y_inspections_norm <- df$X5y_inspections/df$number_beds/5
+df[444, "X5y_inspections_norm"] <- df[444, "X5y_inspections_norm"]*5/4
+df$X2y_inspections_norm <- df$X2y_inspections/df$number_beds/2
 
 # Number of complaints/beds
 df$total_complaints_norm <- df$total_complaints/df$number_beds/df$years_since_first
@@ -54,34 +59,25 @@ df$X5y_complaints_norm <- df$X5y_complaints/df$number_beds/5
 df[444, "X5y_complaints_norm"] <- df[444, "X5y_complaints_norm"]*5/4
 df$X2y_complaints_norm <- df$X2y_complaints/df$number_beds/2
 
-# Number of inspections/beds
-df$total_inspections_norm <- df$total_inspections/df$number_beds/df$years_since_first
-df$X5y_inspections_norm <- df$X5y_inspections/df$number_beds/5
-df[444, "X5y_inspections_norm"] <- df[444, "X5y_inspections_norm"]*5/4
-df$X2y_inspections_norm <- df$X2y_inspections/df$number_beds/2
-
 # Number of noncomplaints/beds
 df$total_noncomplaints_norm <- (df$total_inspections - df$total_complaints)/df$number_beds/df$years_since_first
 df$X5y_noncomplaints_norm <- (df$X5y_inspections - df$X5y_complaints)/df$number_beds/5
 df[444, "X5y_noncomplaints_norm"] <- df[444, "X5y_noncomplaints_norm"]*5/4
 df$X2y_noncomplaints_norm <- (df$X2y_inspections - df$X2y_complaints)/df$number_beds/2
 
+# Number of critical/beds
+df$total_critical_norm <- df$total_critical/df$number_beds/df$years_since_first
+df$X5y_critical_norm <- df$X5y_critical/df$number_beds/5
+df[444, "X5y_critical_norm"] <- df[444, "X5y_critical_norm"]*5/4
+df$X2y_critical_norm <- df$X2y_critical/df$number_beds/2
+
+# Number of withOrders/beds
+df$total_withOrders_norm <- df$total_withOrders/df$number_beds/df$years_since_first
+df$X5y_withOrders_norm <- df$X5y_withOrders/df$number_beds/5
+df[444, "X5y_withOrders_norm"] <- df[444, "X5y_withOrders_norm"]*5/4
+df$X2y_withOrders_norm <- df$X2y_withOrders/df$number_beds/2
+
 ```
-
-```{r, echo=FALSE}
-# Change variable types
-# Update data types for some columns
-df[, 'outbreak'] <- as.factor(df[, 'outbreak'])
-
-# Change data type of character
-listofcol = list('name', 'cleaned_name', 'address', 'city', 'postal_code', 'CSDname')
-for (each in listofcol){
-  df[, each] <- as.character(df[, each])
-}
-
-skim(df)
-```
-
 
 ```{r, }
 # Generate the data for analysis
@@ -102,56 +98,137 @@ noncomplaints = c("total_noncomplaints_norm"
   , "X5y_noncomplaints_norm"
   , "X2y_noncomplaints_norm"
   )
+critical = c("total_critical_norm"
+  , "X5y_critical_norm"
+  , "X2y_critical_norm"
+  )
+withOrders = c("total_withOrders_norm"
+  , "X5y_withOrders_norm"
+  , "X2y_withOrders_norm"
+  )
 
 all_inspections_recent = c("X5y_inspections_norm", "X2y_inspections_norm")
 complaints_recent = c("X5y_complaints_norm", "X2y_complaints_norm")
 noncomplaints_recent = c("X5y_noncomplaints_norm", "X2y_noncomplaints_norm")
-
-# covid = c("confirmed_resident_cases", "resident_deaths", "confirmed_staff_cases")
+critical_recent = c("X5y_critical_norm", "X2y_critical_norm")
+withOrders_recent = c("X5y_withOrders_norm", "X2y_withOrders_norm")
 
 ```
 
+```{r }
+
+```
 
 ```{r }
 # data <- subset(df, select = c(keep, profile, all_inspections, complaints))
-# data <- subset(df, select = c(keep, profile, noncomplaints, complaints))
-# data <- subset(df, select = c(keep, profile, noncomplaints_recent, complaints_recent))
 # data <- subset(df, select = c(keep, profile, all_inspections_recent, complaints_recent))
 
+data <- subset(df, select = c(keep, profile, noncomplaints, complaints))
+data <- subset(df, select = c(keep, profile, complaints, critical, withOrders))
+data <- subset(df, select = c(keep, profile, noncomplaints, complaints, critical, withOrders))
+# data <- subset(df, select = c(keep, profile, noncomplaints_recent, complaints_recent))
+
 data_lr <- subset(df, select = c(keep, profile, 'total_noncomplaints_norm', 'total_complaints_norm'))
-data_lr_recent <- subset(df, select = c(keep, profile, 'X5y_noncomplaints_norm', 'X5y_complaints_norm'))
+data_lr <- subset(df, select = c(keep, profile, 'total_critical_norm', 'total_withOrders_norm','total_complaints_norm'))
+
+# data_lr_2y <- subset(df, select = c(keep, profile, 'X2y_noncomplaints_norm', 'X2y_complaints_norm'))
+data_lr_2y <- subset(df, select = c(keep, profile, 'X2y_critical_norm', 'X2y_withOrders_norm', 'X2y_complaints_norm'))
+
+data_lr_5y <- subset(df, select = c(keep, profile, 'X5y_noncomplaints_norm', 'X5y_complaints_norm'))
+data_lr_5y <- subset(df, select = c(keep, profile, 'X5y_critical_norm', 'X5y_withOrders_norm', 'X5y_complaints_norm'))
 
 skim(data)
 # dput(names(df))
+```
+
+## Fit logistic regression
+```{r }
+# fit logistic regression using transformed data
+fit_all = glm(outbreak~., family='binomial', data=data)
+summary(fit_all)
+
+fit = glm(outbreak~., family='binomial', data=data_lr)
+summary(fit)
+
+fit_2y = glm(outbreak~., family='binomial', data=data_lr_2y)
+summary(fit_2y)
+
+fit_5y = glm(outbreak~., family='binomial', data=data_lr_5y)
+summary(fit_5y)
+
+
+
 ```
 
 LASSO
 ```{r }
 # https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
 library(glmnet)
+# library(caret)
+options(max.print=999999)
 
 # model.matrix() automatically transforms any qualitative variables into dummy variables
 # Trim the first column leaving only predictors
 x = model.matrix(outbreak~., data = data)[,-1]
 # y <- as.matrix(subset(data, select = c('outbreak')))
-y <- data.matrix(data[,1])
+y <- as.factor(data.matrix(data[,1]))
 
-# Note alpha=1 for lasso only and can blend with ridge penalty down to
+# Note alpha=1 for lasso only, and can blend with ridge penalty
 # alpha=0 ridge only
-glmmod <- glmnet(x, y=as.factor(y), alpha = 1, family = 'binomial')
 
-# Plot variable coefficients vs. shrinkage parameter lambda
+# Lasso
+glmmod <- glmnet(x, y, family = 'binomial')
+# glmmod$call
+# summary(glmmod)
 plot(glmmod, xvar = 'lambda', label = TRUE)
+plot(glmmod, xvar = 'dev', label = TRUE)
+coef(glmmod)
 
+# CV Lasso
 cv.glmmod <- cv.glmnet(x, y, alpha=1, family = 'binomial')
-
-
+plot(cv.glmmod$glmnet.fit, label = TRUE, xvar = "lambda")
+plot(cv.glmmod$glmnet.fit, label = TRUE, xvar = "dev")
 plot(cv.glmmod)
-cv.glmmod$lambda.min
-
+coef(cv.glmmod)
 coef(cv.glmmod, s = "lambda.min")
 
-summary(glmmod)
+lambda_min <- cv.glmmod$lambda.min
+lambda_1se <- cv.glmmod$lambda.1se
+
+cv.glmmod.auc <- cv.glmnet(x, y, alpha=1, family = 'binomial', type.measure = "auc")
+coef(cv.glmmod.auc, s = "lambda.min")
+plot(cv.glmmod.auc)
+plot(cv.glmmod.auc$glmnet.fit, label = T, xvar = "lambda")
+plot(cv.glmmod.auc$glmnet.fit, label = T, xvar = "dev")
+
+cv.glmmod.class <- cv.glmnet(x, y, alpha=1, family = 'binomial', type.measure = "class")
+coef(cv.glmmod.class, s = "lambda.min")
+plot(cv.glmmod.class)
+plot(cv.glmmod.class$glmnet.fit, label = T, xvar = "lambda")
+
+# Lasso model with suggested lambda values
+glmmod_min <- glmnet(x, y, alpha = 1, family = 'binomial', lambda = lambda_min)
+glmmod_1se <- glmnet(x, y, alpha = 1, family = 'binomial', lambda = lambda_1se)
+coef(glmmod_min)
+coef(glmmod_1se)
+
+```
+As lambda decreases, the order that covariates are added to the model:
+1. number_beds
+2. home_typeMunicipal
+3. X2y_critical_norm
+4. short_stayYes, total_complaints_norm
+5. X2y_withOrders_norm
+6. family_councilYes, total_noncomplaints_norm
+7. X5y_noncomplaints_norm
+8. accreditationYes
+9. X2y_noncomplaints_norm
+
+```{r }
+
+```
+
+```{r }
 
 ```
 
@@ -313,15 +390,6 @@ ggplot(data = predicted.data, aes(x=rank, y=probability.of.outbreak)) +
 
 ```
 
-
-
-```{r }
-
-```
-
-```{r }
-
-```
 
 
 ```{r }

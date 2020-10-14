@@ -30,15 +30,18 @@ Adjust Covariates/Predictors
   - Define a binary variable for the presence of shared rooms
   - Remove the original ROOMS_* predictors
 
+
 - Define binary variables for:
   - Resident council
   - Family council
   - Resident and Family councils
 
+
 - Private beds
   - 205/297 of homes have 0 private beds
   - Define proportion, private beds/total beds
   - Define a binary variable for the presence of private beds
+
 
 - Define complaints/sub_complaints per 100 beds variable
 
@@ -48,15 +51,19 @@ Adjust Covariates/Predictors
   - Keep incident_outbreak_100
   - Remove other subcategories of incident data
 
+
 - Infractions
   - Define infractions/infractions_disease per 100 beds covariate
   - Define infractions - infractions_disease per 100 beds covariate
   - Remove subcategories of infractions data except disease
 
+
 - Ownership
   - Define a binary variable for HA ownership vs not
 
+
 - Removed irrelevant predictors
+
 
 Selected Dataset
 - As above
@@ -106,5 +113,6 @@ Script: ngan_bc_filter_homes.ipynb
   - 'Bella Coola General Hospital'
   - 'Delta View Habilitation Centre'
   - 'R. W. Large Memorial Hospital'
+
 
 - Remove STAY_LENGTH predictor, which is the only predictor with missing values from the remaining dataset
