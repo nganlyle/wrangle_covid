@@ -13,6 +13,7 @@ library(dplyr)
 # Import the data
 df <- read.csv("../data/BC/bc_ltc_selected_sep18.csv", na.strings="", header=TRUE)
 str(df)
+
 ```
 
 ```{r, echo=FALSE}
@@ -25,8 +26,10 @@ for (each in listofcol){
 
 listofcol = list('outbreak',
   # 'ownership_HA',
-  'rooms_semi_binary', 'rooms_multi_binary', 'rooms_shared', 'resident_council', 'family_council',
-  'res_fam_council', 'beds_privatebinary')
+  'rooms_semi_binary', 'rooms_multi_binary', 'rooms_shared', 
+  'resident_council', 'family_council',
+  'res_fam_council', 
+  'beds_privatebinary')
 
 for (each in listofcol){
   df[, each] <- as.factor(df[, each])
@@ -44,6 +47,7 @@ str(df)
 num <- c("BEDS_TOTAL", "INSPECTIONS", 
   # "beds_privateprop",
   "infractions_100Xdisease", "infractions_disease_100")
+
 cat <- c(
   "HLTH_AUTH", 
   # 'ownership_HA',
@@ -51,7 +55,7 @@ cat <- c(
   "REGULATION", "ACCRED_STATUS", 
   "rooms_semi_binary", "rooms_multi_binary", "rooms_shared",
   "resident_council", "family_council",
-  "res_fam_council",
+  # "res_fam_council",
   "beds_privatebinary"
   )
 
@@ -81,12 +85,14 @@ y <- data.matrix(data[,1])
 # Note alpha=1 for lasso only and can blend with ridge penalty down to
 # alpha=0 ridge only
 glmmod <- glmnet(x, y, alpha = 1, family = 'binomial')
+coef(glmmod)
 
 # Plot variable coefficients vs. shrinkage parameter lambda
 plot(glmmod, xvar = 'lambda', label = TRUE)
+plot(glmmod, xvar = 'dev', label = TRUE)
 
 cv.glmmod <- cv.glmnet(x, y, alpha=1, family = 'binomial')
-
+coef(cv.glmmod)
 
 plot(cv.glmmod)
 cv.glmmod$lambda.min

@@ -12,6 +12,7 @@ library(skimr)
 # Import the data
 df <- read.csv("../data/BC/ngan_bc_ltc_mainland.csv", na.strings="", header=TRUE)
 str(df)
+skim(df)
 # dput(names(df))
 ```
 
@@ -24,7 +25,7 @@ for (each in listofcol){
 }
 
 listofcol = list("outbreak", "rooms_semi_binary", "rooms_multi_binary", "rooms_shared", 
-"resident_council", "family_council", "res_fam_council", "beds_privatebinary", "ownership_HA")
+"resident_council", "family_council", "res_fam_council", "beds_privatebinary")
 for (each in listofcol){
   df[, each] <- as.factor(df[, each])
 }
@@ -39,38 +40,19 @@ dput(names(df))
 ```{r, include=FALSE}
 # Divide the variables into numeric and categorical types
 
-num <- c(
-  "BEDS_TOTAL", 
-  "INSPECTIONS", 
-  "INCIDENT_OUTBREAK_100",
+num <- c("BEDS_TOTAL", 
+"INCIDENT_OUTBREAK_100", "AGE", "FEMALE", "AGE_85_PLUS", "AGE_UNDER_65", 
+"DEPRESSION", "ADL_DEPENDENT", "CPS_SEVERE", "DEMENTIA", 
+"ABS_PHYS_ABUSIVE", "ISE", "ISE_LOW", "CMI", "THERAPY_PT", "THERAPY_RT", 
+"THERAPY_OT", "MEDS_DEPRESSION", "MEDS_ANTIPSYCHOTICS", "RESTRAINTS", 
+"INSPECTIONS", "complaints_100", "sub_complaints_100", 
+"incident_100sumXoutbreak", "infractions_disease_100", "infractions_100Xdisease"
+)
 
-  "AGE", "FEMALE", "AGE_85_PLUS", "AGE_UNDER_65",
-  "DEPRESSION", "ADL_DEPENDENT", "CPS_SEVERE", "DEMENTIA", "ABS_PHYS_ABUSIVE",
-  # "ISE",
-  "ISE_LOW", 
-  # "CMI",
-  "THERAPY_PT", "THERAPY_RT", "THERAPY_OT",
-  "MEDS_DEPRESSION", "MEDS_ANTIPSYCHOTICS", "RESTRAINTS",
-
-  "beds_privateprop",
-  "complaints_100", "sub_complaints_100",
-  "incident_100sum",
-  "incident_100sumXoutbreak",
-  "infractions_100",
-  "infractions_disease_100", 
-  "infractions_100Xdisease"
-  )
-
-cat <- c(
-    "HLTH_AUTH", 
-    "OWNERSHIP", 
-    "REGULATION", 
-    "ACCRED_STATUS",
-    "rooms_semi_binary", "rooms_multi_binary", "rooms_shared",
-    "resident_council", "family_council",
-    "res_fam_council",
-    "beds_privatebinary",
-    "ownership_HA"
+cat <- c("HLTH_AUTH", "OWNERSHIP", "REGULATION", "ACCRED_STATUS", 
+         "rooms_semi_binary", "rooms_multi_binary", 
+"rooms_shared", "resident_council", "family_council", "res_fam_council", 
+"beds_privatebinary"
 )
 
 # Subset the data for analysis
@@ -100,14 +82,38 @@ glmmod <- glmnet(x, y, alpha = 1, family = 'binomial')
 plot(glmmod, xvar = 'lambda', label = TRUE)
 
 cv.glmmod <- cv.glmnet(x, y, alpha=1, family = 'binomial')
-
 plot(cv.glmmod)
+coef(cv.glmmod)
 cv.glmmod$lambda.min
-
 coef(cv.glmmod, s = "lambda.min")
 
 ```
 
+## Group LASSO
+```{r, }
+library(grplasso)
+x <- model.matrix(outbreak~. , data = data)[,-1]
+y <- as.numeric(data.matrix(data[,1]))
+
+# Index the predictors so that they are grouped
+index = c(1, 2, 3, 4, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 6, 6, 6, 7, 7, 7, 8, 9, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26)
+
+## Use a multiplicative grid for the penalty parameter lambda, starting
+## at the maximal lambda value
+lambda <- lambdamax(x, y = y, index = index, penscale = sqrt,
+                    model = LogReg()) * 0.5^(0:5)
+
+## Fit the solution path on the lambda grid
+grplass_mod <- grplasso(x, y, index = index, lambda = lambda, model = LogReg(),
+                penscale = sqrt,
+                control = grpl.control(update.hess = "lambda", trace = 0),
+                center = FALSE)
+
+coef(grplass_mod)
+plot(grplass_mod)
+
+```
+  
 
 ## Using the stepAIC() function
 ```{r }
@@ -254,10 +260,6 @@ for (each in list_0s) {
 
 ```
 
-```{r, }
-
-```
-  
 ```{r, }
 
 ```
