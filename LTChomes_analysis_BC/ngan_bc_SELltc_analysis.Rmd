@@ -44,15 +44,18 @@ str(df)
 # Create lists of variables used to filter data for analysis
 
 # Selected data
-num <- c("BEDS_TOTAL", "INSPECTIONS", 
-  # "beds_privateprop",
-  "infractions_100Xdisease", "infractions_disease_100")
+num <- c(
+  "BEDS_TOTAL", 
+  "INSPECTIONS", 
+  "infractions_100Xdisease", 
+  "infractions_disease_100"
+  )
 
 cat <- c(
   "HLTH_AUTH", 
-  # 'ownership_HA',
   "OWNERSHIP",
-  "REGULATION", "ACCRED_STATUS", 
+  "REGULATION", 
+  "ACCRED_STATUS", 
   "rooms_semi_binary", "rooms_multi_binary", "rooms_shared",
   "resident_council", "family_council",
   # "res_fam_council",
@@ -79,7 +82,6 @@ library(glmnet)
 # model.matrix() automatically transforms any qualitative variables into dummy variables
 # Trim the first column leaving only predictors
 x = model.matrix(outbreak~. , data = data)[,-1]
-# y <- as.matrix(subset(data, select = c('outbreak')))
 y <- data.matrix(data[,1])
 
 # Note alpha=1 for lasso only and can blend with ridge penalty down to
@@ -92,11 +94,8 @@ plot(glmmod, xvar = 'lambda', label = TRUE)
 plot(glmmod, xvar = 'dev', label = TRUE)
 
 cv.glmmod <- cv.glmnet(x, y, alpha=1, family = 'binomial')
-coef(cv.glmmod)
-
 plot(cv.glmmod)
-cv.glmmod$lambda.min
-
+coef(cv.glmmod)
 coef(cv.glmmod, s = "lambda.min")
 
 ```
