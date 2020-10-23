@@ -53,41 +53,55 @@ subset(df, years_since_first == 4)
 # Number of inspections/beds
 df$total_inspections_norm <- df$total_inspections/df$number_beds/df$years_since_first
 df$X5y_inspections_norm <- df$X5y_inspections/df$number_beds/5
-df[444, "X5y_inspections_norm"] <- df[444, "X5y_inspections_norm"]*5/4
+df[293, "X5y_inspections_norm"] <- df[293, "X5y_inspections_norm"]*5/4
 df$X2y_inspections_norm <- df$X2y_inspections/df$number_beds/2
 
-# Number of complaints/beds
-df$total_complaints_norm <- df$total_complaints/df$number_beds/df$years_since_first
-df$X5y_complaints_norm <- df$X5y_complaints/df$number_beds/5
-df[444, "X5y_complaints_norm"] <- df[444, "X5y_complaints_norm"]*5/4
-df$X2y_complaints_norm <- df$X2y_complaints/df$number_beds/2
-
-# Number of noncomplaints/beds
-df$total_noncomplaints_norm <- (df$total_inspections - df$total_complaints)/df$number_beds/df$years_since_first
-df$X5y_noncomplaints_norm <- (df$X5y_inspections - df$X5y_complaints)/df$number_beds/5
-df[444, "X5y_noncomplaints_norm"] <- df[444, "X5y_noncomplaints_norm"]*5/4
-df$X2y_noncomplaints_norm <- (df$X2y_inspections - df$X2y_complaints)/df$number_beds/2
-
-# Number of critical/beds
-df$total_critical_norm <- df$total_critical/df$number_beds/df$years_since_first
-df$X5y_critical_norm <- df$X5y_critical/df$number_beds/5
-df[444, "X5y_critical_norm"] <- df[444, "X5y_critical_norm"]*5/4
-df$X2y_critical_norm <- df$X2y_critical/df$number_beds/2
+# # Number of complaints/beds
+# df$total_complaints_norm <- df$total_complaints/df$number_beds/df$years_since_first
+# df$X5y_complaints_norm <- df$X5y_complaints/df$number_beds/5
+# df[293, "X5y_complaints_norm"] <- df[293, "X5y_complaints_norm"]*5/4
+# df$X2y_complaints_norm <- df$X2y_complaints/df$number_beds/2
+# 
+# # Number of noncomplaints/beds
+# df$total_noncomplaints_norm <- (df$total_inspections - df$total_complaints)/df$number_beds/df$years_since_first
+# df$X5y_noncomplaints_norm <- (df$X5y_inspections - df$X5y_complaints)/df$number_beds/5
+# df[293, "X5y_noncomplaints_norm"] <- df[293, "X5y_noncomplaints_norm"]*5/4
+# df$X2y_noncomplaints_norm <- (df$X2y_inspections - df$X2y_complaints)/df$number_beds/2
+# 
+# # Number of critical/beds
+# df$total_critical_norm <- df$total_critical/df$number_beds/df$years_since_first
+# df$X5y_critical_norm <- df$X5y_critical/df$number_beds/5
+# df[293, "X5y_critical_norm"] <- df[293, "X5y_critical_norm"]*5/4
+# df$X2y_critical_norm <- df$X2y_critical/df$number_beds/2
+# 
+# # Number of non-critical/beds
+# df$total_noncritical_norm <- (df$total_inspections - df$total_critical)/df$number_beds/df$years_since_first
+# df$X5y_noncritical_norm <- (df$X5y_inspections - df$X5y_critical)/df$number_beds/5
+# df[293, "X5y_noncritical_norm"] <- df[293, "X5y_noncritical_norm"]*5/4
+# df$X2y_noncritical_norm <- (df$X2y_inspections - df$X2y_critical)/df$number_beds/2
 
 # Number of withOrders/beds
 df$total_withOrders_norm <- df$total_withOrders/df$number_beds/df$years_since_first
 df$X5y_withOrders_norm <- df$X5y_withOrders/df$number_beds/5
-df[444, "X5y_withOrders_norm"] <- df[444, "X5y_withOrders_norm"]*5/4
+df[293, "X5y_withOrders_norm"] <- df[293, "X5y_withOrders_norm"]*5/4
 df$X2y_withOrders_norm <- df$X2y_withOrders/df$number_beds/2
+
+# # Number of non-withOrders/beds
+# df$total_nonwithOrders_norm <- (df$total_inspections - df$total_withOrders)/df$number_beds/df$years_since_first
+# df$X5y_nonwithOrders_norm <- (df$X5y_inspections - df$X5y_withOrders)/df$number_beds/5
+# df[293, "X5y_nonwithOrders_norm"] <- df[293, "X5y_nonwithOrders_norm"]*5/4
+# df$X2y_nonwithOrders_norm <- (df$X2y_inspections - df$X2y_withOrders)/df$number_beds/2
+
 
 # View(colnames(df))
 # Drop un-normalized inspections data
 df <- df[,-c(21:32)]
 
+df[293,]
 
 ```
 
-```{r, include=FALSE}
+```{r, }
 skim(df)
 ```
 
@@ -134,46 +148,46 @@ qual = c(
   "pain_percent"
   )
 
-complaints = c("total_complaints_norm"
-  , "X5y_complaints_norm"
-  , "X2y_complaints_norm"
+inspections = c(
+  "total_inspections_norm", 
+  "X5y_inspections_norm", 
+  "X2y_inspections_norm" 
   )
-noncomplaints = c("total_noncomplaints_norm"
-  , "X5y_noncomplaints_norm"
-  , "X2y_noncomplaints_norm"
-  )
-critical = c("total_critical_norm"
-  , "X5y_critical_norm"
-  , "X2y_critical_norm"
-  )
+
+# complaints = c("total_complaints_norm"
+#   , "X5y_complaints_norm"
+#   , "X2y_complaints_norm"
+#   , "total_noncomplaints_norm"
+#   , "X5y_noncomplaints_norm"
+#   , "X2y_noncomplaints_norm"
+#   )
+# 
+# critical = c("total_critical_norm"
+#   , "X5y_critical_norm"
+#   , "X2y_critical_norm"
+#   , "total_noncritical_norm"
+#   , "X5y_noncritical_norm"
+#   , "X2y_noncritical_norm"
+#   )
+
 withOrders = c("total_withOrders_norm"
   , "X5y_withOrders_norm"
   , "X2y_withOrders_norm"
+  # , "total_nonwithOrders_norm"
+  # , "X5y_nonwithOrders_norm"
+  # , "X2y_nonwithOrders_norm"
+  
   )
-
-all_inspections = c(complaints, noncomplaints, critical, withOrders)
-all_inspections_general = c(complaints, noncomplaints)
-all_inspections_specific = c(complaints, critical, withOrders)
-
-```
-
-```{r, include=FALSE }
-# complaints_recent = c("X5y_complaints_norm", "X2y_complaints_norm")
-# noncomplaints_recent = c("X5y_noncomplaints_norm", "X2y_noncomplaints_norm")
-# critical_recent = c("X5y_critical_norm", "X2y_critical_norm")
-# withOrders_recent = c("X5y_withOrders_norm", "X2y_withOrders_norm")
-# 
-# recent_inspections = c(complaints_recent,  noncomplaints_recent)
-# recent_inspections_specific = c(complaints_recent, critical_recent, withOrders_recent)
 
 ```
 
 ## Analysis with all 625 homes (exclude Quality data)
 ```{r }
-data <- subset(df, select = c('outbreak', profile, all_inspections))
+data <- subset(df, select = c('outbreak', profile, withOrders, inspections))
 skim(data)
 # View(colnames(data))
 # dput(names(df))
+
 ```
 
 ## Fit logistic regression
@@ -183,6 +197,8 @@ fit = glm(outbreak~., family='binomial', data=data)
 summary(fit)
 
 ```
+
+
 LASSO
 ```{r }
 # https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
@@ -209,16 +225,14 @@ coef(glmmod)
 As lambda decreases, the order that covariates are added to the model:
     
     1. number_beds
-    2. X2y_critical_norm
-    3. home_typeMunicipal
+    2. home_typeMunicipal
+    3. total_inspections_norm
     4. short_stayYes
-    5. total_complaints_norm
-    6. X2y_withOrders_norm
-    7. family_councilYes, 
-    8. total_noncomplaints_norm
-    9. X5y_noncomplaints_norm
-    10. accreditationYes
-    11. X2y_noncomplaints_norm
+    5. family_councilYes
+    6. accreditationYes
+    7. X2y_withOrders_norm
+    8. X2y_inspections_norm, residents_councilYes
+
 
 ```{r, include=FALSE}
 # lambda_min <- cv.glmmod$lambda.min
@@ -254,29 +268,21 @@ coef(cv.glmmod, s = "lambda.min")
 
 ```
 
+  
 # Fit logistic regression with selected covariates
 ```{r }
-data_lr <- subset(df, select = c('outbreak',
-                                 'number_beds',
-                                 'home_type',
-                                 'short_stay',
-                                 'family_council',
-                                 'accreditation',
-                                 'X2y_complaints_norm',
-                                 'X2y_critical_norm',
-                                 'X2y_withOrders_norm'
-                                 ))
+data_lr <- subset(df, select = c('outbreak'
+                                 , 'number_beds'
+                                 , 'home_type'
+                                 , 'short_stay'
+                                 , 'family_council'
+                                 , 'residents_council'
+                                 , 'accreditation'
 
-# data_lr <- subset(df, select = c('outbreak', 
-#                                  'number_beds', 
-#                                  'home_type',
-#                                  'short_stay',
-#                                  'family_council',
-#                                  'accreditation',
-#                                  
-#                                  'X2y_complaints_norm',
-#                                  'X2y_noncomplaints_norm'
-#                                  ))
+                                 , "X2y_inspections_norm"
+                                 , "X2y_withOrders_norm"
+                                 
+                                 ))
 
 
 fit = glm(outbreak~., family='binomial', data=data_lr)

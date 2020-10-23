@@ -25,7 +25,7 @@ library(factoextra)
 df_source = read.csv(file = 'PHU_merged_data.csv', stringsAsFactors = FALSE, na.strings="", header=TRUE)
 colnames(df_source)
 
-skim(df)
+skim(df_source)
 # rownames(df)
 # head(df)
 
@@ -119,8 +119,6 @@ colnames(df)
 
 ```
 
-
-
 ```{r, include=FALSE }
 # # Clean data
 
@@ -153,12 +151,15 @@ plot(pca, type="lines")
 # pca$rotation <- -pca$rotation
 
 # Extract the first 6 principal components (based on the Scree plot) for PCR
-pcs <- pca$x[,c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6")]
+# pcs <- pca$x[,c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6")]
+pcs <- pca$x[,"PC1"]
 
 # Create a dataframe with reponse variable TOTAL proportion of COVID cases and explanatory variables (the PCs)
 pcr_data <- as.data.frame(cbind(df_source[,"HRPOP"], df[,"TOTAL_prop"], df[,"FATAL_prop"], pcs))
 # head(pcr_data)
 
+# https://stats.stackexchange.com/questions/26762/how-to-do-logistic-regression-in-r-when-outcome-is-fractional-a-ratio-of-two-co
+# https://stats.stackexchange.com/questions/225027/how-can-standard-logistic-regression-model-fractional-response-variable-while-de
 # Perform fractional logistic regression against cases
 phu_lm_total <- glm(V2 ~ . -V1 - V3, data = pcr_data, weights = V1)
 summary(phu_lm_total)
