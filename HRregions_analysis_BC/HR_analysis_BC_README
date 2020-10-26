@@ -1,5 +1,12 @@
 ## HR analysis BC
 
+The analysis was performed at the HSD rather than HA level. This is because some data were only available at the HSDA level including the Health data and the Census data.
+
+There are 16 HSDs in BC. These aggregate to 5 HAs.
+
+https://www2.gov.bc.ca/gov/content/data/geographic-data-services/land-use/administrative-boundaries/health-boundaries
+
+In BC there are
 ### Proximity Data Preparation
 
 1. Clean the Proximity Measures Database for manipulation in QGIS and in preparation for aggregation.
@@ -36,11 +43,7 @@ Script | comorbidity_data_prep_BC.ipynb
 Input files | 13100113.csv
 Output file | <ul><li>comorbidity_data_percent_BC.csv</li><li>comorbidity_data_num_BC.csv</li></ul>
 
-The Health characteristics, two-year period estimates was downloaded from [Statistics Canada](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310011301).
-
-Health data were grouped at the Health Service Delivery (HSD) level rather than the Health Authority (HA) level. There are 16 HSAs in BC. These aggregate to HAs.
-
-https://www2.gov.bc.ca/gov/content/data/geographic-data-services/land-use/administrative-boundaries/health-boundaries
+The Health characteristics, two-year period estimates was downloaded from [Statistics Canada](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310011301). Health data were grouped at the Health Service Delivery (HSD) level rather than the Health Authority (HA) level.
 
 ### COVID Data preparation
 
@@ -70,6 +73,9 @@ Output file | census_data_BC.csv
 The Census Profile at the HSD (not the HA) level was downloaded from [Statistics Canada](https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/prof/details/download-telecharger/comp/page_dl-tc.cfm?Lang=E).
 
 ### Merge Data
+
+HSDs were linked to HAs and Peer Group classifications manually in the file HSD_HA_names_id.csv. 
+
 Type | Name
 --|--
 Script | merge_data_BC_HSD.ipynb

@@ -31,7 +31,7 @@ Script | comorbidity_data_prep.ipynb
 Input files | 13100113.csv
 Output file | <ul><li>comorbidity_data_percent.csv</li><li>comorbidity_data_num.csv</li></ul>
 
-The Health characteristics, two-year period estimates was downloaded from [Statistics Canada](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310011301).
+The Health characteristics, 2017/2018 two-year period estimates was downloaded from [Statistics Canada](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310011301).
 
 ### Census Profile Data preparation
 

@@ -16,6 +16,7 @@ library(skimr)
 # Import the PHU data
 df_source = read.csv(file = 'merged_data_BC_HSD.csv', stringsAsFactors = FALSE, na.strings="", header=TRUE)
 colnames(df_source)
+str(df_source)
 # skim(df)
 # rownames(df)
 # head(df)
@@ -48,13 +49,21 @@ The response variables are proportion (as a fraction of the population in the he
 ```{r, echo=FALSE}
 df <- df_source
 
+# Create a column with colors corresponding to urban classification
+df$peer_col <- ifelse(df$peer_char == "Large urban", 'red',
+                  ifelse(df$peer_char == "Moderate urban", 'gold',
+                         ifelse(df$peer_char == "Urban-rural mix", 'dodgerblue', 'dodgerblue4')))
+
+
 # COPD - impute 0
 # Consider imputing with a different value, neighboring HSD or based on proportion smokers
 df$Chronic.obstructive.pulmonary.disease..COPD..35.years.and.over.[is.na(df$Chronic.obstructive.pulmonary.disease..COPD..35.years.and.over.)] <- 0
 
+# colnames(df)
+
 # Breastfeeding variables and obesity in youth - remove
 # Remove other variables not needed
-df <- df[,-c(1:2, 4:5, 7:8, 10:32, 43:52, 57:59, 63, 78:79)] 
+df <- df[,-c(1:2, 4:7, 34, 45:54, 59:61, 65, 80:81)] 
 # df <- df[,-c(1:2, 4:32, 43:79)] # Include just the proximity measures as predictors
 # df <- df[,-c(1:2, 4:5, 32, 43:52, 56:58, 60, 63, 76, 78:79)] # Remove median prox scores
 
@@ -64,14 +73,15 @@ df <- df[,-c(1:2, 4:5, 7:8, 10:32, 43:52, 57:59, 63, 78:79)]
 # df[, c(16:34)] <- df[, c(16:34)]/100
 
 colnames(df)
+# skim(df)
 # head(df)
 
 ```
 
 ## PCA on the data
 ```{r }
-pca <- prcomp(df[,-c(1, 35)], scale = TRUE)
-summary(pca)
+pca <- prcomp(df[,-c(1, 59:60)], scale = TRUE)
+s <- summary(pca)
 
 ```
 
@@ -83,13 +93,28 @@ plot(pca, type="lines")
 
 # Graph the PCA
 ```{r }
-# # PCA graph using the base graphics function plot()
-# plot(pca$x[,1], pca$x[,3])
+# PCA graph using the base graphics function plot()
+# plot(pca$x[,1], pca$x[,2])
 
+# Create groups
+pch.group <- rep(21, times=16)
+
+# PCA graph using the base graphics function plot()
+plot(pca$x[,1], pca$x[,2], xlab=paste("PC1 (", round(s$importance[2]*100, 1), "%)", sep = ""), ylab=paste("PC2 (", round(s$importance[5]*100, 1), "%)", sep = ""), pch=pch.group, col="black", bg=df$peer_col, cex=1.5, las=1, asp=1)
+
+# Add grid lines
+abline(v=0, lty=2, col="grey50")
+abline(h=0, lty=2, col="grey50")
+
+# Add legend
+legend("bottomright", legend=c("Large urban", "Moderate urban", "Urban-rural mix", "Rural"), col="black", pt.bg=c("red", "gold", "dodgerblue", "dodgerblue4"), pch=c(21, 21, 21, 21), pt.cex=1.5)
+
+```
+
+```{r }
 # Biplot
 biplot(pca, col = c("blue", "red"), cex = c(0.5,0.5))
 # pca
-
 ```
 
 ## Principal components regression (PCR) against proportion of cases
@@ -98,27 +123,16 @@ biplot(pca, col = c("blue", "red"), cex = c(0.5,0.5))
 # pca$rotation <- -pca$rotation
 
 # Extract the PCs for PCR
-pcs <- pca$x[,c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6")]
+# pcs <- pca$x[,c("PC1", "PC2", "PC3", "PC4", "PC5", "PC6")]
+pcs <- pca$x[,c("PC1", "PC2")]
 
-# Create a dataframe with reponse variable TOTAL proportion of COVID cases and explanatory variables (the PCs)
+# Create a dataframe with response variable TOTAL proportion of COVID cases and explanatory variables (the PCs)
 pcr_data <- as.data.frame(cbind(df_source[,"HSDPOP"], df[,"count_prop"], pcs))
 head(pcr_data)
 
 # Perform regression
 phu_lm_total <- lm(V2 ~ . -V1, data = pcr_data, weights = V1)
 summary(phu_lm_total)
-
-# # Backwards Selection
-# phu_lm_total <- update(phu_lm_total, .~. -PC5)
-# summary(phu_lm_total)
-# phu_lm_total <- update(phu_lm_total, .~. -PC3)
-# summary(phu_lm_total)
-# phu_lm_total <- update(phu_lm_total, .~. -PC4)
-# summary(phu_lm_total)
-# phu_lm_total <- update(phu_lm_total, .~. -PC6)
-# summary(phu_lm_total)
-# phu_lm_total <- update(phu_lm_total, .~. -PC2)
-# summary(phu_lm_total)
 
 ```
 
@@ -300,9 +314,6 @@ pred_test1
 ```
 
 
-```{r }
-
-```
 
 
 ```{r }

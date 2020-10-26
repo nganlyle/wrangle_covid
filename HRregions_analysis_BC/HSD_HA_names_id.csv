@@ -1,17 +1,17 @@
-,phu_name,HR_UID,HA_Name,HSDA_Name
-0,Central Vancouver Island Health Service Delivery Area,5942,Vancouver Island,Central Vancouver Island
-1,East Kootenay Health Service Delivery Area,5911,Interior,East Kootenay
-2,Fraser East Health Service Delivery Area,5921,Fraser,Fraser East
-3,Fraser North Health Service Delivery Area,5922,Fraser,Fraser North
-4,Fraser South Health Service Delivery Area,5923,Fraser,Fraser South
-5,Kootenay-Boundary Health Service Delivery Area,5912,Interior,Kootenay-Boundary
-6,North Shore/Coast Garibaldi Health Service Delivery Area,5933,Vancouver Coastal,North Shore/Coast Garibaldi
-7,North Vancouver Island Health Service Delivery Area,5943,Vancouver Island,North Vancouver Island
-8,Northeast Health Service Delivery Area,5953,Northern,Northeast
-9,Northern Interior Health Service Delivery Area,5952,Northern,Northern Interior
-10,Northwest Health Service Delivery Area,5951,Northern,Northwest
-11,Okanagan Health Service Delivery Area,5913,Interior,Okanagan
-12,Richmond Health Service Delivery Area,5931,Vancouver Coastal,Richmond
-13,South Vancouver Island Health Service Delivery Area,5941,Vancouver Island,South Vancouver Island
-14,Thompson/Cariboo Health Service Delivery Area,5914,Interior,Thompson/Cariboo
-15,Vancouver Health Service Delivery Area,5932,Vancouver Coastal,Vancouver
+,phu_name,HR_UID,HA_Name,HSDA_Name,peer_group,peer_char
+0,Central Vancouver Island Health Service Delivery Area,5942,Vancouver Island,Central Vancouver Island,C,Urban-rural mix
+1,East Kootenay Health Service Delivery Area,5911,Interior,East Kootenay,D,Rural
+2,Fraser East Health Service Delivery Area,5921,Fraser,Fraser East,B,Moderate urban
+3,Fraser North Health Service Delivery Area,5922,Fraser,Fraser North,H,Large urban
+4,Fraser South Health Service Delivery Area,5923,Fraser,Fraser South,H,Large urban
+5,Kootenay-Boundary Health Service Delivery Area,5912,Interior,Kootenay-Boundary,C,Urban-rural mix
+6,North Shore/Coast Garibaldi Health Service Delivery Area,5933,Vancouver Coastal,North Shore/Coast Garibaldi,H,Large urban
+7,North Vancouver Island Health Service Delivery Area,5943,Vancouver Island,North Vancouver Island,C,Urban-rural mix
+8,Northeast Health Service Delivery Area,5953,Northern,Northeast,A,Rural
+9,Northern Interior Health Service Delivery Area,5952,Northern,Northern Interior,D,Rural
+10,Northwest Health Service Delivery Area,5951,Northern,Northwest,D,Rural
+11,Okanagan Health Service Delivery Area,5913,Interior,Okanagan,C,Urban-rural mix
+12,Richmond Health Service Delivery Area,5931,Vancouver Coastal,Richmond,H,Large urban
+13,South Vancouver Island Health Service Delivery Area,5941,Vancouver Island,South Vancouver Island,B,Moderate urban
+14,Thompson/Cariboo Health Service Delivery Area,5914,Interior,Thompson/Cariboo,C,Urban-rural mix
+15,Vancouver Health Service Delivery Area,5932,Vancouver Coastal,Vancouver,G,Large urban
