@@ -99,6 +99,25 @@ coef(cv.glmmod)
 coef(cv.glmmod, s = "lambda.min")
 
 ```
+## Fit logistic regression
+```{r }
+# Fit logistic regression using transformed data
+fit = glm(outbreak~
+            BEDS_TOTAL +
+            # infractions_100Xdisease + 
+            infractions_disease_100 +
+            # HLTH_AUTH + 
+            OWNERSHIP +
+            REGULATION + 
+            ACCRED_STATUS + 
+            # rooms_semi_binary + 
+            # rooms_multi_binary +
+            rooms_shared +
+            resident_council + 
+            family_council
+          , family=binomial, data=data)
+summary(fit)
+```
 
 ## Using the stepAIC() function
 ```{r }
@@ -123,6 +142,33 @@ stepAIC(full, scope=list(lower=null, upper=full), data=data, direction='backward
 # stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='forward')
 ```
 
+# Modeling the number of cases and deaths within LTC homes
+## LASSO
+```{r }
+# https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
+library(glmnet)
+
+# model.matrix() automatically transforms any qualitative variables into dummy variables
+# Trim the first column leaving only predictors
+x = model.matrix(Total.Confirmed.Cases~. , data = data_cases)[,-1]
+y <- data.matrix(data_cases[,1])
+
+# Note alpha=1 for lasso only and can blend with ridge penalty down to
+# alpha=0 ridge only
+glmmod <- glmnet(x, y, alpha = 1)
+coef(glmmod)
+
+# Plot variable coefficients vs. shrinkage parameter lambda
+plot(glmmod, xvar = 'lambda', label = TRUE)
+plot(glmmod, xvar = 'dev', label = TRUE)
+
+cv.glmmod <- cv.glmnet(x, y, alpha=1)
+plot(cv.glmmod)
+coef(cv.glmmod)
+coef(cv.glmmod, s = "lambda.min")
+
+```
+
 # Poisson regression
 ```{r }
 # fit_poi <- glm(Total.Confirmed.Cases/BEDS_TOTAL~ ., family = poisson, data = data_cases, weight = BEDS_TOTAL)
@@ -131,7 +177,8 @@ stepAIC(full, scope=list(lower=null, upper=full), data=data, direction='backward
 fit_poi <- glm(Total.Confirmed.Cases~ 
     INSPECTIONS + 
     # beds_privateprop +
-    infractions_100Xdisease + infractions_disease_100 + 
+    infractions_100Xdisease + 
+    infractions_disease_100 + 
     HLTH_AUTH + 
     OWNERSHIP +
     # ownership_HA +
@@ -332,42 +379,7 @@ Review the minority of homes without a family council
 subset(df, FAMILY_COUNCIL == 'False')
 ```
 
-## Transforming covariates
-```{r, include=FALSE}
-## Assessing skewness
-# Check for R skewness in numeric predictors
-library(e1071)
 
-listofcol = c(num)
-
-for (each in listofcol){
-  print(each)
-  print(skewness(data[[each]]))
-  qqnorm(data[[each]], main = each)
-  qqline(data[[each]], col = 'red')
-}
-
-# Assess variables for 0s
-for (each in listofcol){
-  print(each)
-  print(summary(df[[each]]))
-}
-
-library(rcompanion)
-
-## Explore the variables for transformation
-# Visualize the effect of square root transformations on the  predictors
-for (each in listofcol) {  
-  plotNormalHistogram(x = data[[each]], main = each)
-  plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
-}
-
-## Transform the data
-# Square root transform in place
-data[listofcol] <- sqrt(data[listofcol])
-
-skim(data)
-```
 
 
 ```{r }

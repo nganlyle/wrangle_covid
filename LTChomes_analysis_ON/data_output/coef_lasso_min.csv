@@ -1,0 +1,9 @@
+"","row","column","value"
+"1","(Intercept)","1",-1.59860429257828
+"2","home_typeMunicipal","1",-0.521237558473317
+"3","number_beds","1",0.0155082539675923
+"4","short_stayYes","1",-0.340688389034546
+"5","family_councilYes","1",0.199427454119185
+"6","accreditationYes","1",-0.116445259743879
+"7","X2y_inspections_norm","1",-1.9082920982486
+"8","X2y_withOrders_norm","1",10.813168076556

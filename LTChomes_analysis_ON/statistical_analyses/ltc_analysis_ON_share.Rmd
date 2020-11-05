@@ -5,7 +5,9 @@ output: html_document
 
 ## Import and prepare the data
 ```{r }
-library(skimr)
+# library(skimr)
+library(devtools)
+library(broom)
 
 # Import the data
 df <- read.csv("../data_output/merged_LTC_odhf_quality.csv", na.strings="", header=TRUE)
@@ -25,7 +27,7 @@ for (each in listofcol){
   df[, each] <- as.character(df[, each])
 }
 
-skim(df)
+# skim(df)
 
 ```
 
@@ -69,7 +71,7 @@ df <- df[,-c(21:32)]
 
 # dput(names(df))
 
-skim(df)
+# skim(df)
 ```
 
 
@@ -125,7 +127,7 @@ inspections = c(inspections_2y, inspections_5y, inspections_total)
 ## Analysis with all 625 homes (exclude Quality data)
 ```{r }
 data <- subset(df, select = c('outbreak', profile, inspections))
-skim(data)
+# skim(data)
 # View(colnames(data))
 # dput(names(df))
 
@@ -133,7 +135,7 @@ skim(data)
 
 ## Fit logistic regression
 ```{r }
-# fit logistic regression 
+# fit logistic regression
 fit = glm(outbreak~., family='binomial', data=data)
 summary(fit)
 
@@ -157,19 +159,20 @@ glmmod <- glmnet(x, y, family = 'binomial')
 
 # glmmod$call
 # summary(glmmod)
-# plot(glmmod, xvar = 'lambda', label = TRUE)
+plot(glmmod, xvar = 'lambda', label = TRUE)
 # plot(glmmod, xvar = 'dev', label = TRUE)
 coef(glmmod)
+plot(glmmod)
 
 ```
 As lambda decreases, the order that covariates are added to the model:
     
     1. number_beds
     2. home_typeMunicipal
-    3. total_inspections_normshort_stayYes
-    4. family_councilYes
-    5. accreditationYes
-    6. X2y_withOrders_norm
+    3. short_stayYes
+    4. X2y_withOrders_norm
+    5. family_councilYes
+    6. accreditationYes
     7. X2y_inspections_norm
     8. home_typeNon-Profit 
     
@@ -182,7 +185,10 @@ plot(cv.glmmod$glmnet.fit, label = TRUE, xvar = "lambda")
 plot(cv.glmmod$glmnet.fit, label = TRUE, xvar = "dev")
 
 coef(cv.glmmod)
-coef(cv.glmmod, s = "lambda.min")
+coef_min <- tidy(coef(cv.glmmod, s = "lambda.min"))
+coef_min
+
+# write.csv(coef_min, file="../data_output/coef_lasso_min.csv")
 
 ```
 
@@ -192,10 +198,8 @@ data_lr <- subset(df, select = c('outbreak',
                                  'home_type',
                                  'short_stay',
                                  'family_council',
-                                 'residents_council',
+                                 # 'residents_council',
                                  'accreditation',
-                                 
-                                 # 'total_inspections_norm',
                                  'X2y_withOrders_norm',
                                  'X2y_inspections_norm'
                                  ))
@@ -203,6 +207,10 @@ data_lr <- subset(df, select = c('outbreak',
 
 fit = glm(outbreak~., family='binomial', data=data_lr)
 summary(fit)
+tidy_fit <- tidy(summary(fit)$coef)
+
+write.csv(tidy_fit, file="../data_output/logistic_regression_model.csv")
+
 ```
 
 
