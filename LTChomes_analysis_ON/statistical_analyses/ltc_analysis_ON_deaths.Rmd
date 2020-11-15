@@ -1,5 +1,5 @@
 ---
-title: "ltc_analysis_ON_share"
+title: "ltc_analysis_ON_deaths"
 output: html_document
 ---
 
@@ -28,8 +28,10 @@ for (each in listofcol){
 }
 
 # skim(df)
+str(df)
 
 ```
+
 
 ## Determine number years since the first inspection for each home
 ```{r, results='hide'}
@@ -48,10 +50,8 @@ df$years_since_first <- 2020 - df$first_inspection_year
 table(df['years_since_first'])
 subset(df, years_since_first == 4)
 ```
-
 ### Normalize the number of inspections
 ```{r, results='hide'}
-
 # Number of inspections/beds
 df$total_inspections_norm <- df$total_inspections/df$number_beds/df$years_since_first
 df$X5y_inspections_norm <- df$X5y_inspections/df$number_beds/5
@@ -69,11 +69,11 @@ df <- df[,-c(21:32)]
 
 # dput(names(df))
 # skim(df)
+str(df)
 ```
-
-
+## Subset the data
 ```{r, }
-# Generate the data for analysis
+# Group the data for analysis
 # Create lists of variables used to filter data for analysis
 
 outcomes = c(
@@ -121,94 +121,108 @@ inspections = c(inspections_2y, inspections_5y, inspections_total)
 
 ```
 
-## Analysis with all 625 homes (exclude Quality data)
-```{r }
-data <- subset(df, select = c('outbreak', profile, inspections))
-# skim(data)
-# View(colnames(data))
-# dput(names(df))
+
+```{r, }
+# As cases/deaths can only occur in homes with an outbreak will subset to include only homes with an outbreak
+outbreak <- subset(df, outbreak == 1)
+
+# Look at the distribution of count data
+hist(outbreak$cum_resident_deaths)
+hist(outbreak$max_resident_cases)
+hist(outbreak$max_hcw_cases)
 
 ```
 
-## Fit logistic regression
+
 ```{r }
-fit = glm(outbreak~., family='binomial', data=data)
-summary(fit)
+# Subset data, cumulative resident deaths as outcome
+data <- subset(outbreak, select = c('cum_resident_deaths', profile, inspections))
+# dput(names(data))
 
 ```
 
+# Modeling the number of deaths
 ## LASSO for variable selection
-```{r }
-# https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
-library(glmnet)
-# library(caret)
-options(max.print=999999)
 
+
+```{r, results="hide"}
+library(glmnet)
+options(max.print= 9999, width = 9999)
 # model.matrix() automatically transforms any qualitative variables into dummy variables
 # Trim the first column leaving only predictors
-x = model.matrix(outbreak~., data = data)[,-1]
-y <- as.factor(data.matrix(data[,1]))
+x <- model.matrix(cum_resident_deaths/number_beds~., data = data)[,-1]
+y <- data.matrix(data[,1])
 
-# Note alpha=1 for lasso only, and can blend with ridge penalty
+# Note alpha=1 for lasso only and can blend with ridge penalty down to
 # alpha=0 ridge only
-glmmod <- glmnet(x, y, family = 'binomial')
-
-# glmmod$call
-# summary(glmmod)
-plot(glmmod, xvar = 'lambda', label = TRUE)
-# plot(glmmod, xvar = 'dev', label = TRUE)
+glmmod <- glmnet(x, y, alpha = 1)
 coef(glmmod)
-plot(glmmod)
-
 ```
-As lambda decreases, the order that covariates are added to the model:
+
+As lambda decreases, the order that predictors are added to the model:
     
-    1. number_beds
-    2. home_typeMunicipal
-    3. short_stayYes
-    4. X2y_withOrders_norm
+    1. home_typeMunicipal
+    2. short_stayYes
+    3. accreditationYes
+    4. residents_councilYes
     5. family_councilYes
-    6. accreditationYes
-    7. X2y_inspections_norm
-    8. home_typeNon-Profit 
-    
 
-## LASSO - CV
+
 ```{r }
-cv.glmmod <- cv.glmnet(x, y, alpha=1, family = 'binomial')
+# Plot variable coefficients vs. shrinkage parameter lambda
+plot(glmmod, xvar = 'lambda', label = TRUE)
+plot(glmmod, xvar = 'dev', label = TRUE)
+
+# LASSO - CV
+grid = exp(seq(-5, 5, length=100))
+cv.glmmod <- cv.glmnet(x, y, alpha=1, lambda = grid)
+# cv.glmmod <- cv.glmnet(x, y, alpha=1)
 plot(cv.glmmod)
-plot(cv.glmmod$glmnet.fit, label = TRUE, xvar = "lambda")
-plot(cv.glmmod$glmnet.fit, label = TRUE, xvar = "dev")
-
 coef(cv.glmmod)
-coef_min <- tidy(coef(cv.glmmod, s = "lambda.min"))
-coef_min
+coef(cv.glmmod, s = "lambda.min")
+```
 
-# write.csv(coef_min, file="../data_output/coef_lasso_min.csv")
+    
+# Poisson regression with offset for the number of beds in each home
+```{r }
+# fit_poi <- glm(Total.Confirmed.Cases/BEDS_TOTAL~ ., family = poisson, data = data_cases, weight = BEDS_TOTAL)
+# summary(fit_poi)
+
+fit_poi <- glm(cum_resident_deaths~ 
+    home_type
+    + short_stay
+    + residents_council
+    + family_council
+    + accreditation
+    # + X2y_inspections_norm
+    # + X2y_withOrders_norm
+    # + X5y_inspections_norm
+    # + X5y_withOrders_norm
+    # + total_inspections_norm
+    # + total_withOrders_norm
+    , family = poisson, data = data, offset = log(number_beds))
+summary(fit_poi)
 
 ```
+
+
 
 ```{r }
-data_lr <- subset(df, select = c('outbreak',
-                                 'number_beds',
-                                 'home_type',
-                                 'short_stay',
-                                 'family_council',
-                                 # 'residents_council',
-                                 'accreditation',
-                                 'X2y_withOrders_norm',
-                                 'X2y_inspections_norm'
-                                 ))
-
-
-fit = glm(outbreak~., family='binomial', data=data_lr)
-summary(fit)
-tidy_fit <- tidy(summary(fit)$coef)
-
-write.csv(tidy_fit, file="../data_output/logistic_regression_model.csv")
 
 ```
 
 
+```{r }
 
+```
+
+
+```{r }
+
+```
+
+
+```{r }
+
+```
 
