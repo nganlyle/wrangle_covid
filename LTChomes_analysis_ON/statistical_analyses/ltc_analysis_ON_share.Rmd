@@ -49,8 +49,6 @@ table(df['years_since_first'])
 subset(df, years_since_first == 4)
 ```
 
-
-
 ### Normalize the number of inspections
 ```{r, results='hide'}
 
@@ -70,7 +68,6 @@ df$X2y_withOrders_norm <- df$X2y_withOrders/df$number_beds/2
 df <- df[,-c(21:32)]
 
 # dput(names(df))
-
 # skim(df)
 ```
 
@@ -135,13 +132,12 @@ data <- subset(df, select = c('outbreak', profile, inspections))
 
 ## Fit logistic regression
 ```{r }
-# fit logistic regression
 fit = glm(outbreak~., family='binomial', data=data)
 summary(fit)
 
 ```
 
-LASSO 
+## LASSO for variable selection
 ```{r }
 # https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
 library(glmnet)
@@ -177,7 +173,7 @@ As lambda decreases, the order that covariates are added to the model:
     8. home_typeNon-Profit 
     
 
-LASSO - CV
+## LASSO - CV
 ```{r }
 cv.glmmod <- cv.glmnet(x, y, alpha=1, family = 'binomial')
 plot(cv.glmmod)
@@ -212,6 +208,7 @@ tidy_fit <- tidy(summary(fit)$coef)
 write.csv(tidy_fit, file="../data_output/logistic_regression_model.csv")
 
 ```
+
 
 
 

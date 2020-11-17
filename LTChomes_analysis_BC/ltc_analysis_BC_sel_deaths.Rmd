@@ -1,0 +1,164 @@
+---
+title: "ltc_analysis_BC_sel_deaths"
+output: html_document
+---
+
+## Import the data
+```{r results="hide"}
+library(skimr)
+library(dplyr)
+
+# Import the data
+df <- read.csv("../data/BC/bc_ltc_selected_sep18.csv", na.strings="", header=TRUE)
+
+# Change datatypes as needed
+listofcol = list('FACILITY_NAME', 'HCC_CODE', 'STREET_ADDRESS', 'CITY', 'POSTAL')
+
+for (each in listofcol){
+  df[, each] <- as.character(df[, each])
+}
+
+listofcol = list('outbreak',
+  'rooms_semi_binary', 
+  'rooms_multi_binary', 
+  'rooms_shared', 
+  'resident_council', 
+  'family_council',
+  'res_fam_council', 
+  'beds_privatebinary')
+
+for (each in listofcol){
+  df[, each] <- as.factor(df[, each])
+}
+
+# Create a new column for total infractions
+df['infractions_100'] = df['infractions_disease_100'] + df['infractions_100Xdisease']
+
+str(df)
+# dput(names(df))
+```
+
+```{r }
+# As cases/deaths can only occur in homes with an outbreak will subset to include only homes with an outbreak
+outbreak <- subset(df, outbreak == 1)
+
+hist(outbreak$Total.Confirmed.Cases)
+hist(outbreak$Total.Deaths)
+```
+
+```{r, include=FALSE}
+# Generate the data for analysis
+# Create lists of variables used to filter data for analysis
+
+# Selected data
+num <- c(
+  "BEDS_TOTAL", 
+  "INSPECTIONS", 
+  "infractions_100Xdisease", 
+  "infractions_disease_100",
+  "infractions_100"
+  )
+
+cat <- c(
+  # "HLTH_AUTH", 
+  "OWNERSHIP",
+  "REGULATION", 
+  "ACCRED_STATUS", 
+  "rooms_semi_binary", 
+  "rooms_multi_binary", 
+  "rooms_shared",
+  "resident_council", 
+  "family_council",
+  # "res_fam_council",
+  "beds_privatebinary"
+  )
+
+# Data with cases/deaths as outcome
+data_cases <- subset(outbreak, select = c('Total.Confirmed.Cases', num, cat))
+data_deaths <- subset(outbreak, select = c('Total.Deaths', num, cat))
+
+```
+
+# Modeling the number of cases and deaths
+## LASSO for variable selection based on cases
+```{r, results='hide'}
+library(glmnet)
+options(max.print= 9999, width = 9999)
+# model.matrix() automatically transforms any qualitative variables into dummy variables
+# Trim the first column leaving only predictors
+x = model.matrix(Total.Confirmed.Cases/BEDS_TOTAL~. , data = data_cases)[,-1]
+y <- data.matrix(data_cases[,1])
+
+# Note alpha=1 for lasso only and can blend with ridge penalty down to
+# alpha=0 ridge only
+glmmod <- glmnet(x, y, alpha = 1)
+coef(glmmod)
+```
+
+
+```{r }
+# Plot variable coefficients vs. shrinkage parameter lambda
+plot(glmmod, xvar = 'lambda', label = TRUE)
+plot(glmmod, xvar = 'dev', label = TRUE)
+
+# LASSO - CV
+grid = exp(seq(-2, 10, length=100))
+cv.glmmod <- cv.glmnet(x, y, alpha=1, lambda = grid)
+plot(cv.glmmod)
+coef(cv.glmmod)
+coef(cv.glmmod, s = "lambda.min")
+```
+As lambda decreases, the order that predictors are added to the model:
+    
+    1. OWNERSHIPPNP
+    2. REGULATIONHospital Act & Community Care & Assisted Living Act
+    3. INSPECTIONS
+    4. rooms_multi_binary1
+    5. infractions_disease_100
+
+# Poisson regression - cases
+```{r }
+fit_poi <- glm(Total.Confirmed.Cases~ 
+    INSPECTIONS +
+    # beds_privateprop +
+    infractions_100Xdisease +
+    # infractions_disease_100
+    # HLTH_AUTH + 
+    OWNERSHIP +
+    REGULATION + 
+    # ACCRED_STATUS + 
+    # rooms_semi_binary + 
+    rooms_multi_binary
+    # rooms_shared +
+    # resident_council + 
+    # family_council +
+    # res_fam_council +
+    # beds_privatebinary
+    , family = poisson, data = data_cases, offset = log(BEDS_TOTAL))
+summary(fit_poi)
+
+
+```
+## Poisson regression - deaths
+```{r }
+fit_poi <- glm(Total.Deaths~ 
+    INSPECTIONS + 
+    # beds_privateprop +
+    # infractions_100Xdisease + 
+    infractions_disease_100 +
+    # HLTH_AUTH + 
+    OWNERSHIP +
+    # ownership_HA +
+    REGULATION + 
+    # ACCRED_STATUS + 
+    # rooms_semi_binary + 
+    rooms_multi_binary
+    # rooms_shared +
+    # resident_council + 
+    # family_council 
+    # res_fam_council +
+    # beds_privatebinary,
+    , family = poisson, data = data_deaths, offset = log(BEDS_TOTAL))
+summary(fit_poi)
+```
+

@@ -65,12 +65,6 @@ cat <- c(
 # Data with outbreak as outcome
 data <- subset(df, select = c('outbreak', num, cat))
 
-# Data with cases/deaths as outcome
-# As cases/deaths can only occur in homes with an outbreak will subset to include only homes with an outbreak
-df_outbreak <- subset(df, outbreak == 1)
-data_cases <- subset(df_outbreak, select = c('Total.Confirmed.Cases', num, cat))
-data_deaths <- subset(df_outbreak, select = c('Total.Deaths', num, cat))
-
 # str(data)
 ```
 
@@ -140,76 +134,6 @@ full <- glm(
 
 stepAIC(full, scope=list(lower=null, upper=full), data=data, direction='backward')
 # stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='forward')
-```
-
-# Modeling the number of cases and deaths within LTC homes
-## LASSO
-```{r }
-# https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
-library(glmnet)
-
-# model.matrix() automatically transforms any qualitative variables into dummy variables
-# Trim the first column leaving only predictors
-x = model.matrix(Total.Confirmed.Cases~. , data = data_cases)[,-1]
-y <- data.matrix(data_cases[,1])
-
-# Note alpha=1 for lasso only and can blend with ridge penalty down to
-# alpha=0 ridge only
-glmmod <- glmnet(x, y, alpha = 1)
-coef(glmmod)
-
-# Plot variable coefficients vs. shrinkage parameter lambda
-plot(glmmod, xvar = 'lambda', label = TRUE)
-plot(glmmod, xvar = 'dev', label = TRUE)
-
-cv.glmmod <- cv.glmnet(x, y, alpha=1)
-plot(cv.glmmod)
-coef(cv.glmmod)
-coef(cv.glmmod, s = "lambda.min")
-
-```
-
-# Poisson regression
-```{r }
-# fit_poi <- glm(Total.Confirmed.Cases/BEDS_TOTAL~ ., family = poisson, data = data_cases, weight = BEDS_TOTAL)
-# summary(fit_poi)
-
-fit_poi <- glm(Total.Confirmed.Cases~ 
-    INSPECTIONS + 
-    # beds_privateprop +
-    infractions_100Xdisease + 
-    infractions_disease_100 + 
-    HLTH_AUTH + 
-    OWNERSHIP +
-    # ownership_HA +
-    REGULATION + ACCRED_STATUS + 
-    rooms_semi_binary + rooms_multi_binary + 
-    # rooms_shared +
-    resident_council + family_council +
-    # res_fam_council +
-    beds_privatebinary, 
-    family = poisson, data = data_cases, offset = log(BEDS_TOTAL))
-summary(fit_poi)
-
-fit_poi <- glm(Total.Deaths~ 
-    INSPECTIONS + 
-    # beds_privateprop +
-    infractions_100Xdisease + infractions_disease_100 + 
-    HLTH_AUTH + 
-    OWNERSHIP +
-    # ownership_HA +
-    REGULATION + ACCRED_STATUS + 
-    rooms_semi_binary + rooms_multi_binary + 
-    # rooms_shared +
-    resident_council + family_council +
-    # res_fam_council +
-    beds_privatebinary,
-  family = poisson, data = data_deaths, offset = log(BEDS_TOTAL))
-summary(fit_poi)
-```
-
-```{r }
-
 ```
 
 

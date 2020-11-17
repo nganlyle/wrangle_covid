@@ -1,0 +1,228 @@
+---
+title: "ltc_analysis_ON_deaths"
+output: html_document
+---
+
+## Import and prepare the data
+```{r }
+# library(skimr)
+library(devtools)
+library(broom)
+
+# Import the data
+df <- read.csv("../data_output/merged_LTC_odhf_quality.csv", na.strings="", header=TRUE)
+# skim(df)
+# head(df)
+
+# Change variable data types
+df[, 'outbreak'] <- as.factor(df[, 'outbreak'])
+
+listofcol = list('first_inspection_date', 'date_first_outbreak', 'date_max_cases', 'date_max_HCWcases', 'date_first_resolved')
+for (each in listofcol){
+  df[, each] <- as.Date(df[, each])
+}
+
+listofcol = list('name', 'cleaned_name', 'address', 'city', 'postal_code', 'CSDname')
+for (each in listofcol){
+  df[, each] <- as.character(df[, each])
+}
+
+# skim(df)
+str(df)
+
+```
+
+
+## Determine number years since the first inspection for each home
+```{r, results='hide'}
+# Create a new column for first inspection year
+df$first_inspection_year <- format(df$first_inspection_date,"%Y")
+df$first_inspection_year <- as.numeric(df$first_inspection_year)
+
+# Earliest date of first inspection was in 2009 and latest date was 2016
+summary(df[['first_inspection_year']])
+
+# Create a new column with number of years since the first inspection was reported
+df$years_since_first <- 2020 - df$first_inspection_year
+# summary(df[['years_since_first']])
+
+# There is only 1 home with fewer than 5 years of inspections -> Royal Rose Place
+table(df['years_since_first'])
+subset(df, years_since_first == 4)
+```
+### Normalize the number of inspections
+```{r, results='hide'}
+# Number of inspections/beds
+df$total_inspections_norm <- df$total_inspections/df$number_beds/df$years_since_first
+df$X5y_inspections_norm <- df$X5y_inspections/df$number_beds/5
+df[293, "X5y_inspections_norm"] <- df[293, "X5y_inspections_norm"]*5/4
+df$X2y_inspections_norm <- df$X2y_inspections/df$number_beds/2
+
+# Number of withOrders/beds
+df$total_withOrders_norm <- df$total_withOrders/df$number_beds/df$years_since_first
+df$X5y_withOrders_norm <- df$X5y_withOrders/df$number_beds/5
+df[293, "X5y_withOrders_norm"] <- df[293, "X5y_withOrders_norm"]*5/4
+df$X2y_withOrders_norm <- df$X2y_withOrders/df$number_beds/2
+
+# Drop un-normalized inspections data
+df <- df[,-c(21:32)]
+
+# dput(names(df))
+# skim(df)
+str(df)
+```
+## Subset the data
+```{r, }
+# Group the data for analysis
+# Create lists of variables used to filter data for analysis
+
+outcomes = c(
+  "outbreak", 
+  "cum_resident_deaths", 
+  "max_resident_cases", 
+  "max_hcw_cases"
+  )
+
+profile = c(
+  "home_type", 
+  "number_beds", 
+  "short_stay", 
+  "residents_council", 
+  "family_council", 
+  "accreditation"
+  )
+
+location = c(
+  'address', 
+  'LHIN', 
+  'city', 
+  'postal_code', 
+  'CSDname', 
+  'CSDuid', 
+  'latitude', 
+  'longitude')
+
+inspections_total = c(
+  'total_inspections_norm',
+  'total_withOrders_norm'
+)
+
+inspections_5y = c(
+    'X5y_inspections_norm'
+  , "X5y_withOrders_norm"
+  )
+
+inspections_2y = c(
+    'X2y_inspections_norm'
+  , "X2y_withOrders_norm"
+  )
+
+inspections = c(inspections_2y, inspections_5y, inspections_total)
+
+```
+
+
+```{r, }
+# As cases/deaths can only occur in homes with an outbreak will subset to include only homes with an outbreak
+outbreak <- subset(df, outbreak == 1)
+
+# Look at the distribution of count data
+hist(outbreak$cum_resident_deaths)
+hist(outbreak$max_resident_cases)
+hist(outbreak$max_hcw_cases)
+
+```
+
+
+```{r }
+# Subset data, cumulative resident deaths as outcome
+data <- subset(outbreak, select = c('cum_resident_deaths', profile, inspections))
+# dput(names(data))
+
+```
+
+# Modeling the number of deaths
+## LASSO for variable selection
+
+
+```{r, results="hide"}
+library(glmnet)
+options(max.print= 9999, width = 9999)
+# model.matrix() automatically transforms any qualitative variables into dummy variables
+# Trim the first column leaving only predictors
+x <- model.matrix(cum_resident_deaths/number_beds~., data = data)[,-1]
+y <- data.matrix(data[,1])
+
+# Note alpha=1 for lasso only and can blend with ridge penalty down to
+# alpha=0 ridge only
+glmmod <- glmnet(x, y, alpha = 1)
+coef(glmmod)
+```
+
+As lambda decreases, the order that predictors are added to the model:
+    
+    1. home_typeMunicipal
+    2. short_stayYes
+    3. accreditationYes
+    4. residents_councilYes
+    5. family_councilYes
+
+
+```{r }
+# Plot variable coefficients vs. shrinkage parameter lambda
+plot(glmmod, xvar = 'lambda', label = TRUE)
+plot(glmmod, xvar = 'dev', label = TRUE)
+
+# LASSO - CV
+grid = exp(seq(-5, 5, length=100))
+cv.glmmod <- cv.glmnet(x, y, alpha=1, lambda = grid)
+# cv.glmmod <- cv.glmnet(x, y, alpha=1)
+plot(cv.glmmod)
+coef(cv.glmmod)
+coef(cv.glmmod, s = "lambda.min")
+```
+
+    
+# Poisson regression with offset for the number of beds in each home
+```{r }
+# fit_poi <- glm(Total.Confirmed.Cases/BEDS_TOTAL~ ., family = poisson, data = data_cases, weight = BEDS_TOTAL)
+# summary(fit_poi)
+
+fit_poi <- glm(cum_resident_deaths~ 
+    home_type
+    + short_stay
+    + residents_council
+    + family_council
+    + accreditation
+    # + X2y_inspections_norm
+    # + X2y_withOrders_norm
+    # + X5y_inspections_norm
+    # + X5y_withOrders_norm
+    # + total_inspections_norm
+    # + total_withOrders_norm
+    , family = poisson, data = data, offset = log(number_beds))
+summary(fit_poi)
+
+```
+
+
+
+```{r }
+
+```
+
+
+```{r }
+
+```
+
+
+```{r }
+
+```
+
+
+```{r }
+
+```
+
