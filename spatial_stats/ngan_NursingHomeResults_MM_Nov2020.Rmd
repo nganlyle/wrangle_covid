@@ -1,0 +1,458 @@
+---
+title: "Nursing Home COVID Mortality Zero Inflated Model"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+set.seed(100)
+```
+
+```{r Require R Packages, include=FALSE}
+library(sp)
+library(tidyverse)
+library(rgdal)
+library(maps)
+library(tidyverse)
+#install.packages('INLA', repos=c(getOption('repos'),INLA='https://inla.r-inla-download.org/R/testing'),dep=TRUE)
+# inla.upgrade(testing=TRUE)
+library(INLA)
+library(geostatsp)
+library(mapmisc)
+library(leaflet)
+library(knitr)
+```
+
+```{r Get Data: Pollution Stations and Boundary shp, include=FALSE}
+nursing_home_olddata <- read.csv2('LTC Outbreaks Case Numbers Updated (Accurate as of June 24 2020).csv', sep=',')
+
+#new up to date data Oct 27, 2020
+nursing_home <- read.csv2('../LTChomes_analysis_ON/data_output/merged_LTC_odhf_quality.csv', sep=',')
+
+# table(nursing_home[['cum_resident_deaths']])
+
+# Canada = raster::getData('GADM', country='CA', level=1)
+nursing_home$latitude <- as.numeric(as.character(nursing_home$latitude))
+nursing_home$longitude <- as.numeric(as.character(nursing_home$longitude))
+
+# # Coordinates are correct in the updated dataset
+# nursing_home[nursing_home$name == 'VILLA COLOMBO SENIORS CENTRE (VAUGHAN)',]
+# nursing_home[nursing_home$name == 'THE MEADOWS',]
+
+# # Fix the Bad Coordinate
+# # i=1
+# for (i in 1:615) {
+# if (nursing_home$name[i]=='VILLA COLOMBO SENIORS CENTRE (VAUGHAN)') {
+#   nursing_home$longitude[i] = -79.631803
+# }}
+
+# # Assign NA Coordinate
+# # i = 1
+# for (i in 1:615) {
+#   if (nursing_home$name[i] == 'THE MEADOWS') {
+#     nursing_home$latitude[i] = 43.211202
+#       nursing_home$longitude[i] = -80.007111
+#   }
+# }
+
+# Create anyCases column
+nursing_home$outbreak <- as.numeric(as.character(nursing_home$outbreak))
+
+# Check that all homes with an outbreak have a value for deaths
+withOutbreak <- subset(nursing_home, outbreak == 1)
+table(withOutbreak[['cum_resident_deaths']])
+
+```
+
+```{r prepareData}
+
+# prepare data
+nursing_home$logBed=log(as.numeric(nursing_home$number_beds))
+nursing_home$resident_deaths <- nursing_home$cum_resident_deaths
+
+nursing_home$resident_deaths[which(nursing_home$resident_deaths=='')] <- 0
+nursing_home$cum_resident_deaths[which(nursing_home$resident_deaths=='')] <- 0
+
+# # i = 1
+# for (i in 1:nrow(nursing_home)){
+#   if (nursing_home$resident_deaths[i] == '<5') {
+#     nursing_home$resident_deaths[i] = '1'
+#   }}
+
+nursing_home$resident_deaths <- as.numeric(nursing_home$resident_deaths)
+
+# Create the spatial object
+coordinates(nursing_home) <- c('longitude', 'latitude')
+
+# Set coordinate reference system
+crs(nursing_home) <- CRS("+init=epsg:4326")
+
+```
+
+
+```{r all nursing homes, echo=FALSE, eval=FALSE}
+## All Nursing Homes in Ontario (615) Leaflet Map
+par(mar=c(1, 1, 1, 1))
+colBreaks <- c(0,0.01,10,25,40,70)
+
+#nursing_home@data$resident_deaths[which(is.na(nursing_home@data$resident_deaths))] <- 0
+#nursing_home@data$resident_deaths <- as.numeric(nursing_home@data$resident_deaths)
+nursing_home@data$number_beds <- as.numeric(nursing_home@data$number_beds)
+
+nursing_home$rate <- with(nursing_home@data, resident_deaths/number_beds)
+nursing_home <- nursing_home[order(nursing_home$resident_deaths, na.last=FALSE),]
+ptCol <- colourScale(nursing_home$resident_deaths, breaks=colBreaks, style='fixed',
+                                         col="YlOrRd")
+ptCol$plot <- ifelse(is.na(ptCol$plot), "#000000", ptCol$plot)
+
+legendLabs <- sapply(seq(ptCol$breaks)[-1], function(i) { 
+  paste0(ptCol$breaks[i-1],' - ',ptCol$breaks[i])
+})
+
+leaflet(nursing_home) %>%
+  addTiles() %>%
+  addCircleMarkers(#lng = ~longitude, lat = ~latitude, 
+    label = ~ as.character(cleaned_name), 
+             fillColor = ptCol$plot, fillOpacity = 0.8, radius = 3, stroke = FALSE) 
+#%>% 
+#addLegend(colors = ptCol$col, labels = legendLabs, sizes = 6, font.sizes = 2, group='Number of deaths')
+
+```
+
+```{r setProj}
+
+projTrans <- CRS("+proj=omerc +lat_0=43.869 +lonc=-78.882 +alpha=-80 +k_0=1 +x_0=0 +y_0=0 +gamma=-48 +ellps=WGS84 +units=m +datum=WGS84 +towgs84=0,0,0")
+
+mapTrans <- CRS("+init=epsg:3162")
+
+```
+
+## Model 6: Zero-Inflated Censored Poisson Model W/ Individual Effect - Southern Ontario Nursing Homes; buffer 100km
+
+```{r model_6_southOn, warning=FALSE, message=FALSE}
+
+# subset data by postal code
+# South ON, 554 homes
+nursingHome_southOn <- nursing_home[substr(trimws(nursing_home$postal_code),1,1)!='P',]
+crs(nursingHome_southOn) <- CRS("+init=epsg:4326")
+nursingHome_southOn_proj <- spTransform(nursingHome_southOn, projTrans)
+
+nursingHome_southOn_proj@data$total_complaints <- as.numeric(
+  nursingHome_southOn_proj@data$total_complaints
+)
+nursingHome_southOn_proj@data$total_inspections <- as.numeric(
+  nursingHome_southOn_proj@data$total_inspections
+)
+
+# model
+Res6 = geostatsp::glgm(resident_deaths ~ offset(logBed) 
+                                            + total_complaints 
+                                            + home_type 
+                                            + total_inspections 
+                                            + f(cleaned_name), 
+                         data=nursingHome_southOn_proj, 
+                         grid=200, 
+                         buffer=100*1000,
+                         family='zeroinflatedcenpoisson0', # zero inflated censored poisson
+                         control.family = list(cenpoisson.I = c(1,4)))
+# summary
+knitr::kable(Res6$parameters$summary)
+knitr::kable(Res6$inla$summary.hyperpar)
+
+```
+
+```{r leafletLegend, include=FALSE}
+
+addLegendCustom <- function(map, colors, labels, sizes, font.sizes, opacity = 0.8, group){
+  colorAdditions <- paste0(colors, "; width:", sizes, "px; height:", sizes, "px")
+  labelAdditions <- paste0("<div style='display: inline-block;height: ", font.sizes, "px;margin-top: 4px;line-height: ", font.sizes, "px;'>", labels, "</div>")
+  
+  return(addLegend(map, colors = colorAdditions, labels = labelAdditions, group = group, opacity = opacity))
+}
+
+
+```
+
+
+```{r select_res, include=FALSE}
+
+res <- Res6
+
+```
+
+```{r map_setup, message=FALSE, warning=FALSE, include=FALSE}
+
+# # Boundaries
+# canada = raster::getData("GADM", country="CAN", level=2)
+# canadaTrans <- spTransform(canada, projTrans)
+# ontario <- canada[canada$NAME_1 == 'Ontario',]
+# ontarioTrans <- spTransform(ontario, projTrans)
+
+# Census division
+cdShp <- rgdal::readOGR('/lcd_000b16a_e.shp')
+onShp <- cdShp[cdShp$PRUID=='35',]
+onShpTrans <- sp::spTransform(onShp, CRSobj=mapTrans)
+
+# Prediction
+pred <- res$raster$predict.exp
+if (is.null(crs(pred))) {
+  crs(pred) <- CRS("+init=epsg:4326")
+  predTrans <- projectRaster(pred, crs=mapTrans)
+} else {
+  predTrans <- pred
+  predTrans <- projectRaster(pred, crs=mapTrans)
+}
+
+predTransMask <- mask(predTrans, onShpTrans) # Masking prediction raster
+
+# Random effect
+rand <- res$raster$random.exp
+if (is.null(crs(rand))) {
+  crs(rand) <- CRS("+init=epsg:4326")
+  randTrans <- projectRaster(rand, crs=mapTrans)
+} else {
+  randTrans <- rand
+  randTrans <- projectRaster(rand, crs=mapTrans)
+}
+
+randTransMask <- mask(randTrans, onShpTrans) # Masking random effect raster
+
+#spTransform(mydata, projTrans)
+
+# Some cities
+someCities = mapmisc::geocode(c("Toronto","Windsor","Ottawa","Whitby"))
+someCitiesTrans <- spTransform(someCities, mapTrans)
+
+```
+
+```{r shadowText, include=FALSE}
+
+# Function for shadow text
+# http://article.gmane.org/gmane.comp.lang.r.general/147787
+
+shadowtext <- function(x, y=NULL, labels, col='black', bg='white',
+                       theta= seq(pi/4, 2*pi, length.out=8), r=0.1, ... ) {
+  
+  xy <- xy.coords(x,y)
+  xo <- r*strwidth('A')
+  yo <- r*strheight('A')
+  
+  for (i in theta) {
+    text( xy$x + cos(i)*xo, xy$y + sin(i)*yo, labels, col=bg, ... )
+  }
+  text(xy$x, xy$y, labels, col=col, ... )
+}
+
+```
+
+```{r offsetLabel, include=FALSE}
+
+offsetLabel <- function(spatial.df, map.extent, pos='bottomright', offset=2) {
+  offsetX = (diff(map.extent[1:2])/100)*offset
+  offsetY = (diff(map.extent[3:4])/100)*offset
+  
+  if (pos=='bottomright') {
+    coords <- cbind(spatial.df@coords[,1]+offsetX, spatial.df@coords[,2]-offsetY)
+  } else if (pos=='bottomleft') {
+    coords <- cbind(spatial.df@coords[,1]-offsetX, spatial.df@coords[,2]-offsetY)
+  } else if (pos=='topright') {
+    coords <- cbind(spatial.df@coords[,1]+offsetX, spatial.df@coords[,2]+offsetY)
+  } else if (pos=='topleft') {
+    coords <- cbind(spatial.df@coords[,1]-offsetX, spatial.df@coords[,2]+offsetY)
+  } 
+  
+  spatial.df@coords <- coords
+  return(spatial.df)
+} 
+
+```
+
+```{r zero inflated model map ON, eval=FALSE, include=FALSE}
+#####################DONT RUN, REFERENCE ONLY####################################
+#################################################################################
+# predicted map
+mapmisc::map.new(nursing_home)
+plot(res$raster$predict.exp, add=TRUE, col=grDevices::heat.colors(6, rev=TRUE))
+#Themap3 = mapmisc::tonerToTrans(mapmisc::openmap(nursing_home, path='stamen-toner'))
+#plot(Themap3, add=TRUE)
+
+#spTransform(mydata, projTrans)
+
+# Boundaries
+canada = raster::getData("GADM", country="CAN", level=2)
+plot(canada, add=TRUE)
+
+points(someCities)
+text(someCities@coords, labels = someCities$name)
+
+```
+
+### Map results from Zero Inflated Censored Poisson model
+
+```{r map_hana, cache=TRUE, fig.width=8, fig.height=6, warning=FALSE, message=FALSE}
+
+mapExtent <- extent(onShpTrans)
+someCitiesTrans2 <- offsetLabel(someCitiesTrans, mapExtent, pos='bottomright', offset=1)
+
+# predicted map
+quantile(predTransMask, prob=c(0:6/6))
+pCols = mapmisc::colourScale(
+  #breaks=c(0.1984, 0.19845, 0.1985, 0.19851, 0.19852, 0.19853, 0.19854, 0.19855, 0.1986),
+  #breaks=c(0.1988,0.19882,0.19884,0.19886,0.19888,0.198882, 0.198884, 0.198886, 0.198888,0.1990),
+  #breaks=c(0.15904,0.15905,0.15906,0.15907,0.15908,0.15909,0.15910),
+  breaks=c(0.1277, 0.1278, 0.1279),
+    col='YlOrRd', rev=FALSE, style='fixed')
+
+mapmisc::map.new(predTransMask)
+plot(predTransMask, breaks = pmax(-100,pCols$breaks), col=pCols$col, legend=FALSE)
+plot(onShpTrans, border=grey(0.5), add=TRUE)
+#Themap3 = mapmisc::tonerToTrans(mapmisc::openmap(nursing_home, path='stamen-toner'))
+#plot(Themap3, add=TRUE)
+points(someCitiesTrans, pch=16, cex=0.9)
+shadowtext(someCitiesTrans2@coords, labels = someCitiesTrans2$name, cex=0.8, font=1, adj=0)
+lgdBreaks <- mapmisc::legendBreaks("bottomright", pCols, cex=0.8, box.lwd = 0,box.col = "white", inset=c(0.25,0.08))
+#lgdBreaks
+lgdBreaksRect <- lgdBreaks[['rect']]
+print('Figure 1. Map of Predicted COVID-19 Death Rate in Southern Ontario Nursing Homes')
+text(x=lgdBreaksRect$left+3000, y=lgdBreaksRect$top-8000, labels='Predicted Death Rates', adj=0, font=2, cex=0.8)
+
+# random effect map
+quantile(randTransMask, prob=c(0:7/7))
+pCols = mapmisc::colourScale(
+    #breaks=c(1.0026,1.0028, 1.0029, 1.003,1.0031, 1.0032, 1.0033, 1.0035),
+    #breaks=c(1.0136,1.0137,1.0138,1.0139,1.014,1.0141,1.0142,1.0144),
+    #breaks=c(1.0029,1.0030,1.00302,1.00304,1.00306,1.00308,1.0031,1.0033),
+    breaks=c(1.0061, 1.0063, 1.0064, 1.0065, 1.0066, 1.0069, 1.0070),
+    col='YlOrRd', rev=FALSE, style='fixed')
+
+mapmisc::map.new(randTransMask)
+plot(randTransMask, breaks = pmax(-100,pCols$breaks), col=pCols$col, legend=FALSE)
+plot(onShpTrans, border=grey(0.5), add=TRUE)
+#Themap3 = mapmisc::tonerToTrans(mapmisc::openmap(nursing_home, path='stamen-toner'))
+#plot(Themap3, add=TRUE)
+points(someCitiesTrans, pch=16, cex=0.7)
+shadowtext(someCitiesTrans2@coords, labels = someCitiesTrans2$name, cex=0.8, font=1, adj=0)
+lgdBreaks <- mapmisc::legendBreaks("bottomright", pCols, cex=0.8, box.lwd = 0,box.col = "white", inset=c(0.25,0.08))
+#lgdBreaks
+lgdBreaksRect <- lgdBreaks[['rect']]
+print('Figure 2. Map of Individual Nursing Home Level Random Effect')
+text(x=lgdBreaksRect$left+3000, y=lgdBreaksRect$top-8000, labels='Random effects', adj=0, font=2, cex=0.8)
+# scalebar(1000*50, xy=c(lgdBreaksRect$left-200000, lgdBreaksRect$top-lgdBreaksRect$h), 
+#          type='line', label=c('0',NA,'50km'))
+
+```
+
+## Model 7: Binomial Model W/ Individual Effect - Southern Ontario Nursing Homes; buffer 100km
+
+
+```{r Binomial Model}
+Res7 = geostatsp::glgm(outbreak ~ offset(logBed) 
+                                            + total_complaints 
+                                            + home_type 
+                                            + total_inspections 
+                                            + f(cleaned_name), 
+                         data=nursingHome_southOn_proj, 
+                         grid=200,
+                         buffer=100*1000,
+                         family='binomial')
+
+knitr::kable(Res7$parameters$summary)
+```
+
+```{r select_res2, include=FALSE}
+
+res <- Res7
+
+```
+
+```{r map_setup2, include=FALSE}
+
+# Prediction
+pred <- res$raster$predict.exp
+if (is.null(crs(pred))) {
+  crs(pred) <- CRS("+init=epsg:4326")
+  predTrans <- projectRaster(pred, crs=mapTrans)
+} else {
+  predTrans <- pred
+  predTrans <- projectRaster(pred, crs=mapTrans)
+}
+
+predTransMask <- mask(predTrans, onShpTrans) # Masking prediction raster
+
+# Random effect
+rand <- res$raster$random.exp
+if (is.null(crs(rand))) {
+  crs(rand) <- CRS("+init=epsg:4326")
+  randTrans <- projectRaster(rand, crs=mapTrans)
+} else {
+  randTrans <- rand
+  randTrans <- projectRaster(rand, crs=mapTrans)
+}
+
+randTransMask <- mask(randTrans, onShpTrans) # Masking random effect raster
+
+#spTransform(mydata, projTrans)
+
+# Some cities
+#someCities = mapmisc::geocode(c("Toronto","Windsor","Ottawa","Whitby"))
+#someCitiesTrans <- spTransform(someCities, mapTrans)
+
+```
+
+
+### Map results from Binomial model
+
+
+```{r map2, cache=TRUE, fig.width=8, fig.height=6, warning = FALSE, message = FALSE}
+
+mapExtent <- extent(onShpTrans)
+someCitiesTrans2 <- offsetLabel(someCitiesTrans, mapExtent, pos='bottomright', offset=1)
+
+# predicted map
+quantile(predTransMask, prob=c(0:6/6))
+pCols = mapmisc::colourScale(
+    #breaks=c(0.1984, 0.19845, 0.1985, 0.19851, 0.19852, 0.19853, 0.19854, 0.19855, 0.1986),
+  #breaks=c(0.1988,0.19882,0.19884,0.19886,0.19888,0.198882, 0.198884, 0.198886, 0.198888,0.1990),
+  #breaks=c(0.15904,0.15905,0.15906,0.15907,0.15908,0.15909,0.15910),
+  breaks = c(0.00109,0.002937,0.003607,0.004070,0.004655,0.006207,0.030889),
+    col='YlOrRd', rev=FALSE, style='fixed')
+
+mapmisc::map.new(predTransMask)
+plot(predTransMask, breaks = pmax(-100,pCols$breaks), col=pCols$col, legend=FALSE)
+plot(onShpTrans, border=grey(0.5), add=TRUE)
+#Themap3 = mapmisc::tonerToTrans(mapmisc::openmap(nursing_home, path='stamen-toner'))
+#plot(Themap3, add=TRUE)
+points(someCitiesTrans, pch=16, cex=0.9)
+shadowtext(someCitiesTrans2@coords, labels = someCitiesTrans2$name, cex=0.8, font=1, adj=0)
+lgdBreaks <- mapmisc::legendBreaks("bottomright", pCols, cex=0.8, box.lwd = 0,box.col = "white", inset=c(0.25,0.08))
+#lgdBreaks
+print('Figure 3. Map of Predicted Probability of COVID-19 Outbreak in Southern Ontario Nursing Homes')
+lgdBreaksRect <- lgdBreaks[['rect']]
+text(x=lgdBreaksRect$left+3000, y=lgdBreaksRect$top-8000, labels='Predicted Outbreak Prob', adj=0, font=2, cex=0.8)
+
+# random effect map
+quantile(randTransMask, prob=c(0:7/7))
+pCols = mapmisc::colourScale(
+    #breaks=c(1.0026,1.0028, 1.0029, 1.003,1.0031, 1.0032, 1.0033, 1.0035),
+    #breaks=c(1.0136,1.0137,1.0138,1.0139,1.014,1.0141,1.0142,1.0144),
+    #breaks=c(1.0029,1.0030,1.00302,1.00304,1.00306,1.00308,1.0031,1.0033),
+    breaks=c(0.3191, 0.8497, 1.0380,1.1763, 1.3021, 1.4736, 2.0833, 9.8601),
+    col='YlOrRd', rev=FALSE, style='fixed')
+
+mapmisc::map.new(randTransMask)
+plot(randTransMask, breaks = pmax(-100,pCols$breaks), col=pCols$col, legend=FALSE)
+plot(onShpTrans, border=grey(0.5), add=TRUE)
+#Themap3 = mapmisc::tonerToTrans(mapmisc::openmap(nursing_home, path='stamen-toner'))
+#plot(Themap3, add=TRUE)
+points(someCitiesTrans, pch=16, cex=0.7)
+shadowtext(someCitiesTrans2@coords, labels = someCitiesTrans2$name, cex=0.8, font=1, adj=0)
+lgdBreaks <- mapmisc::legendBreaks("bottomright", pCols, cex=0.8, box.lwd = 0,box.col = "white", inset=c(0.25,0.08))
+#lgdBreaks
+print('Figure 4. Map of Individual Nursing Home Level Random Effect')
+lgdBreaksRect <- lgdBreaks[['rect']]
+text(x=lgdBreaksRect$left+3000, y=lgdBreaksRect$top-8000, labels='Random effects', adj=0, font=2, cex=0.8)
+# scalebar(1000*50, xy=c(lgdBreaksRect$left-200000, lgdBreaksRect$top-lgdBreaksRect$h), 
+#          type='line', label=c('0',NA,'50km'))
+
+```   

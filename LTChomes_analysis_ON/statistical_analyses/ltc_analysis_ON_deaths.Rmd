@@ -141,9 +141,21 @@ data <- subset(outbreak, select = c('cum_resident_deaths', profile, inspections)
 
 ```
 
+LASSO - CovTest
+```{r }
+x <- model.matrix(cum_resident_deaths~., data = data)[,-1]
+y <- data.matrix(data[,1])
+a=lars(x,y)
+covTest(a,x,y)
+
+a$beta
+plot(a)
+summary(a)
+
+```
+
 # Modeling the number of deaths
 ## LASSO for variable selection
-
 
 ```{r, results="hide"}
 library(glmnet)

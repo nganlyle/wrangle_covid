@@ -137,6 +137,24 @@ summary(fit)
 
 ```
 
+## LASSO CovTest
+```{r }
+library(covTest)
+x = model.matrix(outbreak~., data = data)[,-1]
+y = as.numeric(data.matrix(data[,1]))
+
+a = lars.glm(x,y,family="binomial")
+a$beta
+a$act
+a$pathobj
+a$a0
+
+covTest(a,x,y)
+
+
+
+```
+
 ## LASSO for variable selection
 ```{r }
 # https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome

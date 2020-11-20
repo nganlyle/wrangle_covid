@@ -63,7 +63,12 @@ The ODHF data was filtered for facilities in Ontario only.
 
 **3. COVID Data Preparation**
 
-The COVID data were downloaded from the Ontario [Data Catalogue](https://data.ontario.ca/dataset/long-term-care-home-covid-19-data). Homes with an active or resolved outbreak on July 31, 2020 were extracted.
+The COVID data were downloaded from the Ontario [Data Catalogue](https://data.ontario.ca/dataset/long-term-care-home-covid-19-data). The data consist of 2 csv files - one with homes with active outbreaks and another with homes with resolved outbreaks. The data are essentially daily snapshots of the website listing homes with an active or resolved outbreak on any given day. 
+
+- Data for filtered for observations up through to and including July 31, 2020. 
+- Censored values <5 were replaced with 1
+- Extracted maximum values of resident cases, resident deaths (which are cumulative), and staff cases along with the dates when these occurred
+- Extracted dates when a home first appeared on the active and resolved lists
 
 Type | Name
 --|--
