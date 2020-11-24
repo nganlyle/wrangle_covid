@@ -13,23 +13,38 @@ library(broom)
 df <- read.csv("../data_output/merged_LTC_odhf_quality.csv", na.strings="", header=TRUE)
 # skim(df)
 # head(df)
+# str(df)
 
 # Change variable data types
+# To factor
 df[, 'outbreak'] <- as.factor(df[, 'outbreak'])
 
-listofcol = list('first_inspection_date', 'date_first_outbreak', 'date_max_cases', 'date_max_HCWcases', 'date_first_resolved')
-for (each in listofcol){
-  df[, each] <- as.Date(df[, each])
-}
+# To datetime
+cols <- c( "first_inspection_date", 
+           "last_inspection_date", 
+           "last_rqi_date",
+           "date_first_outbreak", 
+           "date_max_cases", 
+           "date_max_HCWcases", 
+           "date_first_resolved")
+df[cols] <- lapply(df[cols], as.Date)
 
-listofcol = list('name', 'cleaned_name', 'address', 'city', 'postal_code', 'CSDname')
-for (each in listofcol){
-  df[, each] <- as.character(df[, each])
-}
+# To char
+cols <- c("cleaned_name", 
+          "name", 
+          "address", 
+          "city", 
+          "postal_code", 
+          "CSDname")
+df[cols] <- lapply(df[cols], as.character)
 
-# skim(df)
 
 ```
+
+```{r }
+
+```
+
 
 ## Determine number years since the first inspection for each home
 ```{r, results='hide'}
@@ -38,13 +53,13 @@ df$first_inspection_year <- format(df$first_inspection_date,"%Y")
 df$first_inspection_year <- as.numeric(df$first_inspection_year)
 
 # Earliest date of first inspection was in 2009 and latest date was 2016
-summary(df[['first_inspection_year']])
+# summary(df[['first_inspection_year']])
 
 # Create a new column with number of years since the first inspection was reported
 df$years_since_first <- 2020 - df$first_inspection_year
 # summary(df[['years_since_first']])
 
-# There is only 1 home with fewer than 5 years of inspections -> Royal Rose Place
+# There is only 1 home with fewer than 5 years of inspections -> Royal Rose Place 293
 table(df['years_since_first'])
 subset(df, years_since_first == 4)
 ```
@@ -53,24 +68,28 @@ subset(df, years_since_first == 4)
 ```{r, results='hide'}
 
 # Number of inspections/beds
-df$total_inspections_norm <- df$total_inspections/df$number_beds/df$years_since_first
-df$X5y_inspections_norm <- df$X5y_inspections/df$number_beds/5
+df$total_inspections_norm <- df$total_inspections/df$years_since_first
+df$X5y_inspections_norm <- df$X5y_inspections/5
 df[293, "X5y_inspections_norm"] <- df[293, "X5y_inspections_norm"]*5/4
-df$X2y_inspections_norm <- df$X2y_inspections/df$number_beds/2
+df$X2y_inspections_norm <- df$X2y_inspections/2
 
 # Number of withOrders/beds
-df$total_withOrders_norm <- df$total_withOrders/df$number_beds/df$years_since_first
-df$X5y_withOrders_norm <- df$X5y_withOrders/df$number_beds/5
+df$total_withOrders_norm <- df$total_withOrders/df$years_since_first
+df$X5y_withOrders_norm <- df$X5y_withOrders/5
 df[293, "X5y_withOrders_norm"] <- df[293, "X5y_withOrders_norm"]*5/4
-df$X2y_withOrders_norm <- df$X2y_withOrders/df$number_beds/2
+df$X2y_withOrders_norm <- df$X2y_withOrders/2
 
 # Drop un-normalized inspections data
-df <- df[,-c(21:32)]
+# df <- df[,-c(21:32)]
 
-# dput(names(df))
+dput(names(df))
 # skim(df)
 ```
 
+
+```{r }
+cor(df$number_beds, df$X2y_inspections_norm)
+```
 
 ```{r, }
 # Generate the data for analysis
@@ -85,11 +104,11 @@ outcomes = c(
 
 profile = c(
   "home_type", 
-  "number_beds", 
-  "short_stay", 
-  "residents_council", 
-  "family_council", 
-  "accreditation"
+  "number_beds"
+  # "short_stay", 
+  # "residents_council", 
+  # "family_council", 
+  # "accreditation"
   )
 
 location = c(
@@ -130,15 +149,9 @@ data <- subset(df, select = c('outbreak', profile, inspections))
 
 ```
 
-## Fit logistic regression
-```{r }
-fit = glm(outbreak~., family='binomial', data=data)
-summary(fit)
-
-```
-
 ## LASSO CovTest
 ```{r }
+options(max.print=999999)
 library(covTest)
 x = model.matrix(outbreak~., data = data)[,-1]
 y = as.numeric(data.matrix(data[,1]))
@@ -155,17 +168,26 @@ covTest(a,x,y)
 
 ```
 
+## Fit logistic regression
+```{r }
+fit = glm(outbreak~., family='binomial', data=data)
+summary(fit)
+
+```
+## Check multicollinearity
+```{r }
+car::vif(fit)
+```
+
 ## LASSO for variable selection
 ```{r }
 # https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
 library(glmnet)
-# library(caret)
-options(max.print=999999)
 
 # model.matrix() automatically transforms any qualitative variables into dummy variables
 # Trim the first column leaving only predictors
-x = model.matrix(outbreak~., data = data)[,-1]
-y <- as.factor(data.matrix(data[,1]))
+# x = model.matrix(outbreak~., data = data)[,-1]
+# y = as.factor(data.matrix(data[,1]))
 
 # Note alpha=1 for lasso only, and can blend with ridge penalty
 # alpha=0 ridge only
@@ -209,18 +231,19 @@ coef_min
 ```{r }
 data_lr <- subset(df, select = c('outbreak',
                                  'number_beds',
-                                 'home_type',
-                                 'short_stay',
-                                 'family_council',
+                                 'home_type'
+                                 # 'short_stay',
+                                 # 'family_council',
                                  # 'residents_council',
-                                 'accreditation',
-                                 'X2y_withOrders_norm',
-                                 'X2y_inspections_norm'
+                                 # 'accreditation',
+                                 # 'X2y_withOrders_norm'
+                                 # 'X2y_inspections_norm'
                                  ))
 
 
 fit = glm(outbreak~., family='binomial', data=data_lr)
 summary(fit)
+
 tidy_fit <- tidy(summary(fit)$coef)
 
 write.csv(tidy_fit, file="../data_output/logistic_regression_model.csv")
