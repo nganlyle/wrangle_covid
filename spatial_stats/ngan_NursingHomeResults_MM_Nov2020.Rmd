@@ -24,63 +24,48 @@ library(leaflet)
 library(knitr)
 ```
 
-```{r Get Data: Pollution Stations and Boundary shp, include=FALSE}
-nursing_home_olddata <- read.csv2('LTC Outbreaks Case Numbers Updated (Accurate as of June 24 2020).csv', sep=',')
 
-#new up to date data Oct 27, 2020
-nursing_home <- read.csv2('../LTChomes_analysis_ON/data_output/merged_LTC_odhf_quality.csv', sep=',')
+```{r }
+nursing_home <- read.csv('../LTChomes_analysis_ON/data_output/merged_LTC_odhf_quality.csv')
 
-# table(nursing_home[['cum_resident_deaths']])
+dput(names(nursing_home))
 
-# Canada = raster::getData('GADM', country='CA', level=1)
-nursing_home$latitude <- as.numeric(as.character(nursing_home$latitude))
-nursing_home$longitude <- as.numeric(as.character(nursing_home$longitude))
+```
 
-# # Coordinates are correct in the updated dataset
-# nursing_home[nursing_home$name == 'VILLA COLOMBO SENIORS CENTRE (VAUGHAN)',]
-# nursing_home[nursing_home$name == 'THE MEADOWS',]
 
-# # Fix the Bad Coordinate
-# # i=1
-# for (i in 1:615) {
-# if (nursing_home$name[i]=='VILLA COLOMBO SENIORS CENTRE (VAUGHAN)') {
-#   nursing_home$longitude[i] = -79.631803
-# }}
+```{r , include=FALSE}
+# Change datatypes
+# To datetime
+cols <- c( "first_inspection_date", 
+           "last_inspection_date", 
+           "last_rqi_date",
+           "date_first_outbreak", 
+           "date_max_cases", 
+           "date_max_HCWcases", 
+           "date_first_resolved")
+nursing_home[cols] <- lapply(nursing_home[cols], as.Date)
 
-# # Assign NA Coordinate
-# # i = 1
-# for (i in 1:615) {
-#   if (nursing_home$name[i] == 'THE MEADOWS') {
-#     nursing_home$latitude[i] = 43.211202
-#       nursing_home$longitude[i] = -80.007111
-#   }
-# }
+# To char
+cols <- c("cleaned_name", 
+          "name", 
+          "address", 
+          "city", 
+          "postal_code", 
+          "CSDname")
+nursing_home[cols] <- lapply(nursing_home[cols], as.character)
 
-# Create anyCases column
-nursing_home$outbreak <- as.numeric(as.character(nursing_home$outbreak))
-
-# Check that all homes with an outbreak have a value for deaths
-withOutbreak <- subset(nursing_home, outbreak == 1)
-table(withOutbreak[['cum_resident_deaths']])
+# # Check that all homes with an outbreak have a value for deaths
+# withOutbreak <- subset(nursing_home, outbreak == 1)
+# table(withOutbreak[['cum_resident_deaths']])
 
 ```
 
 ```{r prepareData}
 
 # prepare data
-nursing_home$logBed=log(as.numeric(nursing_home$number_beds))
-nursing_home$resident_deaths <- nursing_home$cum_resident_deaths
-
+nursing_home$logBed = log(nursing_home$number_beds)
+nursing_home$resident_deaths = nursing_home$cum_resident_deaths
 nursing_home$resident_deaths[which(nursing_home$resident_deaths=='')] <- 0
-nursing_home$cum_resident_deaths[which(nursing_home$resident_deaths=='')] <- 0
-
-# # i = 1
-# for (i in 1:nrow(nursing_home)){
-#   if (nursing_home$resident_deaths[i] == '<5') {
-#     nursing_home$resident_deaths[i] = '1'
-#   }}
-
-nursing_home$resident_deaths <- as.numeric(nursing_home$resident_deaths)
 
 # Create the spatial object
 coordinates(nursing_home) <- c('longitude', 'latitude')
@@ -96,14 +81,13 @@ crs(nursing_home) <- CRS("+init=epsg:4326")
 par(mar=c(1, 1, 1, 1))
 colBreaks <- c(0,0.01,10,25,40,70)
 
-#nursing_home@data$resident_deaths[which(is.na(nursing_home@data$resident_deaths))] <- 0
-#nursing_home@data$resident_deaths <- as.numeric(nursing_home@data$resident_deaths)
 nursing_home@data$number_beds <- as.numeric(nursing_home@data$number_beds)
+# nursing_home$rate <- with(nursing_home@data, resident_deaths/number_beds)
 
-nursing_home$rate <- with(nursing_home@data, resident_deaths/number_beds)
 nursing_home <- nursing_home[order(nursing_home$resident_deaths, na.last=FALSE),]
-ptCol <- colourScale(nursing_home$resident_deaths, breaks=colBreaks, style='fixed',
-                                         col="YlOrRd")
+
+ptCol <- colourScale(nursing_home$resident_deaths, breaks=colBreaks, style='fixed', col="YlOrRd")
+
 ptCol$plot <- ifelse(is.na(ptCol$plot), "#000000", ptCol$plot)
 
 legendLabs <- sapply(seq(ptCol$breaks)[-1], function(i) { 
@@ -138,24 +122,20 @@ nursingHome_southOn <- nursing_home[substr(trimws(nursing_home$postal_code),1,1)
 crs(nursingHome_southOn) <- CRS("+init=epsg:4326")
 nursingHome_southOn_proj <- spTransform(nursingHome_southOn, projTrans)
 
-nursingHome_southOn_proj@data$total_complaints <- as.numeric(
-  nursingHome_southOn_proj@data$total_complaints
-)
-nursingHome_southOn_proj@data$total_inspections <- as.numeric(
-  nursingHome_southOn_proj@data$total_inspections
-)
-
 # model
 Res6 = geostatsp::glgm(resident_deaths ~ offset(logBed) 
-                                            + total_complaints 
+                                            # + total_complaints
+                                            + X2y_withOrders
                                             + home_type 
-                                            + total_inspections 
+                                            # + total_inspections
+                                            + X2y_inspections
                                             + f(cleaned_name), 
                          data=nursingHome_southOn_proj, 
                          grid=200, 
                          buffer=100*1000,
                          family='zeroinflatedcenpoisson0', # zero inflated censored poisson
                          control.family = list(cenpoisson.I = c(1,4)))
+
 # summary
 knitr::kable(Res6$parameters$summary)
 knitr::kable(Res6$inla$summary.hyperpar)
@@ -165,9 +145,18 @@ knitr::kable(Res6$inla$summary.hyperpar)
 ```{r leafletLegend, include=FALSE}
 
 addLegendCustom <- function(map, colors, labels, sizes, font.sizes, opacity = 0.8, group){
-  colorAdditions <- paste0(colors, "; width:", sizes, "px; height:", sizes, "px")
-  labelAdditions <- paste0("<div style='display: inline-block;height: ", font.sizes, "px;margin-top: 4px;line-height: ", font.sizes, "px;'>", labels, "</div>")
-  
+  colorAdditions <- paste0(colors, 
+                           "; width:", 
+                           sizes, 
+                           "px; height:", 
+                           sizes, "px")
+  labelAdditions <- paste0("<div style='display: inline-block;height: ", 
+                           font.sizes, 
+                           "px;margin-top: 4px;line-height: ", 
+                           font.sizes, 
+                           "px;'>", 
+                           labels, 
+                           "</div>")
   return(addLegend(map, colors = colorAdditions, labels = labelAdditions, group = group, opacity = opacity))
 }
 
@@ -190,7 +179,7 @@ res <- Res6
 # ontarioTrans <- spTransform(ontario, projTrans)
 
 # Census division
-cdShp <- rgdal::readOGR('/lcd_000b16a_e.shp')
+cdShp <- rgdal::readOGR('lcd_000b16a_e.shp')
 onShp <- cdShp[cdShp$PRUID=='35',]
 onShpTrans <- sp::spTransform(onShp, CRSobj=mapTrans)
 
@@ -231,7 +220,10 @@ someCitiesTrans <- spTransform(someCities, mapTrans)
 # Function for shadow text
 # http://article.gmane.org/gmane.comp.lang.r.general/147787
 
-shadowtext <- function(x, y=NULL, labels, col='black', bg='white',
+shadowtext <- function(x, y=NULL, 
+                       labels, 
+                       col='black', 
+                       bg='white',
                        theta= seq(pi/4, 2*pi, length.out=8), r=0.1, ... ) {
   
   xy <- xy.coords(x,y)
@@ -348,9 +340,11 @@ text(x=lgdBreaksRect$left+3000, y=lgdBreaksRect$top-8000, labels='Random effects
 
 ```{r Binomial Model}
 Res7 = geostatsp::glgm(outbreak ~ offset(logBed) 
-                                            + total_complaints 
+                                            # + total_complaints
+                                            + X2y_withOrders
                                             + home_type 
-                                            + total_inspections 
+                                            # + total_inspections
+                                            + X2y_inspections
                                             + f(cleaned_name), 
                          data=nursingHome_southOn_proj, 
                          grid=200,
