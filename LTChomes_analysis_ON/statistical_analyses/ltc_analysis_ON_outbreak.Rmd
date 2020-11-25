@@ -42,6 +42,13 @@ df[cols] <- lapply(df[cols], as.character)
 ```
 
 ```{r }
+# # Add a column of LHIN health regions
+# unique(df[['LHIN']])
+# df$region[df$LHIN=='North West' | df$LHIN=='North East'] <- "North"
+# df$region[df$LHIN=='Toronto Central'] <- "Toronto"
+# df$region[df$LHIN=='Champlain' | df$LHIN=='Central East' | df$LHIN=='South East'] <- "East"
+# df$region[df$LHIN=='Erie St. Clair' | df$LHIN=='Hamilton Niagara Haldimand Brant (Hnhb)' | df$LHIN=='South West' | df$LHIN=='Waterloo Wellington'] <- "West"
+# df$region[df$LHIN=='Mississauga Halton' | df$LHIN=='Central West' | df$LHIN=='Central' | df$LHIN=='North Simcoe Muskoka'] <- "Central"
 
 ```
 
@@ -104,11 +111,20 @@ outcomes = c(
 
 profile = c(
   "home_type", 
-  "number_beds"
-  # "short_stay", 
-  # "residents_council", 
-  # "family_council", 
-  # "accreditation"
+  "number_beds",
+  "short_stay",
+  "residents_council",
+  "family_council",
+  "accreditation"
+  )
+
+qual = c(
+  "antipsychotic_percent", 
+  "pressure_ulcers_percent", 
+  "falls_percent", 
+  "restraints_percent", 
+  "depression_percent", 
+  "pain_percent"
   )
 
 location = c(
@@ -174,12 +190,13 @@ fit = glm(outbreak~., family='binomial', data=data)
 summary(fit)
 
 ```
+
 ## Check multicollinearity
 ```{r }
 car::vif(fit)
 ```
 
-## LASSO for variable selection
+## LASSO for variable selection - manual
 ```{r }
 # https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
 library(glmnet)
@@ -231,25 +248,154 @@ coef_min
 ```{r }
 data_lr <- subset(df, select = c('outbreak',
                                  'number_beds',
-                                 'home_type'
-                                 # 'short_stay',
-                                 # 'family_council',
-                                 # 'residents_council',
-                                 # 'accreditation',
-                                 # 'X2y_withOrders_norm'
-                                 # 'X2y_inspections_norm'
+                                 'home_type',
+                                 'short_stay',
+                                 'family_council',
+                                 'residents_council',
+                                 'accreditation',
+                                 'X2y_withOrders_norm',
+                                 'X2y_inspections_norm'
                                  ))
 
 
 fit = glm(outbreak~., family='binomial', data=data_lr)
 summary(fit)
 
-tidy_fit <- tidy(summary(fit)$coef)
-
-write.csv(tidy_fit, file="../data_output/logistic_regression_model.csv")
+# tidy_fit <- tidy(summary(fit)$coef)
+# write.csv(tidy_fit, file="../data_output/logistic_regression_model.csv")
 
 ```
 
+## Stepwise Model Selection
+```{r, eval=FALSE, include=FALSE }
+library(MASS)
+# Start with model with no predictors - null
+null <- glm(outbreak ~ 1, family = "binomial", data=data) # 1 here means the intercept 
+full <- glm(outbreak ~ 
+              home_type 
+            + number_beds 
+            + short_stay 
+            + residents_council 
+            + family_council 
+            + accreditation 
+            + total_inspections_norm 
+            + X5y_inspections_norm 
+            + X2y_inspections_norm 
+            + total_withOrders_norm 
+            + X5y_withOrders_norm 
+            + X2y_withOrders_norm 
+            , family = 'binomial', data = data)
+
+# With AIC, k = 2 
+modAIC <- stepAIC(full)
+summary(modAIC)
+
+# With BIC
+modBIC <- stepAIC(full, k = log(nrow(data)))
+summary(modBIC)
+
+car::compareCoefs(modAIC, modBIC)
+confint(modBIC)
+
+stepAIC(full, scope=list(lower=null, upper=full), data=data, direction='backward', trace = 0)
+stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='forward', trace = 0)
+stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='both', trace = 0)
+```
+
+## Transforming the Predictors
+```{r, eval=FALSE, include=FALSE}
+# Assessing skewness
+# Check for R skewness in numeric predictors
+library(e1071)
+
+listofcols = c('number_beds', complaints, noncomplaints, all_inspections)
+
+for (each in listofcols){
+  print(each)
+  print(skewness(data[[each]]))
+  qqnorm(data[[each]], main = each)
+  qqline(data[[each]], col = 'red')
+}
+
+for (each in listofcols){
+  print(each)
+  print(summary(df[[each]]))
+}
+
+# Create a list of numeric variables with 0 values
+list0s <- c(complaints, "X2y_noncomplaints_norm")
+
+library(rcompanion)
+listofcols <- setdiff(listofcols, list0s)
+
+# Visualize the effect of square root and log transformations on the data without 0s
+for (each in listofcols) {  
+  plotNormalHistogram(x = data[[each]], main = each)
+  plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
+  plotNormalHistogram(x = log(data[[each]]), main = c(each, 'log trans'))
+}
+
+# Visualize the effect of a square root transformation on the variables with 0s
+for (each in list0s) {  
+  plotNormalHistogram(x = data[[each]], main = each)
+  plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
+}
+
+# Log transform in place
+
+data[c("total_noncomplaints_norm", "X5y_noncomplaints_norm", all_inspections)] <- log(data[c("total_noncomplaints_norm", "X5y_noncomplaints_norm", all_inspections)])
+
+# Square root transform in place
+data[c('number_beds', list0s)] <- sqrt(data[c('number_beds', list0s)])
+
+skim(data)
+```
+
+```{r, eval=FALSE, include=FALSE }
+# Calculate McFadden's pseudo R2
+ll.null <- fit$null.deviance/-2
+ll.proposed <- fit$deviance/-2
+print((ll.null - ll.proposed)/ll.null)
+1 - pchisq(2*(ll.proposed - ll.null), df = (length(fit$coefficients)-1)) #pvalue
+
+```
+
+## Visualize the model
+```{r, eval=FALSE, include=FALSE}
+# Create a new dataframe showing probability of outbreak and outbreak status
+predicted.data <- data.frame(probability.of.outbreak=fit$fitted.values, outbreak=data$outbreak)
+
+# Sort the above df
+predicted.data <- predicted.data[order(predicted.data$probability.of.outbreak, decreasing=FALSE),]
+
+# Add new col to df with rank
+predicted.data$rank <- 1:nrow(predicted.data)
+
+library(ggplot2)
+# library(cowplot)
+
+ggplot(data = predicted.data, aes(x=rank, y=probability.of.outbreak)) +
+  geom_point(aes(color=outbreak), alpha = 0.5, shape = 4, stroke = 1) +
+  xlab("Index") + ylab("Predicted probability of an outbreak") +
+  ggtitle("Outbreak Status Ordered By Predicted Probability of an Outbreak") + 
+  scale_color_manual(values = c('blue', 'red'))
+
+```
+
+
+```{r }
+
+```
+
+
+```{r }
+
+```
+
+
+```{r }
+
+```
 
 
 
