@@ -28,7 +28,7 @@ library(knitr)
 ```{r }
 nursing_home <- read.csv('../LTChomes_analysis_ON/data_output/merged_LTC_odhf_quality.csv')
 
-dput(names(nursing_home))
+# dput(names(nursing_home))
 
 ```
 
@@ -125,10 +125,10 @@ nursingHome_southOn_proj <- spTransform(nursingHome_southOn, projTrans)
 # model
 Res6 = geostatsp::glgm(resident_deaths ~ offset(logBed) 
                                             # + total_complaints
-                                            + X2y_withOrders
+                                            # + X2y_withOrders
                                             + home_type 
                                             # + total_inspections
-                                            + X2y_inspections
+                                            # + X2y_inspections
                                             + f(cleaned_name), 
                          data=nursingHome_southOn_proj, 
                          grid=200, 
@@ -293,7 +293,8 @@ pCols = mapmisc::colourScale(
   #breaks=c(0.1984, 0.19845, 0.1985, 0.19851, 0.19852, 0.19853, 0.19854, 0.19855, 0.1986),
   #breaks=c(0.1988,0.19882,0.19884,0.19886,0.19888,0.198882, 0.198884, 0.198886, 0.198888,0.1990),
   #breaks=c(0.15904,0.15905,0.15906,0.15907,0.15908,0.15909,0.15910),
-  breaks=c(0.1277, 0.1278, 0.1279),
+  #breaks=c(0.1277, 0.1278, 0.1279),
+  breaks=c(0.09735341, 0.09737589, 0.09738098, 0.09738324, 0.09738398, 0.09738524, 0.09742030), 
     col='YlOrRd', rev=FALSE, style='fixed')
 
 mapmisc::map.new(predTransMask)
@@ -311,11 +312,14 @@ text(x=lgdBreaksRect$left+3000, y=lgdBreaksRect$top-8000, labels='Predicted Deat
 
 # random effect map
 quantile(randTransMask, prob=c(0:7/7))
+breaks = c(1.013618, 1.016363, 1.016476, 1.016533, 1.016576, 1.016767, 1.017030, 1.018372)
+breaks = rev(breaks)
 pCols = mapmisc::colourScale(
     #breaks=c(1.0026,1.0028, 1.0029, 1.003,1.0031, 1.0032, 1.0033, 1.0035),
     #breaks=c(1.0136,1.0137,1.0138,1.0139,1.014,1.0141,1.0142,1.0144),
     #breaks=c(1.0029,1.0030,1.00302,1.00304,1.00306,1.00308,1.0031,1.0033),
-    breaks=c(1.0061, 1.0063, 1.0064, 1.0065, 1.0066, 1.0069, 1.0070),
+    #breaks=c(1.0061, 1.0063, 1.0064, 1.0065, 1.0066, 1.0069, 1.0070),
+    breaks=breaks,
     col='YlOrRd', rev=FALSE, style='fixed')
 
 mapmisc::map.new(randTransMask)
@@ -339,12 +343,12 @@ text(x=lgdBreaksRect$left+3000, y=lgdBreaksRect$top-8000, labels='Random effects
 
 
 ```{r Binomial Model}
-Res7 = geostatsp::glgm(outbreak ~ offset(logBed) 
+Res7 = geostatsp::glgm(outbreak ~ number_beds
                                             # + total_complaints
-                                            + X2y_withOrders
+                                            # + X2y_withOrders
                                             + home_type 
                                             # + total_inspections
-                                            + X2y_inspections
+                                            # + X2y_inspections
                                             + f(cleaned_name), 
                          data=nursingHome_southOn_proj, 
                          grid=200,
@@ -406,10 +410,11 @@ someCitiesTrans2 <- offsetLabel(someCitiesTrans, mapExtent, pos='bottomright', o
 # predicted map
 quantile(predTransMask, prob=c(0:6/6))
 pCols = mapmisc::colourScale(
-    #breaks=c(0.1984, 0.19845, 0.1985, 0.19851, 0.19852, 0.19853, 0.19854, 0.19855, 0.1986),
-  #breaks=c(0.1988,0.19882,0.19884,0.19886,0.19888,0.198882, 0.198884, 0.198886, 0.198888,0.1990),
-  #breaks=c(0.15904,0.15905,0.15906,0.15907,0.15908,0.15909,0.15910),
-  breaks = c(0.00109,0.002937,0.003607,0.004070,0.004655,0.006207,0.030889),
+  # breaks=c(0.1984, 0.19845, 0.1985, 0.19851, 0.19852, 0.19853, 0.19854, 0.19855, 0.1986),
+  # breaks=c(0.1988,0.19882,0.19884,0.19886,0.19888,0.198882, 0.198884, 0.198886, 0.198888,0.1990),
+  # breaks=c(0.15904,0.15905,0.15906,0.15907,0.15908,0.15909,0.15910),
+  # breaks = c(0.00109,0.002937,0.003607,0.004070,0.004655,0.006207,0.030889),
+  breaks = c(0.06451772, 0.15819085, 0.17997505, 0.19976422, 0.22515152, 0.29855273, 1.04889938),
     col='YlOrRd', rev=FALSE, style='fixed')
 
 mapmisc::map.new(predTransMask)
@@ -431,7 +436,8 @@ pCols = mapmisc::colourScale(
     #breaks=c(1.0026,1.0028, 1.0029, 1.003,1.0031, 1.0032, 1.0033, 1.0035),
     #breaks=c(1.0136,1.0137,1.0138,1.0139,1.014,1.0141,1.0142,1.0144),
     #breaks=c(1.0029,1.0030,1.00302,1.00304,1.00306,1.00308,1.0031,1.0033),
-    breaks=c(0.3191, 0.8497, 1.0380,1.1763, 1.3021, 1.4736, 2.0833, 9.8601),
+    # breaks=c(0.3191, 0.8497, 1.0380,1.1763, 1.3021, 1.4736, 2.0833, 9.8601),
+    breaks = c(0.3723564, 0.8965009, 1.0264569, 1.1213603, 1.2372540, 1.3896223, 1.8950715, 6.2884280),
     col='YlOrRd', rev=FALSE, style='fixed')
 
 mapmisc::map.new(randTransMask)
