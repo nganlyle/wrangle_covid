@@ -1,13 +1,13 @@
 ## LTC homes analysis
-**1. Webscraping for LTC Homes Data**
+**1a. Webscraping for LTC Homes Data**
 
 Type | Name | Details
 --|--|--
-Script | webscrape_ltc_general_database.ipynb
+Script | LTCgen_data_webscrape.ipynb
 Input files | None
-Output file | webscrape_ltc_general_database.csv
+Output file | <ul><li>webscrape_LTCgen_profile</li><li>webscrape_LTCgen_inspections</li>
 
-A database of LTC homes in Ontario was created by webscraping the website   [Reports on Long-Term Care Homes](http://publicreporting.ltchomes.net/en-ca/Default.aspx).
+Profile and inspections data for LTC homes in Ontario was scraped from the website   [Reports on Long-Term Care Homes](http://publicreporting.ltchomes.net/en-ca/Default.aspx).
 The following information was scraped:
 
   A. Home profile information
@@ -26,30 +26,34 @@ The following information was scraped:
 
   B. Home inspections information
 
-        1. Total number of inspections
-            - Total available
-            - Total in the last 5 years (since January 1, 2015)
-            - Total in the last 2 years (since January 1, 2018)
-        2. Total number of complaints inspections
-            - Total available
-            - Total in the last 5 years (since Dec 31, 2014)
-            - Total in the last 2 years (since Dec 31, 2017)
-        3. Total number of critical incident inspections
-            - Total available
-            - Total in the last 5 years (since Dec 31, 2014)
-            - Total in the last 2 years (since Dec 31, 2017)
-        4. Total number of inspections accompanied by an order(s) of the inspector
-            - Total available
-            - Total in the last 5 years (since Dec 31, 2014)
-            - Total in the last 2 years (since Dec 31, 2017)
-        5. Date of the first inspection report
+        1. Name
+        2. Inspection type
+        3. Inspection date
+
+**1b. Wrangle LTC Homes Data**
+
+Type | Name | Details
+--|--|--
+Script | LTCgen_data_process.ipynb
+Input files | <ul><li>webscrape_LTCgen_profile</li><li>webscrape_LTCgen_inspections</li>
+Output file | webscrape_LTC_general_database
+
+The following information was extracted:
+  1. Date of the last Resident Quality Inspection (RQI) inspections
+  2. Date of first and last (most recent) available inspection
+
+The following data cleaning was done:
+  3. Filtered for inspections up to Jan 1, 2020
+  4. Calculated the number of inspections per year in the last 5 years (Jan 1, 2015 to Jan 1, 2020) and the number in the last 2 years (Jan 1, 2018 to Jan 1, 2020)
+  5. Filtered for inspections with the word "with Order(s)" and calculated the number of such inspections per year in the last 5 and 2 years
+  6. Merged the inspections data with the profile data
 
 On initial webscraping 651 homes were identified. Subsequently, 26 homes were removed (leaving 625) as follows:
 
-        1. Closed, 20
-        2. Merged with another home, 1
-        3. Missing all profile information, 2
-        4. No inspections for for 2 years, 3
+        1. Closed - 20
+        2. Merged with another home - 1
+        3. Missing all profile information - 2
+        4. No inspections for for 2 years - 3
 
 **2. ODHF Data Preparation**
 

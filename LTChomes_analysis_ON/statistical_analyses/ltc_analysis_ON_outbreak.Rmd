@@ -1,11 +1,16 @@
 ---
-title: "ltc_analysis_ON_share"
+title: "ltc_analysis_ON_outbreak"
 output: html_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+set.seed(100)
+```
+
 ## Import and prepare the data
-```{r }
-# library(skimr)
+```{r import_data }
+library(skimr)
 library(devtools)
 library(broom)
 
@@ -38,11 +43,12 @@ cols <- c("cleaned_name",
           "CSDname")
 df[cols] <- lapply(df[cols], as.character)
 
-
+skim(df)
 ```
 
-```{r }
-# # Add a column of LHIN health regions
+```{r, include=FALSE }
+# # Add a column where LHIN are classified into health regions
+# # https://www.dapasoft.com/14-lhins-reorganized-ontario/
 # unique(df[['LHIN']])
 # df$region[df$LHIN=='North West' | df$LHIN=='North East'] <- "North"
 # df$region[df$LHIN=='Toronto Central'] <- "Toronto"
@@ -53,52 +59,7 @@ df[cols] <- lapply(df[cols], as.character)
 ```
 
 
-## Determine number years since the first inspection for each home
-```{r, results='hide'}
-# Create a new column for first inspection year
-df$first_inspection_year <- format(df$first_inspection_date,"%Y")
-df$first_inspection_year <- as.numeric(df$first_inspection_year)
-
-# Earliest date of first inspection was in 2009 and latest date was 2016
-# summary(df[['first_inspection_year']])
-
-# Create a new column with number of years since the first inspection was reported
-df$years_since_first <- 2020 - df$first_inspection_year
-# summary(df[['years_since_first']])
-
-# There is only 1 home with fewer than 5 years of inspections -> Royal Rose Place 293
-table(df['years_since_first'])
-subset(df, years_since_first == 4)
-```
-
-### Normalize the number of inspections
-```{r, results='hide'}
-
-# Number of inspections/beds
-df$total_inspections_norm <- df$total_inspections/df$years_since_first
-df$X5y_inspections_norm <- df$X5y_inspections/5
-df[293, "X5y_inspections_norm"] <- df[293, "X5y_inspections_norm"]*5/4
-df$X2y_inspections_norm <- df$X2y_inspections/2
-
-# Number of withOrders/beds
-df$total_withOrders_norm <- df$total_withOrders/df$years_since_first
-df$X5y_withOrders_norm <- df$X5y_withOrders/5
-df[293, "X5y_withOrders_norm"] <- df[293, "X5y_withOrders_norm"]*5/4
-df$X2y_withOrders_norm <- df$X2y_withOrders/2
-
-# Drop un-normalized inspections data
-# df <- df[,-c(21:32)]
-
-dput(names(df))
-# skim(df)
-```
-
-
-```{r }
-cor(df$number_beds, df$X2y_inspections_norm)
-```
-
-```{r, }
+```{r, include=FALSE}
 # Generate the data for analysis
 # Create lists of variables used to filter data for analysis
 
@@ -112,7 +73,7 @@ outcomes = c(
 profile = c(
   "home_type", 
   "number_beds",
-  "short_stay",
+  # "short_stay",
   "residents_council",
   "family_council",
   "accreditation"
@@ -138,32 +99,36 @@ location = c(
   'longitude')
 
 inspections_total = c(
-  'total_inspections_norm',
-  'total_withOrders_norm'
+  'total_inspections_per_year',
+  'total_withOrders_per_year'
 )
 
 inspections_5y = c(
-    'X5y_inspections_norm'
-  , "X5y_withOrders_norm"
+    'X5y_inspections_per_year'
+  , "X5y_withOrders_per_year"
   )
 
 inspections_2y = c(
-    'X2y_inspections_norm'
-  , "X2y_withOrders_norm"
+    'X2y_inspections_per_year'
+  , "X2y_withOrders_per_year"
   )
 
 inspections = c(inspections_2y, inspections_5y, inspections_total)
 
 ```
 
-## Analysis with all 625 homes (exclude Quality data)
+
+## Subset data for analysis
 ```{r }
-data <- subset(df, select = c('outbreak', profile, inspections))
+# Subset southern ON homes, 554 homes
+df_southON <- df[substr(trimws(df$postal_code),1,1)!='P',]
+
+data <- subset(df_southON, select = c('outbreak', profile, inspections_5y, inspections_2y))
 # skim(data)
 # View(colnames(data))
 # dput(names(df))
-
 ```
+
 
 ## LASSO CovTest
 ```{r }
@@ -173,31 +138,63 @@ x = model.matrix(outbreak~., data = data)[,-1]
 y = as.numeric(data.matrix(data[,1]))
 
 a = lars.glm(x,y,family="binomial")
-a$beta
-a$act
+# a$beta
+# a$act
 a$pathobj
-a$a0
+# a$a0
 
 covTest(a,x,y)
 
+```
 
+## LASSO - CV
+```{r }
+cv.glmmod <- cv.glmnet(x, y, alpha=1, family = 'binomial')
+plot(cv.glmmod)
+plot(cv.glmmod$glmnet.fit, label = TRUE, xvar = "lambda")
+plot(cv.glmmod$glmnet.fit, label = TRUE, xvar = "dev")
+
+coef(cv.glmmod)
+coef(cv.glmmod, s = "lambda.min")
+
+# coef_min <- tidy(coef(cv.glmmod, s = "lambda.min"))
+# coef_min
+# write.csv(coef_min, file="../data_output/coef_lasso_min.csv")
 
 ```
 
-## Fit logistic regression
+
+## Fit logistic regression - selected covariates
 ```{r }
+fit = glm(outbreak~
+            number_beds
+          # + home_type
+          # + X2y_withOrders_norm
+          , family='binomial', data=data)
+summary(fit)
+
+```
+
+
+```{r, eval=FALSE, include=FALSE}
+## Fit logistic regression - full
 fit = glm(outbreak~., family='binomial', data=data)
 summary(fit)
 
 ```
 
-## Check multicollinearity
-```{r }
-car::vif(fit)
-```
 
+```{r ,eval=FALSE, include=FALSE}
+## Check multicollinearity
+car::vif(fit)
+
+``` 
+
+
+
+```{r, eval=FALSE, include=FALSE}
+# Old Code
 ## LASSO for variable selection - manual
-```{r }
 # https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
 library(glmnet)
 
@@ -217,35 +214,20 @@ plot(glmmod, xvar = 'lambda', label = TRUE)
 coef(glmmod)
 plot(glmmod)
 
-```
-As lambda decreases, the order that covariates are added to the model:
-    
-    1. number_beds
-    2. home_typeMunicipal
-    3. short_stayYes
-    4. X2y_withOrders_norm
-    5. family_councilYes
-    6. accreditationYes
-    7. X2y_inspections_norm
-    8. home_typeNon-Profit 
-    
-
-## LASSO - CV
-```{r }
-cv.glmmod <- cv.glmnet(x, y, alpha=1, family = 'binomial')
-plot(cv.glmmod)
-plot(cv.glmmod$glmnet.fit, label = TRUE, xvar = "lambda")
-plot(cv.glmmod$glmnet.fit, label = TRUE, xvar = "dev")
-
-coef(cv.glmmod)
-coef_min <- tidy(coef(cv.glmmod, s = "lambda.min"))
-coef_min
-
-# write.csv(coef_min, file="../data_output/coef_lasso_min.csv")
-
+# As lambda decreases, the order that covariates are added to the model:
+#     
+#     1. number_beds
+#     2. home_typeMunicipal
+#     3. short_stayYes
+#     4. X2y_withOrders_norm
+#     5. family_councilYes
+#     6. accreditationYes
+#     7. X2y_inspections_norm
+#     8. home_typeNon-Profit 
 ```
 
-```{r }
+    
+```{r, include=FALSE, eval=FALSE}
 data_lr <- subset(df, select = c('outbreak',
                                  'number_beds',
                                  'home_type',
@@ -266,8 +248,8 @@ summary(fit)
 
 ```
 
+```{r, include=FALSE, eval=FALSE}
 ## Stepwise Model Selection
-```{r, eval=FALSE, include=FALSE }
 library(MASS)
 # Start with model with no predictors - null
 null <- glm(outbreak ~ 1, family = "binomial", data=data) # 1 here means the intercept 
@@ -302,8 +284,9 @@ stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='forward'
 stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='both', trace = 0)
 ```
 
-## Transforming the Predictors
+
 ```{r, eval=FALSE, include=FALSE}
+## Transforming the Predictors
 # Assessing skewness
 # Check for R skewness in numeric predictors
 library(e1071)
@@ -360,8 +343,9 @@ print((ll.null - ll.proposed)/ll.null)
 
 ```
 
-## Visualize the model
+
 ```{r, eval=FALSE, include=FALSE}
+## Visualize the model
 # Create a new dataframe showing probability of outbreak and outbreak status
 predicted.data <- data.frame(probability.of.outbreak=fit$fitted.values, outbreak=data$outbreak)
 
