@@ -5,7 +5,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
-set.seed(100)
+# set.seed(100)
 ```
 
 ## Import and prepare the data
@@ -98,22 +98,23 @@ location = c(
   'latitude', 
   'longitude')
 
-inspections_total = c(
-  'total_inspections_per_year',
-  'total_withOrders_per_year'
+inspections_1y = c(
+  'X1y_inspections',
+  'X1y_withOrders'
 )
 
-inspections_5y = c(
-    'X5y_inspections_per_year'
-  , "X5y_withOrders_per_year"
-  )
-
 inspections_2y = c(
-    'X2y_inspections_per_year'
-  , "X2y_withOrders_per_year"
+    'X2y_inspections'
+  , "X2y_withOrders"
   )
 
-inspections = c(inspections_2y, inspections_5y, inspections_total)
+inspections_3y = c(
+    'X3y_inspections'
+  , "X3y_withOrders"
+  )
+
+
+inspections = c(inspections_2y, inspections_3y, inspections_1y)
 
 ```
 
@@ -123,7 +124,7 @@ inspections = c(inspections_2y, inspections_5y, inspections_total)
 # Subset southern ON homes, 554 homes
 df_southON <- df[substr(trimws(df$postal_code),1,1)!='P',]
 
-data <- subset(df_southON, select = c('outbreak', profile, inspections_5y, inspections_2y))
+data <- subset(df_southON, select = c('outbreak', profile, inspections_2y))
 # skim(data)
 # View(colnames(data))
 # dput(names(df))
@@ -164,207 +165,207 @@ coef(cv.glmmod, s = "lambda.min")
 ```
 
 
-## Fit logistic regression - selected covariates
+## Fit logistic regression - selected covariates with covTest p-value <0.5
 ```{r }
 fit = glm(outbreak~
-            number_beds
+            log(number_beds)
           # + home_type
-          # + X2y_withOrders_norm
+          # + X2y_withOrders
           , family='binomial', data=data)
 summary(fit)
 
 ```
 
 
-```{r, eval=FALSE, include=FALSE}
-## Fit logistic regression - full
-fit = glm(outbreak~., family='binomial', data=data)
-summary(fit)
+<!-- ```{r, eval=FALSE, include=FALSE} -->
+<!-- ## Fit logistic regression - full -->
+<!-- fit = glm(outbreak~., family='binomial', data=data) -->
+<!-- summary(fit) -->
 
-```
-
-
-```{r ,eval=FALSE, include=FALSE}
-## Check multicollinearity
-car::vif(fit)
-
-``` 
+<!-- ``` -->
 
 
+<!-- ```{r ,eval=FALSE, include=FALSE} -->
+<!-- ## Check multicollinearity -->
+<!-- car::vif(fit) -->
 
-```{r, eval=FALSE, include=FALSE}
-# Old Code
-## LASSO for variable selection - manual
-# https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome
-library(glmnet)
-
-# model.matrix() automatically transforms any qualitative variables into dummy variables
-# Trim the first column leaving only predictors
-# x = model.matrix(outbreak~., data = data)[,-1]
-# y = as.factor(data.matrix(data[,1]))
-
-# Note alpha=1 for lasso only, and can blend with ridge penalty
-# alpha=0 ridge only
-glmmod <- glmnet(x, y, family = 'binomial')
-
-# glmmod$call
-# summary(glmmod)
-plot(glmmod, xvar = 'lambda', label = TRUE)
-# plot(glmmod, xvar = 'dev', label = TRUE)
-coef(glmmod)
-plot(glmmod)
-
-# As lambda decreases, the order that covariates are added to the model:
-#     
-#     1. number_beds
-#     2. home_typeMunicipal
-#     3. short_stayYes
-#     4. X2y_withOrders_norm
-#     5. family_councilYes
-#     6. accreditationYes
-#     7. X2y_inspections_norm
-#     8. home_typeNon-Profit 
-```
-
-    
-```{r, include=FALSE, eval=FALSE}
-data_lr <- subset(df, select = c('outbreak',
-                                 'number_beds',
-                                 'home_type',
-                                 'short_stay',
-                                 'family_council',
-                                 'residents_council',
-                                 'accreditation',
-                                 'X2y_withOrders_norm',
-                                 'X2y_inspections_norm'
-                                 ))
+<!-- ```  -->
 
 
-fit = glm(outbreak~., family='binomial', data=data_lr)
-summary(fit)
 
-# tidy_fit <- tidy(summary(fit)$coef)
-# write.csv(tidy_fit, file="../data_output/logistic_regression_model.csv")
+<!-- ```{r, eval=FALSE, include=FALSE} -->
+<!-- # Old Code -->
+<!-- ## LASSO for variable selection - manual -->
+<!-- # https://stats.stackexchange.com/questions/72251/an-example-lasso-regression-using-glmnet-for-binary-outcome -->
+<!-- library(glmnet) -->
 
-```
+<!-- # model.matrix() automatically transforms any qualitative variables into dummy variables -->
+<!-- # Trim the first column leaving only predictors -->
+<!-- # x = model.matrix(outbreak~., data = data)[,-1] -->
+<!-- # y = as.factor(data.matrix(data[,1])) -->
 
-```{r, include=FALSE, eval=FALSE}
-## Stepwise Model Selection
-library(MASS)
-# Start with model with no predictors - null
-null <- glm(outbreak ~ 1, family = "binomial", data=data) # 1 here means the intercept 
-full <- glm(outbreak ~ 
-              home_type 
-            + number_beds 
-            + short_stay 
-            + residents_council 
-            + family_council 
-            + accreditation 
-            + total_inspections_norm 
-            + X5y_inspections_norm 
-            + X2y_inspections_norm 
-            + total_withOrders_norm 
-            + X5y_withOrders_norm 
-            + X2y_withOrders_norm 
-            , family = 'binomial', data = data)
+<!-- # Note alpha=1 for lasso only, and can blend with ridge penalty -->
+<!-- # alpha=0 ridge only -->
+<!-- glmmod <- glmnet(x, y, family = 'binomial') -->
 
-# With AIC, k = 2 
-modAIC <- stepAIC(full)
-summary(modAIC)
+<!-- # glmmod$call -->
+<!-- # summary(glmmod) -->
+<!-- plot(glmmod, xvar = 'lambda', label = TRUE) -->
+<!-- # plot(glmmod, xvar = 'dev', label = TRUE) -->
+<!-- coef(glmmod) -->
+<!-- plot(glmmod) -->
 
-# With BIC
-modBIC <- stepAIC(full, k = log(nrow(data)))
-summary(modBIC)
-
-car::compareCoefs(modAIC, modBIC)
-confint(modBIC)
-
-stepAIC(full, scope=list(lower=null, upper=full), data=data, direction='backward', trace = 0)
-stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='forward', trace = 0)
-stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='both', trace = 0)
-```
+<!-- # As lambda decreases, the order that covariates are added to the model: -->
+<!-- #      -->
+<!-- #     1. number_beds -->
+<!-- #     2. home_typeMunicipal -->
+<!-- #     3. short_stayYes -->
+<!-- #     4. X2y_withOrders_norm -->
+<!-- #     5. family_councilYes -->
+<!-- #     6. accreditationYes -->
+<!-- #     7. X2y_inspections_norm -->
+<!-- #     8. home_typeNon-Profit  -->
+<!-- ``` -->
 
 
-```{r, eval=FALSE, include=FALSE}
-## Transforming the Predictors
-# Assessing skewness
-# Check for R skewness in numeric predictors
-library(e1071)
-
-listofcols = c('number_beds', complaints, noncomplaints, all_inspections)
-
-for (each in listofcols){
-  print(each)
-  print(skewness(data[[each]]))
-  qqnorm(data[[each]], main = each)
-  qqline(data[[each]], col = 'red')
-}
-
-for (each in listofcols){
-  print(each)
-  print(summary(df[[each]]))
-}
-
-# Create a list of numeric variables with 0 values
-list0s <- c(complaints, "X2y_noncomplaints_norm")
-
-library(rcompanion)
-listofcols <- setdiff(listofcols, list0s)
-
-# Visualize the effect of square root and log transformations on the data without 0s
-for (each in listofcols) {  
-  plotNormalHistogram(x = data[[each]], main = each)
-  plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
-  plotNormalHistogram(x = log(data[[each]]), main = c(each, 'log trans'))
-}
-
-# Visualize the effect of a square root transformation on the variables with 0s
-for (each in list0s) {  
-  plotNormalHistogram(x = data[[each]], main = each)
-  plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans'))
-}
-
-# Log transform in place
-
-data[c("total_noncomplaints_norm", "X5y_noncomplaints_norm", all_inspections)] <- log(data[c("total_noncomplaints_norm", "X5y_noncomplaints_norm", all_inspections)])
-
-# Square root transform in place
-data[c('number_beds', list0s)] <- sqrt(data[c('number_beds', list0s)])
-
-skim(data)
-```
-
-```{r, eval=FALSE, include=FALSE }
-# Calculate McFadden's pseudo R2
-ll.null <- fit$null.deviance/-2
-ll.proposed <- fit$deviance/-2
-print((ll.null - ll.proposed)/ll.null)
-1 - pchisq(2*(ll.proposed - ll.null), df = (length(fit$coefficients)-1)) #pvalue
-
-```
+<!-- ```{r, include=FALSE, eval=FALSE} -->
+<!-- data_lr <- subset(df, select = c('outbreak', -->
+<!--                                  'number_beds', -->
+<!--                                  'home_type', -->
+<!--                                  'short_stay', -->
+<!--                                  'family_council', -->
+<!--                                  'residents_council', -->
+<!--                                  'accreditation', -->
+<!--                                  'X2y_withOrders_norm', -->
+<!--                                  'X2y_inspections_norm' -->
+<!--                                  )) -->
 
 
-```{r, eval=FALSE, include=FALSE}
-## Visualize the model
-# Create a new dataframe showing probability of outbreak and outbreak status
-predicted.data <- data.frame(probability.of.outbreak=fit$fitted.values, outbreak=data$outbreak)
+<!-- fit = glm(outbreak~., family='binomial', data=data_lr) -->
+<!-- summary(fit) -->
 
-# Sort the above df
-predicted.data <- predicted.data[order(predicted.data$probability.of.outbreak, decreasing=FALSE),]
+<!-- # tidy_fit <- tidy(summary(fit)$coef) -->
+<!-- # write.csv(tidy_fit, file="../data_output/logistic_regression_model.csv") -->
 
-# Add new col to df with rank
-predicted.data$rank <- 1:nrow(predicted.data)
+<!-- ``` -->
 
-library(ggplot2)
-# library(cowplot)
+<!-- ```{r, include=FALSE, eval=FALSE} -->
+<!-- ## Stepwise Model Selection -->
+<!-- library(MASS) -->
+<!-- # Start with model with no predictors - null -->
+<!-- null <- glm(outbreak ~ 1, family = "binomial", data=data) # 1 here means the intercept  -->
+<!-- full <- glm(outbreak ~  -->
+<!--               home_type  -->
+<!--             + number_beds  -->
+<!--             + short_stay  -->
+<!--             + residents_council  -->
+<!--             + family_council  -->
+<!--             + accreditation  -->
+<!--             + total_inspections_norm  -->
+<!--             + X5y_inspections_norm  -->
+<!--             + X2y_inspections_norm  -->
+<!--             + total_withOrders_norm  -->
+<!--             + X5y_withOrders_norm  -->
+<!--             + X2y_withOrders_norm  -->
+<!--             , family = 'binomial', data = data) -->
 
-ggplot(data = predicted.data, aes(x=rank, y=probability.of.outbreak)) +
-  geom_point(aes(color=outbreak), alpha = 0.5, shape = 4, stroke = 1) +
-  xlab("Index") + ylab("Predicted probability of an outbreak") +
-  ggtitle("Outbreak Status Ordered By Predicted Probability of an Outbreak") + 
-  scale_color_manual(values = c('blue', 'red'))
+<!-- # With AIC, k = 2  -->
+<!-- modAIC <- stepAIC(full) -->
+<!-- summary(modAIC) -->
 
-```
+<!-- # With BIC -->
+<!-- modBIC <- stepAIC(full, k = log(nrow(data))) -->
+<!-- summary(modBIC) -->
+
+<!-- car::compareCoefs(modAIC, modBIC) -->
+<!-- confint(modBIC) -->
+
+<!-- stepAIC(full, scope=list(lower=null, upper=full), data=data, direction='backward', trace = 0) -->
+<!-- stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='forward', trace = 0) -->
+<!-- stepAIC(null, scope=list(lower=null, upper=full), data=data, direction='both', trace = 0) -->
+<!-- ``` -->
+
+
+<!-- ```{r, eval=FALSE, include=FALSE} -->
+<!-- ## Transforming the Predictors -->
+<!-- # Assessing skewness -->
+<!-- # Check for R skewness in numeric predictors -->
+<!-- library(e1071) -->
+
+<!-- listofcols = c('number_beds', complaints, noncomplaints, all_inspections) -->
+
+<!-- for (each in listofcols){ -->
+<!--   print(each) -->
+<!--   print(skewness(data[[each]])) -->
+<!--   qqnorm(data[[each]], main = each) -->
+<!--   qqline(data[[each]], col = 'red') -->
+<!-- } -->
+
+<!-- for (each in listofcols){ -->
+<!--   print(each) -->
+<!--   print(summary(df[[each]])) -->
+<!-- } -->
+
+<!-- # Create a list of numeric variables with 0 values -->
+<!-- list0s <- c(complaints, "X2y_noncomplaints_norm") -->
+
+<!-- library(rcompanion) -->
+<!-- listofcols <- setdiff(listofcols, list0s) -->
+
+<!-- # Visualize the effect of square root and log transformations on the data without 0s -->
+<!-- for (each in listofcols) {   -->
+<!--   plotNormalHistogram(x = data[[each]], main = each) -->
+<!--   plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans')) -->
+<!--   plotNormalHistogram(x = log(data[[each]]), main = c(each, 'log trans')) -->
+<!-- } -->
+
+<!-- # Visualize the effect of a square root transformation on the variables with 0s -->
+<!-- for (each in list0s) {   -->
+<!--   plotNormalHistogram(x = data[[each]], main = each) -->
+<!--   plotNormalHistogram(x = sqrt(data[[each]]), main = c(each, 'sqrt trans')) -->
+<!-- } -->
+
+<!-- # Log transform in place -->
+
+<!-- data[c("total_noncomplaints_norm", "X5y_noncomplaints_norm", all_inspections)] <- log(data[c("total_noncomplaints_norm", "X5y_noncomplaints_norm", all_inspections)]) -->
+
+<!-- # Square root transform in place -->
+<!-- data[c('number_beds', list0s)] <- sqrt(data[c('number_beds', list0s)]) -->
+
+<!-- skim(data) -->
+<!-- ``` -->
+
+<!-- ```{r, eval=FALSE, include=FALSE } -->
+<!-- # Calculate McFadden's pseudo R2 -->
+<!-- ll.null <- fit$null.deviance/-2 -->
+<!-- ll.proposed <- fit$deviance/-2 -->
+<!-- print((ll.null - ll.proposed)/ll.null) -->
+<!-- 1 - pchisq(2*(ll.proposed - ll.null), df = (length(fit$coefficients)-1)) #pvalue -->
+
+<!-- ``` -->
+
+
+<!-- ```{r, eval=FALSE, include=FALSE} -->
+<!-- ## Visualize the model -->
+<!-- # Create a new dataframe showing probability of outbreak and outbreak status -->
+<!-- predicted.data <- data.frame(probability.of.outbreak=fit$fitted.values, outbreak=data$outbreak) -->
+
+<!-- # Sort the above df -->
+<!-- predicted.data <- predicted.data[order(predicted.data$probability.of.outbreak, decreasing=FALSE),] -->
+
+<!-- # Add new col to df with rank -->
+<!-- predicted.data$rank <- 1:nrow(predicted.data) -->
+
+<!-- library(ggplot2) -->
+<!-- # library(cowplot) -->
+
+<!-- ggplot(data = predicted.data, aes(x=rank, y=probability.of.outbreak)) + -->
+<!--   geom_point(aes(color=outbreak), alpha = 0.5, shape = 4, stroke = 1) + -->
+<!--   xlab("Index") + ylab("Predicted probability of an outbreak") + -->
+<!--   ggtitle("Outbreak Status Ordered By Predicted Probability of an Outbreak") +  -->
+<!--   scale_color_manual(values = c('blue', 'red')) -->
+
+<!-- ``` -->
 
 
 ```{r }

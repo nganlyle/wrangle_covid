@@ -44,8 +44,8 @@ The following information was extracted:
 
 The following data cleaning was done:
   3. Filtered for inspections up to Jan 1, 2020
-  4. Calculated the number of inspections per year in the last 5 years (Jan 1, 2015 to Jan 1, 2020) and the number in the last 2 years (Jan 1, 2018 to Jan 1, 2020)
-  5. Filtered for inspections with the word "with Order(s)" and calculated the number of such inspections per year in the last 5 and 2 years
+  4. Calculated the number of inspections per year in the last 3, 2, and 1 year(s) - from Jan 1, 2017; Jan 1, 2018 and Jan 1, 2019 to Jan 1, 2020
+  5. Filtered for inspections with the word "with Order(s)" and calculated the number of such inspections in the last 3, 2 and 1 year(s)
   6. Merged the inspections data with the profile data
 
 On initial webscraping 651 homes were identified. Subsequently, 26 homes were removed (leaving 625) as follows:

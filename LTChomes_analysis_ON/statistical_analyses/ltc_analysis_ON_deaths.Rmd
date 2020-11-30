@@ -2,8 +2,12 @@
 title: "ltc_analysis_ON_deaths"
 output: html_document
 ---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+# set.seed(100)
+```
 
-## Import and prepare the data
+# Import and prepare the data
 ```{r }
 library(devtools)
 library(broom)
@@ -37,46 +41,6 @@ df[cols] <- lapply(df[cols], as.character)
 
 ```
 
-
-## Determine number years since the first inspection for each home
-```{r, results='hide'}
-# Create a new column for first inspection year
-df$first_inspection_year <- format(df$first_inspection_date,"%Y")
-df$first_inspection_year <- as.numeric(df$first_inspection_year)
-
-# Earliest date of first inspection was in 2009 and latest date was 2016
-# summary(df[['first_inspection_year']])
-
-# Create a new column with number of years since the first inspection was reported
-df$years_since_first <- 2020 - df$first_inspection_year
-# summary(df[['years_since_first']])
-
-# There is only 1 home with fewer than 5 years of inspections -> Royal Rose Place 293
-table(df['years_since_first'])
-subset(df, years_since_first == 4)
-
-```
-
-
-### Normalize the number of inspections
-```{r, results='hide'}
-# Number of inspections/years
-df$total_inspections_norm <- df$total_inspections/df$years_since_first
-df$X5y_inspections_norm <- df$X5y_inspections/5
-df[293, "X5y_inspections_norm"] <- df[293, "X5y_inspections_norm"]*5/4
-df$X2y_inspections_norm <- df$X2y_inspections/2
-
-# Number of withOrders/years
-df$total_withOrders_norm <- df$total_withOrders/df$years_since_first
-df$X5y_withOrders_norm <- df$X5y_withOrders/5
-df[293, "X5y_withOrders_norm"] <- df[293, "X5y_withOrders_norm"]*5/4
-df$X2y_withOrders_norm <- df$X2y_withOrders/2
-
-# dput(names(df))
-
-```
-
-
 ## Subset the data
 ```{r, }
 # Generate the data for analysis
@@ -108,40 +72,48 @@ location = c(
   'latitude', 
   'longitude')
 
-inspections_total = c(
-  'total_inspections_norm',
-  'total_withOrders_norm'
+inspections_1y = c(
+  'X1y_inspections',
+  'X1y_withOrders'
 )
 
-inspections_5y = c(
-    'X5y_inspections_norm'
-  , "X5y_withOrders_norm"
-  )
-
 inspections_2y = c(
-    'X2y_inspections_norm'
-  , "X2y_withOrders_norm"
+    'X2y_inspections'
+  , "X2y_withOrders"
   )
 
-inspections = c(inspections_2y, inspections_5y, inspections_total)
+inspections_3y = c(
+    'X3y_inspections'
+  , "X3y_withOrders"
+  )
+
+
+inspections = c(inspections_2y, inspections_3y, inspections_1y)
 
 ```
 
-
-```{r, }
-# As cases/deaths can only occur in homes with an outbreak will subset to include only homes with an outbreak
-outbreak <- subset(df, outbreak == 1)
-
-```
-
-
+## Subset data for analysis
 ```{r }
-# Subset data, cumulative resident deaths as outcome
-data <- subset(outbreak, select = c('cum_resident_deaths', profile, inspections))
-# dput(names(data))
+# Subset southern ON homes, 554 homes
+df_southON <- df[substr(trimws(df$postal_code),1,1)!='P',]
 
+# As cases/deaths can only occur in homes with an outbreak will subset to include only homes with an outbreak
+df_southON_outbreak <- subset(df_southON, outbreak == 1)
+
+data <- subset(df_southON_outbreak, select = c('cum_resident_deaths', profile, inspections_2y))
+
+# skim(data)
+# View(colnames(data))
+# dput(names(df))
+
+```
+
+
+```{r, include=FALSE, eval=FALSE}
 # Look at the distribution of count data
 hist(data$cum_resident_deaths)
+mean(data$cum_resident_deaths)
+var(data$cum_resident_deaths)
 
 ```
 
@@ -154,13 +126,13 @@ x <- model.matrix(cum_resident_deaths~., data = data)[,-1]
 y <- data.matrix(data[,1])
 a = lars(x,y)
 
-a$beta
+# a$beta
 a$act
 a$pathobj
-a$a0
+# a$a0
 
-plot(a)
-summary(a)
+# plot(a)
+# summary(a)
 
 covTest(a,x,y)
 
@@ -169,36 +141,6 @@ covTest(a,x,y)
 
 
 ```
-
-
-## LASSO for variable selection
-```{r, results="hide"}
-library(glmnet)
-options(max.print= 9999, width = 9999)
-# model.matrix() automatically transforms any qualitative variables into dummy variables
-# Trim the first column leaving only predictors
-x <- model.matrix(cum_resident_deaths~., data = data)[,-1]
-y <- data.matrix(data[,1])
-
-# Note alpha=1 for lasso only and can blend with ridge penalty down to
-# alpha=0 ridge only
-glmmod <- glmnet(x, y, alpha = 1)
-coef(glmmod)
-
-# Plot variable coefficients vs. shrinkage parameter lambda
-plot(glmmod, xvar = 'lambda', label = TRUE)
-plot(glmmod, xvar = 'dev', label = TRUE)
-
-```
-
-As lambda decreases, the order that predictors are added to the model:
-    
-    1. home_typeMunicipal
-    2. short_stayYes
-    3. accreditationYes
-    4. residents_councilYes
-    5. family_councilYes
-
 
 ## LASSO - CV
 ```{r }
@@ -210,25 +152,22 @@ coef(cv.glmmod)
 coef(cv.glmmod, s = "lambda.min")
 
 ```
-
-# Poisson regression with offset for the number of beds in each home
+# Regression models
+## Use selected covariates based on a covTest p-value <0.5
+## Quasi-poisson regression with offset for the number of beds 
 ```{r }
 # fit_poi <- glm(Total.Confirmed.Cases/BEDS_TOTAL~ ., family = poisson, data = data_cases, weight = BEDS_TOTAL)
 # summary(fit_poi)
 
 fit_poi <- glm(cum_resident_deaths~ 
   home_type
-  # + short_stay
-  # + residents_council
-  # + family_council
-  # + accreditation
-  # + X2y_inspections_norm
-  # + X2y_withOrders_norm
-  # + X5y_inspections_norm
-  # + X5y_withOrders_norm
-  # + total_inspections_norm
-  # + total_withOrders_norm
-  # + number_beds
+  # + X1y_withOrders
+  # + X1y_inspections
+  + X2y_inspections
+  + X2y_withOrders
+  # + X3y_inspections
+  # + X3y_withOrders
+  # + log(number_beds)
   , family = quasipoisson
   , data = data
   , offset = log(number_beds)
@@ -236,12 +175,119 @@ fit_poi <- glm(cum_resident_deaths~
 summary(fit_poi)
 
 ```
-
-
-
+## Zero-inflated negative binomial regression with offset for number of beds
 ```{r }
-
+library(pscl)
+mod = zeroinfl(cum_resident_deaths~
+                 home_type
+               + log(number_beds)
+  # + X1y_withOrders
+  # + X1y_inspections
+  + X2y_inspections
+  # + X3y_inspections
+               | home_type
+               + log(number_beds)
+  # + X1y_withOrders
+  # + X1y_inspections
+  + X2y_inspections
+  # + X3y_inspections
+               , data = data
+               , dist = 'negbin'
+               , offset = log(number_beds)
+               )
+summary(mod)
+confint(mod)
 ```
+
+
+<!-- ## Use the entire southON dataset (not subset with outbreak) -->
+<!-- ```{r } -->
+<!-- data <- subset(df_southON, select = c('cum_resident_deaths', profile, inspections_2y, inspections_5y)) -->
+<!-- data$cum_resident_deaths[is.na(data$cum_resident_deaths)] = 0 -->
+
+<!-- ``` -->
+
+<!-- ## LASSO - CovTest -->
+<!-- ```{r } -->
+<!-- x <- model.matrix(cum_resident_deaths~., data = data)[,-1] -->
+<!-- y <- data.matrix(data[,1]) -->
+<!-- a = lars(x,y) -->
+
+<!-- # a$beta -->
+<!-- a$act -->
+<!-- # a$pathobj -->
+<!-- # a$a0 -->
+
+<!-- # plot(a) -->
+<!-- # summary(a) -->
+
+<!-- ``` -->
+
+<!-- ```{r } -->
+<!-- covTest(a,x,y) -->
+<!-- # Both number_beds and home_type have significant p-values -->
+<!-- ``` -->
+
+<!-- ## LASSO - CV -->
+<!-- ```{r } -->
+<!-- grid = exp(seq(-5, 5, length=100)) -->
+<!-- cv.glmmod <- cv.glmnet(x, y, alpha=1, lambda = grid) -->
+<!-- # cv.glmmod <- cv.glmnet(x, y, alpha=1) -->
+<!-- plot(cv.glmmod) -->
+<!-- coef(cv.glmmod) -->
+<!-- coef(cv.glmmod, s = "lambda.min") -->
+
+<!-- ``` -->
+
+<!-- Zero-inflated negative binomial regression with offset for number of beds -->
+<!-- ```{r } -->
+<!-- library(pscl) -->
+<!-- mod = zeroinfl(cum_resident_deaths~  -->
+<!--                  home_type  -->
+<!--                + log(number_beds) -->
+<!--                + X5y_withOrders_per_year -->
+<!--                | home_type  -->
+<!--                + log(number_beds) -->
+<!--                + X5y_withOrders_per_year -->
+<!--                , data = data  -->
+<!--                , dist = 'negbin' -->
+<!--                , offset = log(number_beds) -->
+<!--                ) -->
+<!-- summary(mod) -->
+<!-- confint(mod) -->
+
+<!-- ``` -->
+<!-- Since we have data on whether or not homes had an outbreak, does it make sense to apply a zero inflated model? -->
+
+
+<!-- ```{r, , eval=FALSE, include=FALSE} -->
+<!-- # Old code -->
+<!-- ## LASSO for variable selection - manual -->
+
+<!-- library(glmnet) -->
+<!-- options(max.print= 9999, width = 9999) -->
+<!-- # model.matrix() automatically transforms any qualitative variables into dummy variables -->
+<!-- # Trim the first column leaving only predictors -->
+<!-- x <- model.matrix(cum_resident_deaths~., data = data)[,-1] -->
+<!-- y <- data.matrix(data[,1]) -->
+
+<!-- # Note alpha=1 for lasso only and can blend with ridge penalty down to -->
+<!-- # alpha=0 ridge only -->
+<!-- glmmod <- glmnet(x, y, alpha = 1) -->
+<!-- coef(glmmod) -->
+
+<!-- # Plot variable coefficients vs. shrinkage parameter lambda -->
+<!-- plot(glmmod, xvar = 'lambda', label = TRUE) -->
+<!-- plot(glmmod, xvar = 'dev', label = TRUE) -->
+
+<!-- # As lambda decreases, the order that predictors are added to the model: -->
+<!-- #      -->
+<!-- #     1. home_typeMunicipal -->
+<!-- #     2. short_stayYes -->
+<!-- #     3. accreditationYes -->
+<!-- #     4. residents_councilYes -->
+<!-- #     5. family_councilYes -->
+<!-- ``` -->
 
 
 ```{r }
